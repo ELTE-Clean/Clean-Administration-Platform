@@ -2,7 +2,7 @@
 
 ## Technologies
 
-## Fron-End:
+## Front-End:
  - Next.JS 
  - React.JS
  - Typescript

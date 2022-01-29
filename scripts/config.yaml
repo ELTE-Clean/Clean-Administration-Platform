@@ -2,13 +2,13 @@ teacher_file: "teacher.icl"
 student_files:
   - "test.icl"
 test_questions:
-  - question_one:
+  - q1:
       function_name: addInt
       test_cases:
-        - 2 3
-        - 3 4
-        - 2 3
-  - question_two:
+        - [1,2,3]
+        - [1,2,3]
+        - [1,2,3]
+  - q2:
       function_name: subInt
       test_cases:
         - 3 4

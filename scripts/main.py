@@ -5,7 +5,7 @@ import os
 
 def main(args):
     correctTest = CorrectTest(args)
-    print(correctTest.removeStartFromStudeFile())
+    print(correctTest.testStudentFile("test.icl"))
 
 
 if __name__ == "__main__":

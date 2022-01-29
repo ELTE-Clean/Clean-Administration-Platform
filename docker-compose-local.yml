@@ -1,0 +1,35 @@
+version: '3.3'
+
+services:   
+    # cleanplatform:
+        # image : 
+        # command : 
+        # ports:
+        # env_file:
+
+    # keycloak:
+    #     image: "jboss/keycloak:16.1.0"
+    #     command: -Djboss.http.port=8081 # -Dkeycloak.profile.feature.upload_scripts=enabled
+    #     ports:
+    #         - "8081:8081" 
+    #     # volumes:  # This holds the realms.
+    #     env_file:
+    #         - keycloak/env/keycloak.env
+
+    cleanDB:
+        image: cleandb:latest # This image is preloaded with the data we need. Setting up shared volumes or copying the data with dockercompose volumes had problems
+        ports:
+            - "5432:5432"
+        env_file:
+            - cleanDB/env/postgres.env
+
+    # Environment variables are set when the image is created
+    cpgadmin:
+        image: cpgadmin:latest
+        links:
+            - cleanDB
+        restart: always
+        ports:
+            - 5050:80
+        depends_on:
+            - "cleanDB"

@@ -4,6 +4,11 @@
 /dist
 /tmp
 /out-tsc
+*.out
+
+# Package lock ignoring
+*package-lock.json
+*node_modules/*
 
 # Runtime data
 pids

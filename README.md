@@ -21,3 +21,5 @@ Automation: Python
 <br>
 This is how you dropdown.
 </details>
+
+<span style="color:blue">some *blue* text</span>.

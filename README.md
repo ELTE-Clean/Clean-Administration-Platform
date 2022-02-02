@@ -25,7 +25,7 @@ This is how you dropdown.
 <span style="color:blue">some *blue* text</span>.
 
 
-## Example student report for now:
+## Example student report for now
 
 <details>
 <summary>MI3JG2</summary>

@@ -25,7 +25,7 @@ This is how you dropdown.
 <span style="color:blue">some *blue* text</span>.
 
 
-# Example student report for now:
+## Example student report for now:
 
 <details>
 <summary>MI3JG2</summary>
@@ -34,6 +34,19 @@ This is how you dropdown.
 <li>
       <details>
       <summary>addInt</summary>
+      <br>
+      Test case: 1 2<br>
+      Teacher result: 3<br>
+      Student result: 3<br>
+      --------------------------------------------------<br>
+      Test case: 1 3<br>
+      Teacher result: 4<br>
+      Student result: 4<br>
+      </details>
+</li>
+<li>
+      <details>
+      <summary>subInt</summary>
       <br>
       Test case: 1 2<br>
       Teacher result: 3<br>

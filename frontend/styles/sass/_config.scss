@@ -1,0 +1,43 @@
+//colors
+$main-green: #acf19b;
+$main-red: #fbabab;
+$main-dark-blue: #2b2d42;
+$main-light-blue: #8d99ae;
+
+//general variables
+$padding: 20px;
+$border-radius: 25px;
+$main-box-shadow: 1px 1px 10px #00000044;
+
+//fonts
+
+//mixins
+@mixin flex($direction) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+@mixin btn($bc-color, $color) {
+  outline: none;
+  background-color: $bc-color;
+  color: $color;
+  font-weight: bolder;
+  &:hover {
+    transition: 0.2s;
+    background-color: darken($bc-color, 10%);
+  }
+}
+
+@mixin input() {
+  outline: none;
+  border: none;
+  border-radius: 50px;
+  font-size: 20px;
+  text-indent: 20px;
+  &::placeholder {
+    color: rgb(207, 207, 207);
+  }
+}

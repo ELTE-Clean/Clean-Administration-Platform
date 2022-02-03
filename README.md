@@ -16,15 +16,6 @@
 Env: Docker K8S
 Automation: Python
 
-<details>
-<summary>How do I dropdown?</summary>
-<br>
-This is how you dropdown.
-</details>
-
-<span style="color:blue">some *blue* text</span>.
-
-
 ## Example student report for now
 
 <details>

@@ -1,0 +1,24 @@
+@import "./sass/config";
+@import "./sass/login";
+* {
+  box-sizing: border-box;
+  font-family: Gotham Rounded, sans-serif;
+  font-weight: normal;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+body,
+html {
+  position: relative;
+  overflow-x: hidden;
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  // font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  //   Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+//   .children {
+
+//   }

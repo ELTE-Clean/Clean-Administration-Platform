@@ -20,11 +20,16 @@ $main-box-shadow: 1px 1px 10px #00000044;
   flex-wrap: wrap;
 }
 
-@mixin btn($bc-color, $color) {
+@mixin btn($bc-color, $color, $box-shadow, $border, $border-radius, $padding) {
+  box-shadow: $box-shadow;
+  padding: $padding;
   outline: none;
   background-color: $bc-color;
   color: $color;
   font-weight: bolder;
+  border: $border;
+  border-radius: $border-radius;
+  cursor: pointer;
   &:hover {
     transition: 0.2s;
     background-color: darken($bc-color, 10%);

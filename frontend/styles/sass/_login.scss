@@ -48,7 +48,7 @@
       #login-btn {
         background-color: $main-green;
         margin-top: 60px;
-        @include btn($main-green, $main-dark-blue);
+        @include btn($main-green, $main-dark-blue, none, none, 0, 0);
       }
     }
   }

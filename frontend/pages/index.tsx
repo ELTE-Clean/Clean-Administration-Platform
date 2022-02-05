@@ -1,9 +1,10 @@
 import type { NextPage } from "next";
 import Section from "../components/section";
+import Task from "../components/task";
 const Home: NextPage = () => {
   return (
     <div>
-      <Section sectionName={"Homeworks"} />
+      <Task />
     </div>
   );
 };

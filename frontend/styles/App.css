@@ -111,16 +111,26 @@
 .login-container .login-form-container .login-form #login-btn {
   background-color: #acf19b;
   margin-top: 60px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  padding: 0;
   outline: none;
   background-color: #acf19b;
   color: #2b2d42;
   font-weight: bolder;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
 }
 
 .login-container .login-form-container .login-form #login-btn:hover {
   -webkit-transition: 0.2s;
   transition: 0.2s;
   background-color: #87eb6e;
+}
+
+.profile-container {
+  background-color: red;
 }
 
 .menu-container {
@@ -299,6 +309,157 @@
   transition: 0.5s;
 }
 
+.task-container .task-title {
+  font-size: 30px;
+  text-decoration: underline;
+  color: #8d99ae;
+}
+
+.task-container .task-info {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  font-size: 25px;
+  gap: 20px;
+  color: #8d99ae;
+  font-weight: bolder;
+  margin: 30px 0;
+}
+
+.task-container .task-info .grade {
+  position: absolute;
+  right: 0;
+}
+
+.task-container .task-description,
+.task-container .task-attachments {
+  position: relative;
+  margin: 60px 0;
+}
+
+.task-container .task-description .title,
+.task-container .task-attachments .title {
+  font-size: 20px;
+  text-decoration: underline;
+  color: #8d99ae;
+  margin-bottom: 20px;
+}
+
+.task-container .task-description .description-body,
+.task-container .task-attachments .description-body {
+  font-size: 20px;
+  color: #2b2d42;
+}
+
+.task-container .task-description .attachment,
+.task-container .task-attachments .attachment {
+  margin: 20px 0;
+  font-size: 20px;
+  color: black;
+}
+
+.task-container .upload-area {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: 50%;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 100px;
+}
+
+.task-container .upload-area input {
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+  padding: 10px;
+  width: 400px;
+  font-size: 20px;
+}
+
+.task-container .upload-area input[type="file"] {
+  display: none;
+}
+
+.task-container .upload-area .custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  margin-right: 50px;
+  -webkit-box-shadow: 1px 1px 10px #00000044;
+          box-shadow: 1px 1px 10px #00000044;
+  padding: 15px 50px;
+  outline: none;
+  background-color: #2b2d42;
+  color: #fbabab;
+  font-weight: bolder;
+  border: 3px solid #fbabab;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.task-container .upload-area .custom-file-upload:hover {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  background-color: #171823;
+}
+
+.task-container .upload-area #submit-btn {
+  position: absolute;
+  right: 0;
+}
+
+.task-container .upload-area #submit-btn button {
+  -webkit-box-shadow: 1px 1px 10px #00000044;
+          box-shadow: 1px 1px 10px #00000044;
+  padding: 15px 50px;
+  outline: none;
+  background-color: #fbabab;
+  color: #2b2d42;
+  font-weight: bolder;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.task-container .upload-area #submit-btn button:hover {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  background-color: #f97a7a;
+}
+
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -319,7 +480,7 @@ html {
 
 .children {
   min-height: 100vh;
-  min-width: 90vw;
+  min-width: 85vw;
   margin-left: 250px;
   padding: 40px;
   background-color: #f8f8f8;

@@ -1,0 +1,45 @@
+.menu-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: $main-dark-blue;
+  color: #fff;
+  min-height: 100%;
+  height: 100vh;
+  width: 250px;
+
+  .profile-icon-neptun {
+    @include flex(column);
+    padding: 10px;
+    cursor: pointer;
+    .profile-icon {
+      @include flex(column);
+      background-color: #c4c4c4;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+    }
+    .profile-neptun {
+      margin-top: 10px;
+    }
+  }
+  .sections {
+    @include flex(column);
+    height: 60%;
+    justify-content: space-evenly;
+    .section {
+      cursor: pointer;
+      .section-name {
+        text-align: center;
+        h2 {
+          font-size: 30px;
+          text-decoration: underline;
+          color: #fff;
+          &:hover {
+            color: $main-light-blue;
+          }
+        }
+      }
+    }
+  }
+}

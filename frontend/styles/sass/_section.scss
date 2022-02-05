@@ -1,0 +1,39 @@
+.section-container {
+  @include flex(column);
+  align-items: flex-start;
+  gap: 20px;
+  .section-name {
+    margin-bottom: 50px;
+    h1 {
+      color: $main-light-blue;
+      text-decoration: underline;
+      font-size: 60px;
+      font-weight: bolder;
+    }
+  }
+  .section-task {
+    background-color: #fff;
+    border-radius: 30px;
+    padding: 20px;
+    width: 600px;
+    box-shadow: $main-box-shadow;
+    cursor: pointer;
+    .task-title {
+      h3 {
+        color: $main-dark-blue;
+        margin-bottom: 20px;
+        font-size: 30px;
+        font-weight: bolder;
+      }
+    }
+    .task-info {
+      @include flex(row);
+      justify-content: space-between;
+      font-size: 20px;
+    }
+    &:hover {
+      transform: scale(1.02);
+      transition: 0.5s;
+    }
+  }
+}

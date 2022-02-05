@@ -2,6 +2,8 @@
   position: relative;
   height: 100vh;
   width: 100vw;
+  margin-right: 250px;
+  padding: 0;
 }
 
 .login-container .bc-image-container {
@@ -121,6 +123,182 @@
   background-color: #87eb6e;
 }
 
+.menu-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #2b2d42;
+  color: #fff;
+  min-height: 100%;
+  height: 100vh;
+  width: 250px;
+}
+
+.menu-container .profile-icon-neptun {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.menu-container .profile-icon-neptun .profile-icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  background-color: #c4c4c4;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+
+.menu-container .profile-icon-neptun .profile-neptun {
+  margin-top: 10px;
+}
+
+.menu-container .sections {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  height: 60%;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.menu-container .sections .section {
+  cursor: pointer;
+}
+
+.menu-container .sections .section .section-name {
+  text-align: center;
+}
+
+.menu-container .sections .section .section-name h2 {
+  font-size: 30px;
+  text-decoration: underline;
+  color: #fff;
+}
+
+.menu-container .sections .section .section-name h2:hover {
+  color: #8d99ae;
+}
+
+.section-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  gap: 20px;
+}
+
+.section-container .section-name {
+  margin-bottom: 50px;
+}
+
+.section-container .section-name h1 {
+  color: #8d99ae;
+  text-decoration: underline;
+  font-size: 60px;
+  font-weight: bolder;
+}
+
+.section-container .section-task {
+  background-color: #fff;
+  border-radius: 30px;
+  padding: 20px;
+  width: 600px;
+  -webkit-box-shadow: 1px 1px 10px #00000044;
+          box-shadow: 1px 1px 10px #00000044;
+  cursor: pointer;
+}
+
+.section-container .section-task .task-title h3 {
+  color: #2b2d42;
+  margin-bottom: 20px;
+  font-size: 30px;
+  font-weight: bolder;
+}
+
+.section-container .section-task .task-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  font-size: 20px;
+}
+
+.section-container .section-task:hover {
+  -webkit-transform: scale(1.02);
+          transform: scale(1.02);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -137,5 +315,13 @@ html {
   overflow-x: hidden;
   min-height: 100vh;
   scroll-behavior: smooth;
+}
+
+.children {
+  min-height: 100vh;
+  min-width: 90vw;
+  margin-left: 250px;
+  padding: 40px;
+  background-color: #f8f8f8;
 }
 /*# sourceMappingURL=App.css.map */

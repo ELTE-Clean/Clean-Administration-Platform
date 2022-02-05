@@ -1,9 +1,9 @@
 import type { NextPage } from "next";
-
+import Section from "../components/section";
 const Home: NextPage = () => {
   return (
     <div>
-      Mahd is the <a href="https://nextjs.org">best!</a>
+      <Section sectionName={"Homeworks"} />
     </div>
   );
 };

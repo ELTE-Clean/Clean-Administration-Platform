@@ -1,5 +1,9 @@
 @import "./sass/config";
 @import "./sass/login";
+@import "./sass/menu";
+@import "./sass/section";
+@import "./sass/task";
+
 * {
   box-sizing: border-box;
   font-family: Gotham Rounded, sans-serif;
@@ -19,6 +23,10 @@ html {
   //   Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
-//   .children {
-
-//   }
+.children {
+  min-height: 100vh;
+  min-width: 90vw;
+  margin-left: 250px; // This should be same value of the wight of the menu
+  padding: 40px;
+  background-color: #f8f8f8;
+}

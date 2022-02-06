@@ -1,5 +1,7 @@
 .login-container {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   height: 100vh;
   width: 100vw;
 }
@@ -109,9 +111,15 @@
 .login-container .login-form-container .login-form #login-btn {
   background-color: #acf19b;
   margin-top: 60px;
-  outline: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  padding: 15px 0;
   background-color: #acf19b;
   color: #2b2d42;
+  border: none;
+  border-radius: 50px;
+  outline: none;
+  cursor: pointer;
   font-weight: bolder;
 }
 
@@ -119,6 +127,493 @@
   -webkit-transition: 0.2s;
   transition: 0.2s;
   background-color: #87eb6e;
+}
+
+.profile-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.profile-container .title {
+  margin-bottom: 50px;
+}
+
+.profile-container .title h1 {
+  color: #8d99ae;
+  text-decoration: underline;
+  font-size: 60px;
+  font-weight: bolder;
+}
+
+.profile-container .user-info p {
+  font-size: 40px;
+}
+
+.profile-container .user-info b {
+  color: #8d99ae;
+  text-decoration: underline;
+}
+
+.profile-container .change-pass-btn {
+  margin-top: 100px;
+  width: 30%;
+}
+
+.profile-container .change-pass-btn button {
+  -webkit-box-shadow: 1px 1px 10px #00000044;
+          box-shadow: 1px 1px 10px #00000044;
+  padding: 15px 8px;
+  background-color: #2b2d42;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+  font-weight: bolder;
+  font-size: 30px;
+}
+
+.profile-container .change-pass-btn button:hover {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  background-color: #171823;
+}
+
+.profile-container #pass-change-form {
+  padding: 0 20px 0 0;
+}
+
+.profile-container #pass-change-form br {
+  margin: 100px 0;
+}
+
+.profile-container #pass-change-form label {
+  font-size: 30px;
+  color: #2b2d42;
+  font-weight: bolder;
+}
+
+.profile-container #pass-change-form input {
+  width: 100%;
+  outline: none;
+  border: none;
+  border-radius: 50px;
+  font-size: 20px;
+  text-indent: 20px;
+  border-radius: 10px;
+  -webkit-box-shadow: 1px 1px 10px #00000044;
+          box-shadow: 1px 1px 10px #00000044;
+  padding: 20px 0;
+  margin: 20px 0;
+}
+
+.profile-container #pass-change-form input::-webkit-input-placeholder {
+  color: #cfcfcf;
+}
+
+.profile-container #pass-change-form input:-ms-input-placeholder {
+  color: #cfcfcf;
+}
+
+.profile-container #pass-change-form input::-ms-input-placeholder {
+  color: #cfcfcf;
+}
+
+.profile-container #pass-change-form input::placeholder {
+  color: #cfcfcf;
+}
+
+.profile-container #pass-change-form .form-btns {
+  margin-top: 50px;
+  position: relative;
+}
+
+.profile-container #pass-change-form .form-btns #change-btn {
+  -webkit-box-shadow: 1px 1px 10px #00000044;
+          box-shadow: 1px 1px 10px #00000044;
+  padding: 15px 30px;
+  background-color: #acf19b;
+  color: #2b2d42;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+  font-weight: bolder;
+}
+
+.profile-container #pass-change-form .form-btns #change-btn:hover {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  background-color: #87eb6e;
+}
+
+.profile-container #pass-change-form .form-btns #cancel-btn {
+  position: absolute;
+  right: 0;
+  -webkit-box-shadow: 1px 1px 10px #00000044;
+          box-shadow: 1px 1px 10px #00000044;
+  padding: 15px 30px;
+  background-color: #fbabab;
+  color: #2b2d42;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+  font-weight: bolder;
+}
+
+.profile-container #pass-change-form .form-btns #cancel-btn:hover {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  background-color: #f97a7a;
+}
+
+.menu-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #2b2d42;
+  color: #fff;
+  min-height: 100%;
+  height: 100vh;
+  width: 250px;
+}
+
+.menu-container .profile-icon-neptun {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.menu-container .profile-icon-neptun .profile-icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  background-color: #c4c4c4;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+
+.menu-container .profile-icon-neptun .profile-neptun {
+  margin-top: 10px;
+}
+
+.menu-container .sections {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  height: 60%;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.menu-container .sections .section {
+  cursor: pointer;
+}
+
+.menu-container .sections .section .section-name {
+  text-align: center;
+}
+
+.menu-container .sections .section .section-name h2 {
+  font-size: 30px;
+  text-decoration: underline;
+  color: #fff;
+}
+
+.menu-container .sections .section .section-name h2:hover {
+  color: #8d99ae;
+}
+
+.section-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  gap: 20px;
+}
+
+.section-container .section-name {
+  margin-bottom: 50px;
+}
+
+.section-container .section-name h1 {
+  color: #8d99ae;
+  text-decoration: underline;
+  font-size: 60px;
+  font-weight: bolder;
+}
+
+.section-container .section-task {
+  background-color: #fff;
+  border-radius: 30px;
+  padding: 20px;
+  width: 600px;
+  -webkit-box-shadow: 1px 1px 10px #00000044;
+          box-shadow: 1px 1px 10px #00000044;
+  cursor: pointer;
+}
+
+.section-container .section-task .task-title h3 {
+  color: #2b2d42;
+  margin-bottom: 20px;
+  font-size: 30px;
+  font-weight: bolder;
+}
+
+.section-container .section-task .task-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  font-size: 20px;
+}
+
+.section-container .section-task:hover {
+  -webkit-transform: scale(1.02);
+          transform: scale(1.02);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.task-container .task-title {
+  margin-bottom: 50px;
+}
+
+.task-container .task-title h1 {
+  color: #8d99ae;
+  text-decoration: underline;
+  font-size: 60px;
+  font-weight: bolder;
+}
+
+.task-container .task-info {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  font-size: 25px;
+  gap: 20px;
+  color: #2b2d42;
+  font-weight: bolder;
+  margin: 30px 0;
+}
+
+.task-container .task-info .grade {
+  position: absolute;
+  right: 0;
+}
+
+.task-container .task-description,
+.task-container .task-attachments {
+  position: relative;
+  margin: 60px 0;
+}
+
+.task-container .task-description .title,
+.task-container .task-attachments .title {
+  font-size: 20px;
+  text-decoration: underline;
+  color: #8d99ae;
+  margin-bottom: 20px;
+}
+
+.task-container .task-description .description-body,
+.task-container .task-attachments .description-body {
+  font-size: 20px;
+  color: #2b2d42;
+}
+
+.task-container .task-description .attachment,
+.task-container .task-attachments .attachment {
+  margin: 20px 0;
+  font-size: 20px;
+  color: black;
+}
+
+.task-container .upload-area {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: 50%;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 100px;
+}
+
+.task-container .upload-area input {
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+  padding: 10px;
+  width: 400px;
+  font-size: 20px;
+}
+
+.task-container .upload-area input[type="file"] {
+  display: none;
+}
+
+.task-container .upload-area .custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  margin-right: 50px;
+  -webkit-box-shadow: 1px 1px 10px #00000044;
+          box-shadow: 1px 1px 10px #00000044;
+  padding: 15px 50px;
+  background-color: #2b2d42;
+  color: #fbabab;
+  border: 3px solid #fbabab;
+  border-radius: 50px;
+  outline: none;
+  cursor: pointer;
+  font-weight: bolder;
+}
+
+.task-container .upload-area .custom-file-upload:hover {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  background-color: #171823;
+}
+
+.task-container .upload-area #submit-btn {
+  position: absolute;
+  right: 0;
+}
+
+.task-container .upload-area #submit-btn button {
+  -webkit-box-shadow: 1px 1px 10px #00000044;
+          box-shadow: 1px 1px 10px #00000044;
+  padding: 15px 50px;
+  background-color: #fbabab;
+  color: #2b2d42;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+  font-weight: bolder;
+}
+
+.task-container .upload-area #submit-btn button:hover {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  background-color: #f97a7a;
 }
 
 * {
@@ -137,5 +632,27 @@ html {
   overflow-x: hidden;
   min-height: 100vh;
   scroll-behavior: smooth;
+}
+
+#info-btn {
+  position: absolute;
+  right: 0;
+  border-radius: 50px;
+  border: none;
+  outline: none;
+  width: 50px;
+  height: 50px;
+  background-color: #2b2d42;
+  color: #fff;
+  cursor: pointer;
+  margin-right: 40px;
+}
+
+.children {
+  min-height: 100vh;
+  min-width: 85vw;
+  margin-left: 250px;
+  padding: 40px;
+  background-color: #f8f8f8;
 }
 /*# sourceMappingURL=App.css.map */

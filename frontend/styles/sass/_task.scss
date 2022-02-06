@@ -1,0 +1,89 @@
+.task-container {
+  .task-title {
+    @include titles();
+  }
+  .task-info {
+    position: relative;
+    @include flex(row);
+    justify-content: flex-start;
+    font-size: 25px;
+    gap: 20px;
+    color: $main-dark-blue;
+    font-weight: bolder;
+    margin: 30px 0;
+
+    .grade {
+      position: absolute;
+      right: 0;
+    }
+  }
+
+  .task-description,
+  .task-attachments {
+    position: relative;
+    margin: 60px 0;
+    .title {
+      font-size: 20px;
+      text-decoration: underline;
+      color: $main-light-blue;
+      margin-bottom: 20px;
+    }
+    .description-body {
+      font-size: 20px;
+      color: $main-dark-blue;
+    }
+    .attachment {
+      margin: 20px 0;
+      font-size: 20px;
+      color: black;
+    }
+  }
+  .upload-area {
+    @include flex(row);
+    width: 50%;
+    justify-content: flex-start;
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 100px;
+    input {
+      border: none;
+      border-bottom: 1px solid black;
+      outline: none;
+      padding: 10px;
+      width: 400px;
+      font-size: 20px;
+    }
+    input[type="file"] {
+      display: none;
+    }
+    .custom-file-upload {
+      border: 1px solid #ccc;
+      display: inline-block;
+      padding: 6px 12px;
+      cursor: pointer;
+      margin-right: 50px;
+      @include btn(
+        $main-dark-blue,
+        $main-red,
+        $main-box-shadow,
+        3px solid $main-red,
+        50px,
+        15px 50px
+      );
+    }
+    #submit-btn {
+      position: absolute;
+      right: 0;
+      button {
+        @include btn(
+          $main-red,
+          $main-dark-blue,
+          $main-box-shadow,
+          none,
+          10px,
+          15px 50px
+        );
+      }
+    }
+  }
+}

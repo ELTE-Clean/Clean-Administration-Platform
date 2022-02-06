@@ -24,6 +24,20 @@ html {
   //   Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+#info-btn {
+  position: absolute;
+  right: 0;
+  border-radius: 50px;
+  border: none;
+  outline: none;
+  width: 50px;
+  height: 50px;
+  background-color: $main-dark-blue;
+  color: #fff;
+  cursor: pointer;
+  margin-right: 40px;
+}
+
 .children {
   min-height: 100vh;
   min-width: 85vw;

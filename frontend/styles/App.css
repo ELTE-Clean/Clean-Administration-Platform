@@ -1,9 +1,9 @@
 .login-container {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   height: 100vh;
   width: 100vw;
-  margin-right: 250px;
-  padding: 0;
 }
 
 .login-container .bc-image-container {
@@ -113,14 +113,14 @@
   margin-top: 60px;
   -webkit-box-shadow: none;
           box-shadow: none;
-  padding: 0;
-  outline: none;
+  padding: 15px 0;
   background-color: #acf19b;
   color: #2b2d42;
-  font-weight: bolder;
   border: none;
-  border-radius: 0;
+  border-radius: 50px;
+  outline: none;
   cursor: pointer;
+  font-weight: bolder;
 }
 
 .login-container .login-form-container .login-form #login-btn:hover {
@@ -130,7 +130,158 @@
 }
 
 .profile-container {
-  background-color: red;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.profile-container .title {
+  margin-bottom: 50px;
+}
+
+.profile-container .title h1 {
+  color: #8d99ae;
+  text-decoration: underline;
+  font-size: 60px;
+  font-weight: bolder;
+}
+
+.profile-container .user-info p {
+  font-size: 40px;
+}
+
+.profile-container .user-info b {
+  color: #8d99ae;
+  text-decoration: underline;
+}
+
+.profile-container .change-pass-btn {
+  margin-top: 100px;
+  width: 30%;
+}
+
+.profile-container .change-pass-btn button {
+  -webkit-box-shadow: 1px 1px 10px #00000044;
+          box-shadow: 1px 1px 10px #00000044;
+  padding: 15px 8px;
+  background-color: #2b2d42;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+  font-weight: bolder;
+  font-size: 30px;
+}
+
+.profile-container .change-pass-btn button:hover {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  background-color: #171823;
+}
+
+.profile-container #pass-change-form {
+  padding: 0 20px 0 0;
+}
+
+.profile-container #pass-change-form br {
+  margin: 100px 0;
+}
+
+.profile-container #pass-change-form label {
+  font-size: 30px;
+  color: #2b2d42;
+  font-weight: bolder;
+}
+
+.profile-container #pass-change-form input {
+  width: 100%;
+  outline: none;
+  border: none;
+  border-radius: 50px;
+  font-size: 20px;
+  text-indent: 20px;
+  border-radius: 10px;
+  -webkit-box-shadow: 1px 1px 10px #00000044;
+          box-shadow: 1px 1px 10px #00000044;
+  padding: 20px 0;
+  margin: 20px 0;
+}
+
+.profile-container #pass-change-form input::-webkit-input-placeholder {
+  color: #cfcfcf;
+}
+
+.profile-container #pass-change-form input:-ms-input-placeholder {
+  color: #cfcfcf;
+}
+
+.profile-container #pass-change-form input::-ms-input-placeholder {
+  color: #cfcfcf;
+}
+
+.profile-container #pass-change-form input::placeholder {
+  color: #cfcfcf;
+}
+
+.profile-container #pass-change-form .form-btns {
+  margin-top: 50px;
+  position: relative;
+}
+
+.profile-container #pass-change-form .form-btns #change-btn {
+  -webkit-box-shadow: 1px 1px 10px #00000044;
+          box-shadow: 1px 1px 10px #00000044;
+  padding: 15px 30px;
+  background-color: #acf19b;
+  color: #2b2d42;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+  font-weight: bolder;
+}
+
+.profile-container #pass-change-form .form-btns #change-btn:hover {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  background-color: #87eb6e;
+}
+
+.profile-container #pass-change-form .form-btns #cancel-btn {
+  position: absolute;
+  right: 0;
+  -webkit-box-shadow: 1px 1px 10px #00000044;
+          box-shadow: 1px 1px 10px #00000044;
+  padding: 15px 30px;
+  background-color: #fbabab;
+  color: #2b2d42;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+  font-weight: bolder;
+}
+
+.profile-container #pass-change-form .form-btns #cancel-btn:hover {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  background-color: #f97a7a;
 }
 
 .menu-container {
@@ -310,9 +461,14 @@
 }
 
 .task-container .task-title {
-  font-size: 30px;
-  text-decoration: underline;
+  margin-bottom: 50px;
+}
+
+.task-container .task-title h1 {
   color: #8d99ae;
+  text-decoration: underline;
+  font-size: 60px;
+  font-weight: bolder;
 }
 
 .task-container .task-info {
@@ -337,7 +493,7 @@
           justify-content: flex-start;
   font-size: 25px;
   gap: 20px;
-  color: #8d99ae;
+  color: #2b2d42;
   font-weight: bolder;
   margin: 30px 0;
 }
@@ -421,13 +577,13 @@
   -webkit-box-shadow: 1px 1px 10px #00000044;
           box-shadow: 1px 1px 10px #00000044;
   padding: 15px 50px;
-  outline: none;
   background-color: #2b2d42;
   color: #fbabab;
-  font-weight: bolder;
   border: 3px solid #fbabab;
   border-radius: 50px;
+  outline: none;
   cursor: pointer;
+  font-weight: bolder;
 }
 
 .task-container .upload-area .custom-file-upload:hover {
@@ -445,13 +601,13 @@
   -webkit-box-shadow: 1px 1px 10px #00000044;
           box-shadow: 1px 1px 10px #00000044;
   padding: 15px 50px;
-  outline: none;
   background-color: #fbabab;
   color: #2b2d42;
-  font-weight: bolder;
   border: none;
   border-radius: 10px;
+  outline: none;
   cursor: pointer;
+  font-weight: bolder;
 }
 
 .task-container .upload-area #submit-btn button:hover {
@@ -476,6 +632,20 @@ html {
   overflow-x: hidden;
   min-height: 100vh;
   scroll-behavior: smooth;
+}
+
+#info-btn {
+  position: absolute;
+  right: 0;
+  border-radius: 50px;
+  border: none;
+  outline: none;
+  width: 50px;
+  height: 50px;
+  background-color: #2b2d42;
+  color: #fff;
+  cursor: pointer;
+  margin-right: 40px;
 }
 
 .children {

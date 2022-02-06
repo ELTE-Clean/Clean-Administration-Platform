@@ -1,3 +1,78 @@
 .profile-container {
-  background-color: red;
+  @include flex(column);
+  align-items: flex-start;
+  .title {
+    @include titles();
+  }
+  .user-info {
+    p {
+      font-size: 40px;
+    }
+    b {
+      color: $main-light-blue;
+      text-decoration: underline;
+    }
+  }
+  .change-pass-btn {
+    margin-top: 100px;
+    width: 30%;
+    button {
+      @include btn(
+        $main-dark-blue,
+        #fff,
+        $main-box-shadow,
+        none,
+        10px,
+        15px 8px
+      );
+      font-size: 30px;
+    }
+  }
+
+  #pass-change-form {
+    padding: 0 20px 0 0;
+    br {
+      margin: 100px 0;
+    }
+    label {
+      font-size: 30px;
+      color: $main-dark-blue;
+      font-weight: bolder;
+    }
+    input {
+      width: 100%;
+      @include input();
+      border-radius: 10px;
+      box-shadow: $main-box-shadow;
+      padding: 20px 0;
+      margin: 20px 0;
+    }
+    .form-btns {
+      margin-top: 50px;
+      position: relative;
+      #change-btn {
+        @include btn(
+          $main-green,
+          $main-dark-blue,
+          $main-box-shadow,
+          none,
+          10px,
+          15px 30px
+        );
+      }
+      #cancel-btn {
+        position: absolute;
+
+        right: 0;
+        @include btn(
+          $main-red,
+          $main-dark-blue,
+          $main-box-shadow,
+          none,
+          10px,
+          15px 30px
+        );
+      }
+    }
+  }
 }

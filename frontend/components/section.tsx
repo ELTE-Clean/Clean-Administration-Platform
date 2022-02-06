@@ -2,7 +2,7 @@ import { Task } from "../interfaces/task";
 
 const Section = (sectionName: String) => {
   let name = "Homeworks";
-
+  let isTeacher: Boolean = true;
   // Here instead of "tasks" there should be an api call to the backend to get the respective data for sectionName
 
   const tasks = [
@@ -37,6 +37,8 @@ const Section = (sectionName: String) => {
       <div className="section-name">
         <h1>Homeworks</h1>
       </div>
+      {isTeacher && <button>Edit</button>}
+
       {tasks.map((task, idx) => (
         <div key={idx} className="section-task">
           <div className="task-title">

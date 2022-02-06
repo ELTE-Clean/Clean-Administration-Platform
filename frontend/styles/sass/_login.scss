@@ -1,9 +1,9 @@
 .login-container {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   height: 100vh;
   width: 100vw;
-  margin-right: 250px;
-  padding: 0;
   .bc-image-container {
     height: 100%;
     width: 100%;
@@ -48,7 +48,7 @@
       #login-btn {
         background-color: $main-green;
         margin-top: 60px;
-        @include btn($main-green, $main-dark-blue, none, none, 0, 0);
+        @include btn($main-green, $main-dark-blue, none, none, 50px, 15px 0);
       }
     }
   }

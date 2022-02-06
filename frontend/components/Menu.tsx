@@ -21,6 +21,7 @@ const Menu = () => {
           </div>
         ))}
       </div>
+      <div className="add-section-btn">Add section</div>
     </div>
   );
 };

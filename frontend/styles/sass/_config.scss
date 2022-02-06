@@ -19,17 +19,25 @@ $main-box-shadow: 1px 1px 10px #00000044;
   align-items: center;
   flex-wrap: wrap;
 }
-
+@mixin titles() {
+  margin-bottom: 50px;
+  h1 {
+    color: $main-light-blue;
+    text-decoration: underline;
+    font-size: 60px;
+    font-weight: bolder;
+  }
+}
 @mixin btn($bc-color, $color, $box-shadow, $border, $border-radius, $padding) {
   box-shadow: $box-shadow;
   padding: $padding;
-  outline: none;
   background-color: $bc-color;
   color: $color;
-  font-weight: bolder;
   border: $border;
   border-radius: $border-radius;
+  outline: none;
   cursor: pointer;
+  font-weight: bolder;
   &:hover {
     transition: 0.2s;
     background-color: darken($bc-color, 10%);

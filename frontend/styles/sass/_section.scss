@@ -3,13 +3,7 @@
   align-items: flex-start;
   gap: 20px;
   .section-name {
-    margin-bottom: 50px;
-    h1 {
-      color: $main-light-blue;
-      text-decoration: underline;
-      font-size: 60px;
-      font-weight: bolder;
-    }
+    @include titles();
   }
   .section-task {
     background-color: #fff;

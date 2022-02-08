@@ -1,9 +1,13 @@
+import { useState } from "react";
 import { Task } from "../interfaces/task";
+import EditHomeworkForm from "./EditHomeworkForm";
+import Popup from "./Popup";
 
 const Section = (sectionName: String) => {
   let name = "Homeworks";
   let isTeacher: Boolean = true;
   // Here instead of "tasks" there should be an api call to the backend to get the respective data for sectionName
+  const [buttonEditPopup, setButtonEditPopup] = useState(false);
 
   const tasks = [
     {
@@ -37,7 +41,10 @@ const Section = (sectionName: String) => {
       <div className="section-name">
         <h1>Homeworks</h1>
       </div>
-      {isTeacher && <button>Edit</button>}
+
+      {isTeacher && <div className="edit-btn-container"> <button onClick={()=> setButtonEditPopup(true)} className="edit-btn">Edit</button>
+      <Popup trigger={buttonEditPopup} setTrigger={setButtonEditPopup} popupType="edit-home-work"  component={<EditHomeworkForm tasks={tasks} name= "Homeworks"/>}/>
+      </div>}
 
       {tasks.map((task, idx) => (
         <div key={idx} className="section-task">

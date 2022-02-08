@@ -1,6 +1,7 @@
 //colors
 $main-green: #acf19b;
 $main-red: #fbabab;
+$btn-txt-color: #e6e0e0;
 $main-dark-blue: #2b2d42;
 $main-light-blue: #8d99ae;
 
@@ -33,6 +34,7 @@ $main-box-shadow: 1px 1px 10px #00000044;
   padding: $padding;
   background-color: $bc-color;
   color: $color;
+  text-align: center;
   border: $border;
   border-radius: $border-radius;
   outline: none;

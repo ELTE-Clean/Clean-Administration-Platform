@@ -16,6 +16,9 @@
 Env: Docker K8S
 Automation: Python
 
+## Application architecture
+![Untitled Diagram drawio](https://user-images.githubusercontent.com/48254077/153008152-10429da8-3431-4b5e-a9b9-46ac501ccd35.png)
+
 ## Example student report for now
 
 <details>

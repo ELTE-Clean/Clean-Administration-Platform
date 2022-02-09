@@ -21,9 +21,9 @@ SET row_security = off;
 -- Name: test_db; Type: DATABASE; Schema: -; Owner: postgres
 --
 
+
+-- Creating some random database
 CREATE DATABASE test_db WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'en_US.utf8' LC_CTYPE = 'en_US.utf8';
-
-
 ALTER DATABASE test_db OWNER TO postgres;
 
 \connect test_db

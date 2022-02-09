@@ -1,0 +1,15 @@
+.edit-homework-container{
+    .edit-homework-btn{
+        margin: 4px 30px;
+        @include btn($main-light-blue, $btn-txt-color, $main-box-shadow, 1px, 5px, 15px 32px)
+      }
+}
+.add-task-btn{
+    @include btn(
+      $main-dark-blue,
+      $btn-txt-color,
+      $main-box-shadow,
+      none,
+      10px,
+      15px 50px)
+}

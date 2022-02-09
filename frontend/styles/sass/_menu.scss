@@ -42,4 +42,9 @@
       }
     }
   }
+
+  .add-section-btn{
+    margin: 4px 30px;
+    @include btn($main-light-blue, $btn-txt-color, $main-box-shadow, 1px, 5px, 15px 32px)
+  }
 }

@@ -1,9 +1,15 @@
 import Link from "next/link";
+import Popup from './Popup'
+import {useState} from 'react';
+import Task from "./task";
+import AddSectionForm from "./AddSectionForm";
 
 const Menu = () => {
   let userNeptun = "MI3JG2";
-
   let sections = ["Homeworks", "Progress Tasks", "Mid Term", "End Term"];
+  
+  const [buttonAddSectionPopup, setButtonAddSectionPopup] = useState(false);
+  
   return (
     <div className="menu-container">
       <Link href="/profile">
@@ -21,7 +27,12 @@ const Menu = () => {
           </div>
         ))}
       </div>
-      <div className="add-section-btn">Add section</div>
+      <div className="add-section-part">
+      <div className="add-section-btn" onClick={()=> setButtonAddSectionPopup(true)}>Add Section</div>
+
+      <Popup trigger={buttonAddSectionPopup} setTrigger={setButtonAddSectionPopup} popupType="add-section" component={<AddSectionForm />}/>
+
+      </div>
     </div>
   );
 };

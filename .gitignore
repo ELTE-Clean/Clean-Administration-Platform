@@ -102,5 +102,8 @@ Thumbs.db
 *.cache
 
 
-#config files(Mainly for the prepros.config)
+#Config files(Mainly for the prepros.config)
 *.config
+
+#Ignoring css files
+*.css

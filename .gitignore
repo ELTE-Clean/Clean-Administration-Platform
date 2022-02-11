@@ -104,3 +104,6 @@ Thumbs.db
 
 #config files(Mainly for the prepros.config)
 *.config
+
+#css files
+*.css

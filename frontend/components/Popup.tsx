@@ -2,7 +2,7 @@ const PopUp = (props) => {
   return (props.trigger) ? (
   
  
-  <div className="task-container">
+  <div className="popup-task-container">
      <div className="PopUp-holder">
           <form>
           <div className="exit-container">

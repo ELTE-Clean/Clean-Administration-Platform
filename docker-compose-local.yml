@@ -6,8 +6,18 @@ services:
         # command : 
         # ports:
         # env_file:
-
-
+    backend:
+        image: backend:latest
+        ports:
+            - 5000:5000
+        #env_file:
+        depends_on:
+            - cleanDB
+            - keycloak
+        links:
+            - cleanDB 
+            - keycloak
+            
     keycloak:
         image: jboss/keycloak:16.1.0
         ports:

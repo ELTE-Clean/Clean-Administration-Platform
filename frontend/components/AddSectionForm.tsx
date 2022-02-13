@@ -1,19 +1,44 @@
-const AddSectionForm = () => {
+import { useState } from "react";
+
+const AddSectionForm = ({ addSectionCallBack }) => {
+  const [userInput, setUserInput] = useState("");
+  let addSectionHandler = () => {
+    if (userInput.trim() == "") {
+      alert("Input cannot be empty!!");
+    } else {
+      let sectionAlreadyIncluded = addSectionCallBack(userInput);
+      if (sectionAlreadyIncluded) {
+        alert(`Section "${userInput}" already exist!!`);
+      } else {
+        console.log("Adding section");
+      }
+    }
+  };
+
   return (
-
     <div className="container">
-      
       <h1>Add Section</h1>
-      <br/>
+      <br />
       <p>Make sure all sections have unique names!</p>
-      <br/>
+      <br />
       <label>Section Name:</label>
-      <br/>
-      <input type="text" placeholder="Write Name here..." name="addSection" required/>
-      <div className="form-buttom">
-          <button type="button" className="submitBtn">add</button>
+      <br />
+      <input
+        type="text"
+        placeholder="Write Name here..."
+        name="addSection"
+        onChange={(e) => setUserInput(e.target.value)}
+        required
+      />
+      <div className="form-button">
+        <button
+          type="button"
+          className="submitBtn"
+          onClick={() => addSectionHandler()}
+        >
+          add
+        </button>
       </div>
-
     </div>
   );
 };

@@ -41,7 +41,7 @@
     }
     input {
       width: 100%;
-      @include input();
+      @include input(none);
       border-radius: 10px;
       box-shadow: $main-box-shadow;
       padding: 20px 0;

@@ -4,7 +4,7 @@ import EditHomeworkForm from "./EditHomeworkForm";
 import Popup from "./Popup";
 
 const Section = (sectionName: String) => {
-  let name = "Homeworks";
+  let name: string = "Homeworks";
   let isTeacher: Boolean = true;
   // Here instead of "tasks" there should be an api call to the backend to get the respective data for sectionName
   const [buttonEditPopup, setButtonEditPopup] = useState(false);
@@ -25,7 +25,7 @@ const Section = (sectionName: String) => {
       gradeOutOf: 20,
     },
     {
-      title: "HW2",
+      title: "HW3",
       dutTme: "11:59",
       dutDate: "2022-1-1",
       grade: 30,
@@ -42,9 +42,20 @@ const Section = (sectionName: String) => {
         <h1>Homeworks</h1>
       </div>
 
-      {isTeacher && <div className="edit-btn-container"> <button onClick={()=> setButtonEditPopup(true)} className="edit-btn">Edit</button>
-      <Popup trigger={buttonEditPopup} setTrigger={setButtonEditPopup} popupType="edit-home-work"  component={<EditHomeworkForm tasks={tasks} name= "Homeworks"/>}/>
-      </div>}
+      {isTeacher && (
+        <div className="edit-btn-container">
+          {" "}
+          <button onClick={() => setButtonEditPopup(true)} className="edit-btn">
+            Edit
+          </button>
+          <Popup
+            trigger={buttonEditPopup}
+            setTrigger={setButtonEditPopup}
+            popupType="edit-home-work"
+            component={<EditHomeworkForm tasks={tasks} sectionName={name} />}
+          />
+        </div>
+      )}
 
       {tasks.map((task, idx) => (
         <div key={idx} className="section-task">

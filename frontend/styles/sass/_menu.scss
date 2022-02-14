@@ -42,9 +42,21 @@
       }
     }
   }
-
-  .add-section-btn{
-    margin: 4px 30px;
-    @include btn($main-light-blue, $btn-txt-color, $main-box-shadow, 1px, 5px, 15px 32px)
+  .add-section-part {
+    @include flex(column);
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 100px;
+    width: 100%;
+    .add-section-btn {
+      @include btn(
+        $main-light-blue,
+        $btn-txt-color,
+        $main-box-shadow,
+        1px,
+        5px,
+        15px 32px
+      );
+    }
   }
 }

@@ -13,7 +13,7 @@ const   mainRouter    = require('./routes/main');
 const  SESSION_SECRET = 'some secret';  // For future use (For the express session)
 const  TLS_PATHS      = "/etc/tls/";    // For future use (If HTTPS is needed).
 const  STATIC_ROOT    = "./";           // For future use (Sets the express static directory roots (Front end files distenation))
-const  PORT           = 5000;           // Port of the backend server.
+const  PORT           = 80;             // Port of the backend server.
 
 /* Global variables */
 const   memoryStore   = new session.MemoryStore();

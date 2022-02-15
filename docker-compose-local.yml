@@ -17,8 +17,7 @@ services:
     backend:
         image: backend:latest
         ports:
-            - 5000:5000
-        #env_file:
+            - 5000:80
         hostname: backend
         depends_on:
             - cleanDB
@@ -28,13 +27,22 @@ services:
             - cleanDB 
             - keycloak
 
+    frontend:
+        image: frontend:latest
+        ports:
+            - 5001:80
+        hostname: frontend
+        depends_on:
+            - nginx
+        # env_file:
+
     keycloak:
         image: jboss/keycloak:16.1.0
         hostname: keycloak
         ports:
-            - 8081:8081
+            - 5002:80
         entrypoint: /bin/sh -c
-        command: ["sleep 45 && /opt/jboss/tools/docker-entrypoint.sh -b 0.0.0.0 -Djboss.http.port=8081 -Dkeycloak.profile.feature.upload_scripts=enabled"]
+        command: ["sleep 45 && /opt/jboss/tools/docker-entrypoint.sh -b 0.0.0.0 -Djboss.http.port=80 -Dkeycloak.profile.feature.upload_scripts=enabled"]
         env_file: 
             - keycloak/env/keycloak.env
         depends_on:
@@ -46,7 +54,7 @@ services:
     cleanDB:
         image: cleandb:latest # This image is preloaded with the data we need. Setting up shared volumes or copying the data with dockercompose volumes had problems
         ports:
-            - 5432:5432
+            - 5003:80
         env_file:
             - cleanDB/env/postgres.env
 
@@ -58,7 +66,7 @@ services:
             - cleanDB
         restart: always
         ports:
-            - 5050:80
+            - 5004:80
         depends_on:
             - nginx
             - cleanDB

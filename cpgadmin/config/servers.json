@@ -3,7 +3,7 @@
         "1": {
             "Name": "Postgres Server",
             "Group": "Postgres",
-            "Port": 5432,
+            "Port": 80,
             "Username": "postgres",
             "Host": "cleanDB",
             "SSLMode": "prefer",

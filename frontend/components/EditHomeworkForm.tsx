@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Task } from "../interfaces/task";
 
-const EditHomeworkForm = (props) => {
+const EditHomeworkForm = (props: any) => {
   const [sectionName, setSectionName] = useState(props.sectionName);
   const [taskName, setTaskName] = useState("");
 

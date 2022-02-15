@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const AddSectionForm = ({ addSectionCallBack }) => {
+const AddSectionForm = ({ addSectionCallBack }: { addSectionCallBack:any }) => {
   const [userInput, setUserInput] = useState("");
   let addSectionHandler = () => {
     if (userInput.trim() == "") {

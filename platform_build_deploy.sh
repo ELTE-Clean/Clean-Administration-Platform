@@ -1,50 +1,81 @@
 #! /bin/sh
 
 
-if [ $# -eq 0 ]
+if [ $# -ne 1 ] || [ $1 -gt 2 ]
 then
     echo "ERROR: "
     echo "  Please specify a building option as an argument."
     echo "      0 : For building and deploying the project";
-    echo "      N : For building the project only. (Call the script with any number)";
+    echo "      1 : For building the project only.";
+    echo "      2 : For deploying the project only.";
     exit;
 fi;
 
 
-# Building the clean database
-echo "Building the cleanDB powered by postgres...";
-cd cleanDB;
-docker build . -t cleandb:latest;
-if [ $? -ne 0 ]
+# Building the images
+if [ $1 -ne 2 ]
 then 
-    echo "Failed to build the image... Exitting with code $?";
-    exit;
+    # Building the backend
+    echo "Building the express backend...";
+    cd backend;
+    docker build . -t backend:latest;
+    if [ $? -ne 0 ]
+    then 
+        echo "Failed to build the image... Exitting with code $?";
+        exit;
+    fi;
+    cd ..;
+
+    echo "----------------------------------------------------------------------------------- ";
+
+    # Building the clean database
+    echo "Building the react frontend...";
+    cd frontend;
+    docker build . -t frontend:latest;
+    if [ $? -ne 0 ]
+    then 
+        echo "Failed to build the image... Exitting with code $?";
+        exit;
+    fi;
+    cd ..;
+
+    echo "----------------------------------------------------------------------------------- ";
+
+    # Building the clean database
+    echo "Building the cleanDB powered by postgres...";
+    cd cleanDB;
+    docker build . -t cleandb:latest;
+    if [ $? -ne 0 ]
+    then 
+        echo "Failed to build the image... Exitting with code $?";
+        exit;
+    fi;
+    cd ..;
+
+    echo "----------------------------------------------------------------------------------- ";
+
+    # Building the cpgadmin
+    echo "Building the clean pgadmin...";
+    cd cpgadmin;
+    docker build . -t cpgadmin:latest;
+    if [ $? -ne 0 ]
+    then 
+        echo "Failed to build the image... Exitting with code $?";
+        exit;
+    fi;
+    cd ..;
+
+    echo "----------------------------------------------------------------------------------- ";
+
+    # Final step to make your "docker images" command outputs pretty stuff. 
+    echo "Deleting all <none> images in docker...";
+    docker images | grep "<none>" | awk '{ print $3; }' | xargs docker rmi -f; # cleaning the docker junk docker images.
+
+    echo "----------------------------------------------------------------------------------- ";
 fi;
-cd ..;
-
-echo "----------------------------------------------------------------------------------- ";
-
-# Building the cpgadmin
-echo "Building the clean pgadmin...";
-cd cpgadmin;
-docker build . -t cpgadmin:latest;
-if [ $? -ne 0 ]
-then 
-    echo "Failed to build the image... Exitting with code $?";
-    exit;
-fi;
-cd ..;
-
-echo "----------------------------------------------------------------------------------- ";
-
-# Final step to make your "docker images" command outputs pretty stuff. 
-echo "Deleting all <none> images in docker...";
-docker images | grep "<none>" | awk '{ print $3; }' | xargs docker rmi -f; # cleaning the docker junk docker images.
-
-echo "----------------------------------------------------------------------------------- ";
 
 
-if [ $1 -eq 0 ]
+if [ $1 -ne 1 ]
 then
     echo "Deploying the project locally...";
     docker-compose -f docker-compose-local.yml up -d --force-recreate;

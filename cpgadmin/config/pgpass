@@ -1,1 +1,1 @@
-cleanDB:5432:*:postgres:postgres
+cleanDB:80:*:postgres:postgres

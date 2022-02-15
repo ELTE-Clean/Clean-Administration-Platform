@@ -2,10 +2,13 @@
   "name": "web-app",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "npm run sass-dev & next dev",
+    "build": "npm run sass-prod && next build",
     "start": "next start",
-    "lint": "next lint"
+    "prod": "npm run build && next start -p 80",
+    "lint": "next lint",
+    "sass-dev": "sass --watch --update --style=expanded styles/App.scss:styles/App.css",
+    "sass-prod": "sass --no-source-map --style=compressed styles/App.scss:styles/App.css"
   },
   "dependencies": {
     "next": "^12.0.10",

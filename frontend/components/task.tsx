@@ -71,7 +71,7 @@ const Task = () => {
             <h1>Attachments</h1>
           </div>
           {task.attachedFiles.map((attachedFile) => (
-            <div className="attachment">
+            <div className="attachment" key={attachedFile}>
               <p>{attachedFile}</p>
             </div>
           ))}

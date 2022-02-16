@@ -58,3 +58,11 @@ $main-box-shadow: 1px 1px 10px #00000044;
     text-align: left;
   }
 }
+
+@mixin clearFix{
+  &:after{
+    content: "";
+    display: block;
+    clear: both;
+  }
+}

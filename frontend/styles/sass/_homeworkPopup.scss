@@ -1,7 +1,7 @@
 .edit-homework-container {
   @include flex(column);
   gap: 5px;
-  .task-container {
+  .homework-task-container {
     @include flex(row);
     width: 100%;
     justify-content: space-between;

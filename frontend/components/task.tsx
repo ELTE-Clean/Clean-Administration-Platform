@@ -1,6 +1,11 @@
 import { BaseSyntheticEvent, useState } from "react";
-
+import EditThisHomeworkForm from "./EditThisHomeworkForm";
+import Popup from "./Popup";
 const Task = () => {
+  //Variables Area.................
+  let isTeacher: Boolean = true;
+  const [buttonEditPopup, setButtonEditPopup] = useState(false);
+  //-------------------------------------
   let uploadedBtnStyle = {
     border: "3px solid #acf19b",
     color: "#acf19b",
@@ -50,6 +55,25 @@ const Task = () => {
           )}
         </div>
       </div>
+
+
+      {isTeacher && (
+        <div className="edit-btn-container">
+          {" "}
+          <button onClick={() => setButtonEditPopup(true)} className="edit-btn">
+            Edit
+          </button>
+          <Popup
+            trigger={buttonEditPopup}
+            setTrigger={setButtonEditPopup}
+            popupType="edit-this-homwwork"
+            component={<EditThisHomeworkForm task={task}/>}
+          />
+        </div>
+      )}
+
+
+
       {task.description === null ? (
         ""
       ) : (

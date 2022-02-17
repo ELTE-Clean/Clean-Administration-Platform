@@ -2,6 +2,7 @@
   @include flex(column);
   align-items: flex-start;
   gap: 20px;
+
   .section-name {
     @include titles();
   }
@@ -30,21 +31,20 @@
       transition: 0.5s;
     }
   }
-  .edit-btn-container{
-    width: 100%;
-    font-weight: bolder;
-    .edit-btn{
-      
-      float: right;
-      @include btn(
-        $main-dark-blue,
-        $btn-txt-color,
-        $main-box-shadow,
-        none,
-        10px,
-        15px 50px
-      );
-    } 
-  }
+}
 
+.edit-btn-container {
+  width: 100%;
+  font-weight: bolder;
+  .edit-btn {
+    float: right;
+    @include btn(
+      $main-dark-blue,
+      $btn-txt-color,
+      $main-box-shadow,
+      none,
+      10px,
+      15px 50px
+    );
+  }
 }

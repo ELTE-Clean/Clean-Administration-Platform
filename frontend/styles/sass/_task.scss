@@ -1,4 +1,7 @@
 .task-container {
+  position: relative;
+  min-height: 90vh;
+
   .task-title {
     @include titles();
   }
@@ -44,7 +47,6 @@
     justify-content: flex-start;
     position: absolute;
     bottom: 0;
-    margin-bottom: 100px;
     input {
       border: none;
       border-bottom: 1px solid black;

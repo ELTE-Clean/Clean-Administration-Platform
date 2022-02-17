@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Task } from "../interfaces/task";
+import { Task } from "../interfaces/teacTask";
 
-const EditHomeworkForm = (props: any) => {
+const EditHomeworkForm = (props) => {
   const [sectionName, setSectionName] = useState(props.sectionName);
   const [taskName, setTaskName] = useState("");
 
@@ -27,6 +27,7 @@ const EditHomeworkForm = (props: any) => {
     if (sectionName.trim() == "") {
       alert("section name cannot be empty!!");
     } else {
+      console.log(sectionName);
       console.log("saving..");
     }
   };
@@ -47,7 +48,7 @@ const EditHomeworkForm = (props: any) => {
       <br />
       <div className="edit-homework-container">
         {props.tasks.map((task: Task, idx: number) => (
-          <div key={idx} className="task-container">
+          <div key={idx} className="homework-task-container">
             <div
               className="edit-homework-btn"
               onClick={() => taskViewHandler(idx)}
@@ -82,11 +83,7 @@ const EditHomeworkForm = (props: any) => {
       <br />
 
       <div className="form-button">
-        <button
-          type="button"
-          className="submitBtn"
-          onClick={() => saveHandler()}
-        >
+        <button type="button" className="submitBtn" onClick={saveHandler}>
           Save
         </button>
       </div>

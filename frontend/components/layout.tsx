@@ -7,7 +7,7 @@ export default function Layout({ children }: { children:any }) {
   const showMenu = router.asPath !== "/login";
 
   return (
-    <div style={{ display: "flex" }}>
+    <div /* style={{ display: "flex" }}*/>
       {showMenu && <Menu />}
       <div className="children">
         {showMenu && (

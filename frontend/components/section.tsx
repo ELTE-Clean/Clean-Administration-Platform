@@ -1,6 +1,7 @@
 import { useState } from "react";
-import EditHomeworkForm from "./EditHomeworkForm";
-import PopUp from "./Popup";
+import { Task } from "../interfaces/userTask";
+import EditSectionForm from "./EditSectionForm";
+import Popup from "./Popup";
 
 const Section = ( { sectionName }: { sectionName:String } ) => {
   let name: string = "Homeworks";
@@ -51,7 +52,7 @@ const Section = ( { sectionName }: { sectionName:String } ) => {
             trigger={buttonEditPopup}
             setTrigger={setButtonEditPopup}
             popupType="edit-home-work"
-            component={<EditHomeworkForm tasks={tasks} sectionName={name} />}
+            component={<EditSectionForm tasks={tasks} sectionName={name} />}
           />
         </div>
       )}

@@ -2,7 +2,7 @@ import Menu from "./Menu";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-export default function Layout({ children }) {
+export default function Layout({ children }: { children:any }) {
   const router = useRouter();
   const showMenu = router.asPath !== "/login";
 

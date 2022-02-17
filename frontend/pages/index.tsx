@@ -5,9 +5,9 @@ import Task from "../components/task";
 const Home: NextPage = () => {
   return (
     <div>
-      { <Section sectionName="Homework" />}
+      { <Section sectionName="Homework"/> }
       {/* <Task /> */}
-      {/*<AddSectionForm />*/}
+      {/* <AddSectionForm /> */}
     </div>
   );
 };

@@ -101,9 +101,9 @@ Thumbs.db
 #cache files
 *.cache
 
-
 #config files(Mainly for the prepros.config)
 *.config
 
 #css files
 *.css
+*.css.map

@@ -1,4 +1,4 @@
-const PopUp = (props) => {
+const PopUp = (props : any) => {
   return props.trigger ? (
     <div className="popup-task-container">
       <div className="PopUp-holder">
@@ -17,7 +17,7 @@ const PopUp = (props) => {
       </div>
     </div>
   ) : (
-    ""
+    <div></div>
   );
 };
 

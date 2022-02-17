@@ -1,7 +1,6 @@
 import Link from "next/link";
-import Popup from "./Popup";
+import PopUp from "./Popup";
 import { useState } from "react";
-import Task from "./task";
 import AddSectionForm from "./AddSectionForm";
 
 const Menu = () => {
@@ -38,7 +37,7 @@ const Menu = () => {
           Add Section
         </div>
 
-        <Popup
+        <PopUp
           trigger={buttonAddSectionPopup}
           setTrigger={setButtonAddSectionPopup}
           popupType="add-section"

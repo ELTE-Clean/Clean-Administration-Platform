@@ -5,8 +5,8 @@
 @import "./sass/section";
 @import "./sass/task";
 @import "./sass/popup";
-@import "./sass/homeworkPopup";
-@import "./sass/thishomeworkPopup";
+@import "./sass/sectionPopup";
+@import "./sass/taskPopup";
 * {
   box-sizing: border-box;
   font-family: Gotham Rounded, sans-serif;
@@ -42,7 +42,7 @@ html {
 
 .children {
   min-height: 100vh;
-  min-width: 85vw;
+  width: calc(100% - 250px);
   margin-left: 250px; // This should be same value of the wight of the menu
   padding: 40px;
   background-color: #f8f8f8;

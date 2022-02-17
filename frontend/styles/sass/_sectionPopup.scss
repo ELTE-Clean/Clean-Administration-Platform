@@ -1,6 +1,7 @@
 .edit-homework-container {
   @include flex(column);
   gap: 5px;
+
   .homework-task-container {
     @include flex(row);
     width: 100%;
@@ -37,6 +38,6 @@
     $main-box-shadow,
     none,
     10px,
-    15px 50px
+    10px 20px
   );
 }

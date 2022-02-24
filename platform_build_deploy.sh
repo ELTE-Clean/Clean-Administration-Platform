@@ -18,12 +18,17 @@ then
     # Building the backend
     echo "Building the express backend...";
     cd backend;
+    npm install;
+    npm run build;
+    cd dist;
+    npm install --only=production
     docker build . -t backend:latest;
     if [ $? -ne 0 ]
     then 
         echo "Failed to build the image... Exitting with code $?";
         exit;
     fi;
+    cd ..;
     cd ..;
 
     echo "----------------------------------------------------------------------------------- ";
@@ -77,6 +82,8 @@ fi;
 
 if [ $1 -ne 1 ]
 then
+    echo "Shutting down the old deployment...";
+    docker-compose -f docker-compose-local.yml down --remove-orphans;
     echo "Deploying the project locally...";
     docker-compose -f docker-compose-local.yml up -d --force-recreate;
     echo "Project has been deployed by running the docker-compose on the docker-compose-local.yml file.";

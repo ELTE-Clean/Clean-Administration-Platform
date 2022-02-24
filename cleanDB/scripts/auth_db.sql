@@ -5,7 +5,7 @@
 -- Dumped from database version 11.14
 -- Dumped by pg_dump version 11.14
 
--- Started on 2022-02-08 15:30:23 UTC
+-- Started on 2022-02-24 21:49:53 UTC
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -19,8 +19,9 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 DROP DATABASE IF EXISTS auth_db;
+
 --
--- TOC entry 3901 (class 1262 OID 16384)
+-- TOC entry 3900 (class 1262 OID 16384)
 -- Name: auth_db; Type: DATABASE; Schema: -; Owner: postgres
 --
 
@@ -47,7 +48,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- TOC entry 237 (class 1259 OID 17053)
+-- TOC entry 196 (class 1259 OID 16385)
 -- Name: admin_event_entity; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -70,7 +71,7 @@ CREATE TABLE public.admin_event_entity (
 ALTER TABLE public.admin_event_entity OWNER TO postgres;
 
 --
--- TOC entry 266 (class 1259 OID 17516)
+-- TOC entry 197 (class 1259 OID 16391)
 -- Name: associated_policy; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -83,7 +84,7 @@ CREATE TABLE public.associated_policy (
 ALTER TABLE public.associated_policy OWNER TO postgres;
 
 --
--- TOC entry 240 (class 1259 OID 17071)
+-- TOC entry 198 (class 1259 OID 16394)
 -- Name: authentication_execution; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -104,7 +105,7 @@ CREATE TABLE public.authentication_execution (
 ALTER TABLE public.authentication_execution OWNER TO postgres;
 
 --
--- TOC entry 239 (class 1259 OID 17065)
+-- TOC entry 199 (class 1259 OID 16398)
 -- Name: authentication_flow; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -122,7 +123,7 @@ CREATE TABLE public.authentication_flow (
 ALTER TABLE public.authentication_flow OWNER TO postgres;
 
 --
--- TOC entry 238 (class 1259 OID 17059)
+-- TOC entry 200 (class 1259 OID 16407)
 -- Name: authenticator_config; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -136,7 +137,7 @@ CREATE TABLE public.authenticator_config (
 ALTER TABLE public.authenticator_config OWNER TO postgres;
 
 --
--- TOC entry 241 (class 1259 OID 17076)
+-- TOC entry 201 (class 1259 OID 16410)
 -- Name: authenticator_config_entry; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -150,7 +151,7 @@ CREATE TABLE public.authenticator_config_entry (
 ALTER TABLE public.authenticator_config_entry OWNER TO postgres;
 
 --
--- TOC entry 267 (class 1259 OID 17531)
+-- TOC entry 202 (class 1259 OID 16416)
 -- Name: broker_link; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -168,7 +169,7 @@ CREATE TABLE public.broker_link (
 ALTER TABLE public.broker_link OWNER TO postgres;
 
 --
--- TOC entry 198 (class 1259 OID 16408)
+-- TOC entry 203 (class 1259 OID 16422)
 -- Name: client; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -205,7 +206,7 @@ CREATE TABLE public.client (
 ALTER TABLE public.client OWNER TO postgres;
 
 --
--- TOC entry 221 (class 1259 OID 16782)
+-- TOC entry 204 (class 1259 OID 16441)
 -- Name: client_attributes; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -219,7 +220,7 @@ CREATE TABLE public.client_attributes (
 ALTER TABLE public.client_attributes OWNER TO postgres;
 
 --
--- TOC entry 278 (class 1259 OID 17790)
+-- TOC entry 205 (class 1259 OID 16447)
 -- Name: client_auth_flow_bindings; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -233,7 +234,7 @@ CREATE TABLE public.client_auth_flow_bindings (
 ALTER TABLE public.client_auth_flow_bindings OWNER TO postgres;
 
 --
--- TOC entry 277 (class 1259 OID 17665)
+-- TOC entry 206 (class 1259 OID 16450)
 -- Name: client_initial_access; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -250,7 +251,7 @@ CREATE TABLE public.client_initial_access (
 ALTER TABLE public.client_initial_access OWNER TO postgres;
 
 --
--- TOC entry 223 (class 1259 OID 16794)
+-- TOC entry 207 (class 1259 OID 16453)
 -- Name: client_node_registrations; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -264,7 +265,7 @@ CREATE TABLE public.client_node_registrations (
 ALTER TABLE public.client_node_registrations OWNER TO postgres;
 
 --
--- TOC entry 255 (class 1259 OID 17314)
+-- TOC entry 208 (class 1259 OID 16456)
 -- Name: client_scope; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -280,7 +281,7 @@ CREATE TABLE public.client_scope (
 ALTER TABLE public.client_scope OWNER TO postgres;
 
 --
--- TOC entry 256 (class 1259 OID 17329)
+-- TOC entry 209 (class 1259 OID 16462)
 -- Name: client_scope_attributes; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -294,7 +295,7 @@ CREATE TABLE public.client_scope_attributes (
 ALTER TABLE public.client_scope_attributes OWNER TO postgres;
 
 --
--- TOC entry 279 (class 1259 OID 17832)
+-- TOC entry 210 (class 1259 OID 16468)
 -- Name: client_scope_client; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -308,7 +309,7 @@ CREATE TABLE public.client_scope_client (
 ALTER TABLE public.client_scope_client OWNER TO postgres;
 
 --
--- TOC entry 257 (class 1259 OID 17335)
+-- TOC entry 211 (class 1259 OID 16475)
 -- Name: client_scope_role_mapping; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -321,7 +322,7 @@ CREATE TABLE public.client_scope_role_mapping (
 ALTER TABLE public.client_scope_role_mapping OWNER TO postgres;
 
 --
--- TOC entry 199 (class 1259 OID 16420)
+-- TOC entry 212 (class 1259 OID 16478)
 -- Name: client_session; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -342,7 +343,7 @@ CREATE TABLE public.client_session (
 ALTER TABLE public.client_session OWNER TO postgres;
 
 --
--- TOC entry 244 (class 1259 OID 17097)
+-- TOC entry 213 (class 1259 OID 16484)
 -- Name: client_session_auth_status; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -356,7 +357,7 @@ CREATE TABLE public.client_session_auth_status (
 ALTER TABLE public.client_session_auth_status OWNER TO postgres;
 
 --
--- TOC entry 222 (class 1259 OID 16788)
+-- TOC entry 214 (class 1259 OID 16487)
 -- Name: client_session_note; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -370,7 +371,7 @@ CREATE TABLE public.client_session_note (
 ALTER TABLE public.client_session_note OWNER TO postgres;
 
 --
--- TOC entry 236 (class 1259 OID 16975)
+-- TOC entry 215 (class 1259 OID 16493)
 -- Name: client_session_prot_mapper; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -383,7 +384,7 @@ CREATE TABLE public.client_session_prot_mapper (
 ALTER TABLE public.client_session_prot_mapper OWNER TO postgres;
 
 --
--- TOC entry 200 (class 1259 OID 16426)
+-- TOC entry 216 (class 1259 OID 16496)
 -- Name: client_session_role; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -396,7 +397,7 @@ CREATE TABLE public.client_session_role (
 ALTER TABLE public.client_session_role OWNER TO postgres;
 
 --
--- TOC entry 245 (class 1259 OID 17178)
+-- TOC entry 217 (class 1259 OID 16499)
 -- Name: client_user_session_note; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -410,7 +411,7 @@ CREATE TABLE public.client_user_session_note (
 ALTER TABLE public.client_user_session_note OWNER TO postgres;
 
 --
--- TOC entry 275 (class 1259 OID 17581)
+-- TOC entry 218 (class 1259 OID 16505)
 -- Name: component; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -428,7 +429,7 @@ CREATE TABLE public.component (
 ALTER TABLE public.component OWNER TO postgres;
 
 --
--- TOC entry 274 (class 1259 OID 17575)
+-- TOC entry 219 (class 1259 OID 16511)
 -- Name: component_config; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -443,7 +444,7 @@ CREATE TABLE public.component_config (
 ALTER TABLE public.component_config OWNER TO postgres;
 
 --
--- TOC entry 201 (class 1259 OID 16429)
+-- TOC entry 220 (class 1259 OID 16517)
 -- Name: composite_role; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -456,7 +457,7 @@ CREATE TABLE public.composite_role (
 ALTER TABLE public.composite_role OWNER TO postgres;
 
 --
--- TOC entry 202 (class 1259 OID 16432)
+-- TOC entry 221 (class 1259 OID 16520)
 -- Name: credential; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -476,7 +477,7 @@ CREATE TABLE public.credential (
 ALTER TABLE public.credential OWNER TO postgres;
 
 --
--- TOC entry 197 (class 1259 OID 16399)
+-- TOC entry 222 (class 1259 OID 16526)
 -- Name: databasechangelog; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -501,7 +502,7 @@ CREATE TABLE public.databasechangelog (
 ALTER TABLE public.databasechangelog OWNER TO postgres;
 
 --
--- TOC entry 196 (class 1259 OID 16394)
+-- TOC entry 223 (class 1259 OID 16532)
 -- Name: databasechangeloglock; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -516,7 +517,7 @@ CREATE TABLE public.databasechangeloglock (
 ALTER TABLE public.databasechangeloglock OWNER TO postgres;
 
 --
--- TOC entry 280 (class 1259 OID 17848)
+-- TOC entry 224 (class 1259 OID 16535)
 -- Name: default_client_scope; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -530,7 +531,7 @@ CREATE TABLE public.default_client_scope (
 ALTER TABLE public.default_client_scope OWNER TO postgres;
 
 --
--- TOC entry 203 (class 1259 OID 16438)
+-- TOC entry 225 (class 1259 OID 16539)
 -- Name: event_entity; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -551,7 +552,7 @@ CREATE TABLE public.event_entity (
 ALTER TABLE public.event_entity OWNER TO postgres;
 
 --
--- TOC entry 268 (class 1259 OID 17537)
+-- TOC entry 226 (class 1259 OID 16545)
 -- Name: fed_user_attribute; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -568,7 +569,7 @@ CREATE TABLE public.fed_user_attribute (
 ALTER TABLE public.fed_user_attribute OWNER TO postgres;
 
 --
--- TOC entry 269 (class 1259 OID 17543)
+-- TOC entry 227 (class 1259 OID 16551)
 -- Name: fed_user_consent; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -588,7 +589,7 @@ CREATE TABLE public.fed_user_consent (
 ALTER TABLE public.fed_user_consent OWNER TO postgres;
 
 --
--- TOC entry 282 (class 1259 OID 17874)
+-- TOC entry 228 (class 1259 OID 16557)
 -- Name: fed_user_consent_cl_scope; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -601,7 +602,7 @@ CREATE TABLE public.fed_user_consent_cl_scope (
 ALTER TABLE public.fed_user_consent_cl_scope OWNER TO postgres;
 
 --
--- TOC entry 270 (class 1259 OID 17552)
+-- TOC entry 229 (class 1259 OID 16560)
 -- Name: fed_user_credential; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -623,7 +624,7 @@ CREATE TABLE public.fed_user_credential (
 ALTER TABLE public.fed_user_credential OWNER TO postgres;
 
 --
--- TOC entry 271 (class 1259 OID 17562)
+-- TOC entry 230 (class 1259 OID 16566)
 -- Name: fed_user_group_membership; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -638,7 +639,7 @@ CREATE TABLE public.fed_user_group_membership (
 ALTER TABLE public.fed_user_group_membership OWNER TO postgres;
 
 --
--- TOC entry 272 (class 1259 OID 17565)
+-- TOC entry 231 (class 1259 OID 16569)
 -- Name: fed_user_required_action; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -653,7 +654,7 @@ CREATE TABLE public.fed_user_required_action (
 ALTER TABLE public.fed_user_required_action OWNER TO postgres;
 
 --
--- TOC entry 273 (class 1259 OID 17572)
+-- TOC entry 232 (class 1259 OID 16576)
 -- Name: fed_user_role_mapping; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -668,7 +669,7 @@ CREATE TABLE public.fed_user_role_mapping (
 ALTER TABLE public.fed_user_role_mapping OWNER TO postgres;
 
 --
--- TOC entry 226 (class 1259 OID 16832)
+-- TOC entry 233 (class 1259 OID 16579)
 -- Name: federated_identity; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -685,7 +686,7 @@ CREATE TABLE public.federated_identity (
 ALTER TABLE public.federated_identity OWNER TO postgres;
 
 --
--- TOC entry 276 (class 1259 OID 17641)
+-- TOC entry 234 (class 1259 OID 16585)
 -- Name: federated_user; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -699,7 +700,7 @@ CREATE TABLE public.federated_user (
 ALTER TABLE public.federated_user OWNER TO postgres;
 
 --
--- TOC entry 252 (class 1259 OID 17251)
+-- TOC entry 235 (class 1259 OID 16591)
 -- Name: group_attribute; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -714,7 +715,7 @@ CREATE TABLE public.group_attribute (
 ALTER TABLE public.group_attribute OWNER TO postgres;
 
 --
--- TOC entry 251 (class 1259 OID 17248)
+-- TOC entry 236 (class 1259 OID 16598)
 -- Name: group_role_mapping; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -727,7 +728,7 @@ CREATE TABLE public.group_role_mapping (
 ALTER TABLE public.group_role_mapping OWNER TO postgres;
 
 --
--- TOC entry 227 (class 1259 OID 16838)
+-- TOC entry 237 (class 1259 OID 16601)
 -- Name: identity_provider; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -751,7 +752,7 @@ CREATE TABLE public.identity_provider (
 ALTER TABLE public.identity_provider OWNER TO postgres;
 
 --
--- TOC entry 228 (class 1259 OID 16848)
+-- TOC entry 238 (class 1259 OID 16613)
 -- Name: identity_provider_config; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -765,7 +766,7 @@ CREATE TABLE public.identity_provider_config (
 ALTER TABLE public.identity_provider_config OWNER TO postgres;
 
 --
--- TOC entry 233 (class 1259 OID 16954)
+-- TOC entry 239 (class 1259 OID 16619)
 -- Name: identity_provider_mapper; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -781,7 +782,7 @@ CREATE TABLE public.identity_provider_mapper (
 ALTER TABLE public.identity_provider_mapper OWNER TO postgres;
 
 --
--- TOC entry 234 (class 1259 OID 16960)
+-- TOC entry 240 (class 1259 OID 16625)
 -- Name: idp_mapper_config; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -795,7 +796,7 @@ CREATE TABLE public.idp_mapper_config (
 ALTER TABLE public.idp_mapper_config OWNER TO postgres;
 
 --
--- TOC entry 250 (class 1259 OID 17245)
+-- TOC entry 241 (class 1259 OID 16631)
 -- Name: keycloak_group; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -810,7 +811,7 @@ CREATE TABLE public.keycloak_group (
 ALTER TABLE public.keycloak_group OWNER TO postgres;
 
 --
--- TOC entry 204 (class 1259 OID 16447)
+-- TOC entry 242 (class 1259 OID 16634)
 -- Name: keycloak_role; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -829,7 +830,7 @@ CREATE TABLE public.keycloak_role (
 ALTER TABLE public.keycloak_role OWNER TO postgres;
 
 --
--- TOC entry 232 (class 1259 OID 16951)
+-- TOC entry 243 (class 1259 OID 16641)
 -- Name: migration_model; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -843,7 +844,7 @@ CREATE TABLE public.migration_model (
 ALTER TABLE public.migration_model OWNER TO postgres;
 
 --
--- TOC entry 249 (class 1259 OID 17235)
+-- TOC entry 244 (class 1259 OID 16645)
 -- Name: offline_client_session; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -861,7 +862,7 @@ CREATE TABLE public.offline_client_session (
 ALTER TABLE public.offline_client_session OWNER TO postgres;
 
 --
--- TOC entry 248 (class 1259 OID 17229)
+-- TOC entry 245 (class 1259 OID 16653)
 -- Name: offline_user_session; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -879,7 +880,7 @@ CREATE TABLE public.offline_user_session (
 ALTER TABLE public.offline_user_session OWNER TO postgres;
 
 --
--- TOC entry 262 (class 1259 OID 17458)
+-- TOC entry 246 (class 1259 OID 16660)
 -- Name: policy_config; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -893,7 +894,7 @@ CREATE TABLE public.policy_config (
 ALTER TABLE public.policy_config OWNER TO postgres;
 
 --
--- TOC entry 224 (class 1259 OID 16819)
+-- TOC entry 247 (class 1259 OID 16666)
 -- Name: protocol_mapper; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -910,7 +911,7 @@ CREATE TABLE public.protocol_mapper (
 ALTER TABLE public.protocol_mapper OWNER TO postgres;
 
 --
--- TOC entry 225 (class 1259 OID 16826)
+-- TOC entry 248 (class 1259 OID 16672)
 -- Name: protocol_mapper_config; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -924,7 +925,7 @@ CREATE TABLE public.protocol_mapper_config (
 ALTER TABLE public.protocol_mapper_config OWNER TO postgres;
 
 --
--- TOC entry 205 (class 1259 OID 16454)
+-- TOC entry 249 (class 1259 OID 16678)
 -- Name: realm; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -988,7 +989,7 @@ CREATE TABLE public.realm (
 ALTER TABLE public.realm OWNER TO postgres;
 
 --
--- TOC entry 206 (class 1259 OID 16472)
+-- TOC entry 250 (class 1259 OID 16712)
 -- Name: realm_attribute; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1002,7 +1003,7 @@ CREATE TABLE public.realm_attribute (
 ALTER TABLE public.realm_attribute OWNER TO postgres;
 
 --
--- TOC entry 254 (class 1259 OID 17261)
+-- TOC entry 251 (class 1259 OID 16718)
 -- Name: realm_default_groups; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1015,7 +1016,7 @@ CREATE TABLE public.realm_default_groups (
 ALTER TABLE public.realm_default_groups OWNER TO postgres;
 
 --
--- TOC entry 231 (class 1259 OID 16943)
+-- TOC entry 252 (class 1259 OID 16721)
 -- Name: realm_enabled_event_types; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1028,7 +1029,7 @@ CREATE TABLE public.realm_enabled_event_types (
 ALTER TABLE public.realm_enabled_event_types OWNER TO postgres;
 
 --
--- TOC entry 207 (class 1259 OID 16481)
+-- TOC entry 253 (class 1259 OID 16724)
 -- Name: realm_events_listeners; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1041,7 +1042,7 @@ CREATE TABLE public.realm_events_listeners (
 ALTER TABLE public.realm_events_listeners OWNER TO postgres;
 
 --
--- TOC entry 287 (class 1259 OID 17988)
+-- TOC entry 254 (class 1259 OID 16727)
 -- Name: realm_localizations; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1055,7 +1056,7 @@ CREATE TABLE public.realm_localizations (
 ALTER TABLE public.realm_localizations OWNER TO postgres;
 
 --
--- TOC entry 208 (class 1259 OID 16484)
+-- TOC entry 255 (class 1259 OID 16733)
 -- Name: realm_required_credential; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1071,7 +1072,7 @@ CREATE TABLE public.realm_required_credential (
 ALTER TABLE public.realm_required_credential OWNER TO postgres;
 
 --
--- TOC entry 209 (class 1259 OID 16492)
+-- TOC entry 256 (class 1259 OID 16741)
 -- Name: realm_smtp_config; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1085,7 +1086,7 @@ CREATE TABLE public.realm_smtp_config (
 ALTER TABLE public.realm_smtp_config OWNER TO postgres;
 
 --
--- TOC entry 229 (class 1259 OID 16858)
+-- TOC entry 257 (class 1259 OID 16747)
 -- Name: realm_supported_locales; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1098,7 +1099,7 @@ CREATE TABLE public.realm_supported_locales (
 ALTER TABLE public.realm_supported_locales OWNER TO postgres;
 
 --
--- TOC entry 210 (class 1259 OID 16504)
+-- TOC entry 258 (class 1259 OID 16750)
 -- Name: redirect_uris; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1111,7 +1112,7 @@ CREATE TABLE public.redirect_uris (
 ALTER TABLE public.redirect_uris OWNER TO postgres;
 
 --
--- TOC entry 247 (class 1259 OID 17192)
+-- TOC entry 259 (class 1259 OID 16753)
 -- Name: required_action_config; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1125,7 +1126,7 @@ CREATE TABLE public.required_action_config (
 ALTER TABLE public.required_action_config OWNER TO postgres;
 
 --
--- TOC entry 246 (class 1259 OID 17184)
+-- TOC entry 260 (class 1259 OID 16759)
 -- Name: required_action_provider; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1144,7 +1145,7 @@ CREATE TABLE public.required_action_provider (
 ALTER TABLE public.required_action_provider OWNER TO postgres;
 
 --
--- TOC entry 284 (class 1259 OID 17913)
+-- TOC entry 261 (class 1259 OID 16767)
 -- Name: resource_attribute; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1159,7 +1160,7 @@ CREATE TABLE public.resource_attribute (
 ALTER TABLE public.resource_attribute OWNER TO postgres;
 
 --
--- TOC entry 264 (class 1259 OID 17486)
+-- TOC entry 262 (class 1259 OID 16774)
 -- Name: resource_policy; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1172,7 +1173,7 @@ CREATE TABLE public.resource_policy (
 ALTER TABLE public.resource_policy OWNER TO postgres;
 
 --
--- TOC entry 263 (class 1259 OID 17471)
+-- TOC entry 263 (class 1259 OID 16777)
 -- Name: resource_scope; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1185,7 +1186,7 @@ CREATE TABLE public.resource_scope (
 ALTER TABLE public.resource_scope OWNER TO postgres;
 
 --
--- TOC entry 258 (class 1259 OID 17405)
+-- TOC entry 264 (class 1259 OID 16780)
 -- Name: resource_server; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1200,7 +1201,7 @@ CREATE TABLE public.resource_server (
 ALTER TABLE public.resource_server OWNER TO postgres;
 
 --
--- TOC entry 283 (class 1259 OID 17889)
+-- TOC entry 265 (class 1259 OID 16785)
 -- Name: resource_server_perm_ticket; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1220,7 +1221,7 @@ CREATE TABLE public.resource_server_perm_ticket (
 ALTER TABLE public.resource_server_perm_ticket OWNER TO postgres;
 
 --
--- TOC entry 261 (class 1259 OID 17443)
+-- TOC entry 266 (class 1259 OID 16791)
 -- Name: resource_server_policy; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1239,7 +1240,7 @@ CREATE TABLE public.resource_server_policy (
 ALTER TABLE public.resource_server_policy OWNER TO postgres;
 
 --
--- TOC entry 259 (class 1259 OID 17413)
+-- TOC entry 267 (class 1259 OID 16797)
 -- Name: resource_server_resource; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1258,7 +1259,7 @@ CREATE TABLE public.resource_server_resource (
 ALTER TABLE public.resource_server_resource OWNER TO postgres;
 
 --
--- TOC entry 260 (class 1259 OID 17428)
+-- TOC entry 268 (class 1259 OID 16804)
 -- Name: resource_server_scope; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1274,7 +1275,7 @@ CREATE TABLE public.resource_server_scope (
 ALTER TABLE public.resource_server_scope OWNER TO postgres;
 
 --
--- TOC entry 285 (class 1259 OID 17932)
+-- TOC entry 269 (class 1259 OID 16810)
 -- Name: resource_uris; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1287,7 +1288,7 @@ CREATE TABLE public.resource_uris (
 ALTER TABLE public.resource_uris OWNER TO postgres;
 
 --
--- TOC entry 286 (class 1259 OID 17942)
+-- TOC entry 270 (class 1259 OID 16813)
 -- Name: role_attribute; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1302,7 +1303,7 @@ CREATE TABLE public.role_attribute (
 ALTER TABLE public.role_attribute OWNER TO postgres;
 
 --
--- TOC entry 211 (class 1259 OID 16507)
+-- TOC entry 271 (class 1259 OID 16819)
 -- Name: scope_mapping; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1315,7 +1316,7 @@ CREATE TABLE public.scope_mapping (
 ALTER TABLE public.scope_mapping OWNER TO postgres;
 
 --
--- TOC entry 265 (class 1259 OID 17501)
+-- TOC entry 272 (class 1259 OID 16822)
 -- Name: scope_policy; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1328,7 +1329,7 @@ CREATE TABLE public.scope_policy (
 ALTER TABLE public.scope_policy OWNER TO postgres;
 
 --
--- TOC entry 213 (class 1259 OID 16513)
+-- TOC entry 273 (class 1259 OID 16825)
 -- Name: user_attribute; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1343,7 +1344,7 @@ CREATE TABLE public.user_attribute (
 ALTER TABLE public.user_attribute OWNER TO postgres;
 
 --
--- TOC entry 235 (class 1259 OID 16966)
+-- TOC entry 274 (class 1259 OID 16832)
 -- Name: user_consent; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1361,7 +1362,7 @@ CREATE TABLE public.user_consent (
 ALTER TABLE public.user_consent OWNER TO postgres;
 
 --
--- TOC entry 281 (class 1259 OID 17864)
+-- TOC entry 275 (class 1259 OID 16838)
 -- Name: user_consent_client_scope; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1374,7 +1375,7 @@ CREATE TABLE public.user_consent_client_scope (
 ALTER TABLE public.user_consent_client_scope OWNER TO postgres;
 
 --
--- TOC entry 214 (class 1259 OID 16519)
+-- TOC entry 276 (class 1259 OID 16841)
 -- Name: user_entity; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1398,7 +1399,7 @@ CREATE TABLE public.user_entity (
 ALTER TABLE public.user_entity OWNER TO postgres;
 
 --
--- TOC entry 215 (class 1259 OID 16528)
+-- TOC entry 277 (class 1259 OID 16850)
 -- Name: user_federation_config; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1412,7 +1413,7 @@ CREATE TABLE public.user_federation_config (
 ALTER TABLE public.user_federation_config OWNER TO postgres;
 
 --
--- TOC entry 242 (class 1259 OID 17082)
+-- TOC entry 278 (class 1259 OID 16856)
 -- Name: user_federation_mapper; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1428,7 +1429,7 @@ CREATE TABLE public.user_federation_mapper (
 ALTER TABLE public.user_federation_mapper OWNER TO postgres;
 
 --
--- TOC entry 243 (class 1259 OID 17088)
+-- TOC entry 279 (class 1259 OID 16862)
 -- Name: user_federation_mapper_config; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1442,7 +1443,7 @@ CREATE TABLE public.user_federation_mapper_config (
 ALTER TABLE public.user_federation_mapper_config OWNER TO postgres;
 
 --
--- TOC entry 216 (class 1259 OID 16534)
+-- TOC entry 280 (class 1259 OID 16868)
 -- Name: user_federation_provider; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1461,7 +1462,7 @@ CREATE TABLE public.user_federation_provider (
 ALTER TABLE public.user_federation_provider OWNER TO postgres;
 
 --
--- TOC entry 253 (class 1259 OID 17258)
+-- TOC entry 281 (class 1259 OID 16874)
 -- Name: user_group_membership; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1474,7 +1475,7 @@ CREATE TABLE public.user_group_membership (
 ALTER TABLE public.user_group_membership OWNER TO postgres;
 
 --
--- TOC entry 217 (class 1259 OID 16540)
+-- TOC entry 282 (class 1259 OID 16877)
 -- Name: user_required_action; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1487,7 +1488,7 @@ CREATE TABLE public.user_required_action (
 ALTER TABLE public.user_required_action OWNER TO postgres;
 
 --
--- TOC entry 218 (class 1259 OID 16543)
+-- TOC entry 283 (class 1259 OID 16881)
 -- Name: user_role_mapping; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1500,7 +1501,7 @@ CREATE TABLE public.user_role_mapping (
 ALTER TABLE public.user_role_mapping OWNER TO postgres;
 
 --
--- TOC entry 219 (class 1259 OID 16546)
+-- TOC entry 284 (class 1259 OID 16884)
 -- Name: user_session; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1523,7 +1524,7 @@ CREATE TABLE public.user_session (
 ALTER TABLE public.user_session OWNER TO postgres;
 
 --
--- TOC entry 230 (class 1259 OID 16861)
+-- TOC entry 285 (class 1259 OID 16891)
 -- Name: user_session_note; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1537,7 +1538,7 @@ CREATE TABLE public.user_session_note (
 ALTER TABLE public.user_session_note OWNER TO postgres;
 
 --
--- TOC entry 212 (class 1259 OID 16510)
+-- TOC entry 286 (class 1259 OID 16897)
 -- Name: username_login_failure; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1554,7 +1555,7 @@ CREATE TABLE public.username_login_failure (
 ALTER TABLE public.username_login_failure OWNER TO postgres;
 
 --
--- TOC entry 220 (class 1259 OID 16559)
+-- TOC entry 287 (class 1259 OID 16903)
 -- Name: web_origins; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1567,24 +1568,24 @@ CREATE TABLE public.web_origins (
 ALTER TABLE public.web_origins OWNER TO postgres;
 
 --
--- TOC entry 3845 (class 0 OID 17053)
--- Dependencies: 237
+-- TOC entry 3803 (class 0 OID 16385)
+-- Dependencies: 196
 -- Data for Name: admin_event_entity; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3874 (class 0 OID 17516)
--- Dependencies: 266
+-- TOC entry 3804 (class 0 OID 16391)
+-- Dependencies: 197
 -- Data for Name: associated_policy; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3848 (class 0 OID 17071)
--- Dependencies: 240
+-- TOC entry 3805 (class 0 OID 16394)
+-- Dependencies: 198
 -- Data for Name: authentication_execution; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1635,11 +1636,58 @@ INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id,
 INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('ff536e17-e11a-4f7a-b2ce-0474af1b0e95', NULL, 'basic-auth', 'master', '5675952a-f771-4b0e-ae60-0919bc41f13f', 0, 10, false, NULL, NULL);
 INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('57af7a94-1bfb-40c5-bfe0-dda4e1563cb4', NULL, 'basic-auth-otp', 'master', '5675952a-f771-4b0e-ae60-0919bc41f13f', 3, 20, false, NULL, NULL);
 INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('1194ceb1-cd2e-449b-b941-9571828ddf53', NULL, 'auth-spnego', 'master', '5675952a-f771-4b0e-ae60-0919bc41f13f', 3, 30, false, NULL, NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('8bf47930-8269-4328-979c-cb257acd3f72', NULL, 'auth-cookie', 'CAP', '5b0b55da-8477-41c4-a819-9dfebdc034cc', 2, 10, false, NULL, NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('2fa04f32-e34e-41f9-99d6-c7fef3902274', NULL, 'auth-spnego', 'CAP', '5b0b55da-8477-41c4-a819-9dfebdc034cc', 3, 20, false, NULL, NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('dc71177c-ec3c-4642-b353-84a8e39e1f50', NULL, 'identity-provider-redirector', 'CAP', '5b0b55da-8477-41c4-a819-9dfebdc034cc', 2, 25, false, NULL, NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('4a653265-fe18-4e13-a2dc-718283526af6', NULL, NULL, 'CAP', '5b0b55da-8477-41c4-a819-9dfebdc034cc', 2, 30, true, '9f4fba88-9500-4c95-a0ce-41221521c1a7', NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('d4f482ae-96a4-4118-a1a5-62905220767b', NULL, 'auth-username-password-form', 'CAP', '9f4fba88-9500-4c95-a0ce-41221521c1a7', 0, 10, false, NULL, NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('4a583657-9280-414e-b007-49f7867a4a96', NULL, NULL, 'CAP', '9f4fba88-9500-4c95-a0ce-41221521c1a7', 1, 20, true, 'c5af64e8-78da-412e-b673-33560ac19d29', NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('7995a45d-5694-48ff-b727-6318114b1fcb', NULL, 'conditional-user-configured', 'CAP', 'c5af64e8-78da-412e-b673-33560ac19d29', 0, 10, false, NULL, NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('f30443eb-1608-4715-b792-1ddaf71ccbe5', NULL, 'auth-otp-form', 'CAP', 'c5af64e8-78da-412e-b673-33560ac19d29', 0, 20, false, NULL, NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('4f045a16-8649-4947-9ad6-1c2f42be6789', NULL, 'direct-grant-validate-username', 'CAP', 'd75139f6-a0ad-425a-af07-8324f27557e7', 0, 10, false, NULL, NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('3155c564-712a-4ddb-8cd7-7b08a58783e7', NULL, 'direct-grant-validate-password', 'CAP', 'd75139f6-a0ad-425a-af07-8324f27557e7', 0, 20, false, NULL, NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('bc3ac494-4ab8-4227-9dd1-aaf15dd3b44a', NULL, NULL, 'CAP', 'd75139f6-a0ad-425a-af07-8324f27557e7', 1, 30, true, 'b6122dcb-ee52-4e8b-bcb3-f9079c4eb15b', NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('96876ded-050a-45b8-9d78-43ee95733e9b', NULL, 'conditional-user-configured', 'CAP', 'b6122dcb-ee52-4e8b-bcb3-f9079c4eb15b', 0, 10, false, NULL, NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('9c63c97f-8326-47ba-bad7-4e416a5c7e7a', NULL, 'direct-grant-validate-otp', 'CAP', 'b6122dcb-ee52-4e8b-bcb3-f9079c4eb15b', 0, 20, false, NULL, NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('5ea23d63-a332-4c63-a2e3-9e0e531f1906', NULL, 'registration-page-form', 'CAP', '0da7e7bf-9f0e-46be-9196-0953a88382c1', 0, 10, true, 'a1fad2ae-035a-4010-a95d-1d2c1cfb7e54', NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('f6329265-4234-4222-94cd-61cbb880c235', NULL, 'registration-user-creation', 'CAP', 'a1fad2ae-035a-4010-a95d-1d2c1cfb7e54', 0, 20, false, NULL, NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('2e3ffae0-0fa6-4fd4-909c-670d91cd2d15', NULL, 'registration-profile-action', 'CAP', 'a1fad2ae-035a-4010-a95d-1d2c1cfb7e54', 0, 40, false, NULL, NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('e62b5fa7-d579-47bd-931d-8be0ba8888da', NULL, 'registration-password-action', 'CAP', 'a1fad2ae-035a-4010-a95d-1d2c1cfb7e54', 0, 50, false, NULL, NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('662dd32a-85ab-4fa6-a9db-6e1afd888a15', NULL, 'registration-recaptcha-action', 'CAP', 'a1fad2ae-035a-4010-a95d-1d2c1cfb7e54', 3, 60, false, NULL, NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('49a0f4fd-0dea-445d-bde3-b752356dec33', NULL, 'reset-credentials-choose-user', 'CAP', '1a4dfbb9-bc1b-4e55-b5bf-c69aad806bc1', 0, 10, false, NULL, NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('c434d049-95b2-4818-92f3-5165fc38887f', NULL, 'reset-credential-email', 'CAP', '1a4dfbb9-bc1b-4e55-b5bf-c69aad806bc1', 0, 20, false, NULL, NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('546574a7-614b-4c90-824a-16c7aa1082f7', NULL, 'reset-password', 'CAP', '1a4dfbb9-bc1b-4e55-b5bf-c69aad806bc1', 0, 30, false, NULL, NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('d59d3e7a-8d7f-41c8-98cf-ac76b73f0c5a', NULL, NULL, 'CAP', '1a4dfbb9-bc1b-4e55-b5bf-c69aad806bc1', 1, 40, true, 'e2787a4c-d0b4-42e0-9c46-ec4e926a4dbb', NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('398818b7-fed8-418c-a8a4-6add294c2292', NULL, 'conditional-user-configured', 'CAP', 'e2787a4c-d0b4-42e0-9c46-ec4e926a4dbb', 0, 10, false, NULL, NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('0ced8b26-aff2-4065-93da-30ebb958607a', NULL, 'reset-otp', 'CAP', 'e2787a4c-d0b4-42e0-9c46-ec4e926a4dbb', 0, 20, false, NULL, NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('8e95ab98-61e1-45e7-97bb-a73e1c42f70f', NULL, 'client-secret', 'CAP', '0fc25843-3a94-474a-b92e-5f6b9ff9ca7d', 2, 10, false, NULL, NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('a7821037-5de6-4227-a6a8-efc5ca675b1a', NULL, 'client-jwt', 'CAP', '0fc25843-3a94-474a-b92e-5f6b9ff9ca7d', 2, 20, false, NULL, NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('93ecc98b-f41d-40ef-a203-b03e1af2a995', NULL, 'client-secret-jwt', 'CAP', '0fc25843-3a94-474a-b92e-5f6b9ff9ca7d', 2, 30, false, NULL, NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('6f2b9b41-ee1b-4290-8265-e639513ae2e7', NULL, 'client-x509', 'CAP', '0fc25843-3a94-474a-b92e-5f6b9ff9ca7d', 2, 40, false, NULL, NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('67d1bba1-5217-43f9-99d4-9192e908a522', NULL, 'idp-review-profile', 'CAP', '358b4564-0040-496f-bf75-a60e75a048ba', 0, 10, false, NULL, '8df9b83b-843a-48cc-8539-567bf8a5a7c4');
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('09d63bc5-fa28-47f5-a1a3-6acca9e9f349', NULL, NULL, 'CAP', '358b4564-0040-496f-bf75-a60e75a048ba', 0, 20, true, 'f7814971-0f06-409b-9957-45f9cb5d85b4', NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('badfa016-f4b1-403f-84b2-f69d247c78dd', NULL, 'idp-create-user-if-unique', 'CAP', 'f7814971-0f06-409b-9957-45f9cb5d85b4', 2, 10, false, NULL, '5a8b08d3-e037-48d3-a525-2a191924e7fb');
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('332d7124-e39e-4403-995b-db244e35c9bb', NULL, NULL, 'CAP', 'f7814971-0f06-409b-9957-45f9cb5d85b4', 2, 20, true, '45f539d5-5251-44c0-8ea3-9869636a3183', NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('3dd264f9-1b1b-4322-92cb-bb1f1f4596b9', NULL, 'idp-confirm-link', 'CAP', '45f539d5-5251-44c0-8ea3-9869636a3183', 0, 10, false, NULL, NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('bafbb002-74c9-4da7-a05d-2894341dddb9', NULL, NULL, 'CAP', '45f539d5-5251-44c0-8ea3-9869636a3183', 0, 20, true, '938b3725-822f-4501-b6dc-dccbda30959f', NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('c9e6c75d-4fe6-463d-bf41-b93a9e6d10c9', NULL, 'idp-email-verification', 'CAP', '938b3725-822f-4501-b6dc-dccbda30959f', 2, 10, false, NULL, NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('ebf55aa2-d514-4906-8302-89e49b4d85d9', NULL, NULL, 'CAP', '938b3725-822f-4501-b6dc-dccbda30959f', 2, 20, true, '85938271-09dc-4325-9e28-2e50f3cba874', NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('59e9278d-ae28-487a-b603-49d61124490c', NULL, 'idp-username-password-form', 'CAP', '85938271-09dc-4325-9e28-2e50f3cba874', 0, 10, false, NULL, NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('45ac3b49-2e9a-419a-9620-7f11537922a1', NULL, NULL, 'CAP', '85938271-09dc-4325-9e28-2e50f3cba874', 1, 20, true, '490fd0db-89e5-4cfa-b0ee-587632152ac5', NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('f412e335-89d6-49b7-89d8-9a2e78e13ef5', NULL, 'conditional-user-configured', 'CAP', '490fd0db-89e5-4cfa-b0ee-587632152ac5', 0, 10, false, NULL, NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('f3eabe80-b06d-4e0d-9c32-c87469c7af74', NULL, 'auth-otp-form', 'CAP', '490fd0db-89e5-4cfa-b0ee-587632152ac5', 0, 20, false, NULL, NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('6e31b58d-132b-42a8-8a7e-90ada541ecca', NULL, 'http-basic-authenticator', 'CAP', '34a16bdb-c423-4b72-b249-2542c4cf55d0', 0, 10, false, NULL, NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('6424669e-af04-4413-b7ed-3057cb5f550e', NULL, 'docker-http-basic-authenticator', 'CAP', 'beb742d5-44b0-413d-8ad8-81005a3ff0b4', 0, 10, false, NULL, NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('c6459693-dea2-46a1-b527-4a5c52f1f51f', NULL, 'no-cookie-redirect', 'CAP', '0de39cf1-cc59-46d4-87f7-3fe1021bfa20', 0, 10, false, NULL, NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('de7a9e72-67f2-4698-bdd8-9096f035a95f', NULL, NULL, 'CAP', '0de39cf1-cc59-46d4-87f7-3fe1021bfa20', 0, 20, true, 'abbb0a1e-ea02-485b-953a-c7916c4f103f', NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('497fc136-e31f-401f-8323-1ea1bad2701a', NULL, 'basic-auth', 'CAP', 'abbb0a1e-ea02-485b-953a-c7916c4f103f', 0, 10, false, NULL, NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('f34eb841-b08e-4bad-b311-6ed878312a7c', NULL, 'basic-auth-otp', 'CAP', 'abbb0a1e-ea02-485b-953a-c7916c4f103f', 3, 20, false, NULL, NULL);
+INSERT INTO public.authentication_execution (id, alias, authenticator, realm_id, flow_id, requirement, priority, authenticator_flow, auth_flow_id, auth_config) VALUES ('16ed2730-56f0-4a7d-be88-51d5e9d8569a', NULL, 'auth-spnego', 'CAP', 'abbb0a1e-ea02-485b-953a-c7916c4f103f', 3, 30, false, NULL, NULL);
 
 
 --
--- TOC entry 3847 (class 0 OID 17065)
--- Dependencies: 239
+-- TOC entry 3806 (class 0 OID 16398)
+-- Dependencies: 199
 -- Data for Name: authentication_flow; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1663,39 +1711,63 @@ INSERT INTO public.authentication_flow (id, alias, description, realm_id, provid
 INSERT INTO public.authentication_flow (id, alias, description, realm_id, provider_id, top_level, built_in) VALUES ('52a66e94-bf7a-406c-bee0-01061d9c6cb5', 'docker auth', 'Used by Docker clients to authenticate against the IDP', 'master', 'basic-flow', true, true);
 INSERT INTO public.authentication_flow (id, alias, description, realm_id, provider_id, top_level, built_in) VALUES ('d3b8a064-e6dc-4db4-ae1f-2e14d4998b72', 'http challenge', 'An authentication flow based on challenge-response HTTP Authentication Schemes', 'master', 'basic-flow', true, true);
 INSERT INTO public.authentication_flow (id, alias, description, realm_id, provider_id, top_level, built_in) VALUES ('5675952a-f771-4b0e-ae60-0919bc41f13f', 'Authentication Options', 'Authentication options.', 'master', 'basic-flow', false, true);
+INSERT INTO public.authentication_flow (id, alias, description, realm_id, provider_id, top_level, built_in) VALUES ('5b0b55da-8477-41c4-a819-9dfebdc034cc', 'browser', 'browser based authentication', 'CAP', 'basic-flow', true, true);
+INSERT INTO public.authentication_flow (id, alias, description, realm_id, provider_id, top_level, built_in) VALUES ('9f4fba88-9500-4c95-a0ce-41221521c1a7', 'forms', 'Username, password, otp and other auth forms.', 'CAP', 'basic-flow', false, true);
+INSERT INTO public.authentication_flow (id, alias, description, realm_id, provider_id, top_level, built_in) VALUES ('c5af64e8-78da-412e-b673-33560ac19d29', 'Browser - Conditional OTP', 'Flow to determine if the OTP is required for the authentication', 'CAP', 'basic-flow', false, true);
+INSERT INTO public.authentication_flow (id, alias, description, realm_id, provider_id, top_level, built_in) VALUES ('d75139f6-a0ad-425a-af07-8324f27557e7', 'direct grant', 'OpenID Connect Resource Owner Grant', 'CAP', 'basic-flow', true, true);
+INSERT INTO public.authentication_flow (id, alias, description, realm_id, provider_id, top_level, built_in) VALUES ('b6122dcb-ee52-4e8b-bcb3-f9079c4eb15b', 'Direct Grant - Conditional OTP', 'Flow to determine if the OTP is required for the authentication', 'CAP', 'basic-flow', false, true);
+INSERT INTO public.authentication_flow (id, alias, description, realm_id, provider_id, top_level, built_in) VALUES ('0da7e7bf-9f0e-46be-9196-0953a88382c1', 'registration', 'registration flow', 'CAP', 'basic-flow', true, true);
+INSERT INTO public.authentication_flow (id, alias, description, realm_id, provider_id, top_level, built_in) VALUES ('a1fad2ae-035a-4010-a95d-1d2c1cfb7e54', 'registration form', 'registration form', 'CAP', 'form-flow', false, true);
+INSERT INTO public.authentication_flow (id, alias, description, realm_id, provider_id, top_level, built_in) VALUES ('1a4dfbb9-bc1b-4e55-b5bf-c69aad806bc1', 'reset credentials', 'Reset credentials for a user if they forgot their password or something', 'CAP', 'basic-flow', true, true);
+INSERT INTO public.authentication_flow (id, alias, description, realm_id, provider_id, top_level, built_in) VALUES ('e2787a4c-d0b4-42e0-9c46-ec4e926a4dbb', 'Reset - Conditional OTP', 'Flow to determine if the OTP should be reset or not. Set to REQUIRED to force.', 'CAP', 'basic-flow', false, true);
+INSERT INTO public.authentication_flow (id, alias, description, realm_id, provider_id, top_level, built_in) VALUES ('0fc25843-3a94-474a-b92e-5f6b9ff9ca7d', 'clients', 'Base authentication for clients', 'CAP', 'client-flow', true, true);
+INSERT INTO public.authentication_flow (id, alias, description, realm_id, provider_id, top_level, built_in) VALUES ('358b4564-0040-496f-bf75-a60e75a048ba', 'first broker login', 'Actions taken after first broker login with identity provider account, which is not yet linked to any Keycloak account', 'CAP', 'basic-flow', true, true);
+INSERT INTO public.authentication_flow (id, alias, description, realm_id, provider_id, top_level, built_in) VALUES ('f7814971-0f06-409b-9957-45f9cb5d85b4', 'User creation or linking', 'Flow for the existing/non-existing user alternatives', 'CAP', 'basic-flow', false, true);
+INSERT INTO public.authentication_flow (id, alias, description, realm_id, provider_id, top_level, built_in) VALUES ('45f539d5-5251-44c0-8ea3-9869636a3183', 'Handle Existing Account', 'Handle what to do if there is existing account with same email/username like authenticated identity provider', 'CAP', 'basic-flow', false, true);
+INSERT INTO public.authentication_flow (id, alias, description, realm_id, provider_id, top_level, built_in) VALUES ('938b3725-822f-4501-b6dc-dccbda30959f', 'Account verification options', 'Method with which to verity the existing account', 'CAP', 'basic-flow', false, true);
+INSERT INTO public.authentication_flow (id, alias, description, realm_id, provider_id, top_level, built_in) VALUES ('85938271-09dc-4325-9e28-2e50f3cba874', 'Verify Existing Account by Re-authentication', 'Reauthentication of existing account', 'CAP', 'basic-flow', false, true);
+INSERT INTO public.authentication_flow (id, alias, description, realm_id, provider_id, top_level, built_in) VALUES ('490fd0db-89e5-4cfa-b0ee-587632152ac5', 'First broker login - Conditional OTP', 'Flow to determine if the OTP is required for the authentication', 'CAP', 'basic-flow', false, true);
+INSERT INTO public.authentication_flow (id, alias, description, realm_id, provider_id, top_level, built_in) VALUES ('34a16bdb-c423-4b72-b249-2542c4cf55d0', 'saml ecp', 'SAML ECP Profile Authentication Flow', 'CAP', 'basic-flow', true, true);
+INSERT INTO public.authentication_flow (id, alias, description, realm_id, provider_id, top_level, built_in) VALUES ('beb742d5-44b0-413d-8ad8-81005a3ff0b4', 'docker auth', 'Used by Docker clients to authenticate against the IDP', 'CAP', 'basic-flow', true, true);
+INSERT INTO public.authentication_flow (id, alias, description, realm_id, provider_id, top_level, built_in) VALUES ('0de39cf1-cc59-46d4-87f7-3fe1021bfa20', 'http challenge', 'An authentication flow based on challenge-response HTTP Authentication Schemes', 'CAP', 'basic-flow', true, true);
+INSERT INTO public.authentication_flow (id, alias, description, realm_id, provider_id, top_level, built_in) VALUES ('abbb0a1e-ea02-485b-953a-c7916c4f103f', 'Authentication Options', 'Authentication options.', 'CAP', 'basic-flow', false, true);
 
 
 --
--- TOC entry 3846 (class 0 OID 17059)
--- Dependencies: 238
+-- TOC entry 3807 (class 0 OID 16407)
+-- Dependencies: 200
 -- Data for Name: authenticator_config; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 INSERT INTO public.authenticator_config (id, alias, realm_id) VALUES ('44d75399-f44d-4695-b57f-b6aa4a270220', 'review profile config', 'master');
 INSERT INTO public.authenticator_config (id, alias, realm_id) VALUES ('33f8618e-713c-46a4-b2ac-0eff00a13bfa', 'create unique user config', 'master');
+INSERT INTO public.authenticator_config (id, alias, realm_id) VALUES ('8df9b83b-843a-48cc-8539-567bf8a5a7c4', 'review profile config', 'CAP');
+INSERT INTO public.authenticator_config (id, alias, realm_id) VALUES ('5a8b08d3-e037-48d3-a525-2a191924e7fb', 'create unique user config', 'CAP');
 
 
 --
--- TOC entry 3849 (class 0 OID 17076)
--- Dependencies: 241
+-- TOC entry 3808 (class 0 OID 16410)
+-- Dependencies: 201
 -- Data for Name: authenticator_config_entry; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 INSERT INTO public.authenticator_config_entry (authenticator_id, value, name) VALUES ('44d75399-f44d-4695-b57f-b6aa4a270220', 'missing', 'update.profile.on.first.login');
 INSERT INTO public.authenticator_config_entry (authenticator_id, value, name) VALUES ('33f8618e-713c-46a4-b2ac-0eff00a13bfa', 'false', 'require.password.update.after.registration');
+INSERT INTO public.authenticator_config_entry (authenticator_id, value, name) VALUES ('8df9b83b-843a-48cc-8539-567bf8a5a7c4', 'missing', 'update.profile.on.first.login');
+INSERT INTO public.authenticator_config_entry (authenticator_id, value, name) VALUES ('5a8b08d3-e037-48d3-a525-2a191924e7fb', 'false', 'require.password.update.after.registration');
 
 
 --
--- TOC entry 3875 (class 0 OID 17531)
--- Dependencies: 267
+-- TOC entry 3809 (class 0 OID 16416)
+-- Dependencies: 202
 -- Data for Name: broker_link; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3806 (class 0 OID 16408)
--- Dependencies: 198
+-- TOC entry 3810 (class 0 OID 16422)
+-- Dependencies: 203
 -- Data for Name: client; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1705,45 +1777,77 @@ INSERT INTO public.client (id, enabled, full_scope_allowed, client_id, not_befor
 INSERT INTO public.client (id, enabled, full_scope_allowed, client_id, not_before, public_client, secret, base_url, bearer_only, management_url, surrogate_auth_required, realm_id, protocol, node_rereg_timeout, frontchannel_logout, consent_required, name, service_accounts_enabled, client_authenticator_type, root_url, description, registration_token, standard_flow_enabled, implicit_flow_enabled, direct_access_grants_enabled, always_display_in_console) VALUES ('6de0b292-3904-4649-8e1a-748444df2949', true, false, 'broker', 0, false, NULL, NULL, true, NULL, false, 'master', 'openid-connect', 0, false, false, '${client_broker}', false, 'client-secret', NULL, NULL, NULL, true, false, false, false);
 INSERT INTO public.client (id, enabled, full_scope_allowed, client_id, not_before, public_client, secret, base_url, bearer_only, management_url, surrogate_auth_required, realm_id, protocol, node_rereg_timeout, frontchannel_logout, consent_required, name, service_accounts_enabled, client_authenticator_type, root_url, description, registration_token, standard_flow_enabled, implicit_flow_enabled, direct_access_grants_enabled, always_display_in_console) VALUES ('5b896a97-4553-4c23-bdd3-738d5fb06e6b', true, false, 'security-admin-console', 0, true, NULL, '/admin/master/console/', false, NULL, false, 'master', 'openid-connect', 0, false, false, '${client_security-admin-console}', false, 'client-secret', '${authAdminUrl}', NULL, NULL, true, false, false, false);
 INSERT INTO public.client (id, enabled, full_scope_allowed, client_id, not_before, public_client, secret, base_url, bearer_only, management_url, surrogate_auth_required, realm_id, protocol, node_rereg_timeout, frontchannel_logout, consent_required, name, service_accounts_enabled, client_authenticator_type, root_url, description, registration_token, standard_flow_enabled, implicit_flow_enabled, direct_access_grants_enabled, always_display_in_console) VALUES ('70a681a4-553d-4188-9ec3-bee027f3c6e1', true, false, 'admin-cli', 0, true, NULL, NULL, false, NULL, false, 'master', 'openid-connect', 0, false, false, '${client_admin-cli}', false, 'client-secret', NULL, NULL, NULL, false, false, true, false);
+INSERT INTO public.client (id, enabled, full_scope_allowed, client_id, not_before, public_client, secret, base_url, bearer_only, management_url, surrogate_auth_required, realm_id, protocol, node_rereg_timeout, frontchannel_logout, consent_required, name, service_accounts_enabled, client_authenticator_type, root_url, description, registration_token, standard_flow_enabled, implicit_flow_enabled, direct_access_grants_enabled, always_display_in_console) VALUES ('255350d7-f727-49d7-a63d-e207e35e270c', true, false, 'CAP-realm', 0, false, NULL, NULL, true, NULL, false, 'master', NULL, 0, false, false, 'CAP Realm', false, 'client-secret', NULL, NULL, NULL, true, false, false, false);
+INSERT INTO public.client (id, enabled, full_scope_allowed, client_id, not_before, public_client, secret, base_url, bearer_only, management_url, surrogate_auth_required, realm_id, protocol, node_rereg_timeout, frontchannel_logout, consent_required, name, service_accounts_enabled, client_authenticator_type, root_url, description, registration_token, standard_flow_enabled, implicit_flow_enabled, direct_access_grants_enabled, always_display_in_console) VALUES ('b1529da2-2468-41f0-95d3-992490e45258', true, false, 'realm-management', 0, false, NULL, NULL, true, NULL, false, 'CAP', 'openid-connect', 0, false, false, '${client_realm-management}', false, 'client-secret', NULL, NULL, NULL, true, false, false, false);
+INSERT INTO public.client (id, enabled, full_scope_allowed, client_id, not_before, public_client, secret, base_url, bearer_only, management_url, surrogate_auth_required, realm_id, protocol, node_rereg_timeout, frontchannel_logout, consent_required, name, service_accounts_enabled, client_authenticator_type, root_url, description, registration_token, standard_flow_enabled, implicit_flow_enabled, direct_access_grants_enabled, always_display_in_console) VALUES ('273cd6ca-70d7-4000-8a51-a421ccd86682', true, false, 'account', 0, true, NULL, '/realms/CAP/account/', false, NULL, false, 'CAP', 'openid-connect', 0, false, false, '${client_account}', false, 'client-secret', '${authBaseUrl}', NULL, NULL, true, false, false, false);
+INSERT INTO public.client (id, enabled, full_scope_allowed, client_id, not_before, public_client, secret, base_url, bearer_only, management_url, surrogate_auth_required, realm_id, protocol, node_rereg_timeout, frontchannel_logout, consent_required, name, service_accounts_enabled, client_authenticator_type, root_url, description, registration_token, standard_flow_enabled, implicit_flow_enabled, direct_access_grants_enabled, always_display_in_console) VALUES ('b7ebb818-40f4-4272-ad17-85a3af269c14', true, false, 'account-console', 0, true, NULL, '/realms/CAP/account/', false, NULL, false, 'CAP', 'openid-connect', 0, false, false, '${client_account-console}', false, 'client-secret', '${authBaseUrl}', NULL, NULL, true, false, false, false);
+INSERT INTO public.client (id, enabled, full_scope_allowed, client_id, not_before, public_client, secret, base_url, bearer_only, management_url, surrogate_auth_required, realm_id, protocol, node_rereg_timeout, frontchannel_logout, consent_required, name, service_accounts_enabled, client_authenticator_type, root_url, description, registration_token, standard_flow_enabled, implicit_flow_enabled, direct_access_grants_enabled, always_display_in_console) VALUES ('041e527a-554d-46c7-ab67-a27cdcae0636', true, false, 'broker', 0, false, NULL, NULL, true, NULL, false, 'CAP', 'openid-connect', 0, false, false, '${client_broker}', false, 'client-secret', NULL, NULL, NULL, true, false, false, false);
+INSERT INTO public.client (id, enabled, full_scope_allowed, client_id, not_before, public_client, secret, base_url, bearer_only, management_url, surrogate_auth_required, realm_id, protocol, node_rereg_timeout, frontchannel_logout, consent_required, name, service_accounts_enabled, client_authenticator_type, root_url, description, registration_token, standard_flow_enabled, implicit_flow_enabled, direct_access_grants_enabled, always_display_in_console) VALUES ('b41a94a8-63bc-4371-9a1d-59e02f446012', true, false, 'security-admin-console', 0, true, NULL, '/admin/CAP/console/', false, NULL, false, 'CAP', 'openid-connect', 0, false, false, '${client_security-admin-console}', false, 'client-secret', '${authAdminUrl}', NULL, NULL, true, false, false, false);
+INSERT INTO public.client (id, enabled, full_scope_allowed, client_id, not_before, public_client, secret, base_url, bearer_only, management_url, surrogate_auth_required, realm_id, protocol, node_rereg_timeout, frontchannel_logout, consent_required, name, service_accounts_enabled, client_authenticator_type, root_url, description, registration_token, standard_flow_enabled, implicit_flow_enabled, direct_access_grants_enabled, always_display_in_console) VALUES ('0831f142-6f37-4e0f-9ae1-052388f1837f', true, false, 'admin-cli', 0, true, NULL, NULL, false, NULL, false, 'CAP', 'openid-connect', 0, false, false, '${client_admin-cli}', false, 'client-secret', NULL, NULL, NULL, false, false, true, false);
+INSERT INTO public.client (id, enabled, full_scope_allowed, client_id, not_before, public_client, secret, base_url, bearer_only, management_url, surrogate_auth_required, realm_id, protocol, node_rereg_timeout, frontchannel_logout, consent_required, name, service_accounts_enabled, client_authenticator_type, root_url, description, registration_token, standard_flow_enabled, implicit_flow_enabled, direct_access_grants_enabled, always_display_in_console) VALUES ('92c59aec-0896-4840-adae-3f291ad1c9ad', true, true, 'cap-app', 0, false, 'aQX4Vdbe7PhQTPCwRdeOwIdQzbpGkOdw', NULL, false, NULL, false, 'CAP', 'openid-connect', -1, false, false, NULL, true, 'client-secret', NULL, NULL, NULL, false, false, true, false);
 
 
 --
--- TOC entry 3829 (class 0 OID 16782)
--- Dependencies: 221
+-- TOC entry 3811 (class 0 OID 16441)
+-- Dependencies: 204
 -- Data for Name: client_attributes; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 INSERT INTO public.client_attributes (client_id, value, name) VALUES ('31fab5fd-a6c4-472a-a737-83b0cb38ceee', 'S256', 'pkce.code.challenge.method');
 INSERT INTO public.client_attributes (client_id, value, name) VALUES ('5b896a97-4553-4c23-bdd3-738d5fb06e6b', 'S256', 'pkce.code.challenge.method');
+INSERT INTO public.client_attributes (client_id, value, name) VALUES ('b7ebb818-40f4-4272-ad17-85a3af269c14', 'S256', 'pkce.code.challenge.method');
+INSERT INTO public.client_attributes (client_id, value, name) VALUES ('b41a94a8-63bc-4371-9a1d-59e02f446012', 'S256', 'pkce.code.challenge.method');
+INSERT INTO public.client_attributes (client_id, value, name) VALUES ('92c59aec-0896-4840-adae-3f291ad1c9ad', 'true', 'backchannel.logout.session.required');
+INSERT INTO public.client_attributes (client_id, value, name) VALUES ('92c59aec-0896-4840-adae-3f291ad1c9ad', 'false', 'backchannel.logout.revoke.offline.tokens');
+INSERT INTO public.client_attributes (client_id, value, name) VALUES ('92c59aec-0896-4840-adae-3f291ad1c9ad', 'false', 'saml.artifact.binding');
+INSERT INTO public.client_attributes (client_id, value, name) VALUES ('92c59aec-0896-4840-adae-3f291ad1c9ad', 'false', 'saml.server.signature');
+INSERT INTO public.client_attributes (client_id, value, name) VALUES ('92c59aec-0896-4840-adae-3f291ad1c9ad', 'false', 'saml.server.signature.keyinfo.ext');
+INSERT INTO public.client_attributes (client_id, value, name) VALUES ('92c59aec-0896-4840-adae-3f291ad1c9ad', 'false', 'saml.assertion.signature');
+INSERT INTO public.client_attributes (client_id, value, name) VALUES ('92c59aec-0896-4840-adae-3f291ad1c9ad', 'false', 'saml.client.signature');
+INSERT INTO public.client_attributes (client_id, value, name) VALUES ('92c59aec-0896-4840-adae-3f291ad1c9ad', 'false', 'saml.encrypt');
+INSERT INTO public.client_attributes (client_id, value, name) VALUES ('92c59aec-0896-4840-adae-3f291ad1c9ad', 'false', 'saml.authnstatement');
+INSERT INTO public.client_attributes (client_id, value, name) VALUES ('92c59aec-0896-4840-adae-3f291ad1c9ad', 'false', 'saml.onetimeuse.condition');
+INSERT INTO public.client_attributes (client_id, value, name) VALUES ('92c59aec-0896-4840-adae-3f291ad1c9ad', 'false', 'saml_force_name_id_format');
+INSERT INTO public.client_attributes (client_id, value, name) VALUES ('92c59aec-0896-4840-adae-3f291ad1c9ad', 'false', 'saml.multivalued.roles');
+INSERT INTO public.client_attributes (client_id, value, name) VALUES ('92c59aec-0896-4840-adae-3f291ad1c9ad', 'false', 'saml.force.post.binding');
+INSERT INTO public.client_attributes (client_id, value, name) VALUES ('92c59aec-0896-4840-adae-3f291ad1c9ad', 'false', 'exclude.session.state.from.auth.response');
+INSERT INTO public.client_attributes (client_id, value, name) VALUES ('92c59aec-0896-4840-adae-3f291ad1c9ad', 'false', 'oauth2.device.authorization.grant.enabled');
+INSERT INTO public.client_attributes (client_id, value, name) VALUES ('92c59aec-0896-4840-adae-3f291ad1c9ad', 'false', 'oidc.ciba.grant.enabled');
+INSERT INTO public.client_attributes (client_id, value, name) VALUES ('92c59aec-0896-4840-adae-3f291ad1c9ad', 'true', 'use.refresh.tokens');
+INSERT INTO public.client_attributes (client_id, value, name) VALUES ('92c59aec-0896-4840-adae-3f291ad1c9ad', 'false', 'id.token.as.detached.signature');
+INSERT INTO public.client_attributes (client_id, value, name) VALUES ('92c59aec-0896-4840-adae-3f291ad1c9ad', 'false', 'tls.client.certificate.bound.access.tokens');
+INSERT INTO public.client_attributes (client_id, value, name) VALUES ('92c59aec-0896-4840-adae-3f291ad1c9ad', 'false', 'require.pushed.authorization.requests');
+INSERT INTO public.client_attributes (client_id, value, name) VALUES ('92c59aec-0896-4840-adae-3f291ad1c9ad', 'false', 'client_credentials.use_refresh_token');
+INSERT INTO public.client_attributes (client_id, value, name) VALUES ('92c59aec-0896-4840-adae-3f291ad1c9ad', 'false', 'display.on.consent.screen');
 
 
 --
--- TOC entry 3886 (class 0 OID 17790)
--- Dependencies: 278
+-- TOC entry 3812 (class 0 OID 16447)
+-- Dependencies: 205
 -- Data for Name: client_auth_flow_bindings; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3885 (class 0 OID 17665)
--- Dependencies: 277
+-- TOC entry 3813 (class 0 OID 16450)
+-- Dependencies: 206
 -- Data for Name: client_initial_access; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3831 (class 0 OID 16794)
--- Dependencies: 223
+-- TOC entry 3814 (class 0 OID 16453)
+-- Dependencies: 207
 -- Data for Name: client_node_registrations; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3863 (class 0 OID 17314)
--- Dependencies: 255
+-- TOC entry 3815 (class 0 OID 16456)
+-- Dependencies: 208
 -- Data for Name: client_scope; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1756,11 +1860,20 @@ INSERT INTO public.client_scope (id, name, realm_id, description, protocol) VALU
 INSERT INTO public.client_scope (id, name, realm_id, description, protocol) VALUES ('757461f9-f109-4c05-8e35-1ae23fac8747', 'roles', 'master', 'OpenID Connect scope for add user roles to the access token', 'openid-connect');
 INSERT INTO public.client_scope (id, name, realm_id, description, protocol) VALUES ('daaa93f1-aec3-40c1-afb2-bdf43da63495', 'web-origins', 'master', 'OpenID Connect scope for add allowed web origins to the access token', 'openid-connect');
 INSERT INTO public.client_scope (id, name, realm_id, description, protocol) VALUES ('543866b8-2b13-43d0-b6d8-b47b158e4a52', 'microprofile-jwt', 'master', 'Microprofile - JWT built-in scope', 'openid-connect');
+INSERT INTO public.client_scope (id, name, realm_id, description, protocol) VALUES ('273ed0d5-4061-4888-af9f-d403d4ad8c8a', 'offline_access', 'CAP', 'OpenID Connect built-in scope: offline_access', 'openid-connect');
+INSERT INTO public.client_scope (id, name, realm_id, description, protocol) VALUES ('63e8230f-3ec1-4d2c-b0c1-e3bd2c1db62f', 'role_list', 'CAP', 'SAML role list', 'saml');
+INSERT INTO public.client_scope (id, name, realm_id, description, protocol) VALUES ('a5cc25a0-1691-486a-a7e5-916199045ee3', 'profile', 'CAP', 'OpenID Connect built-in scope: profile', 'openid-connect');
+INSERT INTO public.client_scope (id, name, realm_id, description, protocol) VALUES ('d6d9a2af-c2b6-4d85-a5fe-3498717917f6', 'email', 'CAP', 'OpenID Connect built-in scope: email', 'openid-connect');
+INSERT INTO public.client_scope (id, name, realm_id, description, protocol) VALUES ('fe0f51af-b5c6-45f0-acc8-df3c16af808b', 'address', 'CAP', 'OpenID Connect built-in scope: address', 'openid-connect');
+INSERT INTO public.client_scope (id, name, realm_id, description, protocol) VALUES ('b88e08dc-64fc-4c6c-9fd5-77708c103588', 'phone', 'CAP', 'OpenID Connect built-in scope: phone', 'openid-connect');
+INSERT INTO public.client_scope (id, name, realm_id, description, protocol) VALUES ('e64621b4-cd4c-4fa6-b24c-46092795e57c', 'roles', 'CAP', 'OpenID Connect scope for add user roles to the access token', 'openid-connect');
+INSERT INTO public.client_scope (id, name, realm_id, description, protocol) VALUES ('f12a3cce-609a-496b-ae0d-aee5645b1417', 'web-origins', 'CAP', 'OpenID Connect scope for add allowed web origins to the access token', 'openid-connect');
+INSERT INTO public.client_scope (id, name, realm_id, description, protocol) VALUES ('3229350b-9873-4c73-9027-3ef99f12b58a', 'microprofile-jwt', 'CAP', 'Microprofile - JWT built-in scope', 'openid-connect');
 
 
 --
--- TOC entry 3864 (class 0 OID 17329)
--- Dependencies: 256
+-- TOC entry 3816 (class 0 OID 16462)
+-- Dependencies: 209
 -- Data for Name: client_scope_attributes; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1788,11 +1901,35 @@ INSERT INTO public.client_scope_attributes (scope_id, value, name) VALUES ('daaa
 INSERT INTO public.client_scope_attributes (scope_id, value, name) VALUES ('daaa93f1-aec3-40c1-afb2-bdf43da63495', 'false', 'include.in.token.scope');
 INSERT INTO public.client_scope_attributes (scope_id, value, name) VALUES ('543866b8-2b13-43d0-b6d8-b47b158e4a52', 'false', 'display.on.consent.screen');
 INSERT INTO public.client_scope_attributes (scope_id, value, name) VALUES ('543866b8-2b13-43d0-b6d8-b47b158e4a52', 'true', 'include.in.token.scope');
+INSERT INTO public.client_scope_attributes (scope_id, value, name) VALUES ('273ed0d5-4061-4888-af9f-d403d4ad8c8a', 'true', 'display.on.consent.screen');
+INSERT INTO public.client_scope_attributes (scope_id, value, name) VALUES ('273ed0d5-4061-4888-af9f-d403d4ad8c8a', '${offlineAccessScopeConsentText}', 'consent.screen.text');
+INSERT INTO public.client_scope_attributes (scope_id, value, name) VALUES ('63e8230f-3ec1-4d2c-b0c1-e3bd2c1db62f', 'true', 'display.on.consent.screen');
+INSERT INTO public.client_scope_attributes (scope_id, value, name) VALUES ('63e8230f-3ec1-4d2c-b0c1-e3bd2c1db62f', '${samlRoleListScopeConsentText}', 'consent.screen.text');
+INSERT INTO public.client_scope_attributes (scope_id, value, name) VALUES ('a5cc25a0-1691-486a-a7e5-916199045ee3', 'true', 'display.on.consent.screen');
+INSERT INTO public.client_scope_attributes (scope_id, value, name) VALUES ('a5cc25a0-1691-486a-a7e5-916199045ee3', '${profileScopeConsentText}', 'consent.screen.text');
+INSERT INTO public.client_scope_attributes (scope_id, value, name) VALUES ('a5cc25a0-1691-486a-a7e5-916199045ee3', 'true', 'include.in.token.scope');
+INSERT INTO public.client_scope_attributes (scope_id, value, name) VALUES ('d6d9a2af-c2b6-4d85-a5fe-3498717917f6', 'true', 'display.on.consent.screen');
+INSERT INTO public.client_scope_attributes (scope_id, value, name) VALUES ('d6d9a2af-c2b6-4d85-a5fe-3498717917f6', '${emailScopeConsentText}', 'consent.screen.text');
+INSERT INTO public.client_scope_attributes (scope_id, value, name) VALUES ('d6d9a2af-c2b6-4d85-a5fe-3498717917f6', 'true', 'include.in.token.scope');
+INSERT INTO public.client_scope_attributes (scope_id, value, name) VALUES ('fe0f51af-b5c6-45f0-acc8-df3c16af808b', 'true', 'display.on.consent.screen');
+INSERT INTO public.client_scope_attributes (scope_id, value, name) VALUES ('fe0f51af-b5c6-45f0-acc8-df3c16af808b', '${addressScopeConsentText}', 'consent.screen.text');
+INSERT INTO public.client_scope_attributes (scope_id, value, name) VALUES ('fe0f51af-b5c6-45f0-acc8-df3c16af808b', 'true', 'include.in.token.scope');
+INSERT INTO public.client_scope_attributes (scope_id, value, name) VALUES ('b88e08dc-64fc-4c6c-9fd5-77708c103588', 'true', 'display.on.consent.screen');
+INSERT INTO public.client_scope_attributes (scope_id, value, name) VALUES ('b88e08dc-64fc-4c6c-9fd5-77708c103588', '${phoneScopeConsentText}', 'consent.screen.text');
+INSERT INTO public.client_scope_attributes (scope_id, value, name) VALUES ('b88e08dc-64fc-4c6c-9fd5-77708c103588', 'true', 'include.in.token.scope');
+INSERT INTO public.client_scope_attributes (scope_id, value, name) VALUES ('e64621b4-cd4c-4fa6-b24c-46092795e57c', 'true', 'display.on.consent.screen');
+INSERT INTO public.client_scope_attributes (scope_id, value, name) VALUES ('e64621b4-cd4c-4fa6-b24c-46092795e57c', '${rolesScopeConsentText}', 'consent.screen.text');
+INSERT INTO public.client_scope_attributes (scope_id, value, name) VALUES ('e64621b4-cd4c-4fa6-b24c-46092795e57c', 'false', 'include.in.token.scope');
+INSERT INTO public.client_scope_attributes (scope_id, value, name) VALUES ('f12a3cce-609a-496b-ae0d-aee5645b1417', 'false', 'display.on.consent.screen');
+INSERT INTO public.client_scope_attributes (scope_id, value, name) VALUES ('f12a3cce-609a-496b-ae0d-aee5645b1417', '', 'consent.screen.text');
+INSERT INTO public.client_scope_attributes (scope_id, value, name) VALUES ('f12a3cce-609a-496b-ae0d-aee5645b1417', 'false', 'include.in.token.scope');
+INSERT INTO public.client_scope_attributes (scope_id, value, name) VALUES ('3229350b-9873-4c73-9027-3ef99f12b58a', 'false', 'display.on.consent.screen');
+INSERT INTO public.client_scope_attributes (scope_id, value, name) VALUES ('3229350b-9873-4c73-9027-3ef99f12b58a', 'true', 'include.in.token.scope');
 
 
 --
--- TOC entry 3887 (class 0 OID 17832)
--- Dependencies: 279
+-- TOC entry 3817 (class 0 OID 16468)
+-- Dependencies: 210
 -- Data for Name: client_scope_client; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1844,68 +1981,125 @@ INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALU
 INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('5b896a97-4553-4c23-bdd3-738d5fb06e6b', '6d4fe2d4-8bb5-4482-a53c-10a4505d3726', false);
 INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('5b896a97-4553-4c23-bdd3-738d5fb06e6b', '43a4ed8e-c8b9-48ec-a916-d704ac8240a0', false);
 INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('5b896a97-4553-4c23-bdd3-738d5fb06e6b', 'b277fa7e-5e87-4366-b032-c5be49f78358', false);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('273cd6ca-70d7-4000-8a51-a421ccd86682', 'e64621b4-cd4c-4fa6-b24c-46092795e57c', true);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('273cd6ca-70d7-4000-8a51-a421ccd86682', 'd6d9a2af-c2b6-4d85-a5fe-3498717917f6', true);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('273cd6ca-70d7-4000-8a51-a421ccd86682', 'a5cc25a0-1691-486a-a7e5-916199045ee3', true);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('273cd6ca-70d7-4000-8a51-a421ccd86682', 'f12a3cce-609a-496b-ae0d-aee5645b1417', true);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('273cd6ca-70d7-4000-8a51-a421ccd86682', '273ed0d5-4061-4888-af9f-d403d4ad8c8a', false);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('273cd6ca-70d7-4000-8a51-a421ccd86682', 'fe0f51af-b5c6-45f0-acc8-df3c16af808b', false);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('273cd6ca-70d7-4000-8a51-a421ccd86682', '3229350b-9873-4c73-9027-3ef99f12b58a', false);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('273cd6ca-70d7-4000-8a51-a421ccd86682', 'b88e08dc-64fc-4c6c-9fd5-77708c103588', false);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('b7ebb818-40f4-4272-ad17-85a3af269c14', 'e64621b4-cd4c-4fa6-b24c-46092795e57c', true);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('b7ebb818-40f4-4272-ad17-85a3af269c14', 'd6d9a2af-c2b6-4d85-a5fe-3498717917f6', true);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('b7ebb818-40f4-4272-ad17-85a3af269c14', 'a5cc25a0-1691-486a-a7e5-916199045ee3', true);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('b7ebb818-40f4-4272-ad17-85a3af269c14', 'f12a3cce-609a-496b-ae0d-aee5645b1417', true);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('b7ebb818-40f4-4272-ad17-85a3af269c14', '273ed0d5-4061-4888-af9f-d403d4ad8c8a', false);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('b7ebb818-40f4-4272-ad17-85a3af269c14', 'fe0f51af-b5c6-45f0-acc8-df3c16af808b', false);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('b7ebb818-40f4-4272-ad17-85a3af269c14', '3229350b-9873-4c73-9027-3ef99f12b58a', false);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('b7ebb818-40f4-4272-ad17-85a3af269c14', 'b88e08dc-64fc-4c6c-9fd5-77708c103588', false);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('0831f142-6f37-4e0f-9ae1-052388f1837f', 'e64621b4-cd4c-4fa6-b24c-46092795e57c', true);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('0831f142-6f37-4e0f-9ae1-052388f1837f', 'd6d9a2af-c2b6-4d85-a5fe-3498717917f6', true);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('0831f142-6f37-4e0f-9ae1-052388f1837f', 'a5cc25a0-1691-486a-a7e5-916199045ee3', true);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('0831f142-6f37-4e0f-9ae1-052388f1837f', 'f12a3cce-609a-496b-ae0d-aee5645b1417', true);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('0831f142-6f37-4e0f-9ae1-052388f1837f', '273ed0d5-4061-4888-af9f-d403d4ad8c8a', false);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('0831f142-6f37-4e0f-9ae1-052388f1837f', 'fe0f51af-b5c6-45f0-acc8-df3c16af808b', false);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('0831f142-6f37-4e0f-9ae1-052388f1837f', '3229350b-9873-4c73-9027-3ef99f12b58a', false);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('0831f142-6f37-4e0f-9ae1-052388f1837f', 'b88e08dc-64fc-4c6c-9fd5-77708c103588', false);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('041e527a-554d-46c7-ab67-a27cdcae0636', 'e64621b4-cd4c-4fa6-b24c-46092795e57c', true);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('041e527a-554d-46c7-ab67-a27cdcae0636', 'd6d9a2af-c2b6-4d85-a5fe-3498717917f6', true);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('041e527a-554d-46c7-ab67-a27cdcae0636', 'a5cc25a0-1691-486a-a7e5-916199045ee3', true);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('041e527a-554d-46c7-ab67-a27cdcae0636', 'f12a3cce-609a-496b-ae0d-aee5645b1417', true);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('041e527a-554d-46c7-ab67-a27cdcae0636', '273ed0d5-4061-4888-af9f-d403d4ad8c8a', false);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('041e527a-554d-46c7-ab67-a27cdcae0636', 'fe0f51af-b5c6-45f0-acc8-df3c16af808b', false);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('041e527a-554d-46c7-ab67-a27cdcae0636', '3229350b-9873-4c73-9027-3ef99f12b58a', false);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('041e527a-554d-46c7-ab67-a27cdcae0636', 'b88e08dc-64fc-4c6c-9fd5-77708c103588', false);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('b1529da2-2468-41f0-95d3-992490e45258', 'e64621b4-cd4c-4fa6-b24c-46092795e57c', true);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('b1529da2-2468-41f0-95d3-992490e45258', 'd6d9a2af-c2b6-4d85-a5fe-3498717917f6', true);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('b1529da2-2468-41f0-95d3-992490e45258', 'a5cc25a0-1691-486a-a7e5-916199045ee3', true);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('b1529da2-2468-41f0-95d3-992490e45258', 'f12a3cce-609a-496b-ae0d-aee5645b1417', true);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('b1529da2-2468-41f0-95d3-992490e45258', '273ed0d5-4061-4888-af9f-d403d4ad8c8a', false);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('b1529da2-2468-41f0-95d3-992490e45258', 'fe0f51af-b5c6-45f0-acc8-df3c16af808b', false);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('b1529da2-2468-41f0-95d3-992490e45258', '3229350b-9873-4c73-9027-3ef99f12b58a', false);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('b1529da2-2468-41f0-95d3-992490e45258', 'b88e08dc-64fc-4c6c-9fd5-77708c103588', false);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('b41a94a8-63bc-4371-9a1d-59e02f446012', 'e64621b4-cd4c-4fa6-b24c-46092795e57c', true);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('b41a94a8-63bc-4371-9a1d-59e02f446012', 'd6d9a2af-c2b6-4d85-a5fe-3498717917f6', true);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('b41a94a8-63bc-4371-9a1d-59e02f446012', 'a5cc25a0-1691-486a-a7e5-916199045ee3', true);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('b41a94a8-63bc-4371-9a1d-59e02f446012', 'f12a3cce-609a-496b-ae0d-aee5645b1417', true);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('b41a94a8-63bc-4371-9a1d-59e02f446012', '273ed0d5-4061-4888-af9f-d403d4ad8c8a', false);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('b41a94a8-63bc-4371-9a1d-59e02f446012', 'fe0f51af-b5c6-45f0-acc8-df3c16af808b', false);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('b41a94a8-63bc-4371-9a1d-59e02f446012', '3229350b-9873-4c73-9027-3ef99f12b58a', false);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('b41a94a8-63bc-4371-9a1d-59e02f446012', 'b88e08dc-64fc-4c6c-9fd5-77708c103588', false);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('92c59aec-0896-4840-adae-3f291ad1c9ad', 'e64621b4-cd4c-4fa6-b24c-46092795e57c', true);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('92c59aec-0896-4840-adae-3f291ad1c9ad', 'd6d9a2af-c2b6-4d85-a5fe-3498717917f6', true);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('92c59aec-0896-4840-adae-3f291ad1c9ad', 'a5cc25a0-1691-486a-a7e5-916199045ee3', true);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('92c59aec-0896-4840-adae-3f291ad1c9ad', 'f12a3cce-609a-496b-ae0d-aee5645b1417', true);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('92c59aec-0896-4840-adae-3f291ad1c9ad', '273ed0d5-4061-4888-af9f-d403d4ad8c8a', false);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('92c59aec-0896-4840-adae-3f291ad1c9ad', 'fe0f51af-b5c6-45f0-acc8-df3c16af808b', false);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('92c59aec-0896-4840-adae-3f291ad1c9ad', '3229350b-9873-4c73-9027-3ef99f12b58a', false);
+INSERT INTO public.client_scope_client (client_id, scope_id, default_scope) VALUES ('92c59aec-0896-4840-adae-3f291ad1c9ad', 'b88e08dc-64fc-4c6c-9fd5-77708c103588', false);
 
 
 --
--- TOC entry 3865 (class 0 OID 17335)
--- Dependencies: 257
+-- TOC entry 3818 (class 0 OID 16475)
+-- Dependencies: 211
 -- Data for Name: client_scope_role_mapping; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 INSERT INTO public.client_scope_role_mapping (scope_id, role_id) VALUES ('6d4fe2d4-8bb5-4482-a53c-10a4505d3726', '1e2b7fbc-37a2-4ab2-b0a5-aa70dbde6a75');
+INSERT INTO public.client_scope_role_mapping (scope_id, role_id) VALUES ('273ed0d5-4061-4888-af9f-d403d4ad8c8a', '361683dc-46bb-4cd0-8f1d-f0b6f0ba4bb7');
 
 
 --
--- TOC entry 3807 (class 0 OID 16420)
--- Dependencies: 199
+-- TOC entry 3819 (class 0 OID 16478)
+-- Dependencies: 212
 -- Data for Name: client_session; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3852 (class 0 OID 17097)
--- Dependencies: 244
+-- TOC entry 3820 (class 0 OID 16484)
+-- Dependencies: 213
 -- Data for Name: client_session_auth_status; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3830 (class 0 OID 16788)
--- Dependencies: 222
+-- TOC entry 3821 (class 0 OID 16487)
+-- Dependencies: 214
 -- Data for Name: client_session_note; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3844 (class 0 OID 16975)
--- Dependencies: 236
+-- TOC entry 3822 (class 0 OID 16493)
+-- Dependencies: 215
 -- Data for Name: client_session_prot_mapper; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3808 (class 0 OID 16426)
--- Dependencies: 200
+-- TOC entry 3823 (class 0 OID 16496)
+-- Dependencies: 216
 -- Data for Name: client_session_role; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3853 (class 0 OID 17178)
--- Dependencies: 245
+-- TOC entry 3824 (class 0 OID 16499)
+-- Dependencies: 217
 -- Data for Name: client_user_session_note; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3883 (class 0 OID 17581)
--- Dependencies: 275
+-- TOC entry 3825 (class 0 OID 16505)
+-- Dependencies: 218
 -- Data for Name: component; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1921,11 +2115,23 @@ INSERT INTO public.component (id, name, parent_id, provider_id, provider_type, r
 INSERT INTO public.component (id, name, parent_id, provider_id, provider_type, realm_id, sub_type) VALUES ('f34c50ec-77f5-48f9-9fcc-0050020fca26', 'rsa-enc-generated', 'master', 'rsa-enc-generated', 'org.keycloak.keys.KeyProvider', 'master', NULL);
 INSERT INTO public.component (id, name, parent_id, provider_id, provider_type, realm_id, sub_type) VALUES ('81faa049-d5ba-447c-b402-b072725e84f5', 'hmac-generated', 'master', 'hmac-generated', 'org.keycloak.keys.KeyProvider', 'master', NULL);
 INSERT INTO public.component (id, name, parent_id, provider_id, provider_type, realm_id, sub_type) VALUES ('62165fe7-b095-4595-a618-547627ad3b4b', 'aes-generated', 'master', 'aes-generated', 'org.keycloak.keys.KeyProvider', 'master', NULL);
+INSERT INTO public.component (id, name, parent_id, provider_id, provider_type, realm_id, sub_type) VALUES ('990ec8de-c68f-438e-ba10-0bd14f222107', 'rsa-generated', 'CAP', 'rsa-generated', 'org.keycloak.keys.KeyProvider', 'CAP', NULL);
+INSERT INTO public.component (id, name, parent_id, provider_id, provider_type, realm_id, sub_type) VALUES ('8fe5cdb2-64a5-4d93-9ee5-a1ba8d836fac', 'rsa-enc-generated', 'CAP', 'rsa-enc-generated', 'org.keycloak.keys.KeyProvider', 'CAP', NULL);
+INSERT INTO public.component (id, name, parent_id, provider_id, provider_type, realm_id, sub_type) VALUES ('a79eed74-5288-4359-8334-aa667179ab38', 'hmac-generated', 'CAP', 'hmac-generated', 'org.keycloak.keys.KeyProvider', 'CAP', NULL);
+INSERT INTO public.component (id, name, parent_id, provider_id, provider_type, realm_id, sub_type) VALUES ('34a074c9-c8fc-4b69-805b-615151b480d1', 'aes-generated', 'CAP', 'aes-generated', 'org.keycloak.keys.KeyProvider', 'CAP', NULL);
+INSERT INTO public.component (id, name, parent_id, provider_id, provider_type, realm_id, sub_type) VALUES ('0f448590-e8e5-4015-8176-4f502b4bc7ba', 'Trusted Hosts', 'CAP', 'trusted-hosts', 'org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy', 'CAP', 'anonymous');
+INSERT INTO public.component (id, name, parent_id, provider_id, provider_type, realm_id, sub_type) VALUES ('436864bf-cd90-47c5-b03e-a90451eb53dc', 'Consent Required', 'CAP', 'consent-required', 'org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy', 'CAP', 'anonymous');
+INSERT INTO public.component (id, name, parent_id, provider_id, provider_type, realm_id, sub_type) VALUES ('e7bd3aa7-5544-4488-9735-ecb7356cec3f', 'Full Scope Disabled', 'CAP', 'scope', 'org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy', 'CAP', 'anonymous');
+INSERT INTO public.component (id, name, parent_id, provider_id, provider_type, realm_id, sub_type) VALUES ('f3efe3ea-1190-4780-bd09-e3e6cf0b526a', 'Max Clients Limit', 'CAP', 'max-clients', 'org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy', 'CAP', 'anonymous');
+INSERT INTO public.component (id, name, parent_id, provider_id, provider_type, realm_id, sub_type) VALUES ('2ed81802-0174-42ad-8514-8ff262668f0b', 'Allowed Protocol Mapper Types', 'CAP', 'allowed-protocol-mappers', 'org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy', 'CAP', 'anonymous');
+INSERT INTO public.component (id, name, parent_id, provider_id, provider_type, realm_id, sub_type) VALUES ('5f69207e-ea03-40af-83e6-d0b7f041959b', 'Allowed Client Scopes', 'CAP', 'allowed-client-templates', 'org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy', 'CAP', 'anonymous');
+INSERT INTO public.component (id, name, parent_id, provider_id, provider_type, realm_id, sub_type) VALUES ('5240db50-3d56-45ad-8332-060fc958db13', 'Allowed Protocol Mapper Types', 'CAP', 'allowed-protocol-mappers', 'org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy', 'CAP', 'authenticated');
+INSERT INTO public.component (id, name, parent_id, provider_id, provider_type, realm_id, sub_type) VALUES ('2519348d-fed1-4d7f-b29a-6ee3bd9a26cf', 'Allowed Client Scopes', 'CAP', 'allowed-client-templates', 'org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy', 'CAP', 'authenticated');
 
 
 --
--- TOC entry 3882 (class 0 OID 17575)
--- Dependencies: 274
+-- TOC entry 3826 (class 0 OID 16511)
+-- Dependencies: 219
 -- Data for Name: component_config; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1966,11 +2172,48 @@ INSERT INTO public.component_config (id, component_id, name, value) VALUES ('006
 INSERT INTO public.component_config (id, component_id, name, value) VALUES ('c61f1802-3134-47ca-9b42-a0edfb351b1d', '62165fe7-b095-4595-a618-547627ad3b4b', 'kid', '5197265d-4663-4264-9f82-552298d584c3');
 INSERT INTO public.component_config (id, component_id, name, value) VALUES ('1cd5c454-70f0-4fb5-b534-3b59ce344613', '62165fe7-b095-4595-a618-547627ad3b4b', 'priority', '100');
 INSERT INTO public.component_config (id, component_id, name, value) VALUES ('b94e7414-fa07-4719-b172-fb5fa36773a9', '62165fe7-b095-4595-a618-547627ad3b4b', 'secret', 'LjZBnUku2WtiMxV2-OI2gQ');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('836cda17-d860-4e6f-80b8-39f63bd2aa72', '34a074c9-c8fc-4b69-805b-615151b480d1', 'priority', '100');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('3d39892c-9c59-4814-a624-2ad641c5a1c3', '34a074c9-c8fc-4b69-805b-615151b480d1', 'kid', '291e7f9a-5e64-448c-b78c-e058194a9b5f');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('e5c35f82-7eae-4644-8ca7-f1ee7b27ded3', '34a074c9-c8fc-4b69-805b-615151b480d1', 'secret', 'Py8AcZ8CgeFz1m7s4qwIJA');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('a06987c0-4685-4ed4-acb0-7813e34a7491', '990ec8de-c68f-438e-ba10-0bd14f222107', 'keyUse', 'SIG');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('b30ec37f-6e5e-466f-87da-193aa37d4df5', '990ec8de-c68f-438e-ba10-0bd14f222107', 'priority', '100');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('d1902bd0-2b8a-4e3d-8908-412d53f197db', '990ec8de-c68f-438e-ba10-0bd14f222107', 'certificate', 'MIIClTCCAX0CBgF/LakzBTANBgkqhkiG9w0BAQsFADAOMQwwCgYDVQQDDANDQVAwHhcNMjIwMjI0MjEzMzU3WhcNMzIwMjI0MjEzNTM3WjAOMQwwCgYDVQQDDANDQVAwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCG1stmdAlbQjOMwwOf0oLVFjgi36kluadLDoHWk9cRsJTRsRhKPU9aejUaki13ZvXgq2ea6Ukok7cbkrb3rKHLFUgPNch46rmBjhcyaoIL7QADgWQajc4mByZa4eO462eGh19n630LfO/Vpae5nrmOIaD+/bDruIhRvG0i16PUHzXK+CHPRcExoLM9WcEcicKnwgDL3JrxEPfFVGPFGV+634KNH35yDS81sRWi/Q8PEV1qO8mXgpErGoXCjTYcCsevYz77rp8ouSD/wXtv0Yb1tU+9ogHi/Yvycm9kqqe/rKTFsNKdhMBA29nFnqCWQCv2ckXaKB+gD4kSXvBfpnX5AgMBAAEwDQYJKoZIhvcNAQELBQADggEBAA6jmciiRTKgbs2UEEeqYVzfuvTduPlFROf1Ijv5vbAYEeyCAKEsIfnBxz3eqJtZtEslBUCWUhEkr6r+tDcIvenUA5deTfzXtgCHFIFAwmSZNiAJXTiXPEy2W4wJLWOdLBl0R7yQdiOKMjgMI2Yk5L+Wm2qw0sebARPTlyPFrfBMdK312L9im8HTErh/MZa37CivkhL15T42tCxpNKR2PiOQYHBMHU+ENebbTewBf9DjCD/6kQKx2C1q8GsVm2M9249ErUm53L+MMIY5Iz6IlMz1Uabxl/nuaoCNAtNLDoQ6mmownDEkVSs5/P6Ia8zVCZ9sIPeSr9eq052jazb7m98=');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('844f4562-2c29-428b-8e1c-ab79937ac1bd', '990ec8de-c68f-438e-ba10-0bd14f222107', 'privateKey', 'MIIEowIBAAKCAQEAhtbLZnQJW0IzjMMDn9KC1RY4It+pJbmnSw6B1pPXEbCU0bEYSj1PWno1GpItd2b14KtnmulJKJO3G5K296yhyxVIDzXIeOq5gY4XMmqCC+0AA4FkGo3OJgcmWuHjuOtnhodfZ+t9C3zv1aWnuZ65jiGg/v2w67iIUbxtItej1B81yvghz0XBMaCzPVnBHInCp8IAy9ya8RD3xVRjxRlfut+CjR9+cg0vNbEVov0PDxFdajvJl4KRKxqFwo02HArHr2M++66fKLkg/8F7b9GG9bVPvaIB4v2L8nJvZKqnv6ykxbDSnYTAQNvZxZ6glkAr9nJF2igfoA+JEl7wX6Z1+QIDAQABAoIBAG1gROPZklFldP1kn0cAcsI44NZhCQsh+rMmlGmjyNx/mWgzOFnYO8tPwE3Kb3kgmqhhQYxmWcLBd9G1BBgJ/8AFhktYPELhXBLcWLK7tLvJxq4RQktL5gHw4Mrt21QAGB0HKHvaiLdN5Bow4snuF+RUIQ1WajH7oRB0QS73Ltx8NOUNaucB9msR7a2A9gmFgl8gb+kln5MKzztaulP0VtWpCRKU3b9JFxqDda3PWywLHuzQcQ4pJ7YoAaKQKMJeB9bBUqVm7dORZmALlYMo/zdG0pTdxShrtcYwA6rSeBG+TW49o36OPy/84u7cNYQUcCtFT54H+7J1VUu4xYqGNAECgYEA490FUdP5mdqKHHO9pNyECoXxwbgqs8MwcaPjjZLmacdFGrNf0IbrBAIkXueYW3ofy5UyIIdI3WAv6YqN2UO63tPsUAufKxXXpGKhwzv+hiuXR/LFtjt+K7PEVk8xmLy+WuTH8etwU3UxP+6IjKoC8XEC9RqANxUNRInSyJvB1YECgYEAl30vkhDgbDeMqbcmEFzq+p4R/jkUk0FW9hnrR1bWYy7Ukbz4pBvEP78XniIAzr6VFkPlHaF4qCC7KKDLcwrLb/azW2jYprdzlN4a8w83/Qb55mSof85OilkIJlAhbPPO4+qEMfx1FYqS+eb2Y76ATuM8HLNPi01Pzx2Fdd9GjHkCgYEAtJP24EdN+nivlSbANwOu/Kvz0GLELJvWK2kHL64oPdH22NcoaphRbWbJLhD5tB0PT4ZYKGEuBIpyzfDIw1KiqG5oS3M6W6m+sH6d1ZwY9HldNV6XAvkY30dipEe0dWe2r0+5iOXdqbYpJpJB0r/0/yRhhJ7Q11Yuoo9a5TJSpYECgYBBI18VG5Skc65UO6BuYMXZRabO/ZRPTUUrRTHZ1wkQVM6qa+suBZJ5Jp3tLQnT3DcW/9LAzvGmuYxAiANzUCzx086De63M4g0c8fP8l4qnjhxeaOHbMsaqzmWms8Xrp1pKvkhhhgCCZreUJS/E6+EYCrWKUb/eUjwC/tqoOH2JYQKBgBvLZ57BFT3nXPZVRf+3Fduf9Vv0MkY4neL3w/eWSh8gtVKuSxh5zYjWLqR0muPPri8wTvQutRMEldVxMTBiYd31ek5itMFTrnuECPIzp28cQO31/rYzuoR/wncXTvaeTB8fDQeI+nTof6gjxO61aUUZvPBE6NBF7v2ZKXwTbeou');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('ddf6b120-aa7f-4381-8dd6-c9374043048d', '8fe5cdb2-64a5-4d93-9ee5-a1ba8d836fac', 'certificate', 'MIIClTCCAX0CBgF/Lak0ajANBgkqhkiG9w0BAQsFADAOMQwwCgYDVQQDDANDQVAwHhcNMjIwMjI0MjEzMzU4WhcNMzIwMjI0MjEzNTM4WjAOMQwwCgYDVQQDDANDQVAwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC7V7yz6CFpObCZOcCnoeaLrS9etrXUS2aH6FII82klSR9RmEmhO+iXECyST7EHZK13YI+ze7KZqhd26Cr090z1fiN+HLS+fu0evupANFrpWi18AJ1lA4+j88nODYT08mSnS4Uz4juAPfEYOmopSgWQvAcKJpN6+7H9i1PmWmHc+pl1TFYyag7hLCjuoy7cwakQR61Kl2vjQB+6R5oHvexSwKMhdbQv7mgx3ON0QofxWAyg2AJ/6EOYG2o2vJPiJyMO0KDe2ttTTEp28Vfqd4eyElfDQqsmrnpa5faLUUSKSkHko8TTG3Asn5KmdCj9clkoZxpX0ObOgTvG23qEcxNhAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAHeqSU+POLmO5xl5PbhX8eh4lA2tKLIVUkAOjuPa5IPeptHw+JD5JEFIh0BiAmguxtxOF2HgzLMen+rO897WzUKGTXLypS9to1Ed+eEwxO+41ZyWakuLE0lzS28LA4ynkRqtip7ZIi/IbsEp/oHSzXAz8fPvX9AjfXilm3xONU2aMYCFkolNsSfIFS/2PuuXwr+JKgvMMYh8jTFGcmIt9DxnAKVZOjT8fHsx4pfMEAsbxBJZqUhCxoOqQZjNj1Ba0zMZV+ACIaVJv1nPEdPFMy6v6Aa1vf4zrs1Llvjs4c/iGDYBHdot9I9JtHN2Eb/StOYIYvlmxFcYFFyDSP2N6Jk=');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('c018b136-ae67-4f1b-8a02-60206504048e', '8fe5cdb2-64a5-4d93-9ee5-a1ba8d836fac', 'algorithm', 'RSA-OAEP');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('07027595-3dea-40fd-87c5-d6177b9b917a', '8fe5cdb2-64a5-4d93-9ee5-a1ba8d836fac', 'keyUse', 'ENC');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('83703357-8a10-428c-8bff-696fa8b4c181', '8fe5cdb2-64a5-4d93-9ee5-a1ba8d836fac', 'priority', '100');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('ccc5ab08-4b20-4e63-b79c-127d046aaaed', '8fe5cdb2-64a5-4d93-9ee5-a1ba8d836fac', 'privateKey', 'MIIEpQIBAAKCAQEAu1e8s+ghaTmwmTnAp6Hmi60vXra11Etmh+hSCPNpJUkfUZhJoTvolxAskk+xB2Std2CPs3uymaoXdugq9PdM9X4jfhy0vn7tHr7qQDRa6VotfACdZQOPo/PJzg2E9PJkp0uFM+I7gD3xGDpqKUoFkLwHCiaTevux/YtT5lph3PqZdUxWMmoO4Swo7qMu3MGpEEetSpdr40AfukeaB73sUsCjIXW0L+5oMdzjdEKH8VgMoNgCf+hDmBtqNryT4icjDtCg3trbU0xKdvFX6neHshJXw0KrJq56WuX2i1FEikpB5KPE0xtwLJ+SpnQo/XJZKGcaV9DmzoE7xtt6hHMTYQIDAQABAoIBAQChYktkj6t4ggHnfSDBR27bFC2iYbLxVqLUoQVKQKVrQTqBh7al9n2+5GgBAjV2MPxdwgkIjJ6mUSg1fnrC2+an9CmPEhuBnsWVntEczf0i2FQmZkEwK4kpq3FE19CZUdXzZ9MvhsvLBZETVf7t4p44uEE4NVMGtpv11nhID8QOHzmG0PQg60O8XSGz4Um0tBnysKFwMEeRQZ6wbJq4duZ914paxMfMHxKSzbMd+rGUTjvkRnjb4BZunvad99ONIouyrjzEMeQtAHATlzTK0BuW4p8QWBOxTXC5XNLEUaRzcH3QZoHqFOQVO/UMLsfMGYyPXakpUQHCAPiFcZAEqaIhAoGBAN6Z/uhHOYhIAU/3MQfBVMCF6qLHODbfvjvnlMN/K6CtGMQr7Xe+CLXOst5R14Zp83EGJ+9p565VX+BmNJEQnAfo5DQ3is1glMqFG9ylSd4QRCHH9QQcdlYGGhGhX9aMmWaqE+lxr9EAmKj6mcTK1yC2K6dbfybBnlldevN3PYknAoGBANdzeBzn5CTDdhfBfWjGnzq2EHrbOYRzhbxF3C2ui42KBbdV0A0QdwZJC02+DVfe0bBhCNGY2HzRBN1fSNj4Qi/7sH+5RoMf7p3IFVyk43xBWwsy4dJiLv29LHqC05t1RUGF7Igf1reKMwzlCwT/DU4+dMyXkimZlrF7gXEA+gQ3AoGAQPrdMXsRLVovn+M92dCy59xvyQK0wzf/NUd94q+t0aKV9zYHhQvhSQlEp6dmbeNh4B127OmSaw6bBUtwjuQ1WA3BCAkqqJdH9/JxVrCdZoiDCwVu3btdQ/FWDM15x4yVfyWo2F2KgE1XQwScfJjlwbPL/He2H18n1Vh3erjVKsMCgYEAidjUMdJgUvFIPnzKy13BhOP1+VUIIOl02HfuHsA9g4qai6l42tL9BGV5uPzvNphWmz4KUWg0ou9s6GJNjpyQZHjpfV7CcaTdm8/ncwYAkoCSSsD8YQn2vNvreFr6Hs3SSNDx/Eo6q+XdMdPd0A2LqtMlEb2sg7dEBjxaHj4cuNMCgYEA1cl92Er00dD1gFcPXIJory6f3dzO0npfQKrj+R5iBIArPEXQz5+XgwzU7WF/pQOdGZFJljSdIj/W/QEqrJWtf8Ovp7rig7ue/qJIOedGdM5mGVZfAkmv1VREkupHsog9l4fNnRz2YSJD3H1XxBj3s9Q5y6eFbEBcpT5bJrYOBME=');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('d90c9455-a785-4d7a-828a-c6340c0996a4', 'a79eed74-5288-4359-8334-aa667179ab38', 'kid', 'c64bcc34-8f98-4eea-ad0b-65e919b3bbd6');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('735299d5-f5f8-4ae2-9c91-5283d42b7b84', 'a79eed74-5288-4359-8334-aa667179ab38', 'priority', '100');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('64a7d1e9-5a92-4c67-8398-af9795573f0a', 'a79eed74-5288-4359-8334-aa667179ab38', 'secret', '5wo-hF9JY-TSjC94IGCgj-aoVu8psqMhcLtfmaNAdTuPu-e9BLJIQallmlttDOw2OiaJPJOzJj765spUZu0JXg');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('d10f5dea-3072-412b-8ee8-2c23bf2a47a7', 'a79eed74-5288-4359-8334-aa667179ab38', 'algorithm', 'HS256');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('23315b85-04b3-4930-aece-6fb54275cac5', '2ed81802-0174-42ad-8514-8ff262668f0b', 'allowed-protocol-mapper-types', 'saml-user-attribute-mapper');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('4ec1f30e-0b3f-423a-97c6-54613ca656e4', '2ed81802-0174-42ad-8514-8ff262668f0b', 'allowed-protocol-mapper-types', 'saml-user-property-mapper');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('d64f8b7b-dab3-4382-bcee-a0ed43719a6b', '2ed81802-0174-42ad-8514-8ff262668f0b', 'allowed-protocol-mapper-types', 'oidc-usermodel-attribute-mapper');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('beb1c20a-11e8-45a1-a13e-4b0565a67659', '2ed81802-0174-42ad-8514-8ff262668f0b', 'allowed-protocol-mapper-types', 'oidc-usermodel-property-mapper');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('98ad90c6-9410-474e-9bb0-aa79d8767675', '2ed81802-0174-42ad-8514-8ff262668f0b', 'allowed-protocol-mapper-types', 'oidc-address-mapper');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('e031c119-3442-453b-b973-c93e0e18cf5f', '2ed81802-0174-42ad-8514-8ff262668f0b', 'allowed-protocol-mapper-types', 'saml-role-list-mapper');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('6faf7b43-5c35-490c-872a-6f04b62b1d78', '2ed81802-0174-42ad-8514-8ff262668f0b', 'allowed-protocol-mapper-types', 'oidc-full-name-mapper');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('d7216e23-2308-4759-8b2f-7b63eee262b4', '2ed81802-0174-42ad-8514-8ff262668f0b', 'allowed-protocol-mapper-types', 'oidc-sha256-pairwise-sub-mapper');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('ca8edded-cf74-4246-b1f6-542612673a56', '5240db50-3d56-45ad-8332-060fc958db13', 'allowed-protocol-mapper-types', 'saml-user-attribute-mapper');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('9c9ab15e-172a-43de-8366-cb4da867c2b6', '5240db50-3d56-45ad-8332-060fc958db13', 'allowed-protocol-mapper-types', 'oidc-usermodel-attribute-mapper');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('f1d00bc3-b17e-4ca5-b024-8bb4df704173', '5240db50-3d56-45ad-8332-060fc958db13', 'allowed-protocol-mapper-types', 'oidc-usermodel-property-mapper');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('bd54f4c7-3128-4c7d-9a24-cd369aaccfdf', '5240db50-3d56-45ad-8332-060fc958db13', 'allowed-protocol-mapper-types', 'oidc-sha256-pairwise-sub-mapper');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('1d9b0b33-1401-4333-9881-73b25f12dc38', '5240db50-3d56-45ad-8332-060fc958db13', 'allowed-protocol-mapper-types', 'oidc-full-name-mapper');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('652eb4da-9bb0-40ee-82f4-757f5cc9e43f', '5240db50-3d56-45ad-8332-060fc958db13', 'allowed-protocol-mapper-types', 'saml-user-property-mapper');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('29a2146b-a29b-49c7-a3ac-824cbbcc82f1', '5240db50-3d56-45ad-8332-060fc958db13', 'allowed-protocol-mapper-types', 'oidc-address-mapper');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('74aabce1-695b-4401-811a-fb1400148143', '5240db50-3d56-45ad-8332-060fc958db13', 'allowed-protocol-mapper-types', 'saml-role-list-mapper');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('64692b04-799a-47f1-ada2-9f7ad0a4fc55', '5f69207e-ea03-40af-83e6-d0b7f041959b', 'allow-default-scopes', 'true');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('88c1b4c4-ac8d-41af-8ba9-0271d0d77da0', '0f448590-e8e5-4015-8176-4f502b4bc7ba', 'client-uris-must-match', 'true');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('93b89e73-1e4a-4605-8a6b-86e43201278c', '0f448590-e8e5-4015-8176-4f502b4bc7ba', 'host-sending-registration-request-must-match', 'true');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('194204fc-fd5e-4286-a738-a19897175747', '2519348d-fed1-4d7f-b29a-6ee3bd9a26cf', 'allow-default-scopes', 'true');
+INSERT INTO public.component_config (id, component_id, name, value) VALUES ('a5510149-6729-4dc5-a175-d5d166ead95c', 'f3efe3ea-1190-4780-bd09-e3e6cf0b526a', 'max-clients', '200');
 
 
 --
--- TOC entry 3809 (class 0 OID 16429)
--- Dependencies: 201
+-- TOC entry 3827 (class 0 OID 16517)
+-- Dependencies: 220
 -- Data for Name: composite_role; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2002,20 +2245,70 @@ INSERT INTO public.composite_role (composite, child_role) VALUES ('0ae32fa4-8991
 INSERT INTO public.composite_role (composite, child_role) VALUES ('74c2b1c5-fea4-4191-82f0-83552f718734', 'afd8874f-a142-4027-9ab8-06b9aa9b2d58');
 INSERT INTO public.composite_role (composite, child_role) VALUES ('8f5e4cf5-67e9-425a-81f2-94f848a56b19', '1e2b7fbc-37a2-4ab2-b0a5-aa70dbde6a75');
 INSERT INTO public.composite_role (composite, child_role) VALUES ('8f5e4cf5-67e9-425a-81f2-94f848a56b19', '73a4b3b5-859b-4c0c-b731-9f5f0edf313e');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('74c2b1c5-fea4-4191-82f0-83552f718734', 'c48df4a0-ae36-4a93-9a3f-2ed6094f2b5b');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('74c2b1c5-fea4-4191-82f0-83552f718734', 'd6aa6cd7-33e9-4c30-af3a-dd24795a7269');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('74c2b1c5-fea4-4191-82f0-83552f718734', 'fe944dfd-b6ac-4e34-8140-66136ae7abf1');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('74c2b1c5-fea4-4191-82f0-83552f718734', 'cb2ed9e3-731d-4c34-9ff8-1710e284fd30');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('74c2b1c5-fea4-4191-82f0-83552f718734', '76c534e6-2676-4bd9-8330-d7518bea12f3');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('74c2b1c5-fea4-4191-82f0-83552f718734', 'fd987e7e-923b-4e89-b142-8a2f8754e206');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('74c2b1c5-fea4-4191-82f0-83552f718734', 'a30c0bb4-6fab-4ce0-9401-af18c6c6737f');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('74c2b1c5-fea4-4191-82f0-83552f718734', 'b3d8ef32-0dea-4768-a17a-6ab98a427335');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('74c2b1c5-fea4-4191-82f0-83552f718734', '9d45c19e-8972-4876-9ce8-f9cb5dee4a3d');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('74c2b1c5-fea4-4191-82f0-83552f718734', '0273b4a9-ab4b-44f1-9767-736ce5b2189d');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('74c2b1c5-fea4-4191-82f0-83552f718734', '4d8ea773-34b3-4870-8290-e53b767b8897');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('74c2b1c5-fea4-4191-82f0-83552f718734', '5117ea07-695c-48bd-a8ba-bf8af42ef814');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('74c2b1c5-fea4-4191-82f0-83552f718734', '48d256a2-5a3c-4289-a200-ecc41092920a');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('74c2b1c5-fea4-4191-82f0-83552f718734', 'dd69ea87-1502-4fbb-a6d7-075b7f41df11');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('74c2b1c5-fea4-4191-82f0-83552f718734', '9c51296a-bd3e-4b55-83e4-4d82758d801b');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('74c2b1c5-fea4-4191-82f0-83552f718734', 'e4a5be7b-214c-4c29-87fb-a061cb068be1');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('74c2b1c5-fea4-4191-82f0-83552f718734', '9bf618ce-e060-40d7-abd8-7dd6407a1e28');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('cb2ed9e3-731d-4c34-9ff8-1710e284fd30', '9c51296a-bd3e-4b55-83e4-4d82758d801b');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('fe944dfd-b6ac-4e34-8140-66136ae7abf1', 'dd69ea87-1502-4fbb-a6d7-075b7f41df11');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('fe944dfd-b6ac-4e34-8140-66136ae7abf1', '9bf618ce-e060-40d7-abd8-7dd6407a1e28');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('0e4bdb96-a0d9-496c-a725-14f03ef730b9', '25aff87c-fa6f-411d-9a05-6584a8c12656');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('0e4bdb96-a0d9-496c-a725-14f03ef730b9', '1905f91c-f426-46ca-ba80-8e5d2d33790f');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('0e4bdb96-a0d9-496c-a725-14f03ef730b9', '7de77c1d-6c2d-4c69-9bfc-2ab1f0d9da05');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('0e4bdb96-a0d9-496c-a725-14f03ef730b9', '2812bfdc-e7f4-43f4-b181-f87e58ed366f');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('0e4bdb96-a0d9-496c-a725-14f03ef730b9', '0064cc3a-bf73-42b0-b60e-16e16bc2dd72');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('0e4bdb96-a0d9-496c-a725-14f03ef730b9', '24264fa6-c177-414b-a7c8-758dedf1826f');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('0e4bdb96-a0d9-496c-a725-14f03ef730b9', '4387cac5-2eb3-4bef-a084-d823db9f0256');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('0e4bdb96-a0d9-496c-a725-14f03ef730b9', '9dcbc208-8189-440a-9e59-70502602e600');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('0e4bdb96-a0d9-496c-a725-14f03ef730b9', '2ac3adc9-9d31-45cf-b30a-7b8c9adce32e');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('0e4bdb96-a0d9-496c-a725-14f03ef730b9', '27f196c5-4b16-457d-bd36-27f64c57be7d');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('0e4bdb96-a0d9-496c-a725-14f03ef730b9', '35a0a801-fe4d-4bfd-8479-24f88b60474a');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('0e4bdb96-a0d9-496c-a725-14f03ef730b9', '74b6e62e-d8c3-4325-8a91-a0195c227155');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('0e4bdb96-a0d9-496c-a725-14f03ef730b9', 'ee7fdcef-8980-44c0-ac47-e0cf0bf175dc');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('0e4bdb96-a0d9-496c-a725-14f03ef730b9', 'fe08e3b7-c3c0-4306-97b2-3b470c7afbaa');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('0e4bdb96-a0d9-496c-a725-14f03ef730b9', '4e8b5514-b8da-4739-9816-5113a2968004');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('0e4bdb96-a0d9-496c-a725-14f03ef730b9', '3a834293-9a93-4e05-92d9-d9e80d0b7a7f');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('0e4bdb96-a0d9-496c-a725-14f03ef730b9', 'e8619a55-badc-4b41-911c-3e03396c0394');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('2812bfdc-e7f4-43f4-b181-f87e58ed366f', '4e8b5514-b8da-4739-9816-5113a2968004');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('7de77c1d-6c2d-4c69-9bfc-2ab1f0d9da05', 'fe08e3b7-c3c0-4306-97b2-3b470c7afbaa');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('7de77c1d-6c2d-4c69-9bfc-2ab1f0d9da05', 'e8619a55-badc-4b41-911c-3e03396c0394');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('3d493227-1aa1-481d-8f5c-d5ccc788460a', 'e5ba4966-e73e-4dd5-b51a-7c443b3a8a54');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('3d493227-1aa1-481d-8f5c-d5ccc788460a', '81fd0b8a-d6d1-422f-affe-59da332a56af');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('81fd0b8a-d6d1-422f-affe-59da332a56af', '45b294b9-6637-447e-99c2-22a5fd2b8586');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('96e86293-4802-4a12-b693-127bbda25279', '4a035e29-c0aa-4c90-acbe-de0705d20a8b');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('74c2b1c5-fea4-4191-82f0-83552f718734', '30057f1d-4196-4594-aec0-1ef86985f003');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('0e4bdb96-a0d9-496c-a725-14f03ef730b9', '15de1118-7e55-4d2b-968a-22349e1b5b72');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('3d493227-1aa1-481d-8f5c-d5ccc788460a', '361683dc-46bb-4cd0-8f1d-f0b6f0ba4bb7');
+INSERT INTO public.composite_role (composite, child_role) VALUES ('3d493227-1aa1-481d-8f5c-d5ccc788460a', '327112d1-da27-46a7-9f4b-cbbbb50be59b');
 
 
 --
--- TOC entry 3810 (class 0 OID 16432)
--- Dependencies: 202
+-- TOC entry 3828 (class 0 OID 16520)
+-- Dependencies: 221
 -- Data for Name: credential; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 INSERT INTO public.credential (id, salt, type, user_id, created_date, user_label, secret_data, credential_data, priority) VALUES ('8a729c25-dc00-46a2-8625-0c2b9cea1947', NULL, 'password', 'b3e2d387-81e8-4fb9-a74e-a941a8c4804f', 1644333809510, NULL, '{"value":"XvE1QUrcBDa0uo5ZayBP77LaG1MVs0ntvo4d1X0bsk0szuVtS5eEYZbN7IBfH9h5MjOEcXa2mXZxdNT4u9Em2A==","salt":"w0Oywgnll9Z/KXnV3ag3fw==","additionalParameters":{}}', '{"hashIterations":27500,"algorithm":"pbkdf2-sha256","additionalParameters":{}}', 10);
+INSERT INTO public.credential (id, salt, type, user_id, created_date, user_label, secret_data, credential_data, priority) VALUES ('5e04ede4-9b89-4d3d-848d-69eacc6ba40b', NULL, 'password', '474a96af-2dea-4fb0-9ba9-c183b7776c13', 1645738735990, NULL, '{"value":"c7bDYdWJb+jCjNt9xLzePUIEzSDY8512SZXQRtFGIDara3Lrc3g1aFuA9JQLu0/oc/0Ws6B46ZuYbBpu5xcYXQ==","salt":"0tcjq9RliYvKovoinODb8w==","additionalParameters":{}}', '{"hashIterations":27500,"algorithm":"pbkdf2-sha256","additionalParameters":{}}', 10);
+INSERT INTO public.credential (id, salt, type, user_id, created_date, user_label, secret_data, credential_data, priority) VALUES ('ed5808f3-4949-4761-9fc4-270d369a383f', NULL, 'password', 'fa9667dd-2549-4464-8bef-8cb57adc8796', 1645738878449, NULL, '{"value":"3OWpqhZb+HklhN8UPmyqzhGpFu0AkZzJYYHndIzB0J2UbKuVPtLa6bxjHI2i/ZG9M9LxVyGE6drd4+m58qgiuA==","salt":"GydK3NHhY0tUU2KvjcHWGA==","additionalParameters":{}}', '{"hashIterations":27500,"algorithm":"pbkdf2-sha256","additionalParameters":{}}', 10);
 
 
 --
--- TOC entry 3805 (class 0 OID 16399)
--- Dependencies: 197
+-- TOC entry 3829 (class 0 OID 16526)
+-- Dependencies: 222
 -- Data for Name: databasechangelog; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2126,8 +2419,8 @@ INSERT INTO public.databasechangelog (id, author, filename, dateexecuted, ordere
 
 
 --
--- TOC entry 3804 (class 0 OID 16394)
--- Dependencies: 196
+-- TOC entry 3830 (class 0 OID 16532)
+-- Dependencies: 223
 -- Data for Name: databasechangeloglock; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2137,8 +2430,8 @@ INSERT INTO public.databasechangeloglock (id, locked, lockgranted, lockedby) VAL
 
 
 --
--- TOC entry 3888 (class 0 OID 17848)
--- Dependencies: 280
+-- TOC entry 3831 (class 0 OID 16535)
+-- Dependencies: 224
 -- Data for Name: default_client_scope; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2151,147 +2444,156 @@ INSERT INTO public.default_client_scope (realm_id, scope_id, default_scope) VALU
 INSERT INTO public.default_client_scope (realm_id, scope_id, default_scope) VALUES ('master', '757461f9-f109-4c05-8e35-1ae23fac8747', true);
 INSERT INTO public.default_client_scope (realm_id, scope_id, default_scope) VALUES ('master', 'daaa93f1-aec3-40c1-afb2-bdf43da63495', true);
 INSERT INTO public.default_client_scope (realm_id, scope_id, default_scope) VALUES ('master', '543866b8-2b13-43d0-b6d8-b47b158e4a52', false);
+INSERT INTO public.default_client_scope (realm_id, scope_id, default_scope) VALUES ('CAP', '273ed0d5-4061-4888-af9f-d403d4ad8c8a', false);
+INSERT INTO public.default_client_scope (realm_id, scope_id, default_scope) VALUES ('CAP', '63e8230f-3ec1-4d2c-b0c1-e3bd2c1db62f', true);
+INSERT INTO public.default_client_scope (realm_id, scope_id, default_scope) VALUES ('CAP', 'a5cc25a0-1691-486a-a7e5-916199045ee3', true);
+INSERT INTO public.default_client_scope (realm_id, scope_id, default_scope) VALUES ('CAP', 'd6d9a2af-c2b6-4d85-a5fe-3498717917f6', true);
+INSERT INTO public.default_client_scope (realm_id, scope_id, default_scope) VALUES ('CAP', 'fe0f51af-b5c6-45f0-acc8-df3c16af808b', false);
+INSERT INTO public.default_client_scope (realm_id, scope_id, default_scope) VALUES ('CAP', 'b88e08dc-64fc-4c6c-9fd5-77708c103588', false);
+INSERT INTO public.default_client_scope (realm_id, scope_id, default_scope) VALUES ('CAP', 'e64621b4-cd4c-4fa6-b24c-46092795e57c', true);
+INSERT INTO public.default_client_scope (realm_id, scope_id, default_scope) VALUES ('CAP', 'f12a3cce-609a-496b-ae0d-aee5645b1417', true);
+INSERT INTO public.default_client_scope (realm_id, scope_id, default_scope) VALUES ('CAP', '3229350b-9873-4c73-9027-3ef99f12b58a', false);
 
 
 --
--- TOC entry 3811 (class 0 OID 16438)
--- Dependencies: 203
+-- TOC entry 3832 (class 0 OID 16539)
+-- Dependencies: 225
 -- Data for Name: event_entity; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3876 (class 0 OID 17537)
--- Dependencies: 268
+-- TOC entry 3833 (class 0 OID 16545)
+-- Dependencies: 226
 -- Data for Name: fed_user_attribute; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3877 (class 0 OID 17543)
--- Dependencies: 269
+-- TOC entry 3834 (class 0 OID 16551)
+-- Dependencies: 227
 -- Data for Name: fed_user_consent; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3890 (class 0 OID 17874)
--- Dependencies: 282
+-- TOC entry 3835 (class 0 OID 16557)
+-- Dependencies: 228
 -- Data for Name: fed_user_consent_cl_scope; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3878 (class 0 OID 17552)
--- Dependencies: 270
+-- TOC entry 3836 (class 0 OID 16560)
+-- Dependencies: 229
 -- Data for Name: fed_user_credential; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3879 (class 0 OID 17562)
--- Dependencies: 271
+-- TOC entry 3837 (class 0 OID 16566)
+-- Dependencies: 230
 -- Data for Name: fed_user_group_membership; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3880 (class 0 OID 17565)
--- Dependencies: 272
+-- TOC entry 3838 (class 0 OID 16569)
+-- Dependencies: 231
 -- Data for Name: fed_user_required_action; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3881 (class 0 OID 17572)
--- Dependencies: 273
+-- TOC entry 3839 (class 0 OID 16576)
+-- Dependencies: 232
 -- Data for Name: fed_user_role_mapping; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3834 (class 0 OID 16832)
--- Dependencies: 226
+-- TOC entry 3840 (class 0 OID 16579)
+-- Dependencies: 233
 -- Data for Name: federated_identity; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3884 (class 0 OID 17641)
--- Dependencies: 276
+-- TOC entry 3841 (class 0 OID 16585)
+-- Dependencies: 234
 -- Data for Name: federated_user; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3860 (class 0 OID 17251)
--- Dependencies: 252
+-- TOC entry 3842 (class 0 OID 16591)
+-- Dependencies: 235
 -- Data for Name: group_attribute; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3859 (class 0 OID 17248)
--- Dependencies: 251
+-- TOC entry 3843 (class 0 OID 16598)
+-- Dependencies: 236
 -- Data for Name: group_role_mapping; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3835 (class 0 OID 16838)
--- Dependencies: 227
+-- TOC entry 3844 (class 0 OID 16601)
+-- Dependencies: 237
 -- Data for Name: identity_provider; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3836 (class 0 OID 16848)
--- Dependencies: 228
+-- TOC entry 3845 (class 0 OID 16613)
+-- Dependencies: 238
 -- Data for Name: identity_provider_config; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3841 (class 0 OID 16954)
--- Dependencies: 233
+-- TOC entry 3846 (class 0 OID 16619)
+-- Dependencies: 239
 -- Data for Name: identity_provider_mapper; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3842 (class 0 OID 16960)
--- Dependencies: 234
+-- TOC entry 3847 (class 0 OID 16625)
+-- Dependencies: 240
 -- Data for Name: idp_mapper_config; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3858 (class 0 OID 17245)
--- Dependencies: 250
+-- TOC entry 3848 (class 0 OID 16631)
+-- Dependencies: 241
 -- Data for Name: keycloak_group; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3812 (class 0 OID 16447)
--- Dependencies: 204
+-- TOC entry 3849 (class 0 OID 16634)
+-- Dependencies: 242
 -- Data for Name: keycloak_role; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2326,11 +2628,61 @@ INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, desc
 INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('afd8874f-a142-4027-9ab8-06b9aa9b2d58', 'c5ffd670-9084-42e0-99ec-b5fc6130c0e7', true, '${role_impersonation}', 'impersonation', 'master', 'c5ffd670-9084-42e0-99ec-b5fc6130c0e7', NULL);
 INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('1e2b7fbc-37a2-4ab2-b0a5-aa70dbde6a75', 'master', false, '${role_offline-access}', 'offline_access', 'master', NULL, NULL);
 INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('73a4b3b5-859b-4c0c-b731-9f5f0edf313e', 'master', false, '${role_uma_authorization}', 'uma_authorization', 'master', NULL, NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('3d493227-1aa1-481d-8f5c-d5ccc788460a', 'CAP', false, '${role_default-roles}', 'default-roles-cap', 'CAP', NULL, NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('c48df4a0-ae36-4a93-9a3f-2ed6094f2b5b', '255350d7-f727-49d7-a63d-e207e35e270c', true, '${role_create-client}', 'create-client', 'master', '255350d7-f727-49d7-a63d-e207e35e270c', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('d6aa6cd7-33e9-4c30-af3a-dd24795a7269', '255350d7-f727-49d7-a63d-e207e35e270c', true, '${role_view-realm}', 'view-realm', 'master', '255350d7-f727-49d7-a63d-e207e35e270c', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('fe944dfd-b6ac-4e34-8140-66136ae7abf1', '255350d7-f727-49d7-a63d-e207e35e270c', true, '${role_view-users}', 'view-users', 'master', '255350d7-f727-49d7-a63d-e207e35e270c', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('cb2ed9e3-731d-4c34-9ff8-1710e284fd30', '255350d7-f727-49d7-a63d-e207e35e270c', true, '${role_view-clients}', 'view-clients', 'master', '255350d7-f727-49d7-a63d-e207e35e270c', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('76c534e6-2676-4bd9-8330-d7518bea12f3', '255350d7-f727-49d7-a63d-e207e35e270c', true, '${role_view-events}', 'view-events', 'master', '255350d7-f727-49d7-a63d-e207e35e270c', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('fd987e7e-923b-4e89-b142-8a2f8754e206', '255350d7-f727-49d7-a63d-e207e35e270c', true, '${role_view-identity-providers}', 'view-identity-providers', 'master', '255350d7-f727-49d7-a63d-e207e35e270c', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('a30c0bb4-6fab-4ce0-9401-af18c6c6737f', '255350d7-f727-49d7-a63d-e207e35e270c', true, '${role_view-authorization}', 'view-authorization', 'master', '255350d7-f727-49d7-a63d-e207e35e270c', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('b3d8ef32-0dea-4768-a17a-6ab98a427335', '255350d7-f727-49d7-a63d-e207e35e270c', true, '${role_manage-realm}', 'manage-realm', 'master', '255350d7-f727-49d7-a63d-e207e35e270c', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('9d45c19e-8972-4876-9ce8-f9cb5dee4a3d', '255350d7-f727-49d7-a63d-e207e35e270c', true, '${role_manage-users}', 'manage-users', 'master', '255350d7-f727-49d7-a63d-e207e35e270c', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('0273b4a9-ab4b-44f1-9767-736ce5b2189d', '255350d7-f727-49d7-a63d-e207e35e270c', true, '${role_manage-clients}', 'manage-clients', 'master', '255350d7-f727-49d7-a63d-e207e35e270c', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('4d8ea773-34b3-4870-8290-e53b767b8897', '255350d7-f727-49d7-a63d-e207e35e270c', true, '${role_manage-events}', 'manage-events', 'master', '255350d7-f727-49d7-a63d-e207e35e270c', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('5117ea07-695c-48bd-a8ba-bf8af42ef814', '255350d7-f727-49d7-a63d-e207e35e270c', true, '${role_manage-identity-providers}', 'manage-identity-providers', 'master', '255350d7-f727-49d7-a63d-e207e35e270c', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('48d256a2-5a3c-4289-a200-ecc41092920a', '255350d7-f727-49d7-a63d-e207e35e270c', true, '${role_manage-authorization}', 'manage-authorization', 'master', '255350d7-f727-49d7-a63d-e207e35e270c', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('dd69ea87-1502-4fbb-a6d7-075b7f41df11', '255350d7-f727-49d7-a63d-e207e35e270c', true, '${role_query-users}', 'query-users', 'master', '255350d7-f727-49d7-a63d-e207e35e270c', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('9c51296a-bd3e-4b55-83e4-4d82758d801b', '255350d7-f727-49d7-a63d-e207e35e270c', true, '${role_query-clients}', 'query-clients', 'master', '255350d7-f727-49d7-a63d-e207e35e270c', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('e4a5be7b-214c-4c29-87fb-a061cb068be1', '255350d7-f727-49d7-a63d-e207e35e270c', true, '${role_query-realms}', 'query-realms', 'master', '255350d7-f727-49d7-a63d-e207e35e270c', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('9bf618ce-e060-40d7-abd8-7dd6407a1e28', '255350d7-f727-49d7-a63d-e207e35e270c', true, '${role_query-groups}', 'query-groups', 'master', '255350d7-f727-49d7-a63d-e207e35e270c', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('0e4bdb96-a0d9-496c-a725-14f03ef730b9', 'b1529da2-2468-41f0-95d3-992490e45258', true, '${role_realm-admin}', 'realm-admin', 'CAP', 'b1529da2-2468-41f0-95d3-992490e45258', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('25aff87c-fa6f-411d-9a05-6584a8c12656', 'b1529da2-2468-41f0-95d3-992490e45258', true, '${role_create-client}', 'create-client', 'CAP', 'b1529da2-2468-41f0-95d3-992490e45258', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('1905f91c-f426-46ca-ba80-8e5d2d33790f', 'b1529da2-2468-41f0-95d3-992490e45258', true, '${role_view-realm}', 'view-realm', 'CAP', 'b1529da2-2468-41f0-95d3-992490e45258', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('7de77c1d-6c2d-4c69-9bfc-2ab1f0d9da05', 'b1529da2-2468-41f0-95d3-992490e45258', true, '${role_view-users}', 'view-users', 'CAP', 'b1529da2-2468-41f0-95d3-992490e45258', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('2812bfdc-e7f4-43f4-b181-f87e58ed366f', 'b1529da2-2468-41f0-95d3-992490e45258', true, '${role_view-clients}', 'view-clients', 'CAP', 'b1529da2-2468-41f0-95d3-992490e45258', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('0064cc3a-bf73-42b0-b60e-16e16bc2dd72', 'b1529da2-2468-41f0-95d3-992490e45258', true, '${role_view-events}', 'view-events', 'CAP', 'b1529da2-2468-41f0-95d3-992490e45258', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('24264fa6-c177-414b-a7c8-758dedf1826f', 'b1529da2-2468-41f0-95d3-992490e45258', true, '${role_view-identity-providers}', 'view-identity-providers', 'CAP', 'b1529da2-2468-41f0-95d3-992490e45258', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('4387cac5-2eb3-4bef-a084-d823db9f0256', 'b1529da2-2468-41f0-95d3-992490e45258', true, '${role_view-authorization}', 'view-authorization', 'CAP', 'b1529da2-2468-41f0-95d3-992490e45258', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('9dcbc208-8189-440a-9e59-70502602e600', 'b1529da2-2468-41f0-95d3-992490e45258', true, '${role_manage-realm}', 'manage-realm', 'CAP', 'b1529da2-2468-41f0-95d3-992490e45258', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('2ac3adc9-9d31-45cf-b30a-7b8c9adce32e', 'b1529da2-2468-41f0-95d3-992490e45258', true, '${role_manage-users}', 'manage-users', 'CAP', 'b1529da2-2468-41f0-95d3-992490e45258', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('27f196c5-4b16-457d-bd36-27f64c57be7d', 'b1529da2-2468-41f0-95d3-992490e45258', true, '${role_manage-clients}', 'manage-clients', 'CAP', 'b1529da2-2468-41f0-95d3-992490e45258', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('35a0a801-fe4d-4bfd-8479-24f88b60474a', 'b1529da2-2468-41f0-95d3-992490e45258', true, '${role_manage-events}', 'manage-events', 'CAP', 'b1529da2-2468-41f0-95d3-992490e45258', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('74b6e62e-d8c3-4325-8a91-a0195c227155', 'b1529da2-2468-41f0-95d3-992490e45258', true, '${role_manage-identity-providers}', 'manage-identity-providers', 'CAP', 'b1529da2-2468-41f0-95d3-992490e45258', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('ee7fdcef-8980-44c0-ac47-e0cf0bf175dc', 'b1529da2-2468-41f0-95d3-992490e45258', true, '${role_manage-authorization}', 'manage-authorization', 'CAP', 'b1529da2-2468-41f0-95d3-992490e45258', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('fe08e3b7-c3c0-4306-97b2-3b470c7afbaa', 'b1529da2-2468-41f0-95d3-992490e45258', true, '${role_query-users}', 'query-users', 'CAP', 'b1529da2-2468-41f0-95d3-992490e45258', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('4e8b5514-b8da-4739-9816-5113a2968004', 'b1529da2-2468-41f0-95d3-992490e45258', true, '${role_query-clients}', 'query-clients', 'CAP', 'b1529da2-2468-41f0-95d3-992490e45258', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('3a834293-9a93-4e05-92d9-d9e80d0b7a7f', 'b1529da2-2468-41f0-95d3-992490e45258', true, '${role_query-realms}', 'query-realms', 'CAP', 'b1529da2-2468-41f0-95d3-992490e45258', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('e8619a55-badc-4b41-911c-3e03396c0394', 'b1529da2-2468-41f0-95d3-992490e45258', true, '${role_query-groups}', 'query-groups', 'CAP', 'b1529da2-2468-41f0-95d3-992490e45258', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('e5ba4966-e73e-4dd5-b51a-7c443b3a8a54', '273cd6ca-70d7-4000-8a51-a421ccd86682', true, '${role_view-profile}', 'view-profile', 'CAP', '273cd6ca-70d7-4000-8a51-a421ccd86682', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('81fd0b8a-d6d1-422f-affe-59da332a56af', '273cd6ca-70d7-4000-8a51-a421ccd86682', true, '${role_manage-account}', 'manage-account', 'CAP', '273cd6ca-70d7-4000-8a51-a421ccd86682', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('45b294b9-6637-447e-99c2-22a5fd2b8586', '273cd6ca-70d7-4000-8a51-a421ccd86682', true, '${role_manage-account-links}', 'manage-account-links', 'CAP', '273cd6ca-70d7-4000-8a51-a421ccd86682', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('d42bec70-fd43-41d7-aae1-b53b50616399', '273cd6ca-70d7-4000-8a51-a421ccd86682', true, '${role_view-applications}', 'view-applications', 'CAP', '273cd6ca-70d7-4000-8a51-a421ccd86682', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('4a035e29-c0aa-4c90-acbe-de0705d20a8b', '273cd6ca-70d7-4000-8a51-a421ccd86682', true, '${role_view-consent}', 'view-consent', 'CAP', '273cd6ca-70d7-4000-8a51-a421ccd86682', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('96e86293-4802-4a12-b693-127bbda25279', '273cd6ca-70d7-4000-8a51-a421ccd86682', true, '${role_manage-consent}', 'manage-consent', 'CAP', '273cd6ca-70d7-4000-8a51-a421ccd86682', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('1df3bb3e-a7ca-4b5a-99fe-7663b1ba7640', '273cd6ca-70d7-4000-8a51-a421ccd86682', true, '${role_delete-account}', 'delete-account', 'CAP', '273cd6ca-70d7-4000-8a51-a421ccd86682', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('30057f1d-4196-4594-aec0-1ef86985f003', '255350d7-f727-49d7-a63d-e207e35e270c', true, '${role_impersonation}', 'impersonation', 'master', '255350d7-f727-49d7-a63d-e207e35e270c', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('15de1118-7e55-4d2b-968a-22349e1b5b72', 'b1529da2-2468-41f0-95d3-992490e45258', true, '${role_impersonation}', 'impersonation', 'CAP', 'b1529da2-2468-41f0-95d3-992490e45258', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('b2d80461-2d85-4666-83da-48863cd46c60', '041e527a-554d-46c7-ab67-a27cdcae0636', true, '${role_read-token}', 'read-token', 'CAP', '041e527a-554d-46c7-ab67-a27cdcae0636', NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('361683dc-46bb-4cd0-8f1d-f0b6f0ba4bb7', 'CAP', false, '${role_offline-access}', 'offline_access', 'CAP', NULL, NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('327112d1-da27-46a7-9f4b-cbbbb50be59b', 'CAP', false, '${role_uma_authorization}', 'uma_authorization', 'CAP', NULL, NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('4666aae2-4feb-4111-91ac-ff88bd5bb5d4', 'CAP', false, 'Users have this role will have access to some api endpoints that the student role can''t access.', 'demonstrator', 'CAP', NULL, NULL);
+INSERT INTO public.keycloak_role (id, client_realm_constraint, client_role, description, name, realm_id, client, realm) VALUES ('4ccc6c3e-0dcc-4a5b-8ae7-79619cf40b15', 'CAP', false, 'Users assigned to this role will have access to some endpoints that are only available for them.', 'student', 'CAP', NULL, NULL);
 
 
 --
--- TOC entry 3840 (class 0 OID 16951)
--- Dependencies: 232
+-- TOC entry 3850 (class 0 OID 16641)
+-- Dependencies: 243
 -- Data for Name: migration_model; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2338,32 +2690,32 @@ INSERT INTO public.migration_model (id, version, update_time) VALUES ('n2rqe', '
 
 
 --
--- TOC entry 3857 (class 0 OID 17235)
--- Dependencies: 249
+-- TOC entry 3851 (class 0 OID 16645)
+-- Dependencies: 244
 -- Data for Name: offline_client_session; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3856 (class 0 OID 17229)
--- Dependencies: 248
+-- TOC entry 3852 (class 0 OID 16653)
+-- Dependencies: 245
 -- Data for Name: offline_user_session; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3870 (class 0 OID 17458)
--- Dependencies: 262
+-- TOC entry 3853 (class 0 OID 16660)
+-- Dependencies: 246
 -- Data for Name: policy_config; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3832 (class 0 OID 16819)
--- Dependencies: 224
+-- TOC entry 3854 (class 0 OID 16666)
+-- Dependencies: 247
 -- Data for Name: protocol_mapper; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2395,11 +2747,42 @@ INSERT INTO public.protocol_mapper (id, name, protocol, protocol_mapper_name, cl
 INSERT INTO public.protocol_mapper (id, name, protocol, protocol_mapper_name, client_id, client_scope_id) VALUES ('7fe930bb-4781-459e-9dcf-2445991e4e55', 'allowed web origins', 'openid-connect', 'oidc-allowed-origins-mapper', NULL, 'daaa93f1-aec3-40c1-afb2-bdf43da63495');
 INSERT INTO public.protocol_mapper (id, name, protocol, protocol_mapper_name, client_id, client_scope_id) VALUES ('8e52660c-631c-472a-a169-39d29894cf53', 'upn', 'openid-connect', 'oidc-usermodel-property-mapper', NULL, '543866b8-2b13-43d0-b6d8-b47b158e4a52');
 INSERT INTO public.protocol_mapper (id, name, protocol, protocol_mapper_name, client_id, client_scope_id) VALUES ('02362dd8-8bf4-44a3-a796-d47ee483b4dc', 'groups', 'openid-connect', 'oidc-usermodel-realm-role-mapper', NULL, '543866b8-2b13-43d0-b6d8-b47b158e4a52');
+INSERT INTO public.protocol_mapper (id, name, protocol, protocol_mapper_name, client_id, client_scope_id) VALUES ('b47ca284-268f-4be2-a216-3cfad545b045', 'audience resolve', 'openid-connect', 'oidc-audience-resolve-mapper', 'b7ebb818-40f4-4272-ad17-85a3af269c14', NULL);
+INSERT INTO public.protocol_mapper (id, name, protocol, protocol_mapper_name, client_id, client_scope_id) VALUES ('653ee9fe-16f0-4e49-b8e1-30325b919bbe', 'role list', 'saml', 'saml-role-list-mapper', NULL, '63e8230f-3ec1-4d2c-b0c1-e3bd2c1db62f');
+INSERT INTO public.protocol_mapper (id, name, protocol, protocol_mapper_name, client_id, client_scope_id) VALUES ('3e6bdf96-24c8-4f90-a7fb-8b3db5ead718', 'full name', 'openid-connect', 'oidc-full-name-mapper', NULL, 'a5cc25a0-1691-486a-a7e5-916199045ee3');
+INSERT INTO public.protocol_mapper (id, name, protocol, protocol_mapper_name, client_id, client_scope_id) VALUES ('67c51e3b-6487-48cc-88b7-84dc030c5119', 'family name', 'openid-connect', 'oidc-usermodel-property-mapper', NULL, 'a5cc25a0-1691-486a-a7e5-916199045ee3');
+INSERT INTO public.protocol_mapper (id, name, protocol, protocol_mapper_name, client_id, client_scope_id) VALUES ('4b763f14-d570-45ec-9420-81e2dab08319', 'given name', 'openid-connect', 'oidc-usermodel-property-mapper', NULL, 'a5cc25a0-1691-486a-a7e5-916199045ee3');
+INSERT INTO public.protocol_mapper (id, name, protocol, protocol_mapper_name, client_id, client_scope_id) VALUES ('a296d2f7-ca15-481b-b806-e4e9b20d6a5b', 'middle name', 'openid-connect', 'oidc-usermodel-attribute-mapper', NULL, 'a5cc25a0-1691-486a-a7e5-916199045ee3');
+INSERT INTO public.protocol_mapper (id, name, protocol, protocol_mapper_name, client_id, client_scope_id) VALUES ('241aad6c-b5ee-44ec-ade1-9ddd466d844d', 'nickname', 'openid-connect', 'oidc-usermodel-attribute-mapper', NULL, 'a5cc25a0-1691-486a-a7e5-916199045ee3');
+INSERT INTO public.protocol_mapper (id, name, protocol, protocol_mapper_name, client_id, client_scope_id) VALUES ('cdf5890f-6acf-4168-a095-385366d943e3', 'username', 'openid-connect', 'oidc-usermodel-property-mapper', NULL, 'a5cc25a0-1691-486a-a7e5-916199045ee3');
+INSERT INTO public.protocol_mapper (id, name, protocol, protocol_mapper_name, client_id, client_scope_id) VALUES ('3a29b1bf-c500-4eb0-87a3-664e596f486f', 'profile', 'openid-connect', 'oidc-usermodel-attribute-mapper', NULL, 'a5cc25a0-1691-486a-a7e5-916199045ee3');
+INSERT INTO public.protocol_mapper (id, name, protocol, protocol_mapper_name, client_id, client_scope_id) VALUES ('aa740f8d-4d26-4696-bc71-99d9f690b562', 'picture', 'openid-connect', 'oidc-usermodel-attribute-mapper', NULL, 'a5cc25a0-1691-486a-a7e5-916199045ee3');
+INSERT INTO public.protocol_mapper (id, name, protocol, protocol_mapper_name, client_id, client_scope_id) VALUES ('a25eda95-6c72-4d40-9e42-082e16988d87', 'website', 'openid-connect', 'oidc-usermodel-attribute-mapper', NULL, 'a5cc25a0-1691-486a-a7e5-916199045ee3');
+INSERT INTO public.protocol_mapper (id, name, protocol, protocol_mapper_name, client_id, client_scope_id) VALUES ('576c61d9-f640-4c78-931c-b579ee23426f', 'gender', 'openid-connect', 'oidc-usermodel-attribute-mapper', NULL, 'a5cc25a0-1691-486a-a7e5-916199045ee3');
+INSERT INTO public.protocol_mapper (id, name, protocol, protocol_mapper_name, client_id, client_scope_id) VALUES ('45371408-14d2-411c-9317-589228e9c048', 'birthdate', 'openid-connect', 'oidc-usermodel-attribute-mapper', NULL, 'a5cc25a0-1691-486a-a7e5-916199045ee3');
+INSERT INTO public.protocol_mapper (id, name, protocol, protocol_mapper_name, client_id, client_scope_id) VALUES ('f67ef182-0cea-4b5d-b1f0-a740f98aa662', 'zoneinfo', 'openid-connect', 'oidc-usermodel-attribute-mapper', NULL, 'a5cc25a0-1691-486a-a7e5-916199045ee3');
+INSERT INTO public.protocol_mapper (id, name, protocol, protocol_mapper_name, client_id, client_scope_id) VALUES ('837e5b47-227b-42d6-a72e-c650ad9a8f39', 'locale', 'openid-connect', 'oidc-usermodel-attribute-mapper', NULL, 'a5cc25a0-1691-486a-a7e5-916199045ee3');
+INSERT INTO public.protocol_mapper (id, name, protocol, protocol_mapper_name, client_id, client_scope_id) VALUES ('035918f9-68b8-4291-81dd-655ec3bda146', 'updated at', 'openid-connect', 'oidc-usermodel-attribute-mapper', NULL, 'a5cc25a0-1691-486a-a7e5-916199045ee3');
+INSERT INTO public.protocol_mapper (id, name, protocol, protocol_mapper_name, client_id, client_scope_id) VALUES ('b028136d-6bde-4710-ba0d-6f892f5e9137', 'email', 'openid-connect', 'oidc-usermodel-property-mapper', NULL, 'd6d9a2af-c2b6-4d85-a5fe-3498717917f6');
+INSERT INTO public.protocol_mapper (id, name, protocol, protocol_mapper_name, client_id, client_scope_id) VALUES ('465125a5-4bcd-491c-867d-fc363ff34038', 'email verified', 'openid-connect', 'oidc-usermodel-property-mapper', NULL, 'd6d9a2af-c2b6-4d85-a5fe-3498717917f6');
+INSERT INTO public.protocol_mapper (id, name, protocol, protocol_mapper_name, client_id, client_scope_id) VALUES ('7c46f5be-995e-4b41-a396-7a3ff6dc4f55', 'address', 'openid-connect', 'oidc-address-mapper', NULL, 'fe0f51af-b5c6-45f0-acc8-df3c16af808b');
+INSERT INTO public.protocol_mapper (id, name, protocol, protocol_mapper_name, client_id, client_scope_id) VALUES ('2004b29e-770e-4801-9f83-a348bfc4e221', 'phone number', 'openid-connect', 'oidc-usermodel-attribute-mapper', NULL, 'b88e08dc-64fc-4c6c-9fd5-77708c103588');
+INSERT INTO public.protocol_mapper (id, name, protocol, protocol_mapper_name, client_id, client_scope_id) VALUES ('4f90a78e-4ab4-49f1-9195-0082f4f9fa53', 'phone number verified', 'openid-connect', 'oidc-usermodel-attribute-mapper', NULL, 'b88e08dc-64fc-4c6c-9fd5-77708c103588');
+INSERT INTO public.protocol_mapper (id, name, protocol, protocol_mapper_name, client_id, client_scope_id) VALUES ('872939ba-caaf-4ddb-99cd-0ae9604c39b2', 'realm roles', 'openid-connect', 'oidc-usermodel-realm-role-mapper', NULL, 'e64621b4-cd4c-4fa6-b24c-46092795e57c');
+INSERT INTO public.protocol_mapper (id, name, protocol, protocol_mapper_name, client_id, client_scope_id) VALUES ('c22075b4-d745-4c88-a814-633b24155ed2', 'client roles', 'openid-connect', 'oidc-usermodel-client-role-mapper', NULL, 'e64621b4-cd4c-4fa6-b24c-46092795e57c');
+INSERT INTO public.protocol_mapper (id, name, protocol, protocol_mapper_name, client_id, client_scope_id) VALUES ('9dbec5aa-79a0-4cac-b8b9-647a1e045476', 'audience resolve', 'openid-connect', 'oidc-audience-resolve-mapper', NULL, 'e64621b4-cd4c-4fa6-b24c-46092795e57c');
+INSERT INTO public.protocol_mapper (id, name, protocol, protocol_mapper_name, client_id, client_scope_id) VALUES ('516d0efd-a338-459a-9024-a8703c767ca4', 'allowed web origins', 'openid-connect', 'oidc-allowed-origins-mapper', NULL, 'f12a3cce-609a-496b-ae0d-aee5645b1417');
+INSERT INTO public.protocol_mapper (id, name, protocol, protocol_mapper_name, client_id, client_scope_id) VALUES ('b2649e87-358b-4656-ac3e-2914c0a8fb02', 'upn', 'openid-connect', 'oidc-usermodel-property-mapper', NULL, '3229350b-9873-4c73-9027-3ef99f12b58a');
+INSERT INTO public.protocol_mapper (id, name, protocol, protocol_mapper_name, client_id, client_scope_id) VALUES ('e39d08fd-a61a-4d7d-a368-bfc6195326a7', 'groups', 'openid-connect', 'oidc-usermodel-realm-role-mapper', NULL, '3229350b-9873-4c73-9027-3ef99f12b58a');
+INSERT INTO public.protocol_mapper (id, name, protocol, protocol_mapper_name, client_id, client_scope_id) VALUES ('ab09cd10-1269-4e46-98cf-ce917173da34', 'locale', 'openid-connect', 'oidc-usermodel-attribute-mapper', 'b41a94a8-63bc-4371-9a1d-59e02f446012', NULL);
+INSERT INTO public.protocol_mapper (id, name, protocol, protocol_mapper_name, client_id, client_scope_id) VALUES ('77c1ced5-bce3-4b2d-a111-f3602c1972b0', 'Client ID', 'openid-connect', 'oidc-usersessionmodel-note-mapper', '92c59aec-0896-4840-adae-3f291ad1c9ad', NULL);
+INSERT INTO public.protocol_mapper (id, name, protocol, protocol_mapper_name, client_id, client_scope_id) VALUES ('7013a586-d808-429f-b048-94360a81d1fa', 'Client Host', 'openid-connect', 'oidc-usersessionmodel-note-mapper', '92c59aec-0896-4840-adae-3f291ad1c9ad', NULL);
+INSERT INTO public.protocol_mapper (id, name, protocol, protocol_mapper_name, client_id, client_scope_id) VALUES ('95d74a9a-63d7-4307-b0bc-e33b0486f681', 'Client IP Address', 'openid-connect', 'oidc-usersessionmodel-note-mapper', '92c59aec-0896-4840-adae-3f291ad1c9ad', NULL);
 
 
 --
--- TOC entry 3833 (class 0 OID 16826)
--- Dependencies: 225
+-- TOC entry 3855 (class 0 OID 16672)
+-- Dependencies: 248
 -- Data for Name: protocol_mapper_config; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2548,20 +2931,181 @@ INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALU
 INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('02362dd8-8bf4-44a3-a796-d47ee483b4dc', 'true', 'access.token.claim');
 INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('02362dd8-8bf4-44a3-a796-d47ee483b4dc', 'groups', 'claim.name');
 INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('02362dd8-8bf4-44a3-a796-d47ee483b4dc', 'String', 'jsonType.label');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('653ee9fe-16f0-4e49-b8e1-30325b919bbe', 'false', 'single');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('653ee9fe-16f0-4e49-b8e1-30325b919bbe', 'Basic', 'attribute.nameformat');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('653ee9fe-16f0-4e49-b8e1-30325b919bbe', 'Role', 'attribute.name');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('3e6bdf96-24c8-4f90-a7fb-8b3db5ead718', 'true', 'userinfo.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('3e6bdf96-24c8-4f90-a7fb-8b3db5ead718', 'true', 'id.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('3e6bdf96-24c8-4f90-a7fb-8b3db5ead718', 'true', 'access.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('67c51e3b-6487-48cc-88b7-84dc030c5119', 'true', 'userinfo.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('67c51e3b-6487-48cc-88b7-84dc030c5119', 'lastName', 'user.attribute');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('67c51e3b-6487-48cc-88b7-84dc030c5119', 'true', 'id.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('67c51e3b-6487-48cc-88b7-84dc030c5119', 'true', 'access.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('67c51e3b-6487-48cc-88b7-84dc030c5119', 'family_name', 'claim.name');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('67c51e3b-6487-48cc-88b7-84dc030c5119', 'String', 'jsonType.label');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('4b763f14-d570-45ec-9420-81e2dab08319', 'true', 'userinfo.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('4b763f14-d570-45ec-9420-81e2dab08319', 'firstName', 'user.attribute');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('4b763f14-d570-45ec-9420-81e2dab08319', 'true', 'id.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('4b763f14-d570-45ec-9420-81e2dab08319', 'true', 'access.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('4b763f14-d570-45ec-9420-81e2dab08319', 'given_name', 'claim.name');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('4b763f14-d570-45ec-9420-81e2dab08319', 'String', 'jsonType.label');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('a296d2f7-ca15-481b-b806-e4e9b20d6a5b', 'true', 'userinfo.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('a296d2f7-ca15-481b-b806-e4e9b20d6a5b', 'middleName', 'user.attribute');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('a296d2f7-ca15-481b-b806-e4e9b20d6a5b', 'true', 'id.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('a296d2f7-ca15-481b-b806-e4e9b20d6a5b', 'true', 'access.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('a296d2f7-ca15-481b-b806-e4e9b20d6a5b', 'middle_name', 'claim.name');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('a296d2f7-ca15-481b-b806-e4e9b20d6a5b', 'String', 'jsonType.label');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('241aad6c-b5ee-44ec-ade1-9ddd466d844d', 'true', 'userinfo.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('241aad6c-b5ee-44ec-ade1-9ddd466d844d', 'nickname', 'user.attribute');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('241aad6c-b5ee-44ec-ade1-9ddd466d844d', 'true', 'id.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('241aad6c-b5ee-44ec-ade1-9ddd466d844d', 'true', 'access.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('241aad6c-b5ee-44ec-ade1-9ddd466d844d', 'nickname', 'claim.name');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('241aad6c-b5ee-44ec-ade1-9ddd466d844d', 'String', 'jsonType.label');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('cdf5890f-6acf-4168-a095-385366d943e3', 'true', 'userinfo.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('cdf5890f-6acf-4168-a095-385366d943e3', 'username', 'user.attribute');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('cdf5890f-6acf-4168-a095-385366d943e3', 'true', 'id.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('cdf5890f-6acf-4168-a095-385366d943e3', 'true', 'access.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('cdf5890f-6acf-4168-a095-385366d943e3', 'preferred_username', 'claim.name');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('cdf5890f-6acf-4168-a095-385366d943e3', 'String', 'jsonType.label');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('3a29b1bf-c500-4eb0-87a3-664e596f486f', 'true', 'userinfo.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('3a29b1bf-c500-4eb0-87a3-664e596f486f', 'profile', 'user.attribute');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('3a29b1bf-c500-4eb0-87a3-664e596f486f', 'true', 'id.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('3a29b1bf-c500-4eb0-87a3-664e596f486f', 'true', 'access.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('3a29b1bf-c500-4eb0-87a3-664e596f486f', 'profile', 'claim.name');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('3a29b1bf-c500-4eb0-87a3-664e596f486f', 'String', 'jsonType.label');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('aa740f8d-4d26-4696-bc71-99d9f690b562', 'true', 'userinfo.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('aa740f8d-4d26-4696-bc71-99d9f690b562', 'picture', 'user.attribute');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('aa740f8d-4d26-4696-bc71-99d9f690b562', 'true', 'id.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('aa740f8d-4d26-4696-bc71-99d9f690b562', 'true', 'access.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('aa740f8d-4d26-4696-bc71-99d9f690b562', 'picture', 'claim.name');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('aa740f8d-4d26-4696-bc71-99d9f690b562', 'String', 'jsonType.label');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('a25eda95-6c72-4d40-9e42-082e16988d87', 'true', 'userinfo.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('a25eda95-6c72-4d40-9e42-082e16988d87', 'website', 'user.attribute');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('a25eda95-6c72-4d40-9e42-082e16988d87', 'true', 'id.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('a25eda95-6c72-4d40-9e42-082e16988d87', 'true', 'access.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('a25eda95-6c72-4d40-9e42-082e16988d87', 'website', 'claim.name');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('a25eda95-6c72-4d40-9e42-082e16988d87', 'String', 'jsonType.label');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('576c61d9-f640-4c78-931c-b579ee23426f', 'true', 'userinfo.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('576c61d9-f640-4c78-931c-b579ee23426f', 'gender', 'user.attribute');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('576c61d9-f640-4c78-931c-b579ee23426f', 'true', 'id.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('576c61d9-f640-4c78-931c-b579ee23426f', 'true', 'access.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('576c61d9-f640-4c78-931c-b579ee23426f', 'gender', 'claim.name');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('576c61d9-f640-4c78-931c-b579ee23426f', 'String', 'jsonType.label');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('45371408-14d2-411c-9317-589228e9c048', 'true', 'userinfo.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('45371408-14d2-411c-9317-589228e9c048', 'birthdate', 'user.attribute');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('45371408-14d2-411c-9317-589228e9c048', 'true', 'id.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('45371408-14d2-411c-9317-589228e9c048', 'true', 'access.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('45371408-14d2-411c-9317-589228e9c048', 'birthdate', 'claim.name');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('45371408-14d2-411c-9317-589228e9c048', 'String', 'jsonType.label');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('f67ef182-0cea-4b5d-b1f0-a740f98aa662', 'true', 'userinfo.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('f67ef182-0cea-4b5d-b1f0-a740f98aa662', 'zoneinfo', 'user.attribute');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('f67ef182-0cea-4b5d-b1f0-a740f98aa662', 'true', 'id.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('f67ef182-0cea-4b5d-b1f0-a740f98aa662', 'true', 'access.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('f67ef182-0cea-4b5d-b1f0-a740f98aa662', 'zoneinfo', 'claim.name');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('f67ef182-0cea-4b5d-b1f0-a740f98aa662', 'String', 'jsonType.label');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('837e5b47-227b-42d6-a72e-c650ad9a8f39', 'true', 'userinfo.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('837e5b47-227b-42d6-a72e-c650ad9a8f39', 'locale', 'user.attribute');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('837e5b47-227b-42d6-a72e-c650ad9a8f39', 'true', 'id.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('837e5b47-227b-42d6-a72e-c650ad9a8f39', 'true', 'access.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('837e5b47-227b-42d6-a72e-c650ad9a8f39', 'locale', 'claim.name');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('837e5b47-227b-42d6-a72e-c650ad9a8f39', 'String', 'jsonType.label');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('035918f9-68b8-4291-81dd-655ec3bda146', 'true', 'userinfo.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('035918f9-68b8-4291-81dd-655ec3bda146', 'updatedAt', 'user.attribute');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('035918f9-68b8-4291-81dd-655ec3bda146', 'true', 'id.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('035918f9-68b8-4291-81dd-655ec3bda146', 'true', 'access.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('035918f9-68b8-4291-81dd-655ec3bda146', 'updated_at', 'claim.name');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('035918f9-68b8-4291-81dd-655ec3bda146', 'String', 'jsonType.label');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('b028136d-6bde-4710-ba0d-6f892f5e9137', 'true', 'userinfo.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('b028136d-6bde-4710-ba0d-6f892f5e9137', 'email', 'user.attribute');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('b028136d-6bde-4710-ba0d-6f892f5e9137', 'true', 'id.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('b028136d-6bde-4710-ba0d-6f892f5e9137', 'true', 'access.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('b028136d-6bde-4710-ba0d-6f892f5e9137', 'email', 'claim.name');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('b028136d-6bde-4710-ba0d-6f892f5e9137', 'String', 'jsonType.label');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('465125a5-4bcd-491c-867d-fc363ff34038', 'true', 'userinfo.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('465125a5-4bcd-491c-867d-fc363ff34038', 'emailVerified', 'user.attribute');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('465125a5-4bcd-491c-867d-fc363ff34038', 'true', 'id.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('465125a5-4bcd-491c-867d-fc363ff34038', 'true', 'access.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('465125a5-4bcd-491c-867d-fc363ff34038', 'email_verified', 'claim.name');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('465125a5-4bcd-491c-867d-fc363ff34038', 'boolean', 'jsonType.label');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('7c46f5be-995e-4b41-a396-7a3ff6dc4f55', 'formatted', 'user.attribute.formatted');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('7c46f5be-995e-4b41-a396-7a3ff6dc4f55', 'country', 'user.attribute.country');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('7c46f5be-995e-4b41-a396-7a3ff6dc4f55', 'postal_code', 'user.attribute.postal_code');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('7c46f5be-995e-4b41-a396-7a3ff6dc4f55', 'true', 'userinfo.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('7c46f5be-995e-4b41-a396-7a3ff6dc4f55', 'street', 'user.attribute.street');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('7c46f5be-995e-4b41-a396-7a3ff6dc4f55', 'true', 'id.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('7c46f5be-995e-4b41-a396-7a3ff6dc4f55', 'region', 'user.attribute.region');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('7c46f5be-995e-4b41-a396-7a3ff6dc4f55', 'true', 'access.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('7c46f5be-995e-4b41-a396-7a3ff6dc4f55', 'locality', 'user.attribute.locality');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('2004b29e-770e-4801-9f83-a348bfc4e221', 'true', 'userinfo.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('2004b29e-770e-4801-9f83-a348bfc4e221', 'phoneNumber', 'user.attribute');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('2004b29e-770e-4801-9f83-a348bfc4e221', 'true', 'id.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('2004b29e-770e-4801-9f83-a348bfc4e221', 'true', 'access.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('2004b29e-770e-4801-9f83-a348bfc4e221', 'phone_number', 'claim.name');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('2004b29e-770e-4801-9f83-a348bfc4e221', 'String', 'jsonType.label');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('4f90a78e-4ab4-49f1-9195-0082f4f9fa53', 'true', 'userinfo.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('4f90a78e-4ab4-49f1-9195-0082f4f9fa53', 'phoneNumberVerified', 'user.attribute');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('4f90a78e-4ab4-49f1-9195-0082f4f9fa53', 'true', 'id.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('4f90a78e-4ab4-49f1-9195-0082f4f9fa53', 'true', 'access.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('4f90a78e-4ab4-49f1-9195-0082f4f9fa53', 'phone_number_verified', 'claim.name');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('4f90a78e-4ab4-49f1-9195-0082f4f9fa53', 'boolean', 'jsonType.label');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('872939ba-caaf-4ddb-99cd-0ae9604c39b2', 'true', 'multivalued');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('872939ba-caaf-4ddb-99cd-0ae9604c39b2', 'foo', 'user.attribute');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('872939ba-caaf-4ddb-99cd-0ae9604c39b2', 'true', 'access.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('872939ba-caaf-4ddb-99cd-0ae9604c39b2', 'realm_access.roles', 'claim.name');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('872939ba-caaf-4ddb-99cd-0ae9604c39b2', 'String', 'jsonType.label');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('c22075b4-d745-4c88-a814-633b24155ed2', 'true', 'multivalued');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('c22075b4-d745-4c88-a814-633b24155ed2', 'foo', 'user.attribute');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('c22075b4-d745-4c88-a814-633b24155ed2', 'true', 'access.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('c22075b4-d745-4c88-a814-633b24155ed2', 'resource_access.${client_id}.roles', 'claim.name');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('c22075b4-d745-4c88-a814-633b24155ed2', 'String', 'jsonType.label');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('b2649e87-358b-4656-ac3e-2914c0a8fb02', 'true', 'userinfo.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('b2649e87-358b-4656-ac3e-2914c0a8fb02', 'username', 'user.attribute');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('b2649e87-358b-4656-ac3e-2914c0a8fb02', 'true', 'id.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('b2649e87-358b-4656-ac3e-2914c0a8fb02', 'true', 'access.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('b2649e87-358b-4656-ac3e-2914c0a8fb02', 'upn', 'claim.name');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('b2649e87-358b-4656-ac3e-2914c0a8fb02', 'String', 'jsonType.label');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('e39d08fd-a61a-4d7d-a368-bfc6195326a7', 'true', 'multivalued');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('e39d08fd-a61a-4d7d-a368-bfc6195326a7', 'foo', 'user.attribute');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('e39d08fd-a61a-4d7d-a368-bfc6195326a7', 'true', 'id.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('e39d08fd-a61a-4d7d-a368-bfc6195326a7', 'true', 'access.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('e39d08fd-a61a-4d7d-a368-bfc6195326a7', 'groups', 'claim.name');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('e39d08fd-a61a-4d7d-a368-bfc6195326a7', 'String', 'jsonType.label');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('ab09cd10-1269-4e46-98cf-ce917173da34', 'true', 'userinfo.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('ab09cd10-1269-4e46-98cf-ce917173da34', 'locale', 'user.attribute');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('ab09cd10-1269-4e46-98cf-ce917173da34', 'true', 'id.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('ab09cd10-1269-4e46-98cf-ce917173da34', 'true', 'access.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('ab09cd10-1269-4e46-98cf-ce917173da34', 'locale', 'claim.name');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('ab09cd10-1269-4e46-98cf-ce917173da34', 'String', 'jsonType.label');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('77c1ced5-bce3-4b2d-a111-f3602c1972b0', 'clientId', 'user.session.note');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('77c1ced5-bce3-4b2d-a111-f3602c1972b0', 'true', 'id.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('77c1ced5-bce3-4b2d-a111-f3602c1972b0', 'true', 'access.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('77c1ced5-bce3-4b2d-a111-f3602c1972b0', 'clientId', 'claim.name');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('77c1ced5-bce3-4b2d-a111-f3602c1972b0', 'String', 'jsonType.label');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('7013a586-d808-429f-b048-94360a81d1fa', 'clientHost', 'user.session.note');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('7013a586-d808-429f-b048-94360a81d1fa', 'true', 'id.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('7013a586-d808-429f-b048-94360a81d1fa', 'true', 'access.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('7013a586-d808-429f-b048-94360a81d1fa', 'clientHost', 'claim.name');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('7013a586-d808-429f-b048-94360a81d1fa', 'String', 'jsonType.label');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('95d74a9a-63d7-4307-b0bc-e33b0486f681', 'clientAddress', 'user.session.note');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('95d74a9a-63d7-4307-b0bc-e33b0486f681', 'true', 'id.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('95d74a9a-63d7-4307-b0bc-e33b0486f681', 'true', 'access.token.claim');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('95d74a9a-63d7-4307-b0bc-e33b0486f681', 'clientAddress', 'claim.name');
+INSERT INTO public.protocol_mapper_config (protocol_mapper_id, value, name) VALUES ('95d74a9a-63d7-4307-b0bc-e33b0486f681', 'String', 'jsonType.label');
 
 
 --
--- TOC entry 3813 (class 0 OID 16454)
--- Dependencies: 205
+-- TOC entry 3856 (class 0 OID 16678)
+-- Dependencies: 249
 -- Data for Name: realm; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 INSERT INTO public.realm (id, access_code_lifespan, user_action_lifespan, access_token_lifespan, account_theme, admin_theme, email_theme, enabled, events_enabled, events_expiration, login_theme, name, not_before, password_policy, registration_allowed, remember_me, reset_password_allowed, social, ssl_required, sso_idle_timeout, sso_max_lifespan, update_profile_on_soc_login, verify_email, master_admin_client, login_lifespan, internationalization_enabled, default_locale, reg_email_as_username, admin_events_enabled, admin_events_details_enabled, edit_username_allowed, otp_policy_counter, otp_policy_window, otp_policy_period, otp_policy_digits, otp_policy_alg, otp_policy_type, browser_flow, registration_flow, direct_grant_flow, reset_credentials_flow, client_auth_flow, offline_session_idle_timeout, revoke_refresh_token, access_token_life_implicit, login_with_email_allowed, duplicate_emails_allowed, docker_auth_flow, refresh_token_max_reuse, allow_user_managed_access, sso_max_lifespan_remember_me, sso_idle_timeout_remember_me, default_role) VALUES ('master', 60, 300, 60, NULL, NULL, NULL, true, false, 0, NULL, 'master', 0, NULL, false, false, false, false, 'EXTERNAL', 1800, 36000, false, false, 'c5ffd670-9084-42e0-99ec-b5fc6130c0e7', 1800, false, NULL, false, false, false, false, 0, 1, 30, 6, 'HmacSHA1', 'totp', '7a4dc86d-5716-4f62-9dca-8f350ec173be', '7706c58f-2cad-4239-ab0a-785249f186a9', '9bb197e1-f04c-4f50-9b95-7c2d79b569cc', 'c8a0c540-a464-4fe2-aa64-d22bbad93855', 'e93d0486-0f85-466f-b7ec-20ef85b997bc', 2592000, false, 900, true, false, '52a66e94-bf7a-406c-bee0-01061d9c6cb5', 0, false, 0, 0, '8f5e4cf5-67e9-425a-81f2-94f848a56b19');
+INSERT INTO public.realm (id, access_code_lifespan, user_action_lifespan, access_token_lifespan, account_theme, admin_theme, email_theme, enabled, events_enabled, events_expiration, login_theme, name, not_before, password_policy, registration_allowed, remember_me, reset_password_allowed, social, ssl_required, sso_idle_timeout, sso_max_lifespan, update_profile_on_soc_login, verify_email, master_admin_client, login_lifespan, internationalization_enabled, default_locale, reg_email_as_username, admin_events_enabled, admin_events_details_enabled, edit_username_allowed, otp_policy_counter, otp_policy_window, otp_policy_period, otp_policy_digits, otp_policy_alg, otp_policy_type, browser_flow, registration_flow, direct_grant_flow, reset_credentials_flow, client_auth_flow, offline_session_idle_timeout, revoke_refresh_token, access_token_life_implicit, login_with_email_allowed, duplicate_emails_allowed, docker_auth_flow, refresh_token_max_reuse, allow_user_managed_access, sso_max_lifespan_remember_me, sso_idle_timeout_remember_me, default_role) VALUES ('CAP', 60, 300, 300, NULL, NULL, NULL, true, false, 0, NULL, 'CAP', 0, NULL, false, false, false, false, 'EXTERNAL', 1800, 36000, false, false, '255350d7-f727-49d7-a63d-e207e35e270c', 1800, false, NULL, false, false, false, false, 0, 1, 30, 6, 'HmacSHA1', 'totp', '5b0b55da-8477-41c4-a819-9dfebdc034cc', '0da7e7bf-9f0e-46be-9196-0953a88382c1', 'd75139f6-a0ad-425a-af07-8324f27557e7', '1a4dfbb9-bc1b-4e55-b5bf-c69aad806bc1', '0fc25843-3a94-474a-b92e-5f6b9ff9ca7d', 2592000, false, 900, true, false, 'beb742d5-44b0-413d-8ad8-81005a3ff0b4', 0, false, 0, 0, '3d493227-1aa1-481d-8f5c-d5ccc788460a');
 
 
 --
--- TOC entry 3814 (class 0 OID 16472)
--- Dependencies: 206
+-- TOC entry 3857 (class 0 OID 16712)
+-- Dependencies: 250
 -- Data for Name: realm_attribute; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2585,88 +3129,138 @@ INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('displayNameH
 INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('defaultSignatureAlgorithm', 'master', 'RS256');
 INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('offlineSessionMaxLifespanEnabled', 'master', 'false');
 INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('offlineSessionMaxLifespan', 'master', '5184000');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('_browser_header.contentSecurityPolicyReportOnly', 'CAP', '');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('_browser_header.xContentTypeOptions', 'CAP', 'nosniff');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('_browser_header.xRobotsTag', 'CAP', 'none');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('_browser_header.xFrameOptions', 'CAP', 'SAMEORIGIN');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('_browser_header.contentSecurityPolicy', 'CAP', 'frame-src ''self''; frame-ancestors ''self''; object-src ''none'';');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('_browser_header.xXSSProtection', 'CAP', '1; mode=block');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('_browser_header.strictTransportSecurity', 'CAP', 'max-age=31536000; includeSubDomains');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('bruteForceProtected', 'CAP', 'false');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('permanentLockout', 'CAP', 'false');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('maxFailureWaitSeconds', 'CAP', '900');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('minimumQuickLoginWaitSeconds', 'CAP', '60');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('waitIncrementSeconds', 'CAP', '60');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('quickLoginCheckMilliSeconds', 'CAP', '1000');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('maxDeltaTimeSeconds', 'CAP', '43200');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('failureFactor', 'CAP', '30');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('defaultSignatureAlgorithm', 'CAP', 'RS256');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('offlineSessionMaxLifespanEnabled', 'CAP', 'false');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('offlineSessionMaxLifespan', 'CAP', '5184000');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('actionTokenGeneratedByAdminLifespan', 'CAP', '43200');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('actionTokenGeneratedByUserLifespan', 'CAP', '300');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('oauth2DeviceCodeLifespan', 'CAP', '600');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('oauth2DevicePollingInterval', 'CAP', '5');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('webAuthnPolicyRpEntityName', 'CAP', 'keycloak');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('webAuthnPolicySignatureAlgorithms', 'CAP', 'ES256');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('webAuthnPolicyRpId', 'CAP', '');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('webAuthnPolicyAttestationConveyancePreference', 'CAP', 'not specified');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('webAuthnPolicyAuthenticatorAttachment', 'CAP', 'not specified');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('webAuthnPolicyRequireResidentKey', 'CAP', 'not specified');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('webAuthnPolicyUserVerificationRequirement', 'CAP', 'not specified');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('webAuthnPolicyCreateTimeout', 'CAP', '0');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('webAuthnPolicyAvoidSameAuthenticatorRegister', 'CAP', 'false');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('webAuthnPolicyRpEntityNamePasswordless', 'CAP', 'keycloak');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('webAuthnPolicySignatureAlgorithmsPasswordless', 'CAP', 'ES256');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('webAuthnPolicyRpIdPasswordless', 'CAP', '');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('webAuthnPolicyAttestationConveyancePreferencePasswordless', 'CAP', 'not specified');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('webAuthnPolicyAuthenticatorAttachmentPasswordless', 'CAP', 'not specified');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('webAuthnPolicyRequireResidentKeyPasswordless', 'CAP', 'not specified');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('webAuthnPolicyUserVerificationRequirementPasswordless', 'CAP', 'not specified');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('webAuthnPolicyCreateTimeoutPasswordless', 'CAP', '0');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('webAuthnPolicyAvoidSameAuthenticatorRegisterPasswordless', 'CAP', 'false');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('cibaBackchannelTokenDeliveryMode', 'CAP', 'poll');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('cibaExpiresIn', 'CAP', '120');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('cibaInterval', 'CAP', '5');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('cibaAuthRequestedUserHint', 'CAP', 'login_hint');
+INSERT INTO public.realm_attribute (name, realm_id, value) VALUES ('parRequestUriLifespan', 'CAP', '60');
 
 
 --
--- TOC entry 3862 (class 0 OID 17261)
--- Dependencies: 254
+-- TOC entry 3858 (class 0 OID 16718)
+-- Dependencies: 251
 -- Data for Name: realm_default_groups; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3839 (class 0 OID 16943)
--- Dependencies: 231
+-- TOC entry 3859 (class 0 OID 16721)
+-- Dependencies: 252
 -- Data for Name: realm_enabled_event_types; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3815 (class 0 OID 16481)
--- Dependencies: 207
+-- TOC entry 3860 (class 0 OID 16724)
+-- Dependencies: 253
 -- Data for Name: realm_events_listeners; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 INSERT INTO public.realm_events_listeners (realm_id, value) VALUES ('master', 'jboss-logging');
+INSERT INTO public.realm_events_listeners (realm_id, value) VALUES ('CAP', 'jboss-logging');
 
 
 --
--- TOC entry 3895 (class 0 OID 17988)
--- Dependencies: 287
+-- TOC entry 3861 (class 0 OID 16727)
+-- Dependencies: 254
 -- Data for Name: realm_localizations; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3816 (class 0 OID 16484)
--- Dependencies: 208
+-- TOC entry 3862 (class 0 OID 16733)
+-- Dependencies: 255
 -- Data for Name: realm_required_credential; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 INSERT INTO public.realm_required_credential (type, form_label, input, secret, realm_id) VALUES ('password', 'password', true, true, 'master');
+INSERT INTO public.realm_required_credential (type, form_label, input, secret, realm_id) VALUES ('password', 'password', true, true, 'CAP');
 
 
 --
--- TOC entry 3817 (class 0 OID 16492)
--- Dependencies: 209
+-- TOC entry 3863 (class 0 OID 16741)
+-- Dependencies: 256
 -- Data for Name: realm_smtp_config; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3837 (class 0 OID 16858)
--- Dependencies: 229
+-- TOC entry 3864 (class 0 OID 16747)
+-- Dependencies: 257
 -- Data for Name: realm_supported_locales; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3818 (class 0 OID 16504)
--- Dependencies: 210
+-- TOC entry 3865 (class 0 OID 16750)
+-- Dependencies: 258
 -- Data for Name: redirect_uris; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 INSERT INTO public.redirect_uris (client_id, value) VALUES ('b201cd92-399a-47a2-b745-c2dc4e34bd62', '/realms/master/account/*');
 INSERT INTO public.redirect_uris (client_id, value) VALUES ('31fab5fd-a6c4-472a-a737-83b0cb38ceee', '/realms/master/account/*');
 INSERT INTO public.redirect_uris (client_id, value) VALUES ('5b896a97-4553-4c23-bdd3-738d5fb06e6b', '/admin/master/console/*');
+INSERT INTO public.redirect_uris (client_id, value) VALUES ('273cd6ca-70d7-4000-8a51-a421ccd86682', '/realms/CAP/account/*');
+INSERT INTO public.redirect_uris (client_id, value) VALUES ('b7ebb818-40f4-4272-ad17-85a3af269c14', '/realms/CAP/account/*');
+INSERT INTO public.redirect_uris (client_id, value) VALUES ('b41a94a8-63bc-4371-9a1d-59e02f446012', '/admin/CAP/console/*');
 
 
 --
--- TOC entry 3855 (class 0 OID 17192)
--- Dependencies: 247
+-- TOC entry 3866 (class 0 OID 16753)
+-- Dependencies: 259
 -- Data for Name: required_action_config; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3854 (class 0 OID 17184)
--- Dependencies: 246
+-- TOC entry 3867 (class 0 OID 16759)
+-- Dependencies: 260
 -- Data for Name: required_action_provider; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2677,26 +3271,33 @@ INSERT INTO public.required_action_provider (id, alias, name, realm_id, enabled,
 INSERT INTO public.required_action_provider (id, alias, name, realm_id, enabled, default_action, provider_id, priority) VALUES ('5e42d531-411c-4d19-ace1-e8848c0854a2', 'terms_and_conditions', 'Terms and Conditions', 'master', false, false, 'terms_and_conditions', 20);
 INSERT INTO public.required_action_provider (id, alias, name, realm_id, enabled, default_action, provider_id, priority) VALUES ('82b7b13a-b8fc-470d-8200-8eb6f3c9958f', 'update_user_locale', 'Update User Locale', 'master', true, false, 'update_user_locale', 1000);
 INSERT INTO public.required_action_provider (id, alias, name, realm_id, enabled, default_action, provider_id, priority) VALUES ('49b6c0d0-0d2a-427a-a9b3-c800a3b8b81f', 'delete_account', 'Delete Account', 'master', false, false, 'delete_account', 60);
+INSERT INTO public.required_action_provider (id, alias, name, realm_id, enabled, default_action, provider_id, priority) VALUES ('db4dc5d6-7bda-4f8f-bd41-dd4300c01ad1', 'VERIFY_EMAIL', 'Verify Email', 'CAP', true, false, 'VERIFY_EMAIL', 50);
+INSERT INTO public.required_action_provider (id, alias, name, realm_id, enabled, default_action, provider_id, priority) VALUES ('4c788267-35f3-4a72-8262-8814e84c2589', 'UPDATE_PROFILE', 'Update Profile', 'CAP', true, false, 'UPDATE_PROFILE', 40);
+INSERT INTO public.required_action_provider (id, alias, name, realm_id, enabled, default_action, provider_id, priority) VALUES ('a934e621-7081-4689-afa7-4c28bfd3ce82', 'CONFIGURE_TOTP', 'Configure OTP', 'CAP', true, false, 'CONFIGURE_TOTP', 10);
+INSERT INTO public.required_action_provider (id, alias, name, realm_id, enabled, default_action, provider_id, priority) VALUES ('76975d49-e6e2-4581-baae-45f08849ee0d', 'UPDATE_PASSWORD', 'Update Password', 'CAP', true, false, 'UPDATE_PASSWORD', 30);
+INSERT INTO public.required_action_provider (id, alias, name, realm_id, enabled, default_action, provider_id, priority) VALUES ('952533f7-7238-4a48-a2b9-f8053d4d3ed5', 'terms_and_conditions', 'Terms and Conditions', 'CAP', false, false, 'terms_and_conditions', 20);
+INSERT INTO public.required_action_provider (id, alias, name, realm_id, enabled, default_action, provider_id, priority) VALUES ('e9a194a1-50ab-4800-ae87-a355195e859d', 'update_user_locale', 'Update User Locale', 'CAP', true, false, 'update_user_locale', 1000);
+INSERT INTO public.required_action_provider (id, alias, name, realm_id, enabled, default_action, provider_id, priority) VALUES ('2087bdf9-9517-4098-88e3-9eb90718cfae', 'delete_account', 'Delete Account', 'CAP', false, false, 'delete_account', 60);
 
 
 --
--- TOC entry 3892 (class 0 OID 17913)
--- Dependencies: 284
+-- TOC entry 3868 (class 0 OID 16767)
+-- Dependencies: 261
 -- Data for Name: resource_attribute; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3872 (class 0 OID 17486)
--- Dependencies: 264
+-- TOC entry 3869 (class 0 OID 16774)
+-- Dependencies: 262
 -- Data for Name: resource_policy; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3871 (class 0 OID 17471)
+-- TOC entry 3870 (class 0 OID 16777)
 -- Dependencies: 263
 -- Data for Name: resource_scope; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2704,204 +3305,233 @@ INSERT INTO public.required_action_provider (id, alias, name, realm_id, enabled,
 
 
 --
--- TOC entry 3866 (class 0 OID 17405)
--- Dependencies: 258
+-- TOC entry 3871 (class 0 OID 16780)
+-- Dependencies: 264
 -- Data for Name: resource_server; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3891 (class 0 OID 17889)
--- Dependencies: 283
+-- TOC entry 3872 (class 0 OID 16785)
+-- Dependencies: 265
 -- Data for Name: resource_server_perm_ticket; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3869 (class 0 OID 17443)
--- Dependencies: 261
+-- TOC entry 3873 (class 0 OID 16791)
+-- Dependencies: 266
 -- Data for Name: resource_server_policy; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3867 (class 0 OID 17413)
--- Dependencies: 259
+-- TOC entry 3874 (class 0 OID 16797)
+-- Dependencies: 267
 -- Data for Name: resource_server_resource; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3868 (class 0 OID 17428)
--- Dependencies: 260
+-- TOC entry 3875 (class 0 OID 16804)
+-- Dependencies: 268
 -- Data for Name: resource_server_scope; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3893 (class 0 OID 17932)
--- Dependencies: 285
+-- TOC entry 3876 (class 0 OID 16810)
+-- Dependencies: 269
 -- Data for Name: resource_uris; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3894 (class 0 OID 17942)
--- Dependencies: 286
+-- TOC entry 3877 (class 0 OID 16813)
+-- Dependencies: 270
 -- Data for Name: role_attribute; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3819 (class 0 OID 16507)
--- Dependencies: 211
+-- TOC entry 3878 (class 0 OID 16819)
+-- Dependencies: 271
 -- Data for Name: scope_mapping; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 INSERT INTO public.scope_mapping (client_id, role_id) VALUES ('31fab5fd-a6c4-472a-a737-83b0cb38ceee', '29a0c8f3-87a5-4675-b716-fea8f460dcc6');
+INSERT INTO public.scope_mapping (client_id, role_id) VALUES ('b7ebb818-40f4-4272-ad17-85a3af269c14', '81fd0b8a-d6d1-422f-affe-59da332a56af');
 
 
 --
--- TOC entry 3873 (class 0 OID 17501)
--- Dependencies: 265
+-- TOC entry 3879 (class 0 OID 16822)
+-- Dependencies: 272
 -- Data for Name: scope_policy; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3821 (class 0 OID 16513)
--- Dependencies: 213
+-- TOC entry 3880 (class 0 OID 16825)
+-- Dependencies: 273
 -- Data for Name: user_attribute; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3843 (class 0 OID 16966)
--- Dependencies: 235
+-- TOC entry 3881 (class 0 OID 16832)
+-- Dependencies: 274
 -- Data for Name: user_consent; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3889 (class 0 OID 17864)
--- Dependencies: 281
+-- TOC entry 3882 (class 0 OID 16838)
+-- Dependencies: 275
 -- Data for Name: user_consent_client_scope; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3822 (class 0 OID 16519)
--- Dependencies: 214
+-- TOC entry 3883 (class 0 OID 16841)
+-- Dependencies: 276
 -- Data for Name: user_entity; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 INSERT INTO public.user_entity (id, email, email_constraint, email_verified, enabled, federation_link, first_name, last_name, realm_id, username, created_timestamp, service_account_client_link, not_before) VALUES ('b3e2d387-81e8-4fb9-a74e-a941a8c4804f', NULL, '80adcd6b-afe6-4e08-9e69-09ba23edcc01', false, true, NULL, NULL, NULL, 'master', 'admin', 1644333809399, NULL, 0);
+INSERT INTO public.user_entity (id, email, email_constraint, email_verified, enabled, federation_link, first_name, last_name, realm_id, username, created_timestamp, service_account_client_link, not_before) VALUES ('3e4386c0-6580-4b79-b2ab-5021406d3cd6', NULL, '2c34abc3-a7f9-4322-95cc-d47331044929', false, true, NULL, NULL, NULL, 'CAP', 'service-account-cap-app', 1645738672200, '92c59aec-0896-4840-adae-3f291ad1c9ad', 0);
+INSERT INTO public.user_entity (id, email, email_constraint, email_verified, enabled, federation_link, first_name, last_name, realm_id, username, created_timestamp, service_account_client_link, not_before) VALUES ('474a96af-2dea-4fb0-9ba9-c183b7776c13', NULL, '773a4d00-3625-4978-aae4-50484d024352', false, true, NULL, NULL, NULL, 'CAP', 'teacher-1', 1645738723637, NULL, 0);
+INSERT INTO public.user_entity (id, email, email_constraint, email_verified, enabled, federation_link, first_name, last_name, realm_id, username, created_timestamp, service_account_client_link, not_before) VALUES ('fa9667dd-2549-4464-8bef-8cb57adc8796', NULL, 'd0befb4e-c8a8-4850-8370-0ddd54ea1d55', false, true, NULL, NULL, NULL, 'CAP', 'student-1', 1645738867953, NULL, 0);
 
 
 --
--- TOC entry 3823 (class 0 OID 16528)
--- Dependencies: 215
+-- TOC entry 3884 (class 0 OID 16850)
+-- Dependencies: 277
 -- Data for Name: user_federation_config; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3850 (class 0 OID 17082)
--- Dependencies: 242
+-- TOC entry 3885 (class 0 OID 16856)
+-- Dependencies: 278
 -- Data for Name: user_federation_mapper; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3851 (class 0 OID 17088)
--- Dependencies: 243
+-- TOC entry 3886 (class 0 OID 16862)
+-- Dependencies: 279
 -- Data for Name: user_federation_mapper_config; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3824 (class 0 OID 16534)
--- Dependencies: 216
+-- TOC entry 3887 (class 0 OID 16868)
+-- Dependencies: 280
 -- Data for Name: user_federation_provider; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3861 (class 0 OID 17258)
--- Dependencies: 253
+-- TOC entry 3888 (class 0 OID 16874)
+-- Dependencies: 281
 -- Data for Name: user_group_membership; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3825 (class 0 OID 16540)
--- Dependencies: 217
+-- TOC entry 3889 (class 0 OID 16877)
+-- Dependencies: 282
 -- Data for Name: user_required_action; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3826 (class 0 OID 16543)
--- Dependencies: 218
+-- TOC entry 3890 (class 0 OID 16881)
+-- Dependencies: 283
 -- Data for Name: user_role_mapping; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('8f5e4cf5-67e9-425a-81f2-94f848a56b19', 'b3e2d387-81e8-4fb9-a74e-a941a8c4804f');
 INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('74c2b1c5-fea4-4191-82f0-83552f718734', 'b3e2d387-81e8-4fb9-a74e-a941a8c4804f');
+INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('c48df4a0-ae36-4a93-9a3f-2ed6094f2b5b', 'b3e2d387-81e8-4fb9-a74e-a941a8c4804f');
+INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('d6aa6cd7-33e9-4c30-af3a-dd24795a7269', 'b3e2d387-81e8-4fb9-a74e-a941a8c4804f');
+INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('fe944dfd-b6ac-4e34-8140-66136ae7abf1', 'b3e2d387-81e8-4fb9-a74e-a941a8c4804f');
+INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('cb2ed9e3-731d-4c34-9ff8-1710e284fd30', 'b3e2d387-81e8-4fb9-a74e-a941a8c4804f');
+INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('76c534e6-2676-4bd9-8330-d7518bea12f3', 'b3e2d387-81e8-4fb9-a74e-a941a8c4804f');
+INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('fd987e7e-923b-4e89-b142-8a2f8754e206', 'b3e2d387-81e8-4fb9-a74e-a941a8c4804f');
+INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('a30c0bb4-6fab-4ce0-9401-af18c6c6737f', 'b3e2d387-81e8-4fb9-a74e-a941a8c4804f');
+INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('b3d8ef32-0dea-4768-a17a-6ab98a427335', 'b3e2d387-81e8-4fb9-a74e-a941a8c4804f');
+INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('9d45c19e-8972-4876-9ce8-f9cb5dee4a3d', 'b3e2d387-81e8-4fb9-a74e-a941a8c4804f');
+INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('0273b4a9-ab4b-44f1-9767-736ce5b2189d', 'b3e2d387-81e8-4fb9-a74e-a941a8c4804f');
+INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('4d8ea773-34b3-4870-8290-e53b767b8897', 'b3e2d387-81e8-4fb9-a74e-a941a8c4804f');
+INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('5117ea07-695c-48bd-a8ba-bf8af42ef814', 'b3e2d387-81e8-4fb9-a74e-a941a8c4804f');
+INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('48d256a2-5a3c-4289-a200-ecc41092920a', 'b3e2d387-81e8-4fb9-a74e-a941a8c4804f');
+INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('dd69ea87-1502-4fbb-a6d7-075b7f41df11', 'b3e2d387-81e8-4fb9-a74e-a941a8c4804f');
+INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('9c51296a-bd3e-4b55-83e4-4d82758d801b', 'b3e2d387-81e8-4fb9-a74e-a941a8c4804f');
+INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('e4a5be7b-214c-4c29-87fb-a061cb068be1', 'b3e2d387-81e8-4fb9-a74e-a941a8c4804f');
+INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('9bf618ce-e060-40d7-abd8-7dd6407a1e28', 'b3e2d387-81e8-4fb9-a74e-a941a8c4804f');
+INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('3d493227-1aa1-481d-8f5c-d5ccc788460a', '3e4386c0-6580-4b79-b2ab-5021406d3cd6');
+INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('3d493227-1aa1-481d-8f5c-d5ccc788460a', '474a96af-2dea-4fb0-9ba9-c183b7776c13');
+INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('4666aae2-4feb-4111-91ac-ff88bd5bb5d4', '474a96af-2dea-4fb0-9ba9-c183b7776c13');
+INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('3d493227-1aa1-481d-8f5c-d5ccc788460a', 'fa9667dd-2549-4464-8bef-8cb57adc8796');
+INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('4ccc6c3e-0dcc-4a5b-8ae7-79619cf40b15', 'fa9667dd-2549-4464-8bef-8cb57adc8796');
+INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('4666aae2-4feb-4111-91ac-ff88bd5bb5d4', '3e4386c0-6580-4b79-b2ab-5021406d3cd6');
+INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('4ccc6c3e-0dcc-4a5b-8ae7-79619cf40b15', '3e4386c0-6580-4b79-b2ab-5021406d3cd6');
 
 
 --
--- TOC entry 3827 (class 0 OID 16546)
--- Dependencies: 219
+-- TOC entry 3891 (class 0 OID 16884)
+-- Dependencies: 284
 -- Data for Name: user_session; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3838 (class 0 OID 16861)
--- Dependencies: 230
+-- TOC entry 3892 (class 0 OID 16891)
+-- Dependencies: 285
 -- Data for Name: user_session_note; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3820 (class 0 OID 16510)
--- Dependencies: 212
+-- TOC entry 3893 (class 0 OID 16897)
+-- Dependencies: 286
 -- Data for Name: username_login_failure; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
 
 --
--- TOC entry 3828 (class 0 OID 16559)
--- Dependencies: 220
+-- TOC entry 3894 (class 0 OID 16903)
+-- Dependencies: 287
 -- Data for Name: web_origins; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 INSERT INTO public.web_origins (client_id, value) VALUES ('5b896a97-4553-4c23-bdd3-738d5fb06e6b', '+');
+INSERT INTO public.web_origins (client_id, value) VALUES ('b41a94a8-63bc-4371-9a1d-59e02f446012', '+');
 
 
 --
--- TOC entry 3368 (class 2606 OID 17655)
+-- TOC entry 3604 (class 2606 OID 16907)
 -- Name: username_login_failure CONSTRAINT_17-2; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2910,7 +3540,7 @@ ALTER TABLE ONLY public.username_login_failure
 
 
 --
--- TOC entry 3341 (class 2606 OID 17969)
+-- TOC entry 3458 (class 2606 OID 16909)
 -- Name: keycloak_role UK_J3RWUVD56ONTGSUHOGM184WW2-2; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2919,7 +3549,7 @@ ALTER TABLE ONLY public.keycloak_role
 
 
 --
--- TOC entry 3582 (class 2606 OID 17794)
+-- TOC entry 3345 (class 2606 OID 16911)
 -- Name: client_auth_flow_bindings c_cli_flow_bind; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2928,7 +3558,7 @@ ALTER TABLE ONLY public.client_auth_flow_bindings
 
 
 --
--- TOC entry 3584 (class 2606 OID 18001)
+-- TOC entry 3360 (class 2606 OID 16913)
 -- Name: client_scope_client c_cli_scope_bind; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2937,7 +3567,7 @@ ALTER TABLE ONLY public.client_scope_client
 
 
 --
--- TOC entry 3579 (class 2606 OID 17669)
+-- TOC entry 3347 (class 2606 OID 16915)
 -- Name: client_initial_access cnstr_client_init_acc_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2946,7 +3576,7 @@ ALTER TABLE ONLY public.client_initial_access
 
 
 --
--- TOC entry 3496 (class 2606 OID 17300)
+-- TOC entry 3493 (class 2606 OID 16917)
 -- Name: realm_default_groups con_group_id_def_groups; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2955,7 +3585,7 @@ ALTER TABLE ONLY public.realm_default_groups
 
 
 --
--- TOC entry 3544 (class 2606 OID 17588)
+-- TOC entry 3335 (class 2606 OID 16919)
 -- Name: broker_link constr_broker_link_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2964,7 +3594,7 @@ ALTER TABLE ONLY public.broker_link
 
 
 --
--- TOC entry 3466 (class 2606 OID 17205)
+-- TOC entry 3379 (class 2606 OID 16921)
 -- Name: client_user_session_note constr_cl_usr_ses_note; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2973,7 +3603,7 @@ ALTER TABLE ONLY public.client_user_session_note
 
 
 --
--- TOC entry 3570 (class 2606 OID 17608)
+-- TOC entry 3385 (class 2606 OID 16923)
 -- Name: component_config constr_component_config_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2982,7 +3612,7 @@ ALTER TABLE ONLY public.component_config
 
 
 --
--- TOC entry 3573 (class 2606 OID 17606)
+-- TOC entry 3381 (class 2606 OID 16925)
 -- Name: component constr_component_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2991,7 +3621,7 @@ ALTER TABLE ONLY public.component
 
 
 --
--- TOC entry 3562 (class 2606 OID 17604)
+-- TOC entry 3422 (class 2606 OID 16927)
 -- Name: fed_user_required_action constr_fed_required_action; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3000,7 +3630,7 @@ ALTER TABLE ONLY public.fed_user_required_action
 
 
 --
--- TOC entry 3546 (class 2606 OID 17590)
+-- TOC entry 3404 (class 2606 OID 16929)
 -- Name: fed_user_attribute constr_fed_user_attr_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3009,7 +3639,7 @@ ALTER TABLE ONLY public.fed_user_attribute
 
 
 --
--- TOC entry 3549 (class 2606 OID 17592)
+-- TOC entry 3407 (class 2606 OID 16931)
 -- Name: fed_user_consent constr_fed_user_consent_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3018,7 +3648,7 @@ ALTER TABLE ONLY public.fed_user_consent
 
 
 --
--- TOC entry 3554 (class 2606 OID 17598)
+-- TOC entry 3414 (class 2606 OID 16933)
 -- Name: fed_user_credential constr_fed_user_cred_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3027,7 +3657,7 @@ ALTER TABLE ONLY public.fed_user_credential
 
 
 --
--- TOC entry 3558 (class 2606 OID 17600)
+-- TOC entry 3418 (class 2606 OID 16935)
 -- Name: fed_user_group_membership constr_fed_user_group; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3036,7 +3666,7 @@ ALTER TABLE ONLY public.fed_user_group_membership
 
 
 --
--- TOC entry 3566 (class 2606 OID 17602)
+-- TOC entry 3426 (class 2606 OID 16937)
 -- Name: fed_user_role_mapping constr_fed_user_role; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3045,7 +3675,7 @@ ALTER TABLE ONLY public.fed_user_role_mapping
 
 
 --
--- TOC entry 3577 (class 2606 OID 17648)
+-- TOC entry 3434 (class 2606 OID 16939)
 -- Name: federated_user constr_federated_user; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3054,7 +3684,7 @@ ALTER TABLE ONLY public.federated_user
 
 
 --
--- TOC entry 3498 (class 2606 OID 17753)
+-- TOC entry 3495 (class 2606 OID 16941)
 -- Name: realm_default_groups constr_realm_default_groups; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3063,7 +3693,7 @@ ALTER TABLE ONLY public.realm_default_groups
 
 
 --
--- TOC entry 3426 (class 2606 OID 17770)
+-- TOC entry 3498 (class 2606 OID 16943)
 -- Name: realm_enabled_event_types constr_realm_enabl_event_types; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3072,7 +3702,7 @@ ALTER TABLE ONLY public.realm_enabled_event_types
 
 
 --
--- TOC entry 3355 (class 2606 OID 17772)
+-- TOC entry 3501 (class 2606 OID 16945)
 -- Name: realm_events_listeners constr_realm_events_listeners; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3081,7 +3711,7 @@ ALTER TABLE ONLY public.realm_events_listeners
 
 
 --
--- TOC entry 3421 (class 2606 OID 17774)
+-- TOC entry 3510 (class 2606 OID 16947)
 -- Name: realm_supported_locales constr_realm_supported_locales; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3090,7 +3720,7 @@ ALTER TABLE ONLY public.realm_supported_locales
 
 
 --
--- TOC entry 3414 (class 2606 OID 16871)
+-- TOC entry 3442 (class 2606 OID 16949)
 -- Name: identity_provider constraint_2b; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3099,7 +3729,7 @@ ALTER TABLE ONLY public.identity_provider
 
 
 --
--- TOC entry 3397 (class 2606 OID 16799)
+-- TOC entry 3342 (class 2606 OID 16951)
 -- Name: client_attributes constraint_3c; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3108,7 +3738,7 @@ ALTER TABLE ONLY public.client_attributes
 
 
 --
--- TOC entry 3338 (class 2606 OID 16571)
+-- TOC entry 3401 (class 2606 OID 16953)
 -- Name: event_entity constraint_4; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3117,7 +3747,7 @@ ALTER TABLE ONLY public.event_entity
 
 
 --
--- TOC entry 3410 (class 2606 OID 16873)
+-- TOC entry 3430 (class 2606 OID 16955)
 -- Name: federated_identity constraint_40; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3126,7 +3756,7 @@ ALTER TABLE ONLY public.federated_identity
 
 
 --
--- TOC entry 3347 (class 2606 OID 16573)
+-- TOC entry 3485 (class 2606 OID 16957)
 -- Name: realm constraint_4a; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3135,7 +3765,7 @@ ALTER TABLE ONLY public.realm
 
 
 --
--- TOC entry 3329 (class 2606 OID 16575)
+-- TOC entry 3377 (class 2606 OID 16959)
 -- Name: client_session_role constraint_5; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3144,7 +3774,7 @@ ALTER TABLE ONLY public.client_session_role
 
 
 --
--- TOC entry 3392 (class 2606 OID 16577)
+-- TOC entry 3600 (class 2606 OID 16961)
 -- Name: user_session constraint_57; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3153,7 +3783,7 @@ ALTER TABLE ONLY public.user_session
 
 
 --
--- TOC entry 3383 (class 2606 OID 16579)
+-- TOC entry 3588 (class 2606 OID 16963)
 -- Name: user_federation_provider constraint_5c; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3162,7 +3792,7 @@ ALTER TABLE ONLY public.user_federation_provider
 
 
 --
--- TOC entry 3400 (class 2606 OID 16801)
+-- TOC entry 3373 (class 2606 OID 16965)
 -- Name: client_session_note constraint_5e; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3171,7 +3801,7 @@ ALTER TABLE ONLY public.client_session_note
 
 
 --
--- TOC entry 3321 (class 2606 OID 16583)
+-- TOC entry 3337 (class 2606 OID 16967)
 -- Name: client constraint_7; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3180,7 +3810,7 @@ ALTER TABLE ONLY public.client
 
 
 --
--- TOC entry 3326 (class 2606 OID 16585)
+-- TOC entry 3368 (class 2606 OID 16969)
 -- Name: client_session constraint_8; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3189,7 +3819,7 @@ ALTER TABLE ONLY public.client_session
 
 
 --
--- TOC entry 3365 (class 2606 OID 16587)
+-- TOC entry 3555 (class 2606 OID 16971)
 -- Name: scope_mapping constraint_81; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3198,7 +3828,7 @@ ALTER TABLE ONLY public.scope_mapping
 
 
 --
--- TOC entry 3402 (class 2606 OID 16803)
+-- TOC entry 3350 (class 2606 OID 16973)
 -- Name: client_node_registrations constraint_84; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3207,7 +3837,7 @@ ALTER TABLE ONLY public.client_node_registrations
 
 
 --
--- TOC entry 3352 (class 2606 OID 16589)
+-- TOC entry 3490 (class 2606 OID 16975)
 -- Name: realm_attribute constraint_9; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3216,7 +3846,7 @@ ALTER TABLE ONLY public.realm_attribute
 
 
 --
--- TOC entry 3358 (class 2606 OID 16591)
+-- TOC entry 3506 (class 2606 OID 16977)
 -- Name: realm_required_credential constraint_92; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3225,7 +3855,7 @@ ALTER TABLE ONLY public.realm_required_credential
 
 
 --
--- TOC entry 3343 (class 2606 OID 16593)
+-- TOC entry 3460 (class 2606 OID 16979)
 -- Name: keycloak_role constraint_a; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3234,7 +3864,7 @@ ALTER TABLE ONLY public.keycloak_role
 
 
 --
--- TOC entry 3444 (class 2606 OID 17757)
+-- TOC entry 3318 (class 2606 OID 16981)
 -- Name: admin_event_entity constraint_admin_event_entity; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3243,7 +3873,7 @@ ALTER TABLE ONLY public.admin_event_entity
 
 
 --
--- TOC entry 3456 (class 2606 OID 17110)
+-- TOC entry 3333 (class 2606 OID 16983)
 -- Name: authenticator_config_entry constraint_auth_cfg_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3252,7 +3882,7 @@ ALTER TABLE ONLY public.authenticator_config_entry
 
 
 --
--- TOC entry 3452 (class 2606 OID 17108)
+-- TOC entry 3323 (class 2606 OID 16985)
 -- Name: authentication_execution constraint_auth_exec_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3261,7 +3891,7 @@ ALTER TABLE ONLY public.authentication_execution
 
 
 --
--- TOC entry 3449 (class 2606 OID 17106)
+-- TOC entry 3327 (class 2606 OID 16987)
 -- Name: authentication_flow constraint_auth_flow_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3270,7 +3900,7 @@ ALTER TABLE ONLY public.authentication_flow
 
 
 --
--- TOC entry 3446 (class 2606 OID 17104)
+-- TOC entry 3330 (class 2606 OID 16989)
 -- Name: authenticator_config constraint_auth_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3279,7 +3909,7 @@ ALTER TABLE ONLY public.authenticator_config
 
 
 --
--- TOC entry 3464 (class 2606 OID 17114)
+-- TOC entry 3371 (class 2606 OID 16991)
 -- Name: client_session_auth_status constraint_auth_status_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3288,7 +3918,7 @@ ALTER TABLE ONLY public.client_session_auth_status
 
 
 --
--- TOC entry 3389 (class 2606 OID 16595)
+-- TOC entry 3597 (class 2606 OID 16993)
 -- Name: user_role_mapping constraint_c; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3297,7 +3927,7 @@ ALTER TABLE ONLY public.user_role_mapping
 
 
 --
--- TOC entry 3331 (class 2606 OID 17751)
+-- TOC entry 3388 (class 2606 OID 16995)
 -- Name: composite_role constraint_composite_role; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3306,7 +3936,7 @@ ALTER TABLE ONLY public.composite_role
 
 
 --
--- TOC entry 3442 (class 2606 OID 16991)
+-- TOC entry 3375 (class 2606 OID 16997)
 -- Name: client_session_prot_mapper constraint_cs_pmp_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3315,7 +3945,7 @@ ALTER TABLE ONLY public.client_session_prot_mapper
 
 
 --
--- TOC entry 3419 (class 2606 OID 16875)
+-- TOC entry 3447 (class 2606 OID 16999)
 -- Name: identity_provider_config constraint_d; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3324,7 +3954,7 @@ ALTER TABLE ONLY public.identity_provider_config
 
 
 --
--- TOC entry 3530 (class 2606 OID 17465)
+-- TOC entry 3477 (class 2606 OID 17001)
 -- Name: policy_config constraint_dpc; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3333,7 +3963,7 @@ ALTER TABLE ONLY public.policy_config
 
 
 --
--- TOC entry 3360 (class 2606 OID 16597)
+-- TOC entry 3508 (class 2606 OID 17003)
 -- Name: realm_smtp_config constraint_e; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3342,7 +3972,7 @@ ALTER TABLE ONLY public.realm_smtp_config
 
 
 --
--- TOC entry 3335 (class 2606 OID 16599)
+-- TOC entry 3392 (class 2606 OID 17005)
 -- Name: credential constraint_f; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3351,7 +3981,7 @@ ALTER TABLE ONLY public.credential
 
 
 --
--- TOC entry 3381 (class 2606 OID 16601)
+-- TOC entry 3580 (class 2606 OID 17007)
 -- Name: user_federation_config constraint_f9; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3360,7 +3990,7 @@ ALTER TABLE ONLY public.user_federation_config
 
 
 --
--- TOC entry 3597 (class 2606 OID 17893)
+-- TOC entry 3531 (class 2606 OID 17009)
 -- Name: resource_server_perm_ticket constraint_fapmt; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3369,7 +3999,7 @@ ALTER TABLE ONLY public.resource_server_perm_ticket
 
 
 --
--- TOC entry 3515 (class 2606 OID 17420)
+-- TOC entry 3540 (class 2606 OID 17011)
 -- Name: resource_server_resource constraint_farsr; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3378,7 +4008,7 @@ ALTER TABLE ONLY public.resource_server_resource
 
 
 --
--- TOC entry 3525 (class 2606 OID 17450)
+-- TOC entry 3535 (class 2606 OID 17013)
 -- Name: resource_server_policy constraint_farsrp; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3387,7 +4017,7 @@ ALTER TABLE ONLY public.resource_server_policy
 
 
 --
--- TOC entry 3541 (class 2606 OID 17520)
+-- TOC entry 3320 (class 2606 OID 17015)
 -- Name: associated_policy constraint_farsrpap; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3396,7 +4026,7 @@ ALTER TABLE ONLY public.associated_policy
 
 
 --
--- TOC entry 3535 (class 2606 OID 17490)
+-- TOC entry 3523 (class 2606 OID 17017)
 -- Name: resource_policy constraint_farsrpp; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3405,7 +4035,7 @@ ALTER TABLE ONLY public.resource_policy
 
 
 --
--- TOC entry 3520 (class 2606 OID 17435)
+-- TOC entry 3545 (class 2606 OID 17019)
 -- Name: resource_server_scope constraint_farsrs; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3414,7 +4044,7 @@ ALTER TABLE ONLY public.resource_server_scope
 
 
 --
--- TOC entry 3532 (class 2606 OID 17475)
+-- TOC entry 3526 (class 2606 OID 17021)
 -- Name: resource_scope constraint_farsrsp; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3423,7 +4053,7 @@ ALTER TABLE ONLY public.resource_scope
 
 
 --
--- TOC entry 3538 (class 2606 OID 17505)
+-- TOC entry 3558 (class 2606 OID 17023)
 -- Name: scope_policy constraint_farsrsps; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3432,7 +4062,7 @@ ALTER TABLE ONLY public.scope_policy
 
 
 --
--- TOC entry 3374 (class 2606 OID 16603)
+-- TOC entry 3573 (class 2606 OID 17025)
 -- Name: user_entity constraint_fb; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3441,7 +4071,7 @@ ALTER TABLE ONLY public.user_entity
 
 
 --
--- TOC entry 3462 (class 2606 OID 17118)
+-- TOC entry 3586 (class 2606 OID 17027)
 -- Name: user_federation_mapper_config constraint_fedmapper_cfg_pm; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3450,7 +4080,7 @@ ALTER TABLE ONLY public.user_federation_mapper_config
 
 
 --
--- TOC entry 3458 (class 2606 OID 17116)
+-- TOC entry 3582 (class 2606 OID 17029)
 -- Name: user_federation_mapper constraint_fedmapperpm; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3459,7 +4089,7 @@ ALTER TABLE ONLY public.user_federation_mapper
 
 
 --
--- TOC entry 3595 (class 2606 OID 17878)
+-- TOC entry 3412 (class 2606 OID 17031)
 -- Name: fed_user_consent_cl_scope constraint_fgrntcsnt_clsc_pm; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3468,7 +4098,7 @@ ALTER TABLE ONLY public.fed_user_consent_cl_scope
 
 
 --
--- TOC entry 3592 (class 2606 OID 17868)
+-- TOC entry 3570 (class 2606 OID 17033)
 -- Name: user_consent_client_scope constraint_grntcsnt_clsc_pm; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3477,7 +4107,7 @@ ALTER TABLE ONLY public.user_consent_client_scope
 
 
 --
--- TOC entry 3437 (class 2606 OID 16985)
+-- TOC entry 3565 (class 2606 OID 17035)
 -- Name: user_consent constraint_grntcsnt_pm; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3486,7 +4116,7 @@ ALTER TABLE ONLY public.user_consent
 
 
 --
--- TOC entry 3483 (class 2606 OID 17267)
+-- TOC entry 3454 (class 2606 OID 17037)
 -- Name: keycloak_group constraint_group; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3495,7 +4125,7 @@ ALTER TABLE ONLY public.keycloak_group
 
 
 --
--- TOC entry 3490 (class 2606 OID 17274)
+-- TOC entry 3436 (class 2606 OID 17039)
 -- Name: group_attribute constraint_group_attribute_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3504,7 +4134,7 @@ ALTER TABLE ONLY public.group_attribute
 
 
 --
--- TOC entry 3487 (class 2606 OID 17288)
+-- TOC entry 3439 (class 2606 OID 17041)
 -- Name: group_role_mapping constraint_group_role; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3513,7 +4143,7 @@ ALTER TABLE ONLY public.group_role_mapping
 
 
 --
--- TOC entry 3432 (class 2606 OID 16981)
+-- TOC entry 3449 (class 2606 OID 17043)
 -- Name: identity_provider_mapper constraint_idpm; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3522,7 +4152,7 @@ ALTER TABLE ONLY public.identity_provider_mapper
 
 
 --
--- TOC entry 3435 (class 2606 OID 17167)
+-- TOC entry 3452 (class 2606 OID 17045)
 -- Name: idp_mapper_config constraint_idpmconfig; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3531,7 +4161,7 @@ ALTER TABLE ONLY public.idp_mapper_config
 
 
 --
--- TOC entry 3429 (class 2606 OID 16979)
+-- TOC entry 3464 (class 2606 OID 17047)
 -- Name: migration_model constraint_migmod; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3540,7 +4170,7 @@ ALTER TABLE ONLY public.migration_model
 
 
 --
--- TOC entry 3479 (class 2606 OID 17976)
+-- TOC entry 3467 (class 2606 OID 17049)
 -- Name: offline_client_session constraint_offl_cl_ses_pk3; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3549,7 +4179,7 @@ ALTER TABLE ONLY public.offline_client_session
 
 
 --
--- TOC entry 3473 (class 2606 OID 17242)
+-- TOC entry 3471 (class 2606 OID 17051)
 -- Name: offline_user_session constraint_offl_us_ses_pk2; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3558,7 +4188,7 @@ ALTER TABLE ONLY public.offline_user_session
 
 
 --
--- TOC entry 3404 (class 2606 OID 16869)
+-- TOC entry 3479 (class 2606 OID 17053)
 -- Name: protocol_mapper constraint_pcm; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3567,7 +4197,7 @@ ALTER TABLE ONLY public.protocol_mapper
 
 
 --
--- TOC entry 3408 (class 2606 OID 17160)
+-- TOC entry 3483 (class 2606 OID 17055)
 -- Name: protocol_mapper_config constraint_pmconfig; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3576,7 +4206,7 @@ ALTER TABLE ONLY public.protocol_mapper_config
 
 
 --
--- TOC entry 3362 (class 2606 OID 17776)
+-- TOC entry 3513 (class 2606 OID 17057)
 -- Name: redirect_uris constraint_redirect_uris; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3585,7 +4215,7 @@ ALTER TABLE ONLY public.redirect_uris
 
 
 --
--- TOC entry 3471 (class 2606 OID 17203)
+-- TOC entry 3516 (class 2606 OID 17059)
 -- Name: required_action_config constraint_req_act_cfg_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3594,7 +4224,7 @@ ALTER TABLE ONLY public.required_action_config
 
 
 --
--- TOC entry 3468 (class 2606 OID 17201)
+-- TOC entry 3518 (class 2606 OID 17061)
 -- Name: required_action_provider constraint_req_act_prv_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3603,7 +4233,7 @@ ALTER TABLE ONLY public.required_action_provider
 
 
 --
--- TOC entry 3386 (class 2606 OID 17112)
+-- TOC entry 3594 (class 2606 OID 17063)
 -- Name: user_required_action constraint_required_action; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3612,7 +4242,7 @@ ALTER TABLE ONLY public.user_required_action
 
 
 --
--- TOC entry 3603 (class 2606 OID 17941)
+-- TOC entry 3550 (class 2606 OID 17065)
 -- Name: resource_uris constraint_resour_uris_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3621,7 +4251,7 @@ ALTER TABLE ONLY public.resource_uris
 
 
 --
--- TOC entry 3605 (class 2606 OID 17949)
+-- TOC entry 3552 (class 2606 OID 17067)
 -- Name: role_attribute constraint_role_attribute_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3630,7 +4260,7 @@ ALTER TABLE ONLY public.role_attribute
 
 
 --
--- TOC entry 3370 (class 2606 OID 17199)
+-- TOC entry 3561 (class 2606 OID 17069)
 -- Name: user_attribute constraint_user_attribute_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3639,7 +4269,7 @@ ALTER TABLE ONLY public.user_attribute
 
 
 --
--- TOC entry 3493 (class 2606 OID 17281)
+-- TOC entry 3591 (class 2606 OID 17071)
 -- Name: user_group_membership constraint_user_group; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3648,7 +4278,7 @@ ALTER TABLE ONLY public.user_group_membership
 
 
 --
--- TOC entry 3424 (class 2606 OID 16879)
+-- TOC entry 3602 (class 2606 OID 17073)
 -- Name: user_session_note constraint_usn_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3657,7 +4287,7 @@ ALTER TABLE ONLY public.user_session_note
 
 
 --
--- TOC entry 3394 (class 2606 OID 17778)
+-- TOC entry 3606 (class 2606 OID 17075)
 -- Name: web_origins constraint_web_origins; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3666,7 +4296,7 @@ ALTER TABLE ONLY public.web_origins
 
 
 --
--- TOC entry 3507 (class 2606 OID 17386)
+-- TOC entry 3358 (class 2606 OID 17077)
 -- Name: client_scope_attributes pk_cl_tmpl_attr; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3675,7 +4305,7 @@ ALTER TABLE ONLY public.client_scope_attributes
 
 
 --
--- TOC entry 3502 (class 2606 OID 17345)
+-- TOC entry 3353 (class 2606 OID 17079)
 -- Name: client_scope pk_cli_template; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3684,7 +4314,7 @@ ALTER TABLE ONLY public.client_scope
 
 
 --
--- TOC entry 3319 (class 2606 OID 16398)
+-- TOC entry 3395 (class 2606 OID 17081)
 -- Name: databasechangeloglock pk_databasechangeloglock; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3693,7 +4323,7 @@ ALTER TABLE ONLY public.databasechangeloglock
 
 
 --
--- TOC entry 3513 (class 2606 OID 17731)
+-- TOC entry 3529 (class 2606 OID 17083)
 -- Name: resource_server pk_resource_server; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3702,7 +4332,7 @@ ALTER TABLE ONLY public.resource_server
 
 
 --
--- TOC entry 3511 (class 2606 OID 17374)
+-- TOC entry 3366 (class 2606 OID 17085)
 -- Name: client_scope_role_mapping pk_template_scope; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3711,7 +4341,7 @@ ALTER TABLE ONLY public.client_scope_role_mapping
 
 
 --
--- TOC entry 3590 (class 2606 OID 17853)
+-- TOC entry 3399 (class 2606 OID 17087)
 -- Name: default_client_scope r_def_cli_scope_bind; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3720,7 +4350,7 @@ ALTER TABLE ONLY public.default_client_scope
 
 
 --
--- TOC entry 3608 (class 2606 OID 17995)
+-- TOC entry 3504 (class 2606 OID 17089)
 -- Name: realm_localizations realm_localizations_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3729,7 +4359,7 @@ ALTER TABLE ONLY public.realm_localizations
 
 
 --
--- TOC entry 3601 (class 2606 OID 17921)
+-- TOC entry 3521 (class 2606 OID 17091)
 -- Name: resource_attribute res_attr_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3738,7 +4368,7 @@ ALTER TABLE ONLY public.resource_attribute
 
 
 --
--- TOC entry 3485 (class 2606 OID 17661)
+-- TOC entry 3456 (class 2606 OID 17093)
 -- Name: keycloak_group sibling_names; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3747,7 +4377,7 @@ ALTER TABLE ONLY public.keycloak_group
 
 
 --
--- TOC entry 3417 (class 2606 OID 16926)
+-- TOC entry 3445 (class 2606 OID 17095)
 -- Name: identity_provider uk_2daelwnibji49avxsrtuf6xj33; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3756,7 +4386,7 @@ ALTER TABLE ONLY public.identity_provider
 
 
 --
--- TOC entry 3324 (class 2606 OID 16607)
+-- TOC entry 3340 (class 2606 OID 17097)
 -- Name: client uk_b71cjlbenv945rb6gcon438at; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3765,7 +4395,7 @@ ALTER TABLE ONLY public.client
 
 
 --
--- TOC entry 3504 (class 2606 OID 17806)
+-- TOC entry 3355 (class 2606 OID 17099)
 -- Name: client_scope uk_cli_scope; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3774,7 +4404,7 @@ ALTER TABLE ONLY public.client_scope
 
 
 --
--- TOC entry 3377 (class 2606 OID 16611)
+-- TOC entry 3576 (class 2606 OID 17101)
 -- Name: user_entity uk_dykn684sl8up1crfei6eckhd7; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3783,7 +4413,7 @@ ALTER TABLE ONLY public.user_entity
 
 
 --
--- TOC entry 3518 (class 2606 OID 17985)
+-- TOC entry 3543 (class 2606 OID 17103)
 -- Name: resource_server_resource uk_frsr6t700s9v50bu18ws5ha6; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3792,7 +4422,7 @@ ALTER TABLE ONLY public.resource_server_resource
 
 
 --
--- TOC entry 3599 (class 2606 OID 17980)
+-- TOC entry 3533 (class 2606 OID 17105)
 -- Name: resource_server_perm_ticket uk_frsr6t700s9v50bu18ws5pmt; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3801,7 +4431,7 @@ ALTER TABLE ONLY public.resource_server_perm_ticket
 
 
 --
--- TOC entry 3528 (class 2606 OID 17722)
+-- TOC entry 3538 (class 2606 OID 17107)
 -- Name: resource_server_policy uk_frsrpt700s9v50bu18ws5ha6; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3810,7 +4440,7 @@ ALTER TABLE ONLY public.resource_server_policy
 
 
 --
--- TOC entry 3523 (class 2606 OID 17726)
+-- TOC entry 3548 (class 2606 OID 17109)
 -- Name: resource_server_scope uk_frsrst700s9v50bu18ws5ha6; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3819,7 +4449,7 @@ ALTER TABLE ONLY public.resource_server_scope
 
 
 --
--- TOC entry 3440 (class 2606 OID 17971)
+-- TOC entry 3568 (class 2606 OID 17111)
 -- Name: user_consent uk_jkuwuvd56ontgsuhogm8uewrt; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3828,7 +4458,7 @@ ALTER TABLE ONLY public.user_consent
 
 
 --
--- TOC entry 3350 (class 2606 OID 16619)
+-- TOC entry 3488 (class 2606 OID 17113)
 -- Name: realm uk_orvsdmla56612eaefiq6wl5oi; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3837,7 +4467,7 @@ ALTER TABLE ONLY public.realm
 
 
 --
--- TOC entry 3379 (class 2606 OID 17650)
+-- TOC entry 3578 (class 2606 OID 17115)
 -- Name: user_entity uk_ru8tt6t700s9v50bu18ws5ha6; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3846,7 +4476,7 @@ ALTER TABLE ONLY public.user_entity
 
 
 --
--- TOC entry 3542 (class 1259 OID 17675)
+-- TOC entry 3321 (class 1259 OID 17116)
 -- Name: idx_assoc_pol_assoc_pol_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3854,7 +4484,7 @@ CREATE INDEX idx_assoc_pol_assoc_pol_id ON public.associated_policy USING btree 
 
 
 --
--- TOC entry 3447 (class 1259 OID 17679)
+-- TOC entry 3331 (class 1259 OID 17117)
 -- Name: idx_auth_config_realm; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3862,7 +4492,7 @@ CREATE INDEX idx_auth_config_realm ON public.authenticator_config USING btree (r
 
 
 --
--- TOC entry 3453 (class 1259 OID 17677)
+-- TOC entry 3324 (class 1259 OID 17118)
 -- Name: idx_auth_exec_flow; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3870,7 +4500,7 @@ CREATE INDEX idx_auth_exec_flow ON public.authentication_execution USING btree (
 
 
 --
--- TOC entry 3454 (class 1259 OID 17676)
+-- TOC entry 3325 (class 1259 OID 17119)
 -- Name: idx_auth_exec_realm_flow; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3878,7 +4508,7 @@ CREATE INDEX idx_auth_exec_realm_flow ON public.authentication_execution USING b
 
 
 --
--- TOC entry 3450 (class 1259 OID 17678)
+-- TOC entry 3328 (class 1259 OID 17120)
 -- Name: idx_auth_flow_realm; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3886,7 +4516,7 @@ CREATE INDEX idx_auth_flow_realm ON public.authentication_flow USING btree (real
 
 
 --
--- TOC entry 3585 (class 1259 OID 18002)
+-- TOC entry 3361 (class 1259 OID 17121)
 -- Name: idx_cl_clscope; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3894,7 +4524,7 @@ CREATE INDEX idx_cl_clscope ON public.client_scope_client USING btree (scope_id)
 
 
 --
--- TOC entry 3398 (class 1259 OID 18009)
+-- TOC entry 3343 (class 1259 OID 17122)
 -- Name: idx_client_att_by_name_value; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3902,7 +4532,7 @@ CREATE INDEX idx_client_att_by_name_value ON public.client_attributes USING btre
 
 
 --
--- TOC entry 3322 (class 1259 OID 17986)
+-- TOC entry 3338 (class 1259 OID 17123)
 -- Name: idx_client_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3910,7 +4540,7 @@ CREATE INDEX idx_client_id ON public.client USING btree (client_id);
 
 
 --
--- TOC entry 3580 (class 1259 OID 17719)
+-- TOC entry 3348 (class 1259 OID 17124)
 -- Name: idx_client_init_acc_realm; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3918,7 +4548,7 @@ CREATE INDEX idx_client_init_acc_realm ON public.client_initial_access USING btr
 
 
 --
--- TOC entry 3327 (class 1259 OID 17683)
+-- TOC entry 3369 (class 1259 OID 17125)
 -- Name: idx_client_session_session; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3926,7 +4556,7 @@ CREATE INDEX idx_client_session_session ON public.client_session USING btree (se
 
 
 --
--- TOC entry 3505 (class 1259 OID 17883)
+-- TOC entry 3356 (class 1259 OID 17126)
 -- Name: idx_clscope_attrs; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3934,7 +4564,7 @@ CREATE INDEX idx_clscope_attrs ON public.client_scope_attributes USING btree (sc
 
 
 --
--- TOC entry 3586 (class 1259 OID 17999)
+-- TOC entry 3362 (class 1259 OID 17127)
 -- Name: idx_clscope_cl; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3942,7 +4572,7 @@ CREATE INDEX idx_clscope_cl ON public.client_scope_client USING btree (client_id
 
 
 --
--- TOC entry 3405 (class 1259 OID 17880)
+-- TOC entry 3480 (class 1259 OID 17128)
 -- Name: idx_clscope_protmap; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3950,7 +4580,7 @@ CREATE INDEX idx_clscope_protmap ON public.protocol_mapper USING btree (client_s
 
 
 --
--- TOC entry 3508 (class 1259 OID 17881)
+-- TOC entry 3363 (class 1259 OID 17129)
 -- Name: idx_clscope_role; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3958,7 +4588,7 @@ CREATE INDEX idx_clscope_role ON public.client_scope_role_mapping USING btree (s
 
 
 --
--- TOC entry 3571 (class 1259 OID 17685)
+-- TOC entry 3386 (class 1259 OID 17130)
 -- Name: idx_compo_config_compo; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3966,7 +4596,7 @@ CREATE INDEX idx_compo_config_compo ON public.component_config USING btree (comp
 
 
 --
--- TOC entry 3574 (class 1259 OID 17956)
+-- TOC entry 3382 (class 1259 OID 17131)
 -- Name: idx_component_provider_type; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3974,7 +4604,7 @@ CREATE INDEX idx_component_provider_type ON public.component USING btree (provid
 
 
 --
--- TOC entry 3575 (class 1259 OID 17684)
+-- TOC entry 3383 (class 1259 OID 17132)
 -- Name: idx_component_realm; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3982,7 +4612,7 @@ CREATE INDEX idx_component_realm ON public.component USING btree (realm_id);
 
 
 --
--- TOC entry 3332 (class 1259 OID 17686)
+-- TOC entry 3389 (class 1259 OID 17133)
 -- Name: idx_composite; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3990,7 +4620,7 @@ CREATE INDEX idx_composite ON public.composite_role USING btree (composite);
 
 
 --
--- TOC entry 3333 (class 1259 OID 17687)
+-- TOC entry 3390 (class 1259 OID 17134)
 -- Name: idx_composite_child; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -3998,7 +4628,7 @@ CREATE INDEX idx_composite_child ON public.composite_role USING btree (child_rol
 
 
 --
--- TOC entry 3587 (class 1259 OID 17886)
+-- TOC entry 3396 (class 1259 OID 17135)
 -- Name: idx_defcls_realm; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4006,7 +4636,7 @@ CREATE INDEX idx_defcls_realm ON public.default_client_scope USING btree (realm_
 
 
 --
--- TOC entry 3588 (class 1259 OID 17887)
+-- TOC entry 3397 (class 1259 OID 17136)
 -- Name: idx_defcls_scope; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4014,7 +4644,7 @@ CREATE INDEX idx_defcls_scope ON public.default_client_scope USING btree (scope_
 
 
 --
--- TOC entry 3339 (class 1259 OID 17987)
+-- TOC entry 3402 (class 1259 OID 17137)
 -- Name: idx_event_time; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4022,7 +4652,7 @@ CREATE INDEX idx_event_time ON public.event_entity USING btree (realm_id, event_
 
 
 --
--- TOC entry 3411 (class 1259 OID 17404)
+-- TOC entry 3431 (class 1259 OID 17138)
 -- Name: idx_fedidentity_feduser; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4030,7 +4660,7 @@ CREATE INDEX idx_fedidentity_feduser ON public.federated_identity USING btree (f
 
 
 --
--- TOC entry 3412 (class 1259 OID 17403)
+-- TOC entry 3432 (class 1259 OID 17139)
 -- Name: idx_fedidentity_user; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4038,7 +4668,7 @@ CREATE INDEX idx_fedidentity_user ON public.federated_identity USING btree (user
 
 
 --
--- TOC entry 3547 (class 1259 OID 17779)
+-- TOC entry 3405 (class 1259 OID 17140)
 -- Name: idx_fu_attribute; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4046,7 +4676,7 @@ CREATE INDEX idx_fu_attribute ON public.fed_user_attribute USING btree (user_id,
 
 
 --
--- TOC entry 3550 (class 1259 OID 17800)
+-- TOC entry 3408 (class 1259 OID 17141)
 -- Name: idx_fu_cnsnt_ext; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4054,7 +4684,7 @@ CREATE INDEX idx_fu_cnsnt_ext ON public.fed_user_consent USING btree (user_id, c
 
 
 --
--- TOC entry 3551 (class 1259 OID 17967)
+-- TOC entry 3409 (class 1259 OID 17142)
 -- Name: idx_fu_consent; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4062,7 +4692,7 @@ CREATE INDEX idx_fu_consent ON public.fed_user_consent USING btree (user_id, cli
 
 
 --
--- TOC entry 3552 (class 1259 OID 17781)
+-- TOC entry 3410 (class 1259 OID 17143)
 -- Name: idx_fu_consent_ru; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4070,7 +4700,7 @@ CREATE INDEX idx_fu_consent_ru ON public.fed_user_consent USING btree (realm_id,
 
 
 --
--- TOC entry 3555 (class 1259 OID 17782)
+-- TOC entry 3415 (class 1259 OID 17144)
 -- Name: idx_fu_credential; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4078,7 +4708,7 @@ CREATE INDEX idx_fu_credential ON public.fed_user_credential USING btree (user_i
 
 
 --
--- TOC entry 3556 (class 1259 OID 17783)
+-- TOC entry 3416 (class 1259 OID 17145)
 -- Name: idx_fu_credential_ru; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4086,7 +4716,7 @@ CREATE INDEX idx_fu_credential_ru ON public.fed_user_credential USING btree (rea
 
 
 --
--- TOC entry 3559 (class 1259 OID 17784)
+-- TOC entry 3419 (class 1259 OID 17146)
 -- Name: idx_fu_group_membership; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4094,7 +4724,7 @@ CREATE INDEX idx_fu_group_membership ON public.fed_user_group_membership USING b
 
 
 --
--- TOC entry 3560 (class 1259 OID 17785)
+-- TOC entry 3420 (class 1259 OID 17147)
 -- Name: idx_fu_group_membership_ru; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4102,7 +4732,7 @@ CREATE INDEX idx_fu_group_membership_ru ON public.fed_user_group_membership USIN
 
 
 --
--- TOC entry 3563 (class 1259 OID 17786)
+-- TOC entry 3423 (class 1259 OID 17148)
 -- Name: idx_fu_required_action; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4110,7 +4740,7 @@ CREATE INDEX idx_fu_required_action ON public.fed_user_required_action USING btr
 
 
 --
--- TOC entry 3564 (class 1259 OID 17787)
+-- TOC entry 3424 (class 1259 OID 17149)
 -- Name: idx_fu_required_action_ru; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4118,7 +4748,7 @@ CREATE INDEX idx_fu_required_action_ru ON public.fed_user_required_action USING 
 
 
 --
--- TOC entry 3567 (class 1259 OID 17788)
+-- TOC entry 3427 (class 1259 OID 17150)
 -- Name: idx_fu_role_mapping; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4126,7 +4756,7 @@ CREATE INDEX idx_fu_role_mapping ON public.fed_user_role_mapping USING btree (us
 
 
 --
--- TOC entry 3568 (class 1259 OID 17789)
+-- TOC entry 3428 (class 1259 OID 17151)
 -- Name: idx_fu_role_mapping_ru; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4134,7 +4764,7 @@ CREATE INDEX idx_fu_role_mapping_ru ON public.fed_user_role_mapping USING btree 
 
 
 --
--- TOC entry 3491 (class 1259 OID 17690)
+-- TOC entry 3437 (class 1259 OID 17152)
 -- Name: idx_group_attr_group; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4142,7 +4772,7 @@ CREATE INDEX idx_group_attr_group ON public.group_attribute USING btree (group_i
 
 
 --
--- TOC entry 3488 (class 1259 OID 17691)
+-- TOC entry 3440 (class 1259 OID 17153)
 -- Name: idx_group_role_mapp_group; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4150,7 +4780,7 @@ CREATE INDEX idx_group_role_mapp_group ON public.group_role_mapping USING btree 
 
 
 --
--- TOC entry 3433 (class 1259 OID 17693)
+-- TOC entry 3450 (class 1259 OID 17154)
 -- Name: idx_id_prov_mapp_realm; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4158,7 +4788,7 @@ CREATE INDEX idx_id_prov_mapp_realm ON public.identity_provider_mapper USING btr
 
 
 --
--- TOC entry 3415 (class 1259 OID 17692)
+-- TOC entry 3443 (class 1259 OID 17155)
 -- Name: idx_ident_prov_realm; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4166,7 +4796,7 @@ CREATE INDEX idx_ident_prov_realm ON public.identity_provider USING btree (realm
 
 
 --
--- TOC entry 3344 (class 1259 OID 17694)
+-- TOC entry 3461 (class 1259 OID 17156)
 -- Name: idx_keycloak_role_client; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4174,7 +4804,7 @@ CREATE INDEX idx_keycloak_role_client ON public.keycloak_role USING btree (clien
 
 
 --
--- TOC entry 3345 (class 1259 OID 17695)
+-- TOC entry 3462 (class 1259 OID 17157)
 -- Name: idx_keycloak_role_realm; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4182,7 +4812,7 @@ CREATE INDEX idx_keycloak_role_realm ON public.keycloak_role USING btree (realm)
 
 
 --
--- TOC entry 3480 (class 1259 OID 18006)
+-- TOC entry 3468 (class 1259 OID 17158)
 -- Name: idx_offline_css_preload; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4190,7 +4820,7 @@ CREATE INDEX idx_offline_css_preload ON public.offline_client_session USING btre
 
 
 --
--- TOC entry 3474 (class 1259 OID 18007)
+-- TOC entry 3472 (class 1259 OID 17159)
 -- Name: idx_offline_uss_by_user; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4198,7 +4828,7 @@ CREATE INDEX idx_offline_uss_by_user ON public.offline_user_session USING btree 
 
 
 --
--- TOC entry 3475 (class 1259 OID 18008)
+-- TOC entry 3473 (class 1259 OID 17160)
 -- Name: idx_offline_uss_by_usersess; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4206,7 +4836,7 @@ CREATE INDEX idx_offline_uss_by_usersess ON public.offline_user_session USING bt
 
 
 --
--- TOC entry 3476 (class 1259 OID 17960)
+-- TOC entry 3474 (class 1259 OID 17161)
 -- Name: idx_offline_uss_createdon; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4214,7 +4844,7 @@ CREATE INDEX idx_offline_uss_createdon ON public.offline_user_session USING btre
 
 
 --
--- TOC entry 3477 (class 1259 OID 17996)
+-- TOC entry 3475 (class 1259 OID 17162)
 -- Name: idx_offline_uss_preload; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4222,7 +4852,7 @@ CREATE INDEX idx_offline_uss_preload ON public.offline_user_session USING btree 
 
 
 --
--- TOC entry 3406 (class 1259 OID 17696)
+-- TOC entry 3481 (class 1259 OID 17163)
 -- Name: idx_protocol_mapper_client; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4230,7 +4860,7 @@ CREATE INDEX idx_protocol_mapper_client ON public.protocol_mapper USING btree (c
 
 
 --
--- TOC entry 3353 (class 1259 OID 17699)
+-- TOC entry 3491 (class 1259 OID 17164)
 -- Name: idx_realm_attr_realm; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4238,7 +4868,7 @@ CREATE INDEX idx_realm_attr_realm ON public.realm_attribute USING btree (realm_i
 
 
 --
--- TOC entry 3500 (class 1259 OID 17879)
+-- TOC entry 3351 (class 1259 OID 17165)
 -- Name: idx_realm_clscope; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4246,7 +4876,7 @@ CREATE INDEX idx_realm_clscope ON public.client_scope USING btree (realm_id);
 
 
 --
--- TOC entry 3499 (class 1259 OID 17700)
+-- TOC entry 3496 (class 1259 OID 17166)
 -- Name: idx_realm_def_grp_realm; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4254,7 +4884,7 @@ CREATE INDEX idx_realm_def_grp_realm ON public.realm_default_groups USING btree 
 
 
 --
--- TOC entry 3356 (class 1259 OID 17703)
+-- TOC entry 3502 (class 1259 OID 17167)
 -- Name: idx_realm_evt_list_realm; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4262,7 +4892,7 @@ CREATE INDEX idx_realm_evt_list_realm ON public.realm_events_listeners USING btr
 
 
 --
--- TOC entry 3427 (class 1259 OID 17702)
+-- TOC entry 3499 (class 1259 OID 17168)
 -- Name: idx_realm_evt_types_realm; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4270,7 +4900,7 @@ CREATE INDEX idx_realm_evt_types_realm ON public.realm_enabled_event_types USING
 
 
 --
--- TOC entry 3348 (class 1259 OID 17698)
+-- TOC entry 3486 (class 1259 OID 17169)
 -- Name: idx_realm_master_adm_cli; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4278,7 +4908,7 @@ CREATE INDEX idx_realm_master_adm_cli ON public.realm USING btree (master_admin_
 
 
 --
--- TOC entry 3422 (class 1259 OID 17704)
+-- TOC entry 3511 (class 1259 OID 17170)
 -- Name: idx_realm_supp_local_realm; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4286,7 +4916,7 @@ CREATE INDEX idx_realm_supp_local_realm ON public.realm_supported_locales USING 
 
 
 --
--- TOC entry 3363 (class 1259 OID 17705)
+-- TOC entry 3514 (class 1259 OID 17171)
 -- Name: idx_redir_uri_client; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4294,7 +4924,7 @@ CREATE INDEX idx_redir_uri_client ON public.redirect_uris USING btree (client_id
 
 
 --
--- TOC entry 3469 (class 1259 OID 17706)
+-- TOC entry 3519 (class 1259 OID 17172)
 -- Name: idx_req_act_prov_realm; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4302,7 +4932,7 @@ CREATE INDEX idx_req_act_prov_realm ON public.required_action_provider USING btr
 
 
 --
--- TOC entry 3536 (class 1259 OID 17707)
+-- TOC entry 3524 (class 1259 OID 17173)
 -- Name: idx_res_policy_policy; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4310,7 +4940,7 @@ CREATE INDEX idx_res_policy_policy ON public.resource_policy USING btree (policy
 
 
 --
--- TOC entry 3533 (class 1259 OID 17708)
+-- TOC entry 3527 (class 1259 OID 17174)
 -- Name: idx_res_scope_scope; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4318,7 +4948,7 @@ CREATE INDEX idx_res_scope_scope ON public.resource_scope USING btree (scope_id)
 
 
 --
--- TOC entry 3526 (class 1259 OID 17727)
+-- TOC entry 3536 (class 1259 OID 17175)
 -- Name: idx_res_serv_pol_res_serv; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4326,7 +4956,7 @@ CREATE INDEX idx_res_serv_pol_res_serv ON public.resource_server_policy USING bt
 
 
 --
--- TOC entry 3516 (class 1259 OID 17728)
+-- TOC entry 3541 (class 1259 OID 17176)
 -- Name: idx_res_srv_res_res_srv; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4334,7 +4964,7 @@ CREATE INDEX idx_res_srv_res_res_srv ON public.resource_server_resource USING bt
 
 
 --
--- TOC entry 3521 (class 1259 OID 17729)
+-- TOC entry 3546 (class 1259 OID 17177)
 -- Name: idx_res_srv_scope_res_srv; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4342,7 +4972,7 @@ CREATE INDEX idx_res_srv_scope_res_srv ON public.resource_server_scope USING btr
 
 
 --
--- TOC entry 3606 (class 1259 OID 17955)
+-- TOC entry 3553 (class 1259 OID 17178)
 -- Name: idx_role_attribute; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4350,7 +4980,7 @@ CREATE INDEX idx_role_attribute ON public.role_attribute USING btree (role_id);
 
 
 --
--- TOC entry 3509 (class 1259 OID 17882)
+-- TOC entry 3364 (class 1259 OID 17179)
 -- Name: idx_role_clscope; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4358,7 +4988,7 @@ CREATE INDEX idx_role_clscope ON public.client_scope_role_mapping USING btree (r
 
 
 --
--- TOC entry 3366 (class 1259 OID 17712)
+-- TOC entry 3556 (class 1259 OID 17180)
 -- Name: idx_scope_mapping_role; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4366,7 +4996,7 @@ CREATE INDEX idx_scope_mapping_role ON public.scope_mapping USING btree (role_id
 
 
 --
--- TOC entry 3539 (class 1259 OID 17713)
+-- TOC entry 3559 (class 1259 OID 17181)
 -- Name: idx_scope_policy_policy; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4374,7 +5004,7 @@ CREATE INDEX idx_scope_policy_policy ON public.scope_policy USING btree (policy_
 
 
 --
--- TOC entry 3430 (class 1259 OID 17965)
+-- TOC entry 3465 (class 1259 OID 17182)
 -- Name: idx_update_time; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4382,7 +5012,7 @@ CREATE INDEX idx_update_time ON public.migration_model USING btree (update_time)
 
 
 --
--- TOC entry 3481 (class 1259 OID 17393)
+-- TOC entry 3469 (class 1259 OID 17183)
 -- Name: idx_us_sess_id_on_cl_sess; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4390,7 +5020,7 @@ CREATE INDEX idx_us_sess_id_on_cl_sess ON public.offline_client_session USING bt
 
 
 --
--- TOC entry 3593 (class 1259 OID 17888)
+-- TOC entry 3571 (class 1259 OID 17184)
 -- Name: idx_usconsent_clscope; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4398,7 +5028,7 @@ CREATE INDEX idx_usconsent_clscope ON public.user_consent_client_scope USING btr
 
 
 --
--- TOC entry 3371 (class 1259 OID 17400)
+-- TOC entry 3562 (class 1259 OID 17185)
 -- Name: idx_user_attribute; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4406,7 +5036,7 @@ CREATE INDEX idx_user_attribute ON public.user_attribute USING btree (user_id);
 
 
 --
--- TOC entry 3372 (class 1259 OID 18010)
+-- TOC entry 3563 (class 1259 OID 17186)
 -- Name: idx_user_attribute_name; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4414,7 +5044,7 @@ CREATE INDEX idx_user_attribute_name ON public.user_attribute USING btree (name,
 
 
 --
--- TOC entry 3438 (class 1259 OID 17397)
+-- TOC entry 3566 (class 1259 OID 17187)
 -- Name: idx_user_consent; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4422,7 +5052,7 @@ CREATE INDEX idx_user_consent ON public.user_consent USING btree (user_id);
 
 
 --
--- TOC entry 3336 (class 1259 OID 17401)
+-- TOC entry 3393 (class 1259 OID 17188)
 -- Name: idx_user_credential; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4430,7 +5060,7 @@ CREATE INDEX idx_user_credential ON public.credential USING btree (user_id);
 
 
 --
--- TOC entry 3375 (class 1259 OID 17394)
+-- TOC entry 3574 (class 1259 OID 17189)
 -- Name: idx_user_email; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4438,7 +5068,7 @@ CREATE INDEX idx_user_email ON public.user_entity USING btree (email);
 
 
 --
--- TOC entry 3494 (class 1259 OID 17396)
+-- TOC entry 3592 (class 1259 OID 17190)
 -- Name: idx_user_group_mapping; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4446,7 +5076,7 @@ CREATE INDEX idx_user_group_mapping ON public.user_group_membership USING btree 
 
 
 --
--- TOC entry 3387 (class 1259 OID 17402)
+-- TOC entry 3595 (class 1259 OID 17191)
 -- Name: idx_user_reqactions; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4454,7 +5084,7 @@ CREATE INDEX idx_user_reqactions ON public.user_required_action USING btree (use
 
 
 --
--- TOC entry 3390 (class 1259 OID 17395)
+-- TOC entry 3598 (class 1259 OID 17192)
 -- Name: idx_user_role_mapping; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4462,7 +5092,7 @@ CREATE INDEX idx_user_role_mapping ON public.user_role_mapping USING btree (user
 
 
 --
--- TOC entry 3459 (class 1259 OID 17715)
+-- TOC entry 3583 (class 1259 OID 17193)
 -- Name: idx_usr_fed_map_fed_prv; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4470,7 +5100,7 @@ CREATE INDEX idx_usr_fed_map_fed_prv ON public.user_federation_mapper USING btre
 
 
 --
--- TOC entry 3460 (class 1259 OID 17716)
+-- TOC entry 3584 (class 1259 OID 17194)
 -- Name: idx_usr_fed_map_realm; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4478,7 +5108,7 @@ CREATE INDEX idx_usr_fed_map_realm ON public.user_federation_mapper USING btree 
 
 
 --
--- TOC entry 3384 (class 1259 OID 17717)
+-- TOC entry 3589 (class 1259 OID 17195)
 -- Name: idx_usr_fed_prv_realm; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4486,7 +5116,7 @@ CREATE INDEX idx_usr_fed_prv_realm ON public.user_federation_provider USING btre
 
 
 --
--- TOC entry 3395 (class 1259 OID 17718)
+-- TOC entry 3607 (class 1259 OID 17196)
 -- Name: idx_web_orig_client; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -4494,7 +5124,7 @@ CREATE INDEX idx_web_orig_client ON public.web_origins USING btree (client_id);
 
 
 --
--- TOC entry 3650 (class 2606 OID 17119)
+-- TOC entry 3620 (class 2606 OID 17197)
 -- Name: client_session_auth_status auth_status_constraint; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4503,7 +5133,7 @@ ALTER TABLE ONLY public.client_session_auth_status
 
 
 --
--- TOC entry 3634 (class 2606 OID 16880)
+-- TOC entry 3634 (class 2606 OID 17202)
 -- Name: identity_provider fk2b4ebc52ae5c3b34; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4512,7 +5142,7 @@ ALTER TABLE ONLY public.identity_provider
 
 
 --
--- TOC entry 3627 (class 2606 OID 16804)
+-- TOC entry 3614 (class 2606 OID 17207)
 -- Name: client_attributes fk3c47c64beacca966; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4521,7 +5151,7 @@ ALTER TABLE ONLY public.client_attributes
 
 
 --
--- TOC entry 3633 (class 2606 OID 16890)
+-- TOC entry 3631 (class 2606 OID 17212)
 -- Name: federated_identity fk404288b92ef007a6; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4530,7 +5160,7 @@ ALTER TABLE ONLY public.federated_identity
 
 
 --
--- TOC entry 3629 (class 2606 OID 17039)
+-- TOC entry 3616 (class 2606 OID 17217)
 -- Name: client_node_registrations fk4129723ba992f594; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4539,7 +5169,7 @@ ALTER TABLE ONLY public.client_node_registrations
 
 
 --
--- TOC entry 3628 (class 2606 OID 16809)
+-- TOC entry 3621 (class 2606 OID 17222)
 -- Name: client_session_note fk5edfb00ff51c2736; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4548,7 +5178,7 @@ ALTER TABLE ONLY public.client_session_note
 
 
 --
--- TOC entry 3637 (class 2606 OID 16920)
+-- TOC entry 3680 (class 2606 OID 17227)
 -- Name: user_session_note fk5edfb00ff51d3472; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4557,7 +5187,7 @@ ALTER TABLE ONLY public.user_session_note
 
 
 --
--- TOC entry 3610 (class 2606 OID 16622)
+-- TOC entry 3623 (class 2606 OID 17232)
 -- Name: client_session_role fk_11b7sgqw18i532811v7o2dv76; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4566,7 +5196,7 @@ ALTER TABLE ONLY public.client_session_role
 
 
 --
--- TOC entry 3619 (class 2606 OID 16627)
+-- TOC entry 3650 (class 2606 OID 17237)
 -- Name: redirect_uris fk_1burs8pb4ouj97h5wuppahv9f; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4575,7 +5205,7 @@ ALTER TABLE ONLY public.redirect_uris
 
 
 --
--- TOC entry 3623 (class 2606 OID 16632)
+-- TOC entry 3676 (class 2606 OID 17242)
 -- Name: user_federation_provider fk_1fj32f6ptolw2qy60cd8n01e8; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4584,7 +5214,7 @@ ALTER TABLE ONLY public.user_federation_provider
 
 
 --
--- TOC entry 3642 (class 2606 OID 17017)
+-- TOC entry 3622 (class 2606 OID 17247)
 -- Name: client_session_prot_mapper fk_33a8sgqw18i532811v7o2dk89; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4593,7 +5223,7 @@ ALTER TABLE ONLY public.client_session_prot_mapper
 
 
 --
--- TOC entry 3617 (class 2606 OID 16642)
+-- TOC entry 3647 (class 2606 OID 17252)
 -- Name: realm_required_credential fk_5hg65lybevavkqfki3kponh9v; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4602,7 +5232,7 @@ ALTER TABLE ONLY public.realm_required_credential
 
 
 --
--- TOC entry 3680 (class 2606 OID 17922)
+-- TOC entry 3652 (class 2606 OID 17257)
 -- Name: resource_attribute fk_5hrm2vlf9ql5fu022kqepovbr; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4611,7 +5241,7 @@ ALTER TABLE ONLY public.resource_attribute
 
 
 --
--- TOC entry 3621 (class 2606 OID 16647)
+-- TOC entry 3669 (class 2606 OID 17262)
 -- Name: user_attribute fk_5hrm2vlf9ql5fu043kqepovbr; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4620,7 +5250,7 @@ ALTER TABLE ONLY public.user_attribute
 
 
 --
--- TOC entry 3624 (class 2606 OID 16657)
+-- TOC entry 3678 (class 2606 OID 17267)
 -- Name: user_required_action fk_6qj3w1jw9cvafhe19bwsiuvmd; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4629,7 +5259,7 @@ ALTER TABLE ONLY public.user_required_action
 
 
 --
--- TOC entry 3614 (class 2606 OID 16662)
+-- TOC entry 3638 (class 2606 OID 17272)
 -- Name: keycloak_role fk_6vyqfe4cn4wlq8r6kt5vdsj5c; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4638,7 +5268,7 @@ ALTER TABLE ONLY public.keycloak_role
 
 
 --
--- TOC entry 3618 (class 2606 OID 16667)
+-- TOC entry 3648 (class 2606 OID 17277)
 -- Name: realm_smtp_config fk_70ej8xdxgxd0b9hh6180irr0o; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4647,7 +5277,7 @@ ALTER TABLE ONLY public.realm_smtp_config
 
 
 --
--- TOC entry 3615 (class 2606 OID 16682)
+-- TOC entry 3643 (class 2606 OID 17282)
 -- Name: realm_attribute fk_8shxd6l3e9atqukacxgpffptw; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4656,7 +5286,7 @@ ALTER TABLE ONLY public.realm_attribute
 
 
 --
--- TOC entry 3611 (class 2606 OID 16687)
+-- TOC entry 3627 (class 2606 OID 17287)
 -- Name: composite_role fk_a63wvekftu8jo1pnj81e7mce2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4665,7 +5295,7 @@ ALTER TABLE ONLY public.composite_role
 
 
 --
--- TOC entry 3646 (class 2606 OID 17139)
+-- TOC entry 3610 (class 2606 OID 17292)
 -- Name: authentication_execution fk_auth_exec_flow; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4674,7 +5304,7 @@ ALTER TABLE ONLY public.authentication_execution
 
 
 --
--- TOC entry 3645 (class 2606 OID 17134)
+-- TOC entry 3611 (class 2606 OID 17297)
 -- Name: authentication_execution fk_auth_exec_realm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4683,7 +5313,7 @@ ALTER TABLE ONLY public.authentication_execution
 
 
 --
--- TOC entry 3644 (class 2606 OID 17129)
+-- TOC entry 3612 (class 2606 OID 17302)
 -- Name: authentication_flow fk_auth_flow_realm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4692,7 +5322,7 @@ ALTER TABLE ONLY public.authentication_flow
 
 
 --
--- TOC entry 3643 (class 2606 OID 17124)
+-- TOC entry 3613 (class 2606 OID 17307)
 -- Name: authenticator_config fk_auth_realm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4701,7 +5331,7 @@ ALTER TABLE ONLY public.authenticator_config
 
 
 --
--- TOC entry 3609 (class 2606 OID 16692)
+-- TOC entry 3619 (class 2606 OID 17312)
 -- Name: client_session fk_b4ao2vcvat6ukau74wbwtfqo1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4710,7 +5340,7 @@ ALTER TABLE ONLY public.client_session
 
 
 --
--- TOC entry 3625 (class 2606 OID 16697)
+-- TOC entry 3679 (class 2606 OID 17317)
 -- Name: user_role_mapping fk_c4fqv34p1mbylloxang7b1q3l; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4719,7 +5349,7 @@ ALTER TABLE ONLY public.user_role_mapping
 
 
 --
--- TOC entry 3657 (class 2606 OID 17827)
+-- TOC entry 3617 (class 2606 OID 17322)
 -- Name: client_scope_attributes fk_cl_scope_attr_scope; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4728,7 +5358,7 @@ ALTER TABLE ONLY public.client_scope_attributes
 
 
 --
--- TOC entry 3658 (class 2606 OID 17817)
+-- TOC entry 3618 (class 2606 OID 17327)
 -- Name: client_scope_role_mapping fk_cl_scope_rm_scope; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4737,7 +5367,7 @@ ALTER TABLE ONLY public.client_scope_role_mapping
 
 
 --
--- TOC entry 3651 (class 2606 OID 17211)
+-- TOC entry 3624 (class 2606 OID 17332)
 -- Name: client_user_session_note fk_cl_usr_ses_note; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4746,7 +5376,7 @@ ALTER TABLE ONLY public.client_user_session_note
 
 
 --
--- TOC entry 3631 (class 2606 OID 17812)
+-- TOC entry 3640 (class 2606 OID 17337)
 -- Name: protocol_mapper fk_cli_scope_mapper; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4755,7 +5385,7 @@ ALTER TABLE ONLY public.protocol_mapper
 
 
 --
--- TOC entry 3673 (class 2606 OID 17670)
+-- TOC entry 3615 (class 2606 OID 17342)
 -- Name: client_initial_access fk_client_init_acc_realm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4764,7 +5394,7 @@ ALTER TABLE ONLY public.client_initial_access
 
 
 --
--- TOC entry 3671 (class 2606 OID 17614)
+-- TOC entry 3626 (class 2606 OID 17347)
 -- Name: component_config fk_component_config; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4773,7 +5403,7 @@ ALTER TABLE ONLY public.component_config
 
 
 --
--- TOC entry 3672 (class 2606 OID 17609)
+-- TOC entry 3625 (class 2606 OID 17352)
 -- Name: component fk_component_realm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4782,7 +5412,7 @@ ALTER TABLE ONLY public.component
 
 
 --
--- TOC entry 3656 (class 2606 OID 17301)
+-- TOC entry 3644 (class 2606 OID 17357)
 -- Name: realm_default_groups fk_def_groups_realm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4791,7 +5421,7 @@ ALTER TABLE ONLY public.realm_default_groups
 
 
 --
--- TOC entry 3649 (class 2606 OID 17154)
+-- TOC entry 3675 (class 2606 OID 17362)
 -- Name: user_federation_mapper_config fk_fedmapper_cfg; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4800,7 +5430,7 @@ ALTER TABLE ONLY public.user_federation_mapper_config
 
 
 --
--- TOC entry 3648 (class 2606 OID 17149)
+-- TOC entry 3673 (class 2606 OID 17367)
 -- Name: user_federation_mapper fk_fedmapperpm_fedprv; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4809,7 +5439,7 @@ ALTER TABLE ONLY public.user_federation_mapper
 
 
 --
--- TOC entry 3647 (class 2606 OID 17144)
+-- TOC entry 3674 (class 2606 OID 17372)
 -- Name: user_federation_mapper fk_fedmapperpm_realm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4818,7 +5448,7 @@ ALTER TABLE ONLY public.user_federation_mapper
 
 
 --
--- TOC entry 3670 (class 2606 OID 17526)
+-- TOC entry 3608 (class 2606 OID 17377)
 -- Name: associated_policy fk_frsr5s213xcx4wnkog82ssrfy; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4827,7 +5457,7 @@ ALTER TABLE ONLY public.associated_policy
 
 
 --
--- TOC entry 3668 (class 2606 OID 17511)
+-- TOC entry 3667 (class 2606 OID 17382)
 -- Name: scope_policy fk_frsrasp13xcx4wnkog82ssrfy; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4836,7 +5466,7 @@ ALTER TABLE ONLY public.scope_policy
 
 
 --
--- TOC entry 3676 (class 2606 OID 17894)
+-- TOC entry 3657 (class 2606 OID 17387)
 -- Name: resource_server_perm_ticket fk_frsrho213xcx4wnkog82sspmt; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4845,7 +5475,7 @@ ALTER TABLE ONLY public.resource_server_perm_ticket
 
 
 --
--- TOC entry 3659 (class 2606 OID 17737)
+-- TOC entry 3662 (class 2606 OID 17392)
 -- Name: resource_server_resource fk_frsrho213xcx4wnkog82ssrfy; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4854,7 +5484,7 @@ ALTER TABLE ONLY public.resource_server_resource
 
 
 --
--- TOC entry 3677 (class 2606 OID 17899)
+-- TOC entry 3658 (class 2606 OID 17397)
 -- Name: resource_server_perm_ticket fk_frsrho213xcx4wnkog83sspmt; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4863,7 +5493,7 @@ ALTER TABLE ONLY public.resource_server_perm_ticket
 
 
 --
--- TOC entry 3678 (class 2606 OID 17904)
+-- TOC entry 3659 (class 2606 OID 17402)
 -- Name: resource_server_perm_ticket fk_frsrho213xcx4wnkog84sspmt; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4872,7 +5502,7 @@ ALTER TABLE ONLY public.resource_server_perm_ticket
 
 
 --
--- TOC entry 3669 (class 2606 OID 17521)
+-- TOC entry 3609 (class 2606 OID 17407)
 -- Name: associated_policy fk_frsrpas14xcx4wnkog82ssrfy; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4881,7 +5511,7 @@ ALTER TABLE ONLY public.associated_policy
 
 
 --
--- TOC entry 3667 (class 2606 OID 17506)
+-- TOC entry 3668 (class 2606 OID 17412)
 -- Name: scope_policy fk_frsrpass3xcx4wnkog82ssrfy; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4890,7 +5520,7 @@ ALTER TABLE ONLY public.scope_policy
 
 
 --
--- TOC entry 3679 (class 2606 OID 17927)
+-- TOC entry 3660 (class 2606 OID 17417)
 -- Name: resource_server_perm_ticket fk_frsrpo2128cx4wnkog82ssrfy; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4899,7 +5529,7 @@ ALTER TABLE ONLY public.resource_server_perm_ticket
 
 
 --
--- TOC entry 3661 (class 2606 OID 17732)
+-- TOC entry 3661 (class 2606 OID 17422)
 -- Name: resource_server_policy fk_frsrpo213xcx4wnkog82ssrfy; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4908,7 +5538,7 @@ ALTER TABLE ONLY public.resource_server_policy
 
 
 --
--- TOC entry 3663 (class 2606 OID 17476)
+-- TOC entry 3655 (class 2606 OID 17427)
 -- Name: resource_scope fk_frsrpos13xcx4wnkog82ssrfy; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4917,7 +5547,7 @@ ALTER TABLE ONLY public.resource_scope
 
 
 --
--- TOC entry 3665 (class 2606 OID 17491)
+-- TOC entry 3653 (class 2606 OID 17432)
 -- Name: resource_policy fk_frsrpos53xcx4wnkog82ssrfy; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4926,7 +5556,7 @@ ALTER TABLE ONLY public.resource_policy
 
 
 --
--- TOC entry 3666 (class 2606 OID 17496)
+-- TOC entry 3654 (class 2606 OID 17437)
 -- Name: resource_policy fk_frsrpp213xcx4wnkog82ssrfy; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4935,7 +5565,7 @@ ALTER TABLE ONLY public.resource_policy
 
 
 --
--- TOC entry 3664 (class 2606 OID 17481)
+-- TOC entry 3656 (class 2606 OID 17442)
 -- Name: resource_scope fk_frsrps213xcx4wnkog82ssrfy; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4944,7 +5574,7 @@ ALTER TABLE ONLY public.resource_scope
 
 
 --
--- TOC entry 3660 (class 2606 OID 17742)
+-- TOC entry 3663 (class 2606 OID 17447)
 -- Name: resource_server_scope fk_frsrso213xcx4wnkog82ssrfy; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4953,7 +5583,7 @@ ALTER TABLE ONLY public.resource_server_scope
 
 
 --
--- TOC entry 3612 (class 2606 OID 16712)
+-- TOC entry 3628 (class 2606 OID 17452)
 -- Name: composite_role fk_gr7thllb9lu8q4vqa4524jjy8; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4962,7 +5592,7 @@ ALTER TABLE ONLY public.composite_role
 
 
 --
--- TOC entry 3675 (class 2606 OID 17869)
+-- TOC entry 3671 (class 2606 OID 17457)
 -- Name: user_consent_client_scope fk_grntcsnt_clsc_usc; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4971,7 +5601,7 @@ ALTER TABLE ONLY public.user_consent_client_scope
 
 
 --
--- TOC entry 3641 (class 2606 OID 17002)
+-- TOC entry 3670 (class 2606 OID 17462)
 -- Name: user_consent fk_grntcsnt_user; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4980,7 +5610,7 @@ ALTER TABLE ONLY public.user_consent
 
 
 --
--- TOC entry 3654 (class 2606 OID 17275)
+-- TOC entry 3632 (class 2606 OID 17467)
 -- Name: group_attribute fk_group_attribute_group; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4989,7 +5619,7 @@ ALTER TABLE ONLY public.group_attribute
 
 
 --
--- TOC entry 3653 (class 2606 OID 17289)
+-- TOC entry 3633 (class 2606 OID 17472)
 -- Name: group_role_mapping fk_group_role_group; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4998,7 +5628,7 @@ ALTER TABLE ONLY public.group_role_mapping
 
 
 --
--- TOC entry 3638 (class 2606 OID 16946)
+-- TOC entry 3645 (class 2606 OID 17477)
 -- Name: realm_enabled_event_types fk_h846o4h0w8epx5nwedrf5y69j; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5007,7 +5637,7 @@ ALTER TABLE ONLY public.realm_enabled_event_types
 
 
 --
--- TOC entry 3616 (class 2606 OID 16722)
+-- TOC entry 3646 (class 2606 OID 17482)
 -- Name: realm_events_listeners fk_h846o4h0w8epx5nxev9f5y69j; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5016,7 +5646,7 @@ ALTER TABLE ONLY public.realm_events_listeners
 
 
 --
--- TOC entry 3639 (class 2606 OID 16992)
+-- TOC entry 3636 (class 2606 OID 17487)
 -- Name: identity_provider_mapper fk_idpm_realm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5025,7 +5655,7 @@ ALTER TABLE ONLY public.identity_provider_mapper
 
 
 --
--- TOC entry 3640 (class 2606 OID 17168)
+-- TOC entry 3637 (class 2606 OID 17492)
 -- Name: idp_mapper_config fk_idpmconfig; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5034,7 +5664,7 @@ ALTER TABLE ONLY public.idp_mapper_config
 
 
 --
--- TOC entry 3626 (class 2606 OID 16732)
+-- TOC entry 3681 (class 2606 OID 17497)
 -- Name: web_origins fk_lojpho213xcx4wnkog82ssrfy; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5043,7 +5673,7 @@ ALTER TABLE ONLY public.web_origins
 
 
 --
--- TOC entry 3620 (class 2606 OID 16742)
+-- TOC entry 3666 (class 2606 OID 17502)
 -- Name: scope_mapping fk_ouse064plmlr732lxjcn1q5f1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5052,7 +5682,7 @@ ALTER TABLE ONLY public.scope_mapping
 
 
 --
--- TOC entry 3630 (class 2606 OID 16885)
+-- TOC entry 3641 (class 2606 OID 17507)
 -- Name: protocol_mapper fk_pcm_realm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5061,7 +5691,7 @@ ALTER TABLE ONLY public.protocol_mapper
 
 
 --
--- TOC entry 3613 (class 2606 OID 16757)
+-- TOC entry 3629 (class 2606 OID 17512)
 -- Name: credential fk_pfyr0glasqyl0dei3kl69r6v0; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5070,7 +5700,7 @@ ALTER TABLE ONLY public.credential
 
 
 --
--- TOC entry 3632 (class 2606 OID 17161)
+-- TOC entry 3642 (class 2606 OID 17517)
 -- Name: protocol_mapper_config fk_pmconfig; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5079,7 +5709,7 @@ ALTER TABLE ONLY public.protocol_mapper_config
 
 
 --
--- TOC entry 3674 (class 2606 OID 17854)
+-- TOC entry 3630 (class 2606 OID 17522)
 -- Name: default_client_scope fk_r_def_cli_scope_realm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5088,7 +5718,7 @@ ALTER TABLE ONLY public.default_client_scope
 
 
 --
--- TOC entry 3652 (class 2606 OID 17206)
+-- TOC entry 3651 (class 2606 OID 17527)
 -- Name: required_action_provider fk_req_act_realm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5097,7 +5727,7 @@ ALTER TABLE ONLY public.required_action_provider
 
 
 --
--- TOC entry 3681 (class 2606 OID 17935)
+-- TOC entry 3664 (class 2606 OID 17532)
 -- Name: resource_uris fk_resource_server_uris; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5106,7 +5736,7 @@ ALTER TABLE ONLY public.resource_uris
 
 
 --
--- TOC entry 3682 (class 2606 OID 17950)
+-- TOC entry 3665 (class 2606 OID 17537)
 -- Name: role_attribute fk_role_attribute_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5115,7 +5745,7 @@ ALTER TABLE ONLY public.role_attribute
 
 
 --
--- TOC entry 3636 (class 2606 OID 16915)
+-- TOC entry 3649 (class 2606 OID 17542)
 -- Name: realm_supported_locales fk_supported_locales_realm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5124,7 +5754,7 @@ ALTER TABLE ONLY public.realm_supported_locales
 
 
 --
--- TOC entry 3622 (class 2606 OID 16777)
+-- TOC entry 3672 (class 2606 OID 17547)
 -- Name: user_federation_config fk_t13hpu1j94r2ebpekr39x5eu5; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5133,7 +5763,7 @@ ALTER TABLE ONLY public.user_federation_config
 
 
 --
--- TOC entry 3655 (class 2606 OID 17282)
+-- TOC entry 3677 (class 2606 OID 17552)
 -- Name: user_group_membership fk_user_group_user; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5142,7 +5772,7 @@ ALTER TABLE ONLY public.user_group_membership
 
 
 --
--- TOC entry 3662 (class 2606 OID 17466)
+-- TOC entry 3639 (class 2606 OID 17557)
 -- Name: policy_config fkdc34197cf864c4e43; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5151,7 +5781,7 @@ ALTER TABLE ONLY public.policy_config
 
 
 --
--- TOC entry 3635 (class 2606 OID 16895)
+-- TOC entry 3635 (class 2606 OID 17562)
 -- Name: identity_provider_config fkdc4897cf864c4e43; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5159,7 +5789,7 @@ ALTER TABLE ONLY public.identity_provider_config
     ADD CONSTRAINT fkdc4897cf864c4e43 FOREIGN KEY (identity_provider_id) REFERENCES public.identity_provider(internal_id);
 
 
--- Completed on 2022-02-08 15:30:24 UTC
+-- Completed on 2022-02-24 21:49:53 UTC
 
 --
 -- PostgreSQL database dump complete

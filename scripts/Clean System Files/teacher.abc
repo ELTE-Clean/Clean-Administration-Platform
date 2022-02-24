@@ -1,5 +1,5 @@
 .comp 920 010111010010000
-.start __ju2hg4_Start
+.start __teacher_Start
 .depend "_SystemEnumStrict" "20211023025801"
 .depend "_SystemStrictLists" "20211023025801"
 .depend "StdStrictLists" "20211023025801"
@@ -22,7 +22,7 @@
 .depend "StdOverloaded" "20211023025801"
 .depend "StdBool" "20211023025801"
 .depend "StdEnv" "20211023025801"
-.module m_ju2hg4 "ju2hg4" "20220224222022"
+.module m_teacher "teacher" "20220224222021"
 .endinfo
 .impmod _system
 .implab _cycle_in_spine
@@ -61,9 +61,9 @@
 .implab _driver
 .impmod StdInt
 .implab e_StdInt_s-;7
-.export __ju2hg4_Start
+.export __teacher_Start
 .o 0 0
-__ju2hg4_Start
+__teacher_Start
 	build _ 0 n2
 .d 1 0
 	jmp _driver

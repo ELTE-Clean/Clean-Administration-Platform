@@ -2,7 +2,6 @@ module ju2hg4
 import StdEnv 
 
 
-
 addInt :: Int Int -> Int
 addInt a b = a + b
 

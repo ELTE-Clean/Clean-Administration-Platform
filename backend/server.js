@@ -23,7 +23,7 @@ const   keycloak      = require('./utils/keycloak_utils').keycloak;
 
 /* Session middlewares */
 app.use(app_session);
-app.use(keycloak.middleware());
+app.use(keycloak.middleware({admin:'/', logout:'/logout'}));
 
 /* setting up parsing middlewares */
 app.use(bodyParser.urlencoded({ extended: true }));

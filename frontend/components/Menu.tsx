@@ -14,7 +14,7 @@ const Menu = () => {
 
   return (
     <div className="menu-container">
-      <Link href="/profile">
+      <Link href="/profile" passHref>
         <div className="profile-icon-neptun">
           <div className="profile-icon">{userNeptun.slice(0, 2)}</div>
           <div className="profile-neptun">{userNeptun}</div>
@@ -22,11 +22,13 @@ const Menu = () => {
       </Link>
       <div className="sections">
         {sections.map((sectionName, idx) => (
-          <div key={idx} className="section">
-            <div className="section-name">
-              <h2>{sectionName}</h2>
+          <Link key={idx} href={`/sections/${sectionName}`} passHref>
+            <div className="section">
+              <div className="section-name">
+                <h2>{sectionName}</h2>
+              </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
       <div className="add-section-part">

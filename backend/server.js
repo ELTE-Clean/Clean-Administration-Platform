@@ -23,6 +23,8 @@ const   keycloak      = require('./utils/keycloak_utils').keycloak;
 
 /* Session middlewares */
 app.use(app_session);
+
+/* TODO::: Later we need to make keycloak avoid redirecting to its logout page*/
 app.use(keycloak.middleware({admin:'/', logout:'/logout'}));
 
 /* setting up parsing middlewares */
@@ -35,8 +37,6 @@ app.use(express.static(STATIC_ROOT));
 /* Handling requests via routers */
 app.use(mainRouter);
 
-/* after logging out, redirect the request to the root page. */
-// app.use( keycloak.middleware( { logout: '/'} ));
 
 /* If we have a certificate for https, then we create a https se */
 if (fs.existsSync(TLS_PATHS)) {     // if the tls folder exist.

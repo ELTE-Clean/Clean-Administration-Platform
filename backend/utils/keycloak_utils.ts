@@ -10,14 +10,6 @@ const CLIENT_SECRET = 'aQX4Vdbe7PhQTPCwRdeOwIdQzbpGkOdw';
 const REALM_NAME    = 'CAP';
 
 /* Global Keycloak Configuration */
-// const kc_config = {
-//     clientId :      CLIENT_ID,              // Our application (Keycloak Client)
-//     bearerOnly:     true,                   // Only accept http/s headers with bearer tokens only
-//     serverUrl:      KEYCLOAK_HOST,          // Keycloak URL
-//     realm:          REALM_NAME,             // Keycloak's Realm.
-//     clientSecret:   CLIENT_SECRET           // The realm key
-// }
-
 export const kc_config = {
     clientId: CLIENT_ID,
     credentials: {

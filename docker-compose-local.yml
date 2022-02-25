@@ -46,7 +46,7 @@ services:
         ports:
             - 8081:8081
         entrypoint: /bin/sh -c
-        command: ["sleep 45 && /opt/jboss/tools/docker-entrypoint.sh -b 0.0.0.0 -Djboss.http.port=8081 -Dkeycloak.profile.feature.upload_scripts=enabled"]
+        command: ["sleep 5 && /opt/jboss/tools/docker-entrypoint.sh -b 0.0.0.0 -Djboss.http.port=8081 -Dkeycloak.profile.feature.upload_scripts=enabled"]
         env_file: 
             - keycloak/env/keycloak.env
         depends_on:

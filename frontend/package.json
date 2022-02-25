@@ -2,15 +2,16 @@
   "name": "web-app",
   "private": true,
   "scripts": {
-    "dev": "npm run sass-dev & next dev",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "next start",
+    "start": "cross-env NODE_ENV=production node server.js",
     "prod": "npm run build && next start -p 80",
     "lint": "next lint",
     "sass-dev": "sass --watch --update --style=expanded styles/App.scss:styles/App.css",
     "sass-prod": "sass --no-source-map --style=compressed styles/App.scss:styles/App.css"
   },
   "dependencies": {
+    "express": "^4.17.3",
     "next": "^12.0.10",
     "react": "17.0.2",
     "react-dom": "17.0.2",

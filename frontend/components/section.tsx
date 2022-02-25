@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Task } from "../interfaces/userTask";
 import EditSectionForm from "./EditSectionForm";
-import Popup from "./Popup";
+import PopUp from "./Popup";
 
-const Section = ( { sectionName }: { sectionName:String } ) => {
+const Section = ({ sectionName }: { sectionName: String }) => {
   let name: string = "Homeworks";
   let isTeacher: Boolean = true;
   // Here instead of "tasks" there should be an api call to the backend to get the respective data for sectionName

@@ -1,6 +1,6 @@
 import { BaseSyntheticEvent, useState } from "react";
-import EditThisHomeworkForm from "./EditThisHomeworkForm";
-import Popup from "./Popup";
+import EditTaskForm from "./EditTaskForm";
+import PopUp from "./Popup";
 const Task = () => {
   //Variables Area.................
   let isTeacher: Boolean = true;
@@ -56,23 +56,20 @@ const Task = () => {
         </div>
       </div>
 
-
       {isTeacher && (
         <div className="edit-btn-container">
           {" "}
           <button onClick={() => setButtonEditPopup(true)} className="edit-btn">
             Edit
           </button>
-          <Popup
+          <PopUp
             trigger={buttonEditPopup}
             setTrigger={setButtonEditPopup}
-            popupType="edit-this-homwwork"
-            component={<EditThisHomeworkForm task={task}/>}
+            popupType="edit-this-homework"
+            component={<EditTaskForm task={task} />}
           />
         </div>
       )}
-
-
 
       {task.description === null ? (
         ""

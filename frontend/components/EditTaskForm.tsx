@@ -1,10 +1,12 @@
 import { BaseSyntheticEvent, useState } from "react";
 import internal from "stream";
-import { Task } from "../interfaces/teacherTask";
+import task from "./task";
 
-const EditThisHomeworkForm = ({ task }) => {
-  const [taskName, setTaskName] = useState(task.title);
-  const [taskDescription, setTaskDescription] = useState(task.description);
+const EditTaskForm = (props: any) => {
+  const [taskName, setTaskName] = useState(props.task.title);
+  const [taskDescription, setTaskDescription] = useState(
+    props.task.description
+  );
   const [functionName, setFunctionName] = useState("");
   const [uploadedFileName, setUploadedFileName] = useState("");
 
@@ -75,15 +77,17 @@ const EditThisHomeworkForm = ({ task }) => {
           <br />
 
           <h3>Attach files:</h3>
-          {task.attachedFiles === null ? (
+          {props.task.attachedFiles === null ? (
             ""
           ) : (
             <div className="edit-this-hw-task-attachments">
-              {task.attachedFiles.map((attachedFile: string, idx: number) => (
-                <div key={idx} className="attachment">
-                  <p>{attachedFile}</p>
-                </div>
-              ))}
+              {props.task.attachedFiles.map(
+                (attachedFile: string, idx: number) => (
+                  <div key={idx} className="attachment">
+                    <p>{attachedFile}</p>
+                  </div>
+                )
+              )}
             </div>
           )}
 
@@ -192,4 +196,4 @@ const EditThisHomeworkForm = ({ task }) => {
   );
 };
 
-export default EditThisHomeworkForm;
+export default EditTaskForm;

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Task } from "../interfaces/teacTask";
+import { Task } from "../interfaces/teacherTask";
 
-const EditHomeworkForm = (props) => {
+const EditSectionForm = (props: { sectionName: any; tasks: any[] }) => {
   const [sectionName, setSectionName] = useState(props.sectionName);
   const [taskName, setTaskName] = useState("");
 
@@ -91,4 +91,4 @@ const EditHomeworkForm = (props) => {
   );
 };
 
-export default EditHomeworkForm;
+export default EditSectionForm;

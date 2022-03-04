@@ -33,7 +33,7 @@ then
 
     echo "----------------------------------------------------------------------------------- ";
 
-    # Building the clean database
+    # Building the frontend
     echo "Building the react frontend...";
     cd frontend;
     docker build . -t frontend:latest;

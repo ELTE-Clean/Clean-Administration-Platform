@@ -4,7 +4,7 @@
 # dump build stage
 FROM postgres:11-alpine as dumper
 
-COPY ./scripts/* /docker-entrypoint-initdb.d/
+COPY /scripts/ /docker-entrypoint-initdb.d/
 
 RUN ["sed", "-i", "s/exec \"$@\"/echo \"skipping...\"/", "/usr/local/bin/docker-entrypoint.sh"]
 

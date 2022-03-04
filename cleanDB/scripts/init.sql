@@ -18,15 +18,12 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: test_db; Type: DATABASE; Schema: -; Owner: postgres
+-- Name: clean_db; Type: DATABASE; Schema: -; Owner: postgres
 --
 
-
--- Creating some random database
-CREATE DATABASE test_db WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'en_US.utf8' LC_CTYPE = 'en_US.utf8';
-ALTER DATABASE test_db OWNER TO postgres;
-
-\connect test_db
+-- Creating the CAP database
+CREATE DATABASE clean_db WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'en_US.utf8' LC_CTYPE = 'en_US.utf8';
+ALTER DATABASE clean_db OWNER TO postgres;
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -43,63 +40,105 @@ SET default_tablespace = '';
 
 SET default_with_oids = false;
 
+\connect clean_db
+
 --
--- Name: clients; Type: TABLE; Schema: public; Owner: postgres
+-- Name: students; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.clients (
-    id integer NOT NULL,
-    name character varying(150) NOT NULL
+CREATE TABLE public.students (
+    id       CHAR(6)    NOT NULL,
+    group_id INT        NOT NULL,
+    PRIMARY KEY(id)
 );
 
 
-ALTER TABLE public.clients OWNER TO postgres;
+ALTER TABLE public.students OWNER TO postgres;
 
 --
--- Name: clients_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: sections; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE SEQUENCE public.clients_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
+CREATE TABLE public.sections (
+    id         CHAR(50)    NOT NULL,
+    group_id   INT         NOT NULL,
+    PRIMARY KEY (id, group_id)
+);
 
 
-ALTER TABLE public.clients_id_seq OWNER TO postgres;
---
--- Name: clients_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-ALTER SEQUENCE public.clients_id_seq OWNED BY public.clients.id;
-
+ALTER TABLE public.sections OWNER TO postgres;
 
 --
--- Name: clients id; Type: DEFAULT; Schema: public; Owner: postgres
---
-ALTER TABLE ONLY public.clients ALTER COLUMN id SET DEFAULT nextval('public.clients_id_seq'::regclass);
-
-
---
--- Data for Name: clients; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Name: tasks; Type: TABLE; Schema: public; Owner: postgres
 --
 
-COPY public.clients (id, name) FROM stdin;
-1	Client 1
-2	Client 2
-\.
+CREATE TABLE public.tasks (
+    id      CHAR(50)    NOT NULL,
+    section CHAR(50)    NOT NULL,
+    max     INT         NOT NULL,
+    PRIMARY KEY (id, section)
+);
 
 
---
--- Name: clients_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-SELECT pg_catalog.setval('public.clients_id_seq', 2, true);
-
+ALTER TABLE public.tasks OWNER TO postgres;
 
 --
--- Name: clients clients_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: grades; Type: TABLE; Schema: public; Owner: postgres
 --
-ALTER TABLE ONLY public.clients
-    ADD CONSTRAINT clients_pkey PRIMARY KEY (id);
 
+select * from students;
+
+CREATE TABLE public.grades (
+    student_id  CHAR(6)     REFERENCES  students(id) NOT NULL,
+    task_id     CHAR(50)    NOT NULL,
+    grade       INT         NOT NULL,
+    PRIMARY KEY (student_id, task_id)
+);
+
+
+ALTER TABLE public.grades OWNER TO postgres;
+
+--
+-- Name: teachers; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.teachers (
+    id          CHAR(6)     REFERENCES students(id) NOT NULL,
+    group_id    INT         NOT NULL,
+    PRIMARY KEY (id, group_id)
+);
+
+
+ALTER TABLE public.teachers OWNER TO postgres;
+
+
+-- Filling the tables with dummy values
+
+INSERT INTO students VALUES ('81AMIA', 1);
+INSERT INTO students VALUES ('9YV5TX', 1);
+INSERT INTO students VALUES ('ZEADKD', 2);
+INSERT INTO students VALUES ('B8WNS6', 3);
+INSERT INTO students VALUES ('NM82SK', 4);
+
+INSERT INTO sections VALUES ('Homework', 1);
+INSERT INTO sections VALUES ('Progress Task', 1);
+INSERT INTO sections VALUES ('Homework', 2);
+INSERT INTO sections VALUES ('Midterm', 3);
+INSERT INTO sections VALUES ('Endterm', 4);
+
+INSERT INTO tasks VALUES ('Homework 1', 'Homework', 1);
+INSERT INTO tasks VALUES ('Progress Task 1', 'Progress Task', 1);
+INSERT INTO tasks VALUES ('Homework 2', 'Homework', 2);
+INSERT INTO tasks VALUES ('Midterm', 'Midterm', 3);
+INSERT INTO tasks VALUES ('Endterm', 'Endterm', 4);
+
+INSERT INTO grades VALUES ('81AMIA', 'Homework 1', 5);
+INSERT INTO grades VALUES ('9YV5TX', 'Homework 1', 2);
+INSERT INTO grades VALUES ('9YV5TX', 'Midterm', 3);
+INSERT INTO grades VALUES ('ZEADKD', 'Midterm', 3);
+INSERT INTO grades VALUES ('ZEADKD', 'Endterm', 4);
+
+INSERT INTO teachers VALUES ('B8WNS6', 1);
+INSERT INTO teachers VALUES ('B8WNS6', 2);
+INSERT INTO teachers VALUES ('NM82SK', 3);
+INSERT INTO teachers VALUES ('NM82SK', 4);

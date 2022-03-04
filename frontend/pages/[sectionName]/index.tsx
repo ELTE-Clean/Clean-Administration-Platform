@@ -3,9 +3,12 @@ import { Task } from "../../interfaces/userTask";
 import EditSectionForm from "../../components/EditSectionForm";
 import PopUp from "../../components/Popup";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
-const Section = ({ sectionName }: { sectionName: String }) => {
-  let name: String = sectionName;
+const Section = () => {
+  const router = useRouter();
+  let name = router.query.sectionName;
+
   let isTeacher: Boolean = true;
   // Here instead of "tasks" there should be an api call to the backend to get the respective data for sectionName
   const [buttonEditPopup, setButtonEditPopup] = useState(false);
@@ -39,7 +42,7 @@ const Section = ({ sectionName }: { sectionName: String }) => {
   return (
     <div className="section-container">
       <div className="section-name">
-        <h1>{sectionName}</h1>
+        <h1>{name}</h1>
       </div>
 
       {isTeacher && (
@@ -58,7 +61,7 @@ const Section = ({ sectionName }: { sectionName: String }) => {
       )}
 
       {tasks.map((task, idx) => (
-        <Link key={idx} href={`/tasks/${task.title}`} passHref>
+        <Link key={idx} href={`/${name}/${task.title}`} passHref>
           <div key={idx} className="section-task">
             <div className="task-title">
               <h3>{task.title}</h3>
@@ -90,24 +93,3 @@ const Section = ({ sectionName }: { sectionName: String }) => {
 };
 
 export default Section;
-
-export async function getStaticPaths() {
-  const sections = ["Homeworks", "Progress Tasks", "Mid Term", "End Term"];
-  const sectionParams = sections.map((section) => {
-    return { params: { sectionName: section } };
-  });
-
-  return {
-    paths: sectionParams,
-    fallback: false,
-  };
-}
-
-export async function getStaticProps(context: { params: any }) {
-  const { params } = context;
-  return {
-    props: {
-      sectionName: params.sectionName,
-    },
-  };
-}

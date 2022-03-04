@@ -22,7 +22,7 @@ const Menu = () => {
       </Link>
       <div className="sections">
         {sections.map((sectionName, idx) => (
-          <Link key={idx} href={`/sections/${sectionName}`} passHref>
+          <Link key={idx} href={`/${sectionName}`} passHref>
             <div className="section">
               <div className="section-name">
                 <h2>{sectionName}</h2>

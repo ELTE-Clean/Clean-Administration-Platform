@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "npm run sass-dev & next dev",
-    "build": "next build",
+    "build": "npm run sass-prod && next build",
     "start": "next start",
     "prod": "npm run build && next start -p 80",
     "lint": "next lint",

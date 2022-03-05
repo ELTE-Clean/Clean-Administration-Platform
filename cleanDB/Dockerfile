@@ -4,7 +4,7 @@
 # dump build stage
 FROM postgres:11-alpine as dumper
 
-COPY ./scripts/* /docker-entrypoint-initdb.d/
+COPY /scripts/ /docker-entrypoint-initdb.d/
 
 RUN ["sed", "-i", "s/exec \"$@\"/echo \"skipping...\"/", "/usr/local/bin/docker-entrypoint.sh"]
 
@@ -18,3 +18,5 @@ RUN ["/usr/local/bin/docker-entrypoint.sh", "postgres"]
 FROM postgres:11-alpine
 
 COPY --from=dumper /data $PGDATA
+
+COPY /conf/pg_hba.conf /var/lib/postgresql/data/pg_hba.conf

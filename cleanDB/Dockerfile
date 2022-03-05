@@ -18,3 +18,5 @@ RUN ["/usr/local/bin/docker-entrypoint.sh", "postgres"]
 FROM postgres:11-alpine
 
 COPY --from=dumper /data $PGDATA
+
+COPY /conf/pg_hba.conf /var/lib/postgresql/data/pg_hba.conf

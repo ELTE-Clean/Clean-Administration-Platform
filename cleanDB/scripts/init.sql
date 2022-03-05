@@ -1,144 +1,53 @@
-
--- Copied directly from https://cadu.dev/creating-a-docker-image-with-database-preloaded/
--- I use it as a test dump to start the database with the following database.
-
--- Dumped from database version 11.5
--- Dumped by pg_dump version 11.3
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET xmloption = content;
-SET client_min_messages = warning;
-
-SET row_security = off;
-
 --
--- Name: clean_db; Type: DATABASE; Schema: -; Owner: postgres
+-- Removing default connect privileges
 --
 
--- Creating the CAP database
-CREATE DATABASE clean_db WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'en_US.utf8' LC_CTYPE = 'en_US.utf8';
-ALTER DATABASE clean_db OWNER TO postgres;
+REVOKE CONNECT ON DATABASE template0 FROM PUBLIC;
+REVOKE CONNECT ON DATABASE template1 FROM PUBLIC;
+REVOKE CONNECT ON DATABASE postgres FROM PUBLIC;
+REVOKE CONNECT ON DATABASE auth_db FROM PUBLIC;
+REVOKE CONNECT ON DATABASE clean_db FROM PUBLIC;
 
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET xmloption = content;
-SET client_min_messages = warning;
-SET row_security = off;
+--
+-- Defining keycloaker role with access to everything in auth_db
+--
 
-SET default_tablespace = '';
+\connect auth_db
 
-SET default_with_oids = false;
+CREATE ROLE keycloaker WITH LOGIN ENCRYPTED PASSWORD 'password1';
+GRANT CONNECT ON DATABASE auth_db TO keycloaker;
+
+-- Granting priviliges for existing objects
+
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO keycloaker;
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO keycloaker;
+GRANT ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA public TO keycloaker;
+
+-- Granting priviliges for future objects
+
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON TABLES TO keycloaker;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON SEQUENCES TO keycloaker;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON FUNCTIONS TO keycloaker;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON TYPES TO keycloaker;
+
+--
+-- Defining demonstrator role with access to everything in clean_db
+--
 
 \connect clean_db
 
---
--- Name: students; Type: TABLE; Schema: public; Owner: postgres
---
+CREATE ROLE demonstrator WITH LOGIN ENCRYPTED PASSWORD 'password2';
+GRANT CONNECT ON DATABASE clean_db TO demonstrator;
 
-CREATE TABLE public.students (
-    id       CHAR(6)    NOT NULL,
-    group_id INT        NOT NULL,
-    PRIMARY KEY(id)
-);
+-- Granting priviliges for existing objects
 
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO demonstrator;
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO demonstrator;
+GRANT ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA public TO demonstrator;
 
-ALTER TABLE public.students OWNER TO postgres;
+-- Granting priviliges for future objects
 
---
--- Name: sections; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.sections (
-    id         CHAR(50)    NOT NULL,
-    group_id   INT         NOT NULL,
-    PRIMARY KEY (id, group_id)
-);
-
-
-ALTER TABLE public.sections OWNER TO postgres;
-
---
--- Name: tasks; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.tasks (
-    id      CHAR(50)    NOT NULL,
-    section CHAR(50)    NOT NULL,
-    max     INT         NOT NULL,
-    PRIMARY KEY (id, section)
-);
-
-
-ALTER TABLE public.tasks OWNER TO postgres;
-
---
--- Name: grades; Type: TABLE; Schema: public; Owner: postgres
---
-
-select * from students;
-
-CREATE TABLE public.grades (
-    student_id  CHAR(6)     REFERENCES  students(id) NOT NULL,
-    task_id     CHAR(50)    NOT NULL,
-    grade       INT         NOT NULL,
-    PRIMARY KEY (student_id, task_id)
-);
-
-
-ALTER TABLE public.grades OWNER TO postgres;
-
---
--- Name: teachers; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.teachers (
-    id          CHAR(6)     REFERENCES students(id) NOT NULL,
-    group_id    INT         NOT NULL,
-    PRIMARY KEY (id, group_id)
-);
-
-
-ALTER TABLE public.teachers OWNER TO postgres;
-
-
--- Filling the tables with dummy values
-
-INSERT INTO students VALUES ('81AMIA', 1);
-INSERT INTO students VALUES ('9YV5TX', 1);
-INSERT INTO students VALUES ('ZEADKD', 2);
-INSERT INTO students VALUES ('B8WNS6', 3);
-INSERT INTO students VALUES ('NM82SK', 4);
-
-INSERT INTO sections VALUES ('Homework', 1);
-INSERT INTO sections VALUES ('Progress Task', 1);
-INSERT INTO sections VALUES ('Homework', 2);
-INSERT INTO sections VALUES ('Midterm', 3);
-INSERT INTO sections VALUES ('Endterm', 4);
-
-INSERT INTO tasks VALUES ('Homework 1', 'Homework', 1);
-INSERT INTO tasks VALUES ('Progress Task 1', 'Progress Task', 1);
-INSERT INTO tasks VALUES ('Homework 2', 'Homework', 2);
-INSERT INTO tasks VALUES ('Midterm', 'Midterm', 3);
-INSERT INTO tasks VALUES ('Endterm', 'Endterm', 4);
-
-INSERT INTO grades VALUES ('81AMIA', 'Homework 1', 5);
-INSERT INTO grades VALUES ('9YV5TX', 'Homework 1', 2);
-INSERT INTO grades VALUES ('9YV5TX', 'Midterm', 3);
-INSERT INTO grades VALUES ('ZEADKD', 'Midterm', 3);
-INSERT INTO grades VALUES ('ZEADKD', 'Endterm', 4);
-
-INSERT INTO teachers VALUES ('B8WNS6', 1);
-INSERT INTO teachers VALUES ('B8WNS6', 2);
-INSERT INTO teachers VALUES ('NM82SK', 3);
-INSERT INTO teachers VALUES ('NM82SK', 4);
+ALTER DEFAULT PRIVILEGES FOR ROLE demonstrator IN SCHEMA public GRANT ALL PRIVILEGES ON TABLES TO demonstrator;
+ALTER DEFAULT PRIVILEGES FOR ROLE demonstrator IN SCHEMA public GRANT ALL PRIVILEGES ON SEQUENCES TO demonstrator;
+ALTER DEFAULT PRIVILEGES FOR ROLE demonstrator IN SCHEMA public GRANT ALL PRIVILEGES ON FUNCTIONS TO demonstrator;
+ALTER DEFAULT PRIVILEGES FOR ROLE demonstrator IN SCHEMA public GRANT ALL PRIVILEGES ON TYPES TO demonstrator;

@@ -1,12 +1,6 @@
 version: '3.3'
 
 services:   
-    # cleanplatform:
-        # image : 
-        # command : 
-        # ports:
-        # env_file:
-
     nginx:
         image: nginx:latest
         ports:
@@ -57,7 +51,7 @@ services:
     cleanDB:
         image: cleandb:latest # This image is preloaded with the data we need. Setting up shared volumes or copying the data with dockercompose volumes had problems
         ports:
-            - 5003:5432
+            - 5432:5432
         env_file:
             - cleanDB/env/postgres.env
         

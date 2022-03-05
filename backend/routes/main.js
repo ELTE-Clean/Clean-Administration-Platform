@@ -6,8 +6,6 @@ const isAuth = require('../utils/keycloak_utils').isAuth;
 const isUnauth = require('../utils/keycloak_utils').isUnauth;
 
 
-
-
 /* LOG-IN Endpoints */
 /**
  * A simple login endpoint to check if everything is working perfectly. In real applications we will not need this one.

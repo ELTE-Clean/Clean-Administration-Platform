@@ -1,18 +1,18 @@
 version: '3.3'
 
 services:   
-    # cleanplatform:
-        # image : 
-        # command : 
-        # ports:
-        # env_file:
-
     nginx:
         image: nginx:latest
         ports:
             - 80:80
         volumes:
             - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+        links:
+            - backend
+            - frontend
+            - cpgadmin
+            - cleanDB
+            - keycloak
 
     backend:
         image: backend:latest
@@ -22,7 +22,6 @@ services:
         depends_on:
             - cleanDB
             - keycloak
-            - nginx
         links:
             - cleanDB 
             - keycloak
@@ -33,20 +32,18 @@ services:
             - 5001:80
         hostname: frontend
         depends_on:
-            - nginx
-        # env_file:
+            - backend
 
     keycloak:
         image: jboss/keycloak:16.1.0
         hostname: keycloak
         ports:
-            - 5002:8081
+            - 8081:8081
         entrypoint: /bin/sh -c
-        command: ["sleep 45 && /opt/jboss/tools/docker-entrypoint.sh -b 0.0.0.0 -Djboss.http.port=8081 -Dkeycloak.profile.feature.upload_scripts=enabled"]
+        command: ["sleep 5 && /opt/jboss/tools/docker-entrypoint.sh -b 0.0.0.0 -Djboss.http.port=8081 -Dkeycloak.profile.feature.upload_scripts=enabled"]
         env_file: 
             - keycloak/env/keycloak.env
         depends_on:
-            - nginx
             - cleanDB
         links:
             - cleanDB
@@ -54,9 +51,10 @@ services:
     cleanDB:
         image: cleandb:latest # This image is preloaded with the data we need. Setting up shared volumes or copying the data with dockercompose volumes had problems
         ports:
-            - 5003:5432
+            - 5432:5432
         env_file:
             - cleanDB/env/postgres.env
+        
 
     # Environment variables are set when the image is created
     cpgadmin:
@@ -68,5 +66,5 @@ services:
         ports:
             - 5004:80
         depends_on:
-            - nginx
             - cleanDB
+

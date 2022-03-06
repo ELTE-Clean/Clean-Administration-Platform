@@ -16,12 +16,16 @@ const  STATIC_ROOT    = "./";           // For future use (Sets the express stat
 const  PORT           = 5000;           // Port of the backend server.
 
 /* Global variables */
-const   memoryStore   = new session.MemoryStore();
+const   memoryStore   = require('./utils/keycloak_utils').memoryStore;  //new session.MemoryStore();
 const   app_session   = session({ secret:SESSION_SECRET, resave: false, saveUninitialized: true, store: memoryStore});
 var     app           = express();
+const   keycloak      = require('./utils/keycloak_utils').keycloak;
 
 /* Session middlewares */
 app.use(app_session);
+
+/* TODO::: Later we need to make keycloak avoid redirecting to its logout page*/
+app.use(keycloak.middleware({admin:'/', logout:'/logout'}));
 
 /* setting up parsing middlewares */
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -32,6 +36,7 @@ app.use(express.static(STATIC_ROOT));
 
 /* Handling requests via routers */
 app.use(mainRouter);
+
 
 /* If we have a certificate for https, then we create a https se */
 if (fs.existsSync(TLS_PATHS)) {     // if the tls folder exist.

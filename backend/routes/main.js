@@ -47,11 +47,7 @@ router.post("/login", isUnauth, (req, res, next) => {
  *      keycloak.grant somewhere in the session.
  */
 router.get("/main", keycloak.protect(protector), isAuth, (req, res, next) => {
-    // console.log("Main getter started")
-    // console.log("SID: ", req.session.id);
     keycloak.getGrant(req, res).then((grant) => {
-        // console.log("The current grant set to this session is: ", grant);
-        // console.log("User is loged in already. The cookie is still active.");
         res.status(200).send(JSON.stringify({message: "User is logged in and authenticated!"}));
     }).catch( err => {
         console.log(err);
@@ -68,7 +64,6 @@ router.get("/main", keycloak.protect(protector), isAuth, (req, res, next) => {
  */
 router.get("/logout", isAuth, (req, res, next) => {
     let sid = req.session.id;
-    console.log("SID : ", sid);
     keycloak.unstoreGrant(sid);     // destroys the keycloak data corresponding to this session.
     res.status(200).send(JSON.stringify({message: "User is Logged out and session has been destroyed"}));
 });

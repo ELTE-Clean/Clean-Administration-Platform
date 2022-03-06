@@ -7,7 +7,7 @@ const   session       = require('express-session');
 
 /* Costum dependencies importing. */
 const   mainRouter    = require('./routes/main');
-
+const   errorHandler  = require('./middlewares/error_handlers');
 
 /* PREDEFINED CONFIGURATIONS */
 const  SESSION_SECRET = 'some secret';  // For future use (For the express session)
@@ -24,8 +24,19 @@ const   keycloak      = require('./utils/keycloak_utils').keycloak;
 /* Session middlewares */
 app.use(app_session);
 
-/* TODO::: Later we need to make keycloak avoid redirecting to its logout page*/
-app.use(keycloak.middleware({admin:'/', logout:'/logout'}));
+
+/* 
+    This middleware (below) setup many of the keycloak configurations and variables to the request bodies.
+    Note that the logout url is just a garbage url. If I don't assign this url to anything or if I put it 
+    null, it will use the default /logout path as its endpoint. So if a client requested to /api/v1/logout, this middleware will jump to the request and redirect the request. I searched for turning
+    this off, but didn't find much clues on how to do that. I tried:
+    logout : undefined 
+    logout : '' 
+    and both activates the default behaviour of this middleware (The one that we don't want). Another solution,
+    will be to catch the /logout first and then redirect it to something like /logoff before this middleware is activated.
+*/
+app.use(keycloak.middleware({admin: '/', logout: '/this_url_redirects_to_the_keycloak_logout_page_which_is_useless_but_we_cant_set_it_to_be_equal_to_null_or_it_will_use_the_default_behavior'}));
+
 
 /* setting up parsing middlewares */
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -37,6 +48,8 @@ app.use(express.static(STATIC_ROOT));
 /* Handling requests via routers */
 app.use(mainRouter);
 
+/* Handling errors */
+app.use(errorHandler);
 
 /* If we have a certificate for https, then we create a https se */
 if (fs.existsSync(TLS_PATHS)) {     // if the tls folder exist.

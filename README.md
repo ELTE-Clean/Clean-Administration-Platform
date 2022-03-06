@@ -21,3 +21,7 @@
 
 Env: Docker K8S
 Automation: Python
+
+To view the full debug logs add the following lines to the keycloak .env file.
+* KEYCLOAK_LOGLEVEL=DEBUG
+* ROOT_LOGLEVEL=DEBUG

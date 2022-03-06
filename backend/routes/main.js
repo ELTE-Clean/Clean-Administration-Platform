@@ -52,7 +52,7 @@ router.get("/main", keycloak.protect(protector), isAuth, (req, res, next) => {
     keycloak.getGrant(req, res).then((grant) => {
         // console.log("The current grant set to this session is: ", grant);
         // console.log("User is loged in already. The cookie is still active.");
-        res.status(200).send(JSON.stringify({message: "User is logged in and authunticated!"}));
+        res.status(200).send(JSON.stringify({message: "User is logged in and authenticated!"}));
     }).catch( err => {
         console.log(err);
         return next("User must be authunticated to access this page.");

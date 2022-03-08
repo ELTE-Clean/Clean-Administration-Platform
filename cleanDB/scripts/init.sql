@@ -1,105 +1,53 @@
-
--- Copied directly from https://cadu.dev/creating-a-docker-image-with-database-preloaded/
--- I use it as a test dump to start the database with the following database.
-
--- Dumped from database version 11.5
--- Dumped by pg_dump version 11.3
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET xmloption = content;
-SET client_min_messages = warning;
-
-SET row_security = off;
-
 --
--- Name: test_db; Type: DATABASE; Schema: -; Owner: postgres
+-- Removing default connect privileges
 --
 
-
--- Creating some random database
-CREATE DATABASE test_db WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'en_US.utf8' LC_CTYPE = 'en_US.utf8';
-ALTER DATABASE test_db OWNER TO postgres;
-
-\connect test_db
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET xmloption = content;
-SET client_min_messages = warning;
-SET row_security = off;
-
-SET default_tablespace = '';
-
-SET default_with_oids = false;
+REVOKE CONNECT ON DATABASE template0 FROM PUBLIC;
+REVOKE CONNECT ON DATABASE template1 FROM PUBLIC;
+REVOKE CONNECT ON DATABASE postgres FROM PUBLIC;
+REVOKE CONNECT ON DATABASE auth_db FROM PUBLIC;
+REVOKE CONNECT ON DATABASE clean_db FROM PUBLIC;
 
 --
--- Name: clients; Type: TABLE; Schema: public; Owner: postgres
+-- Defining keycloaker role with access to everything in auth_db
 --
 
-CREATE TABLE public.clients (
-    id integer NOT NULL,
-    name character varying(150) NOT NULL
-);
+\connect auth_db
 
+CREATE ROLE keycloaker WITH LOGIN ENCRYPTED PASSWORD 'password1';
+GRANT CONNECT ON DATABASE auth_db TO keycloaker;
 
-ALTER TABLE public.clients OWNER TO postgres;
+-- Granting priviliges for existing objects
 
---
--- Name: clients_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO keycloaker;
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO keycloaker;
+GRANT ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA public TO keycloaker;
 
-CREATE SEQUENCE public.clients_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
+-- Granting priviliges for future objects
 
-
-ALTER TABLE public.clients_id_seq OWNER TO postgres;
---
--- Name: clients_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-ALTER SEQUENCE public.clients_id_seq OWNED BY public.clients.id;
-
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON TABLES TO keycloaker;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON SEQUENCES TO keycloaker;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON FUNCTIONS TO keycloaker;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON TYPES TO keycloaker;
 
 --
--- Name: clients id; Type: DEFAULT; Schema: public; Owner: postgres
---
-ALTER TABLE ONLY public.clients ALTER COLUMN id SET DEFAULT nextval('public.clients_id_seq'::regclass);
-
-
---
--- Data for Name: clients; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Defining demonstrator role with access to everything in clean_db
 --
 
-COPY public.clients (id, name) FROM stdin;
-1	Client 1
-2	Client 2
-\.
+\connect clean_db
 
+CREATE ROLE demonstrator WITH LOGIN ENCRYPTED PASSWORD 'password2';
+GRANT CONNECT ON DATABASE clean_db TO demonstrator;
 
---
--- Name: clients_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-SELECT pg_catalog.setval('public.clients_id_seq', 2, true);
+-- Granting priviliges for existing objects
 
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO demonstrator;
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO demonstrator;
+GRANT ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA public TO demonstrator;
 
---
--- Name: clients clients_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-ALTER TABLE ONLY public.clients
-    ADD CONSTRAINT clients_pkey PRIMARY KEY (id);
+-- Granting priviliges for future objects
 
+ALTER DEFAULT PRIVILEGES FOR ROLE demonstrator IN SCHEMA public GRANT ALL PRIVILEGES ON TABLES TO demonstrator;
+ALTER DEFAULT PRIVILEGES FOR ROLE demonstrator IN SCHEMA public GRANT ALL PRIVILEGES ON SEQUENCES TO demonstrator;
+ALTER DEFAULT PRIVILEGES FOR ROLE demonstrator IN SCHEMA public GRANT ALL PRIVILEGES ON FUNCTIONS TO demonstrator;
+ALTER DEFAULT PRIVILEGES FOR ROLE demonstrator IN SCHEMA public GRANT ALL PRIVILEGES ON TYPES TO demonstrator;

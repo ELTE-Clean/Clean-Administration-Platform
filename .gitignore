@@ -9,7 +9,7 @@
 # Package lock ignoring
 *package-lock.json
 *node_modules/*
-*Clean System Files/*
+*Clean*System*Files/*
 *student-files/*
 
 # Runtime data

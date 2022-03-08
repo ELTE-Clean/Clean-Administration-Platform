@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "node server.js",
-    "build": "next build",
+    "build": "npm run sass-prod && next build",
     "start": "cross-env NODE_ENV=production node server.js",
     "prod": "npm run build && next start -p 80",
     "lint": "next lint",

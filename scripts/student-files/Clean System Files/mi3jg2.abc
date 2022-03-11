@@ -22,7 +22,7 @@
 .depend "StdOverloaded" "20211023025801"
 .depend "StdBool" "20211023025801"
 .depend "StdEnv" "20211023025801"
-.module m_mi3jg2 "mi3jg2" "20220203202448"
+.module m_mi3jg2 "mi3jg2" "20220225171737"
 .endinfo
 .impmod _system
 .implab _cycle_in_spine
@@ -60,7 +60,7 @@
 .implab n_S.6 ea_S.6
 .implab _driver
 .impmod StdInt
-.implab e_StdInt_s-;7
+.implab e_StdInt_s+;6
 .export __mi3jg2_Start
 .o 0 0
 __mi3jg2_Start
@@ -82,8 +82,8 @@ n2
 ea2
 .o 0 0
 s2
-	pushI 32
-	pushI 23
+	pushI 2
+	pushI 1
 .d 0 2 ii
 	jmp s1
 .o 0 2 ii
@@ -92,6 +92,6 @@ s1
 	push_b 1
 	update_b 1 3
 	updatepop_b 0 2
-	subI
+	addI
 .d 0 1 i
 	rtn

@@ -14,6 +14,11 @@ const Task = () => {
     gradeOutOf: 50,
     description: "Please dont forget to upload the .icl file",
     attachedFiles: ["mi3jg2-20220320.icl", "mi3jg2-20220320.icl"],
+    testCases: [
+      { name: "test1", testList: ["[1,2,3]", "[1,2,3,4,5]"] },
+      { name: "test2", testList: ["[1,2,3]", "[1,2,3,4,5]"] },
+      { name: "test3", testList: ["[1,2,3]", "[1,2,3,4,5]"] },
+    ],
   };
   let isTeacher: Boolean = true;
   const [buttonEditPopup, setButtonEditPopup] = useState(false);

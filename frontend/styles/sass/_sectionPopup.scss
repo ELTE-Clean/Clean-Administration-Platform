@@ -19,14 +19,7 @@
       text-align: left;
     }
     .remove-task-btn {
-      color: $main-red;
-      cursor: pointer;
-      font-size: 40px;
-      font-weight: bolder;
-      &:hover {
-        transition: 0.2s;
-        transform: rotate(90deg);
-      }
+      @include removeSign();
     }
   }
 }

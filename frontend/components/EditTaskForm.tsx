@@ -1,8 +1,13 @@
-import { BaseSyntheticEvent, useState } from "react";
+import {
+  BaseSyntheticEvent,
+  ReactChild,
+  ReactFragment,
+  ReactPortal,
+  useState,
+} from "react";
 import internal from "stream";
 import EditTestCasesForm from "./EditTestCasesForm";
 import PopUp from "./Popup";
-import task from "./task";
 
 const EditTaskForm = (props: any) => {
   const [taskName, setTaskName] = useState(props.task.title);
@@ -119,7 +124,7 @@ const EditTaskForm = (props: any) => {
           <h3>Test Case</h3>
           <br />
           <div className="edit-homework-container">
-            {props.task.testCases.map((testCase, idx: number) => (
+            {props.task.testCases.map((testCase: any, idx: number) => (
               <div key={idx} className="homework-task-container">
                 <div
                   className="edit-homework-btn"

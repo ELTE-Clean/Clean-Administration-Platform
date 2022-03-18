@@ -2,7 +2,7 @@ import Menu from "./Menu";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-export default function Layout({ children }: { children:any }) {
+export default function Layout({ children }: { children: any }) {
   const router = useRouter();
   const showMenu = router.asPath !== "/login";
 
@@ -11,7 +11,7 @@ export default function Layout({ children }: { children:any }) {
       {showMenu && <Menu />}
       <div className="children">
         {showMenu && (
-          <Link href="/info">
+          <Link href="/info" passHref>
             <button id="info-btn" title="Info Page">
               I
             </button>

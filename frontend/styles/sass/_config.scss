@@ -67,3 +67,14 @@ $main-box-shadow: 1px 1px 10px #00000044;
     clear: both;
   }
 }
+
+@mixin removeSign {
+  color: $main-red;
+  cursor: pointer;
+  font-size: 40px;
+  font-weight: bolder;
+  &:hover {
+    transition: 0.2s;
+    transform: rotate(90deg);
+  }
+}

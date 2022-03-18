@@ -1,0 +1,27 @@
+.TestCasesFormContainer {
+  .test-name {
+    h1 {
+    }
+  }
+  .test-cases-lists {
+    .test-case {
+      width: fit-content;
+      @include flex(row);
+      padding: 10px 0;
+      input {
+        margin: 0 10px 0 0;
+      }
+      .remove-task-case {
+        @include removeSign();
+      }
+    }
+  }
+  .save-changes {
+    text-align: center;
+    margin: 10px 0;
+    button {
+      @include btn($main-green, $main-dark-blue, none, none, 50px, 15px 30px);
+      font-weight: bolder;
+    }
+  }
+}

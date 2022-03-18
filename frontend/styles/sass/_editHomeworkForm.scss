@@ -1,0 +1,35 @@
+.EditHomeworkFormContainer {
+    .test-name {
+      h1 {
+         
+      }
+    }
+    .edit-homework-data {
+        input[type=text] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+          }
+    .edit-homework-info{
+        
+         .info-chunk{
+             float: left;
+             margin: 10px;
+
+         }
+    }
+
+  }
+  .save-changes {
+    text-align: center;
+    margin: 10px 0;
+    button {
+      @include btn($main-green, $main-dark-blue, none, none, 50px, 15px 30px);
+      font-weight: bolder;
+    }
+  }
+}

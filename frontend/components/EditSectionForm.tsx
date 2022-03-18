@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { Task } from "../interfaces/teacherTask";
+import EditHomeworkForm from "./EditHomeworkForm";
+import PopUp from "./Popup";
 
 const EditSectionForm = (props: { sectionName: any; tasks: any[] }) => {
   const [sectionName, setSectionName] = useState(props.sectionName);
   const [taskName, setTaskName] = useState("");
+  const [buttonEditPopup, setButtonEditPopup] = useState(false);
 
   let taskViewHandler = (taskIndex: number) => {
     console.log(`viewing task ${props.tasks[taskIndex].title}`);
@@ -51,7 +54,7 @@ const EditSectionForm = (props: { sectionName: any; tasks: any[] }) => {
           <div key={idx} className="homework-task-container">
             <div
               className="edit-homework-btn"
-              onClick={() => taskViewHandler(idx)}
+              onClick={() => setButtonEditPopup(true)}
             >
               {task.title}
             </div>
@@ -61,6 +64,12 @@ const EditSectionForm = (props: { sectionName: any; tasks: any[] }) => {
             >
               &times;
             </div>
+            <PopUp
+              trigger={buttonEditPopup}
+              setTrigger={setButtonEditPopup}
+              popupType="edit-this-homework-data"
+              component={<EditHomeworkForm taskData={task} />}
+            />
           </div>
         ))}
       </div>

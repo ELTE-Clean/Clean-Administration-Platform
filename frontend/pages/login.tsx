@@ -2,7 +2,23 @@
 import type { NextPage } from "next";
 import Image from "next/image";
 const Login: NextPage = () => {
-  let loginHandler = () => {};
+  let loginHandler = (e: any) => {
+    e.preventDefault();
+    fetch("http://localhost:5003/api/v1/login", {
+      method: "GET", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // body: JSON.stringify({ username: "student-1", password: "123" }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
   return (
     <div className="login-container">
       <div className="bc-image-container">
@@ -26,7 +42,7 @@ const Login: NextPage = () => {
             id="login-btn"
             type="submit"
             value="Login"
-            onClick={() => loginHandler()}
+            onClick={(e) => loginHandler(e)}
           />
         </form>
       </div>

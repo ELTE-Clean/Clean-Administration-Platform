@@ -1,6 +1,11 @@
-import { useState } from "react";
+import { ReactChild, ReactFragment, ReactPortal, useState } from "react";
 
-const EditTestCasesForm = (props) => {
+const EditTestCasesForm = (props: {
+  testCaseData: {
+    testList: any;
+    name: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined;
+  };
+}) => {
   const [testCases, setTestCases] = useState(props.testCaseData.testList);
   const [newTestCase, setNewTestCase] = useState("");
 
@@ -30,7 +35,7 @@ const EditTestCasesForm = (props) => {
         <h1>{props.testCaseData.name}</h1>
       </div>
       <div className="test-cases-lists">
-        {testCases.map((test, idx: number) => (
+        {testCases.map((test: any, idx: number) => (
           <div key={idx} className="test-case">
             <input
               type="text"

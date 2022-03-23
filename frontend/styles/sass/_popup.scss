@@ -48,7 +48,7 @@
       color: lighten($main-dark-blue, 10%);
 
       input {
-        @include input(solid black 1px);
+        @include input(1px solid #ccc);
         margin-top: 20px;
       }
 

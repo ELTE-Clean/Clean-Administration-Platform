@@ -40,8 +40,8 @@
         font-weight: bolder;
       }
       input {
-        width: 100%;
         @include input(none);
+        width: 100%;
         padding: 20px 20px;
         box-shadow: $main-box-shadow;
       }

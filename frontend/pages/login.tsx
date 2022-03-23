@@ -1,15 +1,25 @@
 /* eslint-disable jsx-a11y/alt-text */
 import type { NextPage } from "next";
 import Image from "next/image";
-const Login: NextPage = () => {
+
+export const getStaticProps = async () => {
+  const res = await fetch("http://localhost:5003/api/v1/login");
+  const data = await res.json();
+  return {
+    props: { d: data },
+  };
+};
+const Login: NextPage = ({ d }) => {
+  console.log(d);
+
   let loginHandler = (e: any) => {
     e.preventDefault();
     fetch("http://localhost:5003/api/v1/login", {
-      method: "GET", // or 'PUT'
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      // body: JSON.stringify({ username: "student-1", password: "123" }),
+      body: JSON.stringify({ username: "student-1", password: "123" }),
     })
       .then((response) => response.json())
       .then((data) => {

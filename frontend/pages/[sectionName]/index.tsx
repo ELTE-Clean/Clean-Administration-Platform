@@ -16,22 +16,22 @@ const Section = () => {
   const tasks = [
     {
       title: "HW1",
-      dutTme: "11:59",
-      dutDate: "2022-3-1",
+      dueTime: "11:59",
+      dueDate: "2022-3-1",
       grade: null,
       gradeOutOf: 50,
     },
     {
       title: "HW2",
-      dutTme: "11:59",
-      dutDate: "2022-3-1",
+      dueTime: "11:59",
+      dueDate: "2022-3-1",
       grade: null,
       gradeOutOf: 20,
     },
     {
       title: "HW3",
-      dutTme: "11:59",
-      dutDate: "2022-1-1",
+      dueTime: "11:59",
+      dueDate: "2022-1-1",
       grade: 30,
       gradeOutOf: 30,
     },
@@ -72,7 +72,7 @@ const Section = () => {
               </div>
               <div className="deadline">
                 <p>
-                  {task.dutDate} {task.dutTme}
+                  {task.dueDate} {task.dueTime}
                 </p>
               </div>
               <div className="grade">

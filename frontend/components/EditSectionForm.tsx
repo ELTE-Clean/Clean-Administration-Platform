@@ -6,16 +6,19 @@ import PopUp from "./Popup";
 const EditSectionForm = (props: { sectionName: any; tasks: any[] }) => {
   const [sectionName, setSectionName] = useState(props.sectionName);
   const [taskName, setTaskName] = useState("");
+  const [tasks, setTasks] = useState(props.tasks);
   const [buttonEditPopup, setButtonEditPopup] = useState(false);
 
   let taskViewHandler = (taskIndex: number) => {
-    console.log(`viewing task ${props.tasks[taskIndex].title}`);
+    console.log(`viewing task ${tasks[taskIndex].title}`);
   };
   let removeTaskHandler = (taskIndex: number) => {
-    console.log(`removing task ${props.tasks[taskIndex].title}`);
+    const newTasks = [...tasks];
+    newTasks.splice(taskIndex, 1);
+    setTasks(newTasks);
   };
   let addTaskHandler = () => {
-    let allTasksName = props.tasks.map((task: Task) => task.title);
+    let allTasksName = tasks.map((task: Task) => task.title);
 
     let taskNameAlreadyExist = allTasksName.includes(taskName);
     if (taskNameAlreadyExist) {
@@ -23,11 +26,20 @@ const EditSectionForm = (props: { sectionName: any; tasks: any[] }) => {
     } else if (taskName.trim() === "") {
       alert(`Task name cannot be empty!!!`);
     } else {
-      console.log("adding task...");
+      const newTasks = [...tasks];
+      const newTask = {
+        title: taskName,
+        dueTime: "",
+        dueDate: "",
+        grade: null,
+        gradeOutOf: null,
+      };
+      newTasks.push(newTask);
+      setTasks(newTasks);
     }
   };
   let saveHandler = () => {
-    if (sectionName.trim() == "") {
+    if (sectionName.trim() === "") {
       alert("section name cannot be empty!!");
     } else {
       console.log(sectionName);
@@ -50,7 +62,7 @@ const EditSectionForm = (props: { sectionName: any; tasks: any[] }) => {
       <p>Tasks:</p>
       <br />
       <div className="edit-homework-container">
-        {props.tasks.map((task: Task, idx: number) => (
+        {tasks.map((task: Task, idx: number) => (
           <div key={idx} className="homework-task-container">
             <div
               className="edit-homework-btn"
@@ -64,12 +76,14 @@ const EditSectionForm = (props: { sectionName: any; tasks: any[] }) => {
             >
               &times;
             </div>
-            <PopUp
-              trigger={buttonEditPopup}
-              setTrigger={setButtonEditPopup}
-              popupType="edit-this-homework-data"
-              component={<EditHomeworkForm taskData={task} />}
-            />
+            {buttonEditPopup && (
+              <PopUp
+                trigger={buttonEditPopup}
+                setTrigger={setButtonEditPopup}
+                popupType="edit-this-homework-data"
+                component={<EditHomeworkForm taskData={task} />}
+              />
+            )}
           </div>
         ))}
       </div>

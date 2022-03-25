@@ -19,6 +19,8 @@ services:
         ports:
             - 5000:5000
         hostname: backend
+        env_file: 
+            - backend/env/backend.env
         depends_on:
             - cleanDB
             - keycloak

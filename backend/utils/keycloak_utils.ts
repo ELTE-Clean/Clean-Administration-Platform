@@ -1,5 +1,5 @@
 import KeycloakConnect from 'keycloak-connect';
-import {MemoryStore} from 'express-session';
+import { MemoryStore } from 'express-session';
 import * as express from 'express';
 
 
@@ -39,8 +39,8 @@ export const protector: KeycloakConnect.GuardFn = (token, req) => {
 }
 
 /**
- * An express middleware to check if the user is authunticated (Has a grant to be more specific).
- * Note that Protect() can also check for authunticated user. 
+ * An express middleware to check if the user is authenticated (Has a grant to be more specific).
+ * Note that Protect() can also check for authenticated user. 
  *  But we also may need to define our own checking middleware for the future usage.
  * @param req Request object
  * @param res Response object
@@ -48,30 +48,30 @@ export const protector: KeycloakConnect.GuardFn = (token, req) => {
  */
 export const isAuth: express.RequestHandler = (req: express.Request, res: express.Response, next : express.NextFunction) => {
     keycloak.getGrant(req, res).then((grant) => {
-        console.log("[INFO]: User is authunticated.");
+        console.log("[INFO]: User is authenticated.");
         next();
     }).catch( err => {
-        console.log("[INFO]: User is not authunticated. Keycloak.Grant can't be found in the session");
+        console.log("[INFO]: User is not authenticated. Keycloak.Grant can't be found in the session");
         next(err);
     });
 }
 
 
 /**
- * An express middleware to check if the user is NOT authunticated. 
+ * An express middleware to check if the user is NOT authenticated. 
  *  This can be used in cases for an eplicit check. 
- *  When it is a must for the user not to be authunticated.
+ *  When it is a must for the user not to be authenticated.
  * @param req Request object
  * @param res Response object
  * @param next express Next object
  */
  export const isUnauth: express.RequestHandler = (req: express.Request, res: express.Response, next : express.NextFunction) => {
     keycloak.getGrant(req, res).then((grant) => {
-        console.log("[INFO]: User is authunticated.");
+        console.log("[INFO]: User is authenticated.");
         let err = new Error("User is already logged in");
         next(err);
     }).catch( err => {
-        console.log("[INFO]: User is not authunticated. Keycloak.Grant can't be found in the session");
+        console.log("[INFO]: User is not authenticated. Keycloak.Grant can't be found in the session");
         next();
     });
 }

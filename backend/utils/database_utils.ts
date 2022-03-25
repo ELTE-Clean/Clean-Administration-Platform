@@ -1,7 +1,7 @@
 import {Pool, PoolConfig, QueryConfig, QueryResult,PoolClient, QueryResultRow} from "pg";
 
 // PGHOST='localhost'
-// PGUSER=process.env.USER
+// PGUSER=process.env.USER  
 // PGDATABASE=process.env.USER
 // PGPASSWORD=null
 // PGPORT=5432
@@ -25,7 +25,7 @@ pool.on('error', (err, client) => {
 });
 
 
-//--------------------------------------- Interfaces Area -----------------------------
+//--------------------------------------- Interfaces Area ---------------------------------------
 
 
 /**
@@ -42,7 +42,7 @@ export interface QryResult {
  * Transaction result interface is the default return type of any *Trans() function. 
  * 
  * */
- export interface TransactionInstance{
+ export interface TransactionInstance {
     client?: PoolClient;
     result?: QueryResult;
     error?: any;
@@ -50,7 +50,7 @@ export interface QryResult {
 
 
 
-// ----------------------------------------- Methods Area --------------------------
+// --------------------------------------- Methods Area ---------------------------------------
 
 /**  
  * A simple interface for executing simple queries. 
@@ -62,8 +62,7 @@ export interface QryResult {
  * 
  * 
 */
-export async function execQuery (qry: QueryConfig): Promise<QryResult> 
-{
+export async function execQuery (qry: QueryConfig): Promise<QryResult> {
     try{
         const result = await pool.query(qry);
         let ret : QryResult = {result : result, error: null};
@@ -81,7 +80,6 @@ export async function execQuery (qry: QueryConfig): Promise<QryResult>
  * @returns Transaction instance which can be used in the execTrans and endTrans. 
  */
 export async function startTrans() : Promise<TransactionInstance> {
-
     try{
         const client : PoolClient = await pool.connect();
         client.query('BEGIN');
@@ -99,9 +97,7 @@ export async function startTrans() : Promise<TransactionInstance> {
  * @param transInst - The transaction Instance being used.
  * @returns - Transaction instance with the client being used and the query result.
  */
-export async function execTrans(qry : QueryConfig, transInst : TransactionInstance) 
-: Promise<TransactionInstance> 
-{
+export async function execTrans(qry : QueryConfig, transInst : TransactionInstance) : Promise<TransactionInstance> {
     /* Pre conditional checking before adding the transaction to the current client */
     if(!transInst.client) 
         return {client : transInst.client, error: "Undefined client used in transaction"};
@@ -136,9 +132,7 @@ export async function execTrans(qry : QueryConfig, transInst : TransactionInstan
  * Call this function whenever you want to clear the instance and end the transaction (Commit it).
  * @param transInst - Holds the transaction instance.
  */
-export async function endTrans(transInst : TransactionInstance) 
-: Promise<void>
-{
+export async function endTrans(transInst : TransactionInstance) : Promise<void> {
     if(transInst.error){
         console.log("[ERROR]: [TRANSACTION END]: Transaction Instance contain an error!");
         if(transInst.client){

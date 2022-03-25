@@ -32,10 +32,18 @@ export const keycloak = new KeycloakConnect({ store: memoryStore }, kc_config);
 /* Disable link forwarding since we are using a pure API */
 keycloak.redirectToLogin = function(req) { return false; };
 
-/* Extra Utilities */
+
+
+/**
+ * Protector is a function that can be passed to the Keycloak.protect(). 
+        Protector checks if a user is authorized and might do extra stuff later as maybe editing the database.
+        However, for this application, it is enough to check if a user is authorized or not as the given role. 
+        Therefore, the developer can have the option to either call this function and pass the role to it, or use the Keycloak.protect("realm:<role>") middleware directly.
+        This protector is a mid processing unit to interpolate some data or gather some data about the user. And it is totally useless for the scope of this project. I just realised this.
+*/
 export const protector: KeycloakConnect.GuardFn = (token, req) => {
-    console.log(token.hasRole(`student`));        // Currently we only print. However, in the future, we might need to do more stuff in the protector.
-    return true;
+    console.log(`realm:student: `, token.hasRole(`realm:student`));
+    return token.hasRole(`realm:student`);
 }
 
 /**

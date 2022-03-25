@@ -21,7 +21,16 @@ const endTrans = require('../utils/database_utils').endTrans;
  * * isAuth : is another costum middleware that we defined. It just check if there is a 
  *      keycloak.grant somewhere in the session.
  */
- router.get("/main", keycloak.protect(protector), isAuth, (req, res, next) => {
+ router.get("/main/student", keycloak.protect('realm:student'), isAuth, (req, res, next) => {
+    keycloak.getGrant(req, res).then((grant) => {
+        res.status(200).send(JSON.stringify({message: "User is logged in and authenticated!"}));
+    }).catch( err => {
+        console.log(err);
+        return next("User must be authenticated to access this page.");
+    });
+});
+
+router.get("/main/demonstrator", keycloak.protect('realm:demonstrator'), isAuth, (req, res, next) => {
     keycloak.getGrant(req, res).then((grant) => {
         res.status(200).send(JSON.stringify({message: "User is logged in and authenticated!"}));
     }).catch( err => {
@@ -51,7 +60,8 @@ router.get("/login", isUnauth, (req, res, next) => {
 router.post("/login", isUnauth, (req, res, next) => {
     let username = req.body.username;
     let password = req.body.password;
-
+    console.log("[INFO] : [/login]: User details: ", req.body);
+    
     // Log-in using the keycloak grantManager object.
     keycloak.grantManager.obtainDirectly(username, password)
     .then((grant) => {

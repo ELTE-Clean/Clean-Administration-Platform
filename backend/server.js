@@ -4,6 +4,7 @@ const   cookieParser  = require('cookie-parser');
 const   bodyParser    = require('body-parser');
 const   fs            = require('fs');
 const   session       = require('express-session');
+const   cors          = require('cors');    // Allowing XMLHTTPREQUESTs
 
 /* Costum dependencies importing. */
 const   mainRouter    = require('./routes/main');
@@ -23,7 +24,12 @@ const   keycloak      = require('./utils/keycloak_utils').keycloak;
 
 /* Session middlewares */
 app.use(app_session);
+app.use(cors());
 
+// Configuring body parser middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cookieParser());
 
 /* 
     This middleware (below) setup many of the keycloak configurations and variables to the request bodies.
@@ -38,9 +44,7 @@ app.use(app_session);
 app.use(keycloak.middleware({admin: '/', logout: '/this_url_redirects_to_the_keycloak_logout_page_which_is_useless_but_we_cant_set_it_to_be_equal_to_null_or_it_will_use_the_default_behavior'}));
 
 
-/* setting up parsing middlewares */
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
+
 
 /* Setting up static paths. */
 app.use(express.static(STATIC_ROOT));

@@ -2,7 +2,17 @@
 import type { NextPage } from "next";
 import Image from "next/image";
 import { useState } from "react";
-const Login: NextPage = () => {
+
+export const getStaticProps = async () => {
+  const res = await fetch("http://localhost:5003/api/v1/login");
+  const data = await res.json();
+  return {
+    props: { d: data },
+  };
+};
+
+const Login: NextPage = ({ d }) => {
+  console.log(d);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 

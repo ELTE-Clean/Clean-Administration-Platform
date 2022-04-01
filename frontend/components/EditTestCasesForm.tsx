@@ -8,6 +8,7 @@ const EditTestCasesForm = (props: {
 }) => {
   const [testCases, setTestCases] = useState(props.testCaseData.testList);
   const [newTestCase, setNewTestCase] = useState("");
+  console.log(testCases);
 
   let handleInputChange = (value: string, idx: number) => {
     let tempTestCases = [...testCases];

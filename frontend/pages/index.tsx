@@ -1,9 +1,12 @@
 import type { NextPage } from "next";
 import AddSectionForm from "../components/AddSectionForm";
+
 const Home: NextPage = () => {
   return (
     <div>
-      <p></p>
+      {/* {<Section sectionName="Homework" />} */}
+      {/* {<Task />} */}
+      {/*<AddSectionForm />*/}
     </div>
   );
 };

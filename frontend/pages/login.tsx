@@ -1,17 +1,29 @@
 /* eslint-disable jsx-a11y/alt-text */
 import type { NextPage } from "next";
 import Image from "next/image";
+import { useState } from "react";
 const Login: NextPage = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
   let loginHandler = (e: any) => {
     e.preventDefault();
-    fetch("http://localhost:5003/api/v1/login", {
-      method: "GET", // or 'PUT'
+    fetch("http://localhost:5000/login", {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      // body: JSON.stringify({ username: "student-1", password: "123" }),
+      mode: "cors",
+      credentials: "same-origin",
+      body: JSON.stringify({ username: username, password: password }),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        response.headers.forEach((key, val) => console.log(key, val));
+        const res = response.json();
+        console.log(res);
+        console.log(response.headers.get("set-cookie"));
+        return res;
+      })
       .then((data) => {
         console.log("Success:", data);
       })
@@ -35,9 +47,19 @@ const Login: NextPage = () => {
             <h2>Login with your Neptun</h2>
           </div>
           <label>Neptun</label>
-          <input type="text" placeholder="Write your neptun code..." />
+          <input
+            type="text"
+            placeholder="Write your neptun code..."
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
           <label>Password</label>
-          <input type="text" placeholder="Write your password..." />
+          <input
+            type="text"
+            placeholder="Write your password..."
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
           <input
             id="login-btn"
             type="submit"

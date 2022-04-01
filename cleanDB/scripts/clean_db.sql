@@ -46,23 +46,37 @@ SET default_with_oids = false;
 -- Name: students; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.students (
-    id       CHAR(6)    NOT NULL,
-    group_id INT        NOT NULL,
+CREATE TABLE public.users (
+    id          CHAR(6)     NOT NULL,
+    firstname   CHAR(20)    NOT NULL,
+    lastname    CHAR(20)    NOT NULL,
+    username    CHAR(20)    NOT NULL UNIQUE,
     PRIMARY KEY(id)
 );
 
 
-ALTER TABLE public.students OWNER TO postgres;
+ALTER TABLE public.users OWNER TO postgres;
 
+--
+-- Name: students; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.groups (
+    id                  CHAR(10)    NOT NULL,
+    timetable           CHAR(20)    UNIQUE,
+    PRIMARY KEY(id)
+);
+
+
+ALTER TABLE public.groups OWNER TO postgres;
 --
 -- Name: sections; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.sections (
     id         CHAR(50)    NOT NULL,
-    group_id   INT         NOT NULL,
-    PRIMARY KEY (id, group_id)
+    groupid    CHAR(10)    REFERENCES  groups(id) NOT NULL,
+    PRIMARY KEY (id, groupid)
 );
 
 
@@ -87,10 +101,10 @@ ALTER TABLE public.tasks OWNER TO postgres;
 --
 
 CREATE TABLE public.grades (
-    student_id  CHAR(6)     REFERENCES  students(id) NOT NULL,
-    task_id     CHAR(50)    NOT NULL,
+    studentid   CHAR(6)     REFERENCES  users(id) NOT NULL,
+    taskid      CHAR(50)    NOT NULL,
     grade       INT         NOT NULL,
-    PRIMARY KEY (student_id, task_id)
+    PRIMARY KEY (studentid, taskid)
 );
 
 
@@ -100,29 +114,35 @@ ALTER TABLE public.grades OWNER TO postgres;
 -- Name: teachers; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.teachers (
-    id          CHAR(6)     REFERENCES students(id) NOT NULL,
-    group_id    INT         NOT NULL,
-    PRIMARY KEY (id, group_id)
+CREATE TABLE public.user_to_group (
+    id          CHAR(6)     REFERENCES users(id)    NOT NULL,
+    groupid     CHAR(10)    REFERENCES groups(id)   NOT NULL,
+    PRIMARY KEY (id, groupid)
 );
 
 
-ALTER TABLE public.teachers OWNER TO postgres;
+ALTER TABLE public.user_to_group OWNER TO postgres;
 
 
 -- Filling the tables with dummy values
 
-INSERT INTO students VALUES ('81AMIA', 1);
-INSERT INTO students VALUES ('9YV5TX', 1);
-INSERT INTO students VALUES ('ZEADKD', 2);
-INSERT INTO students VALUES ('B8WNS6', 3);
-INSERT INTO students VALUES ('NM82SK', 4);
+INSERT INTO users VALUES ('81AMIA', 'Judita', 'Fenne', 'Ace');
+INSERT INTO users VALUES ('9YV5TX', 'Hannah', 'Lochana', 'HannaLocha');
+INSERT INTO users VALUES ('ZEADKD', 'Edan', 'Bahadur', 'Noori');
+INSERT INTO users VALUES ('Q50YI1', 'Dita', 'Bertók', 'Queen');
+INSERT INTO users VALUES ('B8WNS6', 'Georg','Vijay', 'Muscleman');
+INSERT INTO users VALUES ('NM82SK', 'Chaz', 'Saundra', 'Picasso');
 
-INSERT INTO sections VALUES ('Homework', 1);
-INSERT INTO sections VALUES ('Progress Task', 1);
-INSERT INTO sections VALUES ('Homework', 2);
-INSERT INTO sections VALUES ('Midterm', 3);
-INSERT INTO sections VALUES ('Endterm', 4);
+INSERT INTO groups VALUES ('Group_1', 'Mon, 12-14');
+INSERT INTO groups VALUES ('Group_2', 'Mon 14-16');
+INSERT INTO groups VALUES ('Group_3', 'Thu 8-10');
+INSERT INTO groups VALUES ('Group_4', 'Fri 12-14');
+
+INSERT INTO sections VALUES ('Homework', 'Group_1');
+INSERT INTO sections VALUES ('Progress Task', 'Group_1');
+INSERT INTO sections VALUES ('Homework', 'Group_2');
+INSERT INTO sections VALUES ('Midterm', 'Group_3');
+INSERT INTO sections VALUES ('Endterm', 'Group_4');
 
 INSERT INTO tasks VALUES ('Homework 1', 'Homework', 1);
 INSERT INTO tasks VALUES ('Progress Task 1', 'Progress Task', 1);
@@ -136,7 +156,11 @@ INSERT INTO grades VALUES ('9YV5TX', 'Midterm', 3);
 INSERT INTO grades VALUES ('ZEADKD', 'Midterm', 3);
 INSERT INTO grades VALUES ('ZEADKD', 'Endterm', 4);
 
-INSERT INTO teachers VALUES ('B8WNS6', 1);
-INSERT INTO teachers VALUES ('B8WNS6', 2);
-INSERT INTO teachers VALUES ('NM82SK', 3);
-INSERT INTO teachers VALUES ('NM82SK', 4);
+INSERT INTO user_to_group VALUES ('81AMIA', 'Group_1');
+INSERT INTO user_to_group VALUES ('9YV5TX', 'Group_2');
+INSERT INTO user_to_group VALUES ('ZEADKD', 'Group_3');
+INSERT INTO user_to_group VALUES ('Q50YI1', 'Group_4');
+INSERT INTO user_to_group VALUES ('B8WNS6', 'Group_1');
+INSERT INTO user_to_group VALUES ('B8WNS6', 'Group_2');
+INSERT INTO user_to_group VALUES ('NM82SK', 'Group_3');
+INSERT INTO user_to_group VALUES ('NM82SK', 'Group_4');

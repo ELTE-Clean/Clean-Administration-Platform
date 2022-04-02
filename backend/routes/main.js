@@ -9,7 +9,7 @@ const isUnauth = require('../utils/keycloak_utils').isUnauth;
 const execQuery = require('../utils/database_utils').execQuery;
 const startTrans = require('../utils/database_utils').startTrans;
 const endTrans = require('../utils/database_utils').endTrans;
-
+const log = require('../utils/logger_utils').log;
 
 // --------------------------------------- Main Endpoint ---------------------------------------
 
@@ -60,7 +60,7 @@ router.get("/login", isUnauth, (req, res, next) => {
 router.post("/login", isUnauth, (req, res, next) => {
     let username = req.body.username;
     let password = req.body.password;
-    console.log("[INFO] : [/login]: User details: ", req.body);
+    log("DEBUG", `/login: User details: ${username} , ${password}`);
     
     // Log-in using the keycloak grantManager object.
     keycloak.grantManager.obtainDirectly(username, password)

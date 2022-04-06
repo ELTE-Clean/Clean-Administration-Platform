@@ -1,10 +1,11 @@
 .TestCasesFormContainer {
   .test-name {
     h1 {
-     
     }
   }
   .test-cases-lists {
+    @include flex(row);
+    justify-content: space-evenly;
     .test-case {
       width: fit-content;
       @include flex(row);
@@ -15,6 +16,21 @@
       .remove-task-case {
         @include removeSign();
       }
+    }
+  }
+  .add-test-case {
+    @include flex(column);
+    width: fit-content;
+    align-items: flex-start;
+    button {
+      @include btn(
+        $main-dark-blue,
+        $btn-txt-color,
+        none,
+        none,
+        10px,
+        10px 30px
+      );
     }
   }
   .save-changes {

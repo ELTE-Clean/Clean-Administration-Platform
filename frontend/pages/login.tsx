@@ -1,20 +1,24 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable jsx-a11y/alt-text */
 import type { NextPage } from "next";
+import { route } from "next/dist/server/router";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
-export const getStaticProps = async () => {
-  const res = await fetch("http://localhost:5003/api/v1/login");
-  const data = await res.json();
-  return {
-    props: { d: data },
-  };
-};
+// export const getStaticProps = async () => {
+//   const res = await fetch("http://localhost:5003/api/v1/login");
+//   const data = await res.json();
+//   return {
+//     props: { d: data },
+//   };
+// };
 
 const Login: NextPage = ({ d }) => {
-  console.log(d);
+  // console.log(d);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
   let loginHandler = (e: any) => {
     e.preventDefault();
@@ -23,19 +27,19 @@ const Login: NextPage = ({ d }) => {
       headers: {
         "Content-Type": "application/json",
       },
-      mode: "cors",
-      credentials: "same-origin",
       body: JSON.stringify({ username: username, password: password }),
     })
       .then((response) => {
-        response.headers.forEach((key, val) => console.log(key, val));
         const res = response.json();
-        console.log(res);
-        console.log(response.headers.get("set-cookie"));
         return res;
       })
       .then((data) => {
-        console.log("Success:", data);
+        if (data["response"] !== undefined) {
+          console.log("Logged In:", data);
+          router.push("/");
+        } else {
+          console.log("Permission Denied:", data);
+        }
       })
       .catch((error) => {
         console.error("Error:", error);

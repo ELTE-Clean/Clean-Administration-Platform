@@ -76,14 +76,14 @@ const EditSectionForm = (props: { sectionName: any; tasks: any[] }) => {
             >
               &times;
             </div>
-<<<<<<< HEAD
+
             <PopUp
-                  trigger={buttonEditPopup}
-                  setTrigger={setButtonEditPopup}
-                  popupType="edit-this-homework-data"
-                  component={<EditHomeworkForm taskData={task} />}
-                />
-=======
+              trigger={buttonEditPopup}
+              setTrigger={setButtonEditPopup}
+              popupType="edit-this-homework-data"
+              component={<EditHomeworkForm taskData={task} />}
+            />
+
             {buttonEditPopup && (
               <PopUp
                 trigger={buttonEditPopup}
@@ -92,7 +92,6 @@ const EditSectionForm = (props: { sectionName: any; tasks: any[] }) => {
                 component={<EditHomeworkForm taskData={task} />}
               />
             )}
->>>>>>> added form handling for homeWorkTask edit form
           </div>
         ))}
       </div>

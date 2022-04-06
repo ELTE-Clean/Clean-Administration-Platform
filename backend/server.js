@@ -1,14 +1,16 @@
 /* Dependencies importing. */
-const express = require("express");
-const cookieParser = require("cookie-parser");
-const bodyParser = require("body-parser");
-const fs = require("fs");
-const session = require("express-session");
-const cors = require("cors"); // Allowing XMLHTTPREQUESTs
+
+const   express       = require('express');
+const   cookieParser  = require('cookie-parser');
+const   bodyParser    = require('body-parser');
+const   fs            = require('fs');
+const   session       = require('express-session');
+
 
 /* Costum dependencies importing. */
-const mainRouter = require("./routes/main");
-const errorHandler = require("./middlewares/error_handlers");
+const   mainRouter    = require('./routes/main');
+const   errorHandler  = require('./middlewares/error_handlers');
+const   corsHandler   = require('./middlewares/prepro_handlers');    // Allowing XMLHTTPREQUESTs
 
 /* PREDEFINED CONFIGURATIONS */
 const SESSION_SECRET = "some secret"; // For future use (For the express session)
@@ -29,12 +31,13 @@ const keycloak = require("./utils/keycloak_utils").keycloak;
 
 /* Session middlewares */
 app.use(app_session);
-app.use(cors());
 
 // Configuring body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(corsHandler);
+
 
 /* 
     This middleware (below) setup many of the keycloak configurations and variables to the request bodies.

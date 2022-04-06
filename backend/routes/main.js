@@ -11,6 +11,13 @@ const startTrans = require('../utils/database_utils').startTrans;
 const endTrans = require('../utils/database_utils').endTrans;
 const log = require('../utils/logger_utils').log;
 
+/* Importing Routers */
+const usersRouter = require('./users');
+
+
+router.use('/users', usersRouter);
+
+
 // --------------------------------------- Main Endpoint ---------------------------------------
 
 /**

@@ -36,7 +36,7 @@ const Login: NextPage = ({ d }) => {
       .then((data) => {
         if (data["response"] !== undefined) {
           console.log("Logged In:", data);
-          router.push("/");
+          // router.push("/");
         } else {
           console.log("Permission Denied:", data);
         }

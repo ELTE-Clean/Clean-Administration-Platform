@@ -51,6 +51,7 @@ CREATE TABLE public.users (
     firstname   CHAR(20)    NOT NULL,
     lastname    CHAR(20)    NOT NULL,
     username    CHAR(20)    NOT NULL UNIQUE,
+    keycloak_id CHAR(30),   -- Keycloak id 
     PRIMARY KEY(id)
 );
 

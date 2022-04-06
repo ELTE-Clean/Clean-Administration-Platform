@@ -2,11 +2,9 @@
   "name": "web-app",
   "private": true,
   "scripts": {
-    
     "dev": "node server.js",
     "build": "npm run sass-prod && next build",
     "start": "cross-env NODE_ENV=production node server.js",
-
     "prod": "npm run build && next start -p 80",
     "lint": "next lint",
     "sass-dev": "sass --watch --update --style=expanded styles/App.scss:styles/App.css",

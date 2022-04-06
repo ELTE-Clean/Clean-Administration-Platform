@@ -1,4 +1,4 @@
-const PopUp = (props : any) => {
+const PopUp = (props: any) => {
   return props.trigger ? (
     <div className="popup-task-container">
       <div className={"PopUp-holder"}>

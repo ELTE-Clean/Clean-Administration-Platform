@@ -1,6 +1,13 @@
-import { BaseSyntheticEvent, useState } from "react";
+import {
+  BaseSyntheticEvent,
+  ReactChild,
+  ReactFragment,
+  ReactPortal,
+  useState,
+} from "react";
 import internal from "stream";
-import task from "./task";
+import EditTestCasesForm from "./EditTestCasesForm";
+import PopUp from "./Popup";
 
 const EditTaskForm = (props: any) => {
   const [taskName, setTaskName] = useState(props.task.title);
@@ -9,6 +16,7 @@ const EditTaskForm = (props: any) => {
   );
   const [functionName, setFunctionName] = useState("");
   const [uploadedFileName, setUploadedFileName] = useState("");
+  const [buttonEditPopup, setButtonEditPopup] = useState(false);
 
   let handelFileUpload = (e: BaseSyntheticEvent) => {
     let latestFile = e.target.files[0].name;
@@ -27,7 +35,7 @@ const EditTaskForm = (props: any) => {
   };
 
   let funcViewHandler = (taskIndex: number) => {
-    console.log(`viewing function DATA`);
+    console.log("Handling viewing");
   };
 
   let removeFuncHandler = (taskIndex: number) => {
@@ -116,51 +124,29 @@ const EditTaskForm = (props: any) => {
           <h3>Test Case</h3>
           <br />
           <div className="edit-homework-container">
-            <div className="homework-task-container">
-              <div
-                className="edit-homework-btn"
-                onClick={() => funcViewHandler(2)}
-              >
-                TempFunc 1
+            {props.task.testCases.map((testCase: any, idx: number) => (
+              <div key={idx} className="homework-task-container">
+                <div
+                  className="edit-homework-btn"
+                  onClick={() => setButtonEditPopup(true)}
+                >
+                  {testCase.name}
+                </div>
+                <div
+                  className="remove-task-btn"
+                  onClick={() => removeFuncHandler(2)}
+                >
+                  &times;
+                </div>
+
+                <PopUp
+                  trigger={buttonEditPopup}
+                  setTrigger={setButtonEditPopup}
+                  popupType="edit-this-homework"
+                  component={<EditTestCasesForm testCaseData={testCase} />}
+                />
               </div>
-              <div
-                className="remove-task-btn"
-                onClick={() => removeFuncHandler(2)}
-              >
-                &times;
-              </div>
-            </div>
-            <br />
-            <div className="homework-task-container">
-              <div
-                className="edit-homework-btn"
-                onClick={() => funcViewHandler(2)}
-              >
-                TempFunc 2
-              </div>
-              <div
-                className="remove-task-btn"
-                onClick={() => removeFuncHandler(2)}
-              >
-                &times;
-              </div>
-            </div>
-            <br />
-            <div className="homework-task-container">
-              <div
-                className="edit-homework-btn"
-                onClick={() => funcViewHandler(2)}
-              >
-                TempFunc 3
-              </div>
-              <div
-                className="remove-task-btn"
-                onClick={() => removeFuncHandler(2)}
-              >
-                &times;
-              </div>
-            </div>
-            <br />
+            ))}
           </div>
 
           <br />

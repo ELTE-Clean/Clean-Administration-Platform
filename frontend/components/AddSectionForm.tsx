@@ -1,6 +1,10 @@
 import { useState } from "react";
 
-const AddSectionForm = ({ addSectionCallBack }: { addSectionCallBack:any }) => {
+const AddSectionForm = ({
+  addSectionCallBack,
+}: {
+  addSectionCallBack: any;
+}) => {
   const [userInput, setUserInput] = useState("");
   let addSectionHandler = () => {
     if (userInput.trim() == "") {
@@ -36,7 +40,7 @@ const AddSectionForm = ({ addSectionCallBack }: { addSectionCallBack:any }) => {
           className="submitBtn"
           onClick={() => addSectionHandler()}
         >
-          add
+          Add
         </button>
       </div>
     </div>

@@ -2,6 +2,8 @@ import { useRouter } from "next/router";
 import { BaseSyntheticEvent, useState } from "react";
 import EditTaskForm from "../../../components/EditTaskForm";
 import PopUp from "../../../components/Popup";
+import Image from "next/image";
+
 const Task = () => {
   const router = useRouter();
   let { sectionName, taskName } = router.query;
@@ -14,6 +16,11 @@ const Task = () => {
     gradeOutOf: 50,
     description: "Please dont forget to upload the .icl file",
     attachedFiles: ["mi3jg2-20220320.icl", "mi3jg2-20220320.icl"],
+    testCases: [
+      { name: "test1", testList: ["[1,2,3]", "[1,2,3,4,5]"] },
+      { name: "test2", testList: ["[1,2,3]", "[1,2,3,4,5]"] },
+      { name: "test3", testList: ["[1,2,3]", "[1,2,3,4,5]"] },
+    ],
   };
   let isTeacher: Boolean = true;
   const [buttonEditPopup, setButtonEditPopup] = useState(false);
@@ -33,8 +40,21 @@ const Task = () => {
     // later send file to the server
   };
 
+  let handleScriptRun = () => {
+    console.log("Running script...");
+  };
+
   return (
     <div className="task-container">
+      <div className="run-script" onClick={() => handleScriptRun()}>
+        <Image
+          src="/robot.png"
+          objectFit="cover"
+          layout="fill"
+          priority={true}
+          alt={"script"}
+        />
+      </div>
       <div className="task-title">
         <h1>{taskName}</h1>
       </div>
@@ -57,7 +77,6 @@ const Task = () => {
           )}
         </div>
       </div>
-
       {isTeacher && (
         <div className="edit-btn-container">
           {" "}
@@ -72,7 +91,6 @@ const Task = () => {
           />
         </div>
       )}
-
       {task.description === null ? (
         ""
       ) : (
@@ -85,7 +103,6 @@ const Task = () => {
           </div>
         </div>
       )}
-
       {task.attachedFiles === null ? (
         ""
       ) : (

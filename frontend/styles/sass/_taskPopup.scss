@@ -52,12 +52,7 @@
 // }
 
 .two-section-container {
-  @include flex(row);
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: nowrap;
   height: 100%;
-
   h3 {
     font-weight: bolder;
   }

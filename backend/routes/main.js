@@ -107,6 +107,8 @@ router.get("/select/:table", (req, res, next) => {
     qryText += ";"
 
     const qry = { text: qryText };
+    log("DEBUG", qryText);
+
     execQuery(qry)
     .then((result) => res.status(200).send(JSON.stringify({message: result.result.rows})))
     .catch((error) => {console.log(error); return next(error)});;

@@ -1,7 +1,8 @@
 import KeycloakConnect from 'keycloak-connect';
+import {Token, Grant} from 'keycloak-connect';
 import { MemoryStore } from 'express-session';
 import * as express from 'express';
-
+import {log} from './logger_utils';
 
 /* Environment variables that are passed to the server */
 const KEYCLOAK_HOST = 'http://nginx/auth/';
@@ -22,6 +23,18 @@ export const kc_config = {
     'bearer-only': true,
     realm: REALM_NAME
 }
+
+
+interface KCUserData {
+    keycloak_id: string,
+    username: string,
+    email_verified : boolean
+};
+interface KCUserInfoRequest{
+    user : KCUserData | null,
+    error : any | null
+}
+
 
 
 /* Keycloak and the memory storage objects */
@@ -83,3 +96,30 @@ export const isAuth: express.RequestHandler = (req: express.Request, res: expres
         next();
     });
 }
+
+
+/**
+ * A function that extracts the keycloak data stored in the grant. Mostly it contain the keycloak ID of the 
+ *  logged in user.
+ * @param req 
+ * @param res 
+ */
+export async function getUserData (req: express.Request, res : express.Response) : Promise<KCUserInfoRequest> {
+    try{
+        let grant : Grant = await keycloak.getGrant(req, res);
+        const at : Token | string = grant.access_token as Token;
+        const rt : Token | string = grant.refresh_token as Token;
+        log("DEBUG", `Access Token: ${at}`);
+
+        const userInfo = await keycloak.grantManager.userInfo(at) as any;
+        const userData : KCUserData = { 
+            keycloak_id: userInfo.sub, 
+            username: userInfo.preferred_username, 
+            email_verified : userInfo.email_verified 
+        } as KCUserData;
+
+        return {error : null, user : userData} as KCUserInfoRequest;
+    }catch(error){
+        return {error : error, user : null} as KCUserInfoRequest;
+    }
+};

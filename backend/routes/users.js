@@ -3,35 +3,45 @@
 /* Dependencies Importing */
 const router = require('express-promise-router')();     // Used to handle async request. Will be useful in the future to dodge the pyramid of doom
 const keycloak = require('../utils/keycloak_utils').keycloak;
-const isAuth = require('../utils/keycloak_utils').isAuth;
-const isUnauth = require('../utils/keycloak_utils').isUnauth;
+const {isAuth, getUserData, isUnauth} = require('../utils/keycloak_utils');
 const {execTrans, startTrans, execQuery, endTrans} = require('../utils/database_utils');
 const log = require('../utils/logger_utils').log;
 const execReq = require('../utils/http_utils').execReq;
 
+
+
+
 /* Getters */
-router.get('/get/profile', keycloak.protect, async (req, res, next) => {
-    keycloak.getGrant(req, res).then((grant) => {
-        const at = grant.access_token;
-        const rt = grant.refresh_token;
-        
-        keycloak.grantManager.userInfo(at)
-         .then((user) => {console.log(user)})
-         .catch((err) => {log("ERROR", "Grant Manager Can't identify the given token."); return next(err);});
+router.get('/get/profile', async (req, res, next) => {
+    log("INFO", `Getting user profile.`);
+    const userReqKC = await getUserData(req, res);
+    console.log(userReqKC);
+    if(userReqKC.error){
+        log("ERROR", `Error in getting the user data from the access token`);
+        return next(userReqKC.error);
+    }
 
-        // Get user details from keycloak.
-        //let reqRes = await execReq("GET", "     " ,  );
+    let qry = {text: `SELECT * FROM users WHERE username = $1;`, values : [userReqKC.user.username]};
+    const userReqDB = await execQuery(qry);
+    console.log(userReqDB);
+    if(userReqDB.error){
+        log("ERROR", `Error in requesting the user from the databae`);
+        return next(userReqKC.error);
+    }else if(userReqDB.result.rowCount == 0){
+        log("ERROR", `User Not found`);
+        return next("No such user exists in the Database. It exists only in our keycloak server.");
+    }
 
-        // Get user profile from the database.
-       // const qry = { text: "SELECT * FROM `users` WHERE " };
-        //execQuery(qry)
-        //.then((result) => res.status(200).send(JSON.stringify({message: result.result.rows})))
-        //.catch((error) => {console.log(error); return next(error)});
-        res.status(200).send(JSON.stringify({message: "User is logged in and authenticated!"}));
-    }).catch( err => {
-        console.log(err);
-        return next("User must be authenticated to access this page.");
-    });
+    const retUser = {
+        kcid : userReqKC.user.keycloak_id, 
+        username: userReqKC.user.username, 
+        firstname: userReqDB.result.rows[0].firstname,
+        lastname: userReqDB.result.rows[0].lastname,
+        uid : userReqDB.result.rows[0].id
+    };
+
+    console.log(retUser);
+    return res.status(200).send(retUser);
 });
 
 

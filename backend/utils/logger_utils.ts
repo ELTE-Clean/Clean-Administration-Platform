@@ -13,7 +13,7 @@ const LEVELS_TO_NUMBERS = new Map<string, number>([
 ])
 
 /* The maximum log level to show. */
-const MAX_LOG_LEVEL_NUMBER : number = LEVELS_TO_NUMBERS.get(process.env.LOG_LEVEL || 'INFO') || 2;
+const MAX_LOG_LEVEL_NUMBER : number = LEVELS_TO_NUMBERS.get(process.env.LOG_LEVEL || 'DEBUG') || 3;
 
 
 /**
@@ -24,7 +24,7 @@ const MAX_LOG_LEVEL_NUMBER : number = LEVELS_TO_NUMBERS.get(process.env.LOG_LEVE
 export function log(level: string, message: string) : void {
     if(!LEVELS_TO_NUMBERS.has(level))
         throw new Error("No such log level exists!");
-    const log_num = (LEVELS_TO_NUMBERS.get(level) || 2);
+    const log_num = (LEVELS_TO_NUMBERS.get(level) || 3);
     if(MAX_LOG_LEVEL_NUMBER < log_num)
         return;
 

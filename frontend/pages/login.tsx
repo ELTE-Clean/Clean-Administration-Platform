@@ -24,6 +24,8 @@ const Login: NextPage = ({ d }) => {
     e.preventDefault();
     fetch("http://localhost:5000/login", {
       method: "POST",
+      mode : "cors",            // Allows the browser to include the headers and tokens in the request
+      credentials : "include", // Allows the browser to send requests to other domains
       headers: {
         "Content-Type": "application/json",
       },

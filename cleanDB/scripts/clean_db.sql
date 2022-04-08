@@ -126,9 +126,9 @@ ALTER TABLE public.user_to_group OWNER TO postgres;
 
 -- Filling the tables with dummy values
 
-INSERT INTO users VALUES ('81AMIA', 'Judita', 'Fenne', 'Ace');
+INSERT INTO users VALUES ('81AMIA', 'Judita', 'Fenne', 'student-1');
 INSERT INTO users VALUES ('9YV5TX', 'Hannah', 'Lochana', 'HannaLocha');
-INSERT INTO users VALUES ('ZEADKD', 'Edan', 'Bahadur', 'Noori');
+INSERT INTO users VALUES ('ZEADKD', 'Edan', 'Bahadur', 'demonstrator-1');
 INSERT INTO users VALUES ('Q50YI1', 'Dita', 'Bertók', 'Queen');
 INSERT INTO users VALUES ('B8WNS6', 'Georg','Vijay', 'Muscleman');
 INSERT INTO users VALUES ('NM82SK', 'Chaz', 'Saundra', 'Picasso');

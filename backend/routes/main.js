@@ -11,6 +11,13 @@ const startTrans = require('../utils/database_utils').startTrans;
 const endTrans = require('../utils/database_utils').endTrans;
 const log = require('../utils/logger_utils').log;
 
+/* Importing Routers */
+const usersRouter = require('./users');
+
+
+router.use('/users', usersRouter);
+
+
 // --------------------------------------- Main Endpoint ---------------------------------------
 
 /**
@@ -100,6 +107,8 @@ router.get("/select/:table", (req, res, next) => {
     qryText += ";"
 
     const qry = { text: qryText };
+    log("DEBUG", qryText);
+
     execQuery(qry)
     .then((result) => res.status(200).send(JSON.stringify({message: result.result.rows})))
     .catch((error) => {console.log(error); return next(error)});;

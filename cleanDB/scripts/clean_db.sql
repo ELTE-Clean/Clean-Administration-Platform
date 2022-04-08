@@ -47,11 +47,11 @@ SET default_with_oids = false;
 --
 
 CREATE TABLE public.users (
-    id          CHAR(6)     NOT NULL,
-    firstname   CHAR(20)    NOT NULL,
-    lastname    CHAR(20)    NOT NULL,
-    username    CHAR(20)    NOT NULL UNIQUE,
-    PRIMARY KEY(id)
+    userid      CHAR(6)         NOT NULL,
+    firstname   VARCHAR(20)     NOT NULL,
+    lastname    VARCHAR(20)     NOT NULL,
+    username    VARCHAR(20)     NOT NULL UNIQUE,
+    PRIMARY KEY(userid)
 );
 
 
@@ -62,9 +62,9 @@ ALTER TABLE public.users OWNER TO postgres;
 --
 
 CREATE TABLE public.groups (
-    id                  CHAR(10)    NOT NULL,
-    timetable           CHAR(20)    UNIQUE,
-    PRIMARY KEY(id)
+    groupid     VARCHAR(10)    NOT NULL,
+    timetable   VARCHAR(20)    UNIQUE,
+    PRIMARY KEY(groupid)
 );
 
 
@@ -74,9 +74,9 @@ ALTER TABLE public.groups OWNER TO postgres;
 --
 
 CREATE TABLE public.sections (
-    id         CHAR(50)    NOT NULL,
-    groupid    CHAR(10)    REFERENCES  groups(id) NOT NULL,
-    PRIMARY KEY (id, groupid)
+    sectionid  VARCHAR(50)    NOT NULL,
+    groupid    VARCHAR(10)    REFERENCES  groups(groupid)  NOT NULL,
+    PRIMARY KEY (sectionid, groupid)
 );
 
 
@@ -87,10 +87,12 @@ ALTER TABLE public.sections OWNER TO postgres;
 --
 
 CREATE TABLE public.tasks (
-    id      CHAR(50)    NOT NULL,
-    section CHAR(50)    NOT NULL,
-    max     INT         NOT NULL,
-    PRIMARY KEY (id, section)
+    taskid      VARCHAR(50)    NOT NULL,
+    sectionid   VARCHAR(50)    NOT NULL,
+    groupid     VARCHAR(10)    NOT NULL,
+    max         INT            NOT NULL,
+    FOREIGN KEY (sectionid, groupid) REFERENCES sections(sectionid, groupid),
+    PRIMARY KEY (taskid, sectionid, groupid)
 );
 
 
@@ -101,10 +103,13 @@ ALTER TABLE public.tasks OWNER TO postgres;
 --
 
 CREATE TABLE public.grades (
-    studentid   CHAR(6)     REFERENCES  users(id) NOT NULL,
-    taskid      CHAR(50)    NOT NULL,
-    grade       INT         NOT NULL,
-    PRIMARY KEY (studentid, taskid)
+    studentid   CHAR(6)         REFERENCES  users(userid)   NOT NULL,
+    taskid      VARCHAR(50)     NOT NULL,
+    sectionid   VARCHAR(50)     NOT NULL,
+    grade       INT             NOT NULL,
+    -- groupid     CHAR(10)    NOT NULL,                                                # Omitted because having groupid would be redundant
+    -- FOREIGN KEY (taskid, sectionid) REFERENCES tasks(taskid, sectionid, groupid),    # Does not work without groupid
+    PRIMARY KEY (studentid, taskid, sectionid)
 );
 
 
@@ -115,9 +120,9 @@ ALTER TABLE public.grades OWNER TO postgres;
 --
 
 CREATE TABLE public.user_to_group (
-    id          CHAR(6)     REFERENCES users(id)    NOT NULL,
-    groupid     CHAR(10)    REFERENCES groups(id)   NOT NULL,
-    PRIMARY KEY (id, groupid)
+    userid      CHAR(6)         REFERENCES users(userid)    NOT NULL,
+    groupid     VARCHAR(10)     REFERENCES groups(groupid)  NOT NULL,
+    PRIMARY KEY (userid, groupid)
 );
 
 
@@ -141,20 +146,20 @@ INSERT INTO groups VALUES ('Group_4', 'Fri 12-14');
 INSERT INTO sections VALUES ('Homework', 'Group_1');
 INSERT INTO sections VALUES ('Progress Task', 'Group_1');
 INSERT INTO sections VALUES ('Homework', 'Group_2');
-INSERT INTO sections VALUES ('Midterm', 'Group_3');
-INSERT INTO sections VALUES ('Endterm', 'Group_4');
+INSERT INTO sections VALUES ('Midterm', 'Group_1');
+INSERT INTO sections VALUES ('Endterm', 'Group_2');
 
-INSERT INTO tasks VALUES ('Homework 1', 'Homework', 1);
-INSERT INTO tasks VALUES ('Progress Task 1', 'Progress Task', 1);
-INSERT INTO tasks VALUES ('Homework 2', 'Homework', 2);
-INSERT INTO tasks VALUES ('Midterm', 'Midterm', 3);
-INSERT INTO tasks VALUES ('Endterm', 'Endterm', 4);
+INSERT INTO tasks VALUES ('Homework 1', 'Homework', 'Group_1', 1);
+INSERT INTO tasks VALUES ('Progress Task 1', 'Progress Task', 'Group_1', 1);
+INSERT INTO tasks VALUES ('Homework 2', 'Homework', 'Group_2', 2);
+INSERT INTO tasks VALUES ('Midterm', 'Midterm', 'Group_1', 3);
+INSERT INTO tasks VALUES ('Endterm', 'Endterm', 'Group_2', 4);
 
-INSERT INTO grades VALUES ('81AMIA', 'Homework 1', 5);
-INSERT INTO grades VALUES ('9YV5TX', 'Homework 1', 2);
-INSERT INTO grades VALUES ('9YV5TX', 'Midterm', 3);
-INSERT INTO grades VALUES ('ZEADKD', 'Midterm', 3);
-INSERT INTO grades VALUES ('ZEADKD', 'Endterm', 4);
+INSERT INTO grades VALUES ('81AMIA', 'Homework 1', 'Homework', 5);
+INSERT INTO grades VALUES ('9YV5TX', 'Homework 1', 'Homework', 2);
+INSERT INTO grades VALUES ('9YV5TX', 'Midterm', 'Exam', 3);
+INSERT INTO grades VALUES ('ZEADKD', 'Midterm', 'Exam', 3);
+INSERT INTO grades VALUES ('ZEADKD', 'Endterm', 'Exam', 4);
 
 INSERT INTO user_to_group VALUES ('81AMIA', 'Group_1');
 INSERT INTO user_to_group VALUES ('9YV5TX', 'Group_2');

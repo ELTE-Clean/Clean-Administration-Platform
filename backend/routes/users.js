@@ -1,13 +1,11 @@
-/** Handles the users functionalities /users/.... */
+/* Handles users functionalities /users/.... */
 
 /* Dependencies Importing */
 const router = require('express-promise-router')();     // Used to handle async request. Will be useful in the future to dodge the pyramid of doom
 const keycloak = require('../utils/keycloak_utils').keycloak;
 const {isAuth, getSelfData, isUnauth, getAllUsersData, createUsers, protector, updateUserRole} = require('../utils/keycloak_utils');
-const {execTrans, startTrans, execQuery, endTrans} = require('../utils/database_utils');
+const selectFromTable = require('../utils/database_utils').selectFromTable;
 const log = require('../utils/logger_utils').log;
-const execReq = require('../utils/http_utils').execReq;
-
 
 
 
@@ -21,8 +19,8 @@ router.get('/get/self', isAuth, async (req, res, next) => {
         return next(userReqKC.error);
     }
 
-    let qry = {text: `SELECT * FROM users WHERE username = $1;`, values : [userReqKC.user.username]};
-    const userReqDB = await execQuery(qry);
+    const userReqDB = await selectFromTable('users', {username : userReqKC.user.username})
+    console.log(userReqDB);
     if(userReqDB.error){
         log("ERROR", `Error in requesting the user from the databae`);
         return next(userReqKC.error);

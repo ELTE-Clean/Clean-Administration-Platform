@@ -5,6 +5,8 @@ import { route } from "next/dist/server/router";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { RequestType } from "../enums/requestTypes";
+import useFetch, { fetchCall } from "../hooks/useFetch";
 
 // export const getStaticProps = async () => {
 //   const res = await fetch("http://localhost:5003/api/v1/login");
@@ -19,17 +21,18 @@ const Login: NextPage = ({ d }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+  // const [data, loading, error] = useFetch<String>({
+  //   method: RequestType.POST,
+  //   url: "login",
+  // });
 
   let loginHandler = (e: any) => {
     e.preventDefault();
-    fetch("http://localhost:5000/login", {
-      method: "POST",
-      mode : "cors",            // Allows the browser to include the headers and tokens in the request
-      credentials : "include", // Allows the browser to send requests to other domains
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username: username, password: password }),
+
+    fetchCall({
+      url: "login",
+      method: RequestType.POST,
+      body: { username: username, password: password },
     })
       .then((response) => {
         const res = response.json();

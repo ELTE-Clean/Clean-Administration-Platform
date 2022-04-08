@@ -7,6 +7,7 @@ import {
 } from "react";
 import internal from "stream";
 import EditTestCasesForm from "./EditTestCasesForm";
+import RichTextEditor from "./RichTextEditor";
 import PopUp from "./Popup";
 
 const EditTaskForm = (props: any) => {
@@ -74,12 +75,13 @@ const EditTaskForm = (props: any) => {
           <br />
           <br />
           <h3>Description:</h3>
-          <textarea
+          {/* <textarea
             className="description-area"
             name="description"
             value={taskDescription}
             onChange={(e) => setTaskDescription(e.target.value.trim())}
-          />
+          /> */}
+          <RichTextEditor classTemp={"description-area"} valueTemp={taskDescription}/>
 
           <br />
           <br />

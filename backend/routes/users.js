@@ -35,8 +35,8 @@ router.get('/get/profile', async (req, res, next) => {
         uid : userReqDB.result.rows[0].id,
         kcid : userReqKC.user.keycloak_id, 
         username: userReqKC.user.username, 
-        firstname: userReqDB.result.rows[0].firstname,
-        lastname: userReqDB.result.rows[0].lastname,
+        firstname: userReqDB.result.rows[0].firstname.replace(/[ \t]+$/g, ''),
+        lastname: userReqDB.result.rows[0].lastname.replace(/[ \t]+$/g, ''),
         roles : userReqKC.user.roles,
     };
 
@@ -63,7 +63,6 @@ router.get('/get/all', async(req, res) => {
             usersKC_map.set(userKC.username, ukc);
         }
     });
-    console.log("keycloak data into map: ", usersKC_map);
 
     /* Get all users from the database */
     const userReqDB = await execQuery({text: `SELECT * FROM users`});
@@ -71,7 +70,6 @@ router.get('/get/all', async(req, res) => {
         log("ERROR", `Error in requesting the user from the databae`);
         return next(userReqKC.error);
     }
-    console.log("just testing: databae users: ", userReqDB.result.rows)
 
     /* Return the users that correspond to a keycloak username only */
     let ret = [];
@@ -85,8 +83,8 @@ router.get('/get/all', async(req, res) => {
                 uid : userDB.id,
                 kcid : kcuser.keycloak_id, 
                 username: kcuser.username, 
-                firstname: userDB.firstname,
-                lastname: userDB.lastname,
+                firstname: userDB.firstname.replace(/[ \t]+$/g, ''),    // Until we remove whitespaces from database
+                lastname: userDB.lastname.replace(/[ \t]+$/g, ''),      // Until we remove whitespaces from database
                 roles : kcuser.roles,
             }
         ];

@@ -166,10 +166,11 @@ export async function getAllUsersData(roles? : string[]) : Promise<KCUserData[]>
     }
     const at = reqRes.result.data.access_token;
 
-    /* Get users from keycloak by role (faster). However, no user must be in two roles (will result in redundancy)*/
-    var usersData : KCUserData[] = [];
-    roles = (roles)? roles : appRoles;  // Roles is given (defined), then we only get users of this role
+    /* Get users from keycloak by role (faster).*/
+    const usersMap = new Map<string, KCUserData>(); // avoid redundancy of roles (iff user has multiple roles)
+    roles = (roles)? roles : appRoles;              // Roles is given (defined), then we only get users of this role
     for(const role of roles){
+        /* Get the users by role */
         reqRes = await execReq(
             "get", 
             `${KEYCLOAK_HOST}admin/realms/${REALM_NAME}/roles/${role}/users`,
@@ -180,15 +181,27 @@ export async function getAllUsersData(roles? : string[]) : Promise<KCUserData[]>
             log("ERROR", reqRes.error);
             continue;
         }
-        const temp : KCUserData[] = reqRes.result.data.map( (user : any) => {
-            return { 
+
+        /* For all the users we got, add them to our map or update the map roles*/
+        reqRes.result.data.forEach((user : any) => {
+            var userRoles = [role];
+            if(usersMap.has(user.id)){ // If we already got the user, then we just edit its role
+                const ukc : KCUserData = usersMap.get(user.id) as KCUserData;
+                userRoles = userRoles.concat(ukc.roles);
+            }
+            usersMap.set(user.id, {  // add/update the user (role is only updated if it exists) 
                 keycloak_id: user.id, 
                 username: user.username, 
                 email_verified : user.emailVerified,
-                roles : [role]
-            } as KCUserData;
+                roles : userRoles
+            } as KCUserData)
         });
-        usersData = usersData.concat(temp);
     }
+
+    /* Transform the map into an array.*/
+    var usersData : KCUserData[] = [];
+    usersMap.forEach( (data : KCUserData) => {
+        usersData = usersData.concat(data);
+    });
     return usersData;
 }

@@ -123,7 +123,7 @@ export async function getUserData (req: express.Request, res : express.Response)
         const at : Token = grant.access_token as Token;
         const rt : Token = grant.refresh_token as Token;
 
-        if(grant.isExpired() || at.isExpired()){
+        if(grant.isExpired() || at.isExpired()){ // An extra validation layer.
             throw new Error("User authentication token is expired");
         }
 
@@ -151,6 +151,8 @@ export async function getUserData (req: express.Request, res : express.Response)
 /**
  * 
  * Get all users that are in the realm. 
+ * @param roles - An array of roles to search the users for. If no role is given, we use the default three roles in 'appRoles' defined in the module
+ * @returns an array of keycloak user data.
  */
 export async function getAllUsersData(roles? : string[]) : Promise<KCUserData[]> {
     /* Get access token for the client (cap-app) so we can request data from keycloak using that client */

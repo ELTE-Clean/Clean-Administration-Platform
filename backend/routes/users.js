@@ -47,9 +47,12 @@ router.get('/get/profile', async (req, res, next) => {
 
 
 /**
- * Get all users data from both the keycloak and database.
+ * Get all users data from both the keycloak and database. Note that if a user exist in keycloak
+ *  and not in the database, will return only the junction between the two databases. Therefore,
+ *  users that exists in both databases are the ones that are returned.
  */
 router.get('/get/all', async(req, res) => {
+    log("INFO", "All users data have been requested");
     const usersKC_arr = await getAllUsersData();
 
     /* Transform the array to a map (username => keycloak user data) */
@@ -90,8 +93,11 @@ router.get('/get/all', async(req, res) => {
         ];
     }
 
+    log("INFO", "All users data have been returned successfully");
     res.status(200).send(ret);
 });
+
+
 
 
 module.exports = router;

@@ -3,12 +3,15 @@ import {Token, Grant} from 'keycloak-connect';
 import { MemoryStore } from 'express-session';
 import * as express from 'express';
 import {log} from './logger_utils';
+import { execReq } from './http_utils';
+import qs from 'qs';
+import { Stream } from 'stream';
 
 /* Environment variables that are passed to the server */
-const KEYCLOAK_HOST = 'http://nginx/auth/';
-const CLIENT_ID     = "cap-app";
-const CLIENT_SECRET = 'aQX4Vdbe7PhQTPCwRdeOwIdQzbpGkOdw';  
-const REALM_NAME    = 'CAP';
+const KEYCLOAK_HOST : string = process.env.KEYCLOAK_HOST || 'http://nginx/auth/';
+const CLIENT_ID     : string = process.env.CLIENT_ID     || "cap-app";
+const CLIENT_SECRET : string = process.env.CLIENT_SECRET || 'aQX4Vdbe7PhQTPCwRdeOwIdQzbpGkOdw';  
+const REALM_NAME    : string = process.env.REALM_NAME    || 'CAP';
 
 /* Global Keycloak Configuration */
 export const kc_config = {
@@ -22,29 +25,39 @@ export const kc_config = {
     'ssl-required': "",
     'bearer-only': true,
     realm: REALM_NAME
-}
-
-
-interface KCUserData {
-    keycloak_id: string,
-    username: string,
-    email_verified : boolean
 };
-interface KCUserInfoRequest{
-    user : KCUserData | null,
-    error : any | null
-}
 
 
+// ------------------------- Constants Section
 
 /* Keycloak and the memory storage objects */
 export const memoryStore = new MemoryStore();                       
 export const keycloak = new KeycloakConnect({ store: memoryStore }, kc_config);
+export const appRoles : string[] = ["admin", "demonstrator", "student"];
 
 
 /* Disable link forwarding since we are using a pure API */
 keycloak.redirectToLogin = function(req) { return false; };
 
+
+// -------------------------- Interfaces (Objects templates)
+/**
+ * The Keycloak User Data.
+ */
+interface KCUserData {
+    keycloak_id: string,
+    username: string,
+    email_verified : boolean,
+    roles : string[]
+};
+
+/**
+ * Encapsulate the User data result or error.  This object is returned when the getUserData() is called.
+ */
+interface KCUserInfoRequest{
+    user : KCUserData | null,
+    error : any | null
+};
 
 
 /**
@@ -107,15 +120,24 @@ export const isAuth: express.RequestHandler = (req: express.Request, res: expres
 export async function getUserData (req: express.Request, res : express.Response) : Promise<KCUserInfoRequest> {
     try{
         let grant : Grant = await keycloak.getGrant(req, res);
-        const at : Token | string = grant.access_token as Token;
-        const rt : Token | string = grant.refresh_token as Token;
-        log("DEBUG", `Access Token: ${at}`);
+        const at : Token = grant.access_token as Token;
+        const rt : Token = grant.refresh_token as Token;
 
+        if(grant.isExpired() || at.isExpired()){
+            throw new Error("User authentication token is expired");
+        }
+
+        let userRoles : string[] = [];
+        for(const role of appRoles){
+            userRoles = (at.hasRealmRole(role))? [...userRoles,role] : userRoles ;
+        }
+        
         const userInfo = await keycloak.grantManager.userInfo(at) as any;
         const userData : KCUserData = { 
             keycloak_id: userInfo.sub, 
             username: userInfo.preferred_username, 
-            email_verified : userInfo.email_verified 
+            email_verified : userInfo.email_verified,
+            roles : userRoles
         } as KCUserData;
 
         return {error : null, user : userData} as KCUserInfoRequest;
@@ -123,3 +145,50 @@ export async function getUserData (req: express.Request, res : express.Response)
         return {error : error, user : null} as KCUserInfoRequest;
     }
 };
+
+
+
+/**
+ * 
+ * Get all users that are in the realm. 
+ */
+export async function getAllUsersData(roles? : string[]) : Promise<KCUserData[]> {
+    /* Get access token for the client (cap-app) so we can request data from keycloak using that client */
+    let reqRes = await execReq(
+        "post", 
+        `${KEYCLOAK_HOST}realms/${REALM_NAME}/protocol/openid-connect/token`, 
+        qs.stringify({grant_type: 'client_credentials', client_id: CLIENT_ID, client_secret: CLIENT_SECRET}),
+        { 'Content-Type': 'application/x-www-form-urlencoded'}
+    );
+    if(reqRes.error){
+        log("ERROR", reqRes.error);
+        return [];
+    }
+    const at = reqRes.result.data.access_token;
+
+    /* Get users from keycloak by role (faster). However, no user must be in two roles (will result in redundancy)*/
+    var usersData : KCUserData[] = [];
+    roles = (roles)? roles : appRoles;  // Roles is given (defined), then we only get users of this role
+    for(const role of roles){
+        reqRes = await execReq(
+            "get", 
+            `${KEYCLOAK_HOST}admin/realms/${REALM_NAME}/roles/${role}/users`,
+            undefined,
+            {'Content-Type': 'application/json', Authorization: 'Bearer ' + at }
+        );
+        if(reqRes.error){
+            log("ERROR", reqRes.error);
+            continue;
+        }
+        const temp : KCUserData[] = reqRes.result.data.map( (user : any) => {
+            return { 
+                keycloak_id: user.id, 
+                username: user.username, 
+                email_verified : user.emailVerified,
+                roles : [role]
+            } as KCUserData;
+        });
+        usersData = usersData.concat(temp);
+    }
+    return usersData;
+}

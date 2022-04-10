@@ -47,8 +47,9 @@ keycloak.redirectToLogin = function(req) { return false; };
 interface KCUserData {
     keycloak_id: string,
     username: string,
-    email_verified : boolean,
-    roles : string[]
+    email_verified? : boolean,
+    roles : string[],
+    email? : string
 };
 
 /**
@@ -147,14 +148,10 @@ export async function getUserData (req: express.Request, res : express.Response)
 };
 
 
-
 /**
- * 
- * Get all users that are in the realm. 
- * @param roles - An array of roles to search the users for. If no role is given, we use the default three roles in 'appRoles' defined in the module
- * @returns an array of keycloak user data.
+ * A helper function for getting an access token of the current client.
  */
-export async function getAllUsersData(roles? : string[]) : Promise<KCUserData[]> {
+export async function createClientAccessToken(): Promise<string>{
     /* Get access token for the client (cap-app) so we can request data from keycloak using that client */
     let reqRes = await execReq(
         "post", 
@@ -163,17 +160,33 @@ export async function getAllUsersData(roles? : string[]) : Promise<KCUserData[]>
         { 'Content-Type': 'application/x-www-form-urlencoded'}
     );
     if(reqRes.error){
-        log("ERROR", reqRes.error);
+        throw new Error(reqRes.error);
+    }
+    return reqRes.result.data.access_token;
+}
+
+
+/**
+ * 
+ * Get all users that are in the realm. 
+ * @param roles - An array of roles to search the users for. If no role is given, we use the default three roles in 'appRoles' defined in the module
+ * @returns an array of keycloak user data.
+ */
+export async function getAllUsersData(roles? : string[]) : Promise<KCUserData[]> {
+    var at : string = "";
+    try{
+        at = await createClientAccessToken();
+    }catch(error){
+        log("ERROR", error as string);
         return [];
     }
-    const at = reqRes.result.data.access_token;
 
     /* Get users from keycloak by role (faster).*/
     const usersMap = new Map<string, KCUserData>(); // avoid redundancy of roles (iff user has multiple roles)
     roles = (roles)? roles : appRoles;              // Roles is given (defined), then we only get users of this role
     for(const role of roles){
         /* Get the users by role */
-        reqRes = await execReq(
+        let reqRes = await execReq(
             "get", 
             `${KEYCLOAK_HOST}admin/realms/${REALM_NAME}/roles/${role}/users`,
             undefined,
@@ -206,4 +219,60 @@ export async function getAllUsersData(roles? : string[]) : Promise<KCUserData[]>
         usersData = usersData.concat(data);
     });
     return usersData;
+}
+
+
+
+
+/**
+ * Create multiple users in keycloak given an array 
+ * of userRepresentation (https://www.keycloak.org/docs-api/15.0/rest-api/index.html#_userrepresentation)
+ * 
+ * Returns:
+ *  A map containing the usernames and their relative passwords
+ * 
+ */
+export async function createUsers(users: KCUserData[]) : Promise<Map<string, string>> {
+    /* Creating client access token */
+    var at : string = "";
+    try{
+        at = await createClientAccessToken();
+    }catch(error){
+        log("ERROR", error as string);
+        return new Map();
+    }
+
+    /* Creating user */
+    var insertedUsers : Map<string, string> = new Map<string, string>();
+    for(const user of users){
+        if(insertedUsers.has(user.username)){
+            log("DEBUG", "multiple users are given that are redundant");
+            continue;
+        }
+        let password = (Math.random() + 1).toString(36).substring(7);
+        let userRepr = {
+            id : user.keycloak_id,
+            email : user.email,
+            emailVerified : user.email_verified,
+            enabled : true,
+            realmRoles : user.roles,
+            username : user.username,
+            credentials : [{type:"password", value: password, temporary: false}]
+        };
+        let reqRes = await execReq(
+            "post", 
+            `${KEYCLOAK_HOST}admin/realms/${REALM_NAME}/users`,
+            userRepr,
+            {'Content-Type': 'application/json', Authorization: 'Bearer ' + at }
+        );
+        if(reqRes.error){
+            log("ERROR", reqRes.error);
+            continue;
+        }
+
+        insertedUsers.set(user.username, password)
+        log("DEBUG", `Created user: ${user.username} with password: ${password}`);
+    }
+
+    return insertedUsers;
 }

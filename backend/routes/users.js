@@ -3,7 +3,7 @@
 /* Dependencies Importing */
 const router = require('express-promise-router')();     // Used to handle async request. Will be useful in the future to dodge the pyramid of doom
 const keycloak = require('../utils/keycloak_utils').keycloak;
-const {isAuth, getUserData, isUnauth, getAllUsersData} = require('../utils/keycloak_utils');
+const {isAuth, getUserData, isUnauth, getAllUsersData, createUsers} = require('../utils/keycloak_utils');
 const {execTrans, startTrans, execQuery, endTrans} = require('../utils/database_utils');
 const log = require('../utils/logger_utils').log;
 const execReq = require('../utils/http_utils').execReq;
@@ -12,7 +12,7 @@ const execReq = require('../utils/http_utils').execReq;
 
 
 /* Getters */
-router.get('/get/profile', async (req, res, next) => {
+router.get('/get/self', async (req, res, next) => {
     log("INFO", `Getting user profile.`);
     const userReqKC = await getUserData(req, res);
     console.log(userReqKC);
@@ -98,6 +98,50 @@ router.get('/get/all', async(req, res) => {
 });
 
 
+/**
+ * Takes a list of users and creates them in both the keycloak and database with random passwords.
+ * Pre-conditions:
+ *  Request Body Contains: [
+ *                              {username: char[20], // unique username (maps database to keycloak) (can be neptun code) 
+ *                               firstname:char[20], // firstname
+ *                               lastname:char[20],  // lastname
+ *                               uid: char[6]},
+ *                               roles: string[]
+ *                           ]      // unique id (can be neptun code.)
+ * 
+ * Returns:
+ *  [{username, password}]
+ * 
+ */
+router.post('/create', async (req, res, next) =>{
+    if(!req.body.users)
+        return next("'users' is not defined in the request body");
+
+    /* Create users in keycloak */
+    const users_kc = req.body.users.map(user => {
+        return {
+            keycloak_id: "",
+            username: user.username,
+            email_verified : user.email_verified || false,
+            roles : user.roles,
+            email : user.email 
+        };
+    });
+    var insertedUsersKC = [];
+    const temp = await createUsers(users_kc);
+    temp.forEach((value, key) => {
+        insertedUsersKC = [...insertedUsersKC, {"username": `${key}`, "password": `${value}`}];
+    });
+    if(insertedUsersKC.length === 0){
+        return next("could not create users");
+    }
+
+    /* Create users in the database. */
+    // TODO: Insert the users into the database
+
+
+    return res.status(200).send(insertedUsersKC);
+});
 
 
 module.exports = router;

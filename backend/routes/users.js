@@ -3,7 +3,7 @@
 /* Dependencies Importing */
 const router = require('express-promise-router')();     // Used to handle async request. Will be useful in the future to dodge the pyramid of doom
 const keycloak = require('../utils/keycloak_utils').keycloak;
-const {isAuth, getUserData, isUnauth, getAllUsersData, createUsers} = require('../utils/keycloak_utils');
+const {isAuth, getSelfData, isUnauth, getAllUsersData, createUsers, protector, updateUserRole} = require('../utils/keycloak_utils');
 const {execTrans, startTrans, execQuery, endTrans} = require('../utils/database_utils');
 const log = require('../utils/logger_utils').log;
 const execReq = require('../utils/http_utils').execReq;
@@ -12,9 +12,9 @@ const execReq = require('../utils/http_utils').execReq;
 
 
 /* Getters */
-router.get('/get/self', async (req, res, next) => {
+router.get('/get/self', isAuth, async (req, res, next) => {
     log("INFO", `Getting user profile.`);
-    const userReqKC = await getUserData(req, res);
+    const userReqKC = await getSelfData(req, res);
     console.log(userReqKC);
     if(userReqKC.error){
         log("ERROR", `Error in getting the user data from the access token`);
@@ -49,9 +49,12 @@ router.get('/get/self', async (req, res, next) => {
 /**
  * Get all users data from both the keycloak and database. Note that if a user exist in keycloak
  *  and not in the database, will return only the junction between the two databases. Therefore,
- *  users that exists in both databases are the ones that are returned.
+ *  users that exists in both databases are the ones that are returned. 
+ * 
+ * Note:
+ *  Only admins or demonstrators have the ability to get all the users.
  */
-router.get('/get/all', async(req, res) => {
+router.get('/get/all', isAuth, protector(["admin", "demonstrator"]), async(req, res) => {
     log("INFO", "All users data have been requested");
     const usersKC_arr = await getAllUsersData();
 
@@ -98,10 +101,11 @@ router.get('/get/all', async(req, res) => {
 });
 
 
+
 /**
  * Takes a list of users and creates them in both the keycloak and database with random passwords.
  * Pre-conditions:
- *  Request Body Contains: [
+ *  Request Body Contains: users: [
  *                              {username: char[20], // unique username (maps database to keycloak) (can be neptun code) 
  *                               firstname:char[20], // firstname
  *                               lastname:char[20],  // lastname
@@ -113,7 +117,7 @@ router.get('/get/all', async(req, res) => {
  *  [{username, password}]
  * 
  */
-router.post('/create', async (req, res, next) =>{
+router.post('/create', isAuth, protector(["admin"]), async (req, res, next) =>{
     if(!req.body.users)
         return next("'users' is not defined in the request body");
 
@@ -139,9 +143,37 @@ router.post('/create', async (req, res, next) =>{
     /* Create users in the database. */
     // TODO: Insert the users into the database
 
-
     return res.status(200).send(insertedUsersKC);
 });
+
+
+/**
+ * Update user's role. Only admins have the ability to change users roles.
+ * Preconditions:
+ *  Request Body Contains: username: string, roles : string[] 
+ *  Logged in user must have an admin role.
+ * 
+ * Returns:
+ *  status: 201
+ *  object: {message}
+ */
+router.put('/update/role', isAuth, protector(["admin"]), async (req, res, next) => {
+    if(!req.body.roles || !req.body.username || req.body.roles.length === 0)
+        return next("'role' is not defined in the request body");
+    
+    log("INFO", `Assigning ${req.body.username} the following roles: ${req.body.roles.toString()}`);
+    const updated = await updateUserRole(req.body.username, req.body.roles);
+    if(!updated)
+        return next("Role of the user did not update");
+
+    log("INFO", `Roles assigned successfully`);
+    return res.status(201).send({message: "Role updates successfully"});
+});
+
+
+
+/// TODO: User password update.
+
 
 
 module.exports = router;

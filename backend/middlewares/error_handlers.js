@@ -1,8 +1,10 @@
+const log = require('../utils/logger_utils').log;
+
 
 const errorHandler = (err, req, res, next) => {
     if(err) {
-        console.log(err);
-        res.status(500).send(JSON.stringify({message: "Internal Server Error"}));
+        log("ERROR", err.toString());
+        res.status(500).send(JSON.stringify({message: `Error: ${err}`}));
     }
     next();
 }

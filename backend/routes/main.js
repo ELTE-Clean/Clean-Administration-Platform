@@ -1,21 +1,20 @@
-const { execTrans } = require('../utils/database_utils');
-
 /* Dependencies Importing */
 const router = require('express-promise-router')();     // Used to handle async request. Will be useful in the future to dodge the pyramid of doom
 const keycloak = require('../utils/keycloak_utils').keycloak;
 const protector = require('../utils/keycloak_utils').protector;
 const isAuth = require('../utils/keycloak_utils').isAuth;
 const isUnauth = require('../utils/keycloak_utils').isUnauth;
-const execQuery = require('../utils/database_utils').execQuery;
-const startTrans = require('../utils/database_utils').startTrans;
-const endTrans = require('../utils/database_utils').endTrans;
 const log = require('../utils/logger_utils').log;
+
+
 
 /* Importing Routers */
 const usersRouter = require('./users');
+const dbRouter = require('./db');
 
 
 router.use('/users', usersRouter);
+router.use('/db', dbRouter);
 
 
 // --------------------------------------- Main Endpoint ---------------------------------------
@@ -46,7 +45,7 @@ router.get("/main/demonstrator", keycloak.protect('realm:demonstrator'), isAuth,
     });
 });
 
-// --------------------------------------- Autherization Endpoints ---------------------------------------
+// --------------------------------------- Authorization Endpoints ---------------------------------------
 
 /**
  * A simple login endpoint to check if everything is working perfectly. In real applications we will not need this one.
@@ -81,8 +80,8 @@ router.post("/login", isUnauth, (req, res, next) => {
 
 /**
  * This will logout the user, destroy the session data that correspond to that user. Note that, it won't 
- *  delete the session, but it will only destroy the keycloak data attached to that session. 
- *  So other arbitrary data can still be saved in the session. 
+ * delete the session, but it will only destroy the keycloak data attached to that session.
+ * So other arbitrary data can still be saved in the session.
  * 
  */
 router.get("/logout", isAuth, (req, res, next) => {
@@ -91,60 +90,6 @@ router.get("/logout", isAuth, (req, res, next) => {
     res.status(200).send(JSON.stringify({message: "User is Logged out and session has been destroyed"}));
 });
 
-// --------------------------------------- Database Endpoints ---------------------------------------
 
-/**
- * Test endpoints to see if we can interact 
- * with the database 
- */
-router.get("/select/:table", (req, res, next) => {
-    let qryText = "select * from " + req.params.table;
-    if (Object.entries(req.query).length > 0) {
-        const pairs = Object.entries(req.query).map( ([key, val]) => key+ "='" + val + "'" );
-        const filter = " where " + pairs.join(" and ");
-        qryText += filter;
-    }
-    qryText += ";"
-
-    const qry = { text: qryText };
-    log("DEBUG", qryText);
-
-    execQuery(qry)
-    .then((result) => res.status(200).send(JSON.stringify({message: result.result.rows})))
-    .catch((error) => {console.log(error); return next(error)});;
-});
-
-router.get("/insert/:table", (req, res, next) => {
-    let qryText = "insert into " + req.params.table;
-    const cols = " (" + Object.keys(req.query).join(", ") + ")";
-    const vals = " values (" + Object.values(req.query).map( val => "'" + val + "'" ).join(", ") + ")";
-    qryText += cols + vals + ";";
-
-    const qry = { text: qryText };
-    execQuery(qry)
-    .then(res.status(200).send(JSON.stringify({message: "Insert successful, table '" + req.params.table + "' updated!"})));
-});
-
-router.get("/delete/:table", (req, res, next) => {
-    let qryText = "delete from " + req.params.table;
-    const pairs = Object.entries(req.query).map( ([key, val]) => key+ "='" + val + "'" );
-    const filter = " where " + pairs.join(" and ");
-    qryText += filter + ";";
-
-    const qry = { text: qryText };
-    execQuery(qry)
-    .then(res.status(200).send(JSON.stringify({message: "Delete successful, table '" + req.params.table + "' updated!"})));
-});
-
-router.get("/transaction", (req, res, next) => {
-    const qry = { text: "select * from grades;" };
-    startTrans().then(transInstance => {
-        execTrans(qry, transInstance).then(result => {
-            endTrans(transInstance).then(
-                res.status(200).send(JSON.stringify({message: result.result.rows}))
-            )
-        })
-    })
-});
 
 module.exports = router;

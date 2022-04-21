@@ -28,7 +28,7 @@ export function log(level: string, message: string) : void {
     if(MAX_LOG_LEVEL_NUMBER < log_num)
         return;
 
-    console.log("%s; [%s]; %s", new Date(), level, message);
+    console.log("%s [%s] %s", new Date(), level, message);
 };
 
 

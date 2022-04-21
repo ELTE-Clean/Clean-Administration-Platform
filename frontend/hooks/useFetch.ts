@@ -30,20 +30,20 @@ export default function useFetch<Res>({
     response: null,
   });
 
-  const ROOT_PATH = "http://localhost:5000/";
+  const ROOT_PATH = "http://localhost:5000";
 
   const fetchCall = () => {
     
     const apiPath =`${ROOT_PATH}/${url}`
     const headers: any = {
-      "Content-Type" : "application/json",
-      "mode" : "cors",
-      "credentials" : "include"
+      "Content-Type" : "application/json"
     };
     
     setRes((prev) => ({ ...prev, loading: true }));
     fetch(apiPath, {
       method: method,
+      "mode" : "cors",
+      "credentials" : "include",
       headers: headers,
       body: JSON.stringify(body),
     })
@@ -71,7 +71,7 @@ export default function useFetch<Res>({
     fetchCall();
   }, [url]);
 
-  return [res.data?.res, res.loading, res.error, res.response];
+  return [res.data, res.loading, res.error, res.response];
 }
 
 
@@ -93,12 +93,12 @@ export const fetchCall = async ({
   const apiPath =`${ROOT_PATH}/${url}`
   const headers: any = {
     "Content-Type" : "application/json",
-    "mode" : "cors",
-    "credentials" : "include"
   };
     
   return await fetch(apiPath, {
     "method": method,
+    "mode" : "cors",
+    "credentials" : "include",
     "headers": headers,
     "body": JSON.stringify(body),
   })

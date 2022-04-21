@@ -4,7 +4,8 @@ import type { NextPage } from "next";
 import { route } from "next/dist/server/router";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "../context/UserContext";
 import { RequestType } from "../enums/requestTypes";
 import useFetch, { fetchCall } from "../hooks/useFetch";
 
@@ -16,15 +17,12 @@ import useFetch, { fetchCall } from "../hooks/useFetch";
 //   };
 // };
 
-const Login: NextPage = ({ d }) => {
+const Login: NextPage = () => {
   // console.log(d);
+  const { setUser } = useContext(UserContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
-  // const [data, loading, error] = useFetch<String>({
-  //   method: RequestType.POST,
-  //   url: "login",
-  // });
 
   let loginHandler = (e: any) => {
     e.preventDefault();
@@ -40,6 +38,7 @@ const Login: NextPage = ({ d }) => {
       })
       .then((data) => {
         if (data["response"] !== undefined) {
+          setUser(data);
           console.log("Logged In:", data);
           router.push("/");
         } else {

@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Task } from "../../interfaces/userTask";
 import EditSectionForm from "../../components/EditSectionForm";
 import PopUp from "../../components/Popup";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { UserContext } from "../../context/UserContext";
 
 const Section = () => {
+  const { user } = useContext(UserContext);
+  console.log(user);
+
   const router = useRouter();
   let name = router.query.sectionName;
 

@@ -1,8 +1,48 @@
 import type { NextPage } from "next";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from "../context/UserContext";
+import { RequestType } from "../enums/requestTypes";
+import useFetch, { fetchCall } from "../hooks/useFetch";
 
 const Profile: NextPage = () => {
+  const { user } = useContext(UserContext);
   const [showChangePassForm, setShowChangePassForm] = useState(false);
+  const [profile, setProfile] = useState({});
+  const route = useRouter();
+  const [data, loading, error] = useFetch<any>({
+    method: RequestType.GET,
+    url: "users/get/profile",
+  });
+
+  useEffect(() => {
+    setProfile(data);
+  }, [data, loading]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  if (!profile) {
+    return <div>Error. No Profile info</div>;
+  }
+
+  let handleLogOut = () => {
+    fetchCall({
+      url: "logout",
+      method: RequestType.GET,
+    })
+      .then((response) => {
+        const res = response.json();
+        return res;
+      })
+      .then((data) => {
+        route.push("/login");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
   let ChangePassForm = () => {
     let handelPassChange = () => {
       console.log("handling password change");
@@ -39,8 +79,7 @@ const Profile: NextPage = () => {
       </div>
     );
   };
-  let userName = "Abdulla Alkhulaqui";
-  let neptun = "MI3JG2";
+
   return (
     <div className="profile-container">
       <div className="title">
@@ -48,10 +87,13 @@ const Profile: NextPage = () => {
       </div>
       <div className="user-info">
         <p>
-          Name: <b> {userName}</b>
+          Name:
+          <b>
+            {profile["firstname"]} {profile["lastname"]}
+          </b>
         </p>
         <p>
-          Neptun: <b> {neptun}</b>
+          Neptun: <b> {profile["uid"]}</b>
         </p>
       </div>
       <div className="change-pass-btn">
@@ -61,6 +103,9 @@ const Profile: NextPage = () => {
           </button>
         )}
         {showChangePassForm && ChangePassForm()}
+      </div>
+      <div className="logout-btn">
+        <button onClick={() => handleLogOut()}>Logout</button>
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import { BaseSyntheticEvent, useState } from "react";
 import EditTaskForm from "../../../components/EditTaskForm";
 import PopUp from "../../../components/Popup";
 import Image from "next/image";
+import withAuth from "../../../components/withAuth";
 
 const Task = () => {
   const router = useRouter();
@@ -146,4 +147,4 @@ const Task = () => {
   );
 };
 
-export default Task;
+export default withAuth(Task);

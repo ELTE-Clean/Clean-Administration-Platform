@@ -13,57 +13,72 @@
       text-decoration: underline;
     }
   }
-  .change-pass-btn {
-    margin-top: 100px;
-    width: 30%;
-    button {
-      @include btn(
-        $main-dark-blue,
-        #fff,
-        $main-box-shadow,
-        none,
-        10px,
-        15px 8px
-      );
-      font-size: 30px;
-    }
-  }
-
-  #pass-change-form {
-    padding: 0 20px 0 0;
-    br {
-      margin: 100px 0;
-    }
-    label {
-      font-size: 30px;
-      color: $main-dark-blue;
-      font-weight: bolder;
-    }
-    input {
-      width: 100%;
-      @include input(none);
-      border-radius: 10px;
-      box-shadow: $main-box-shadow;
-      padding: 20px 0;
-      margin: 20px 0;
-    }
-    .form-btns {
-      margin-top: 50px;
-      position: relative;
-      #change-btn {
+  .action-btns {
+    @include flex(column);
+    justify-content: space-between;
+    .change-pass-btn {
+      button {
         @include btn(
-          $main-green,
           $main-dark-blue,
+          #fff,
           $main-box-shadow,
           none,
           10px,
-          15px 30px
+          15px 8px
         );
+        font-size: 20px;
+        margin: 30px 0;
       }
-      #cancel-btn {
-        position: absolute;
 
-        right: 0;
+      #pass-change-form {
+        width: 30vw;
+        padding: 20px 0;
+        br {
+          margin: 100px 0;
+        }
+        label {
+          font-size: 20px;
+          color: $main-dark-blue;
+          font-weight: bolder;
+        }
+        input {
+          @include input(1px solid #ccc);
+          padding: 20px;
+          margin: 20px 0;
+          width: 100%;
+        }
+        .form-btns {
+          position: relative;
+          #change-btn {
+            @include btn(
+              $main-green,
+              $main-dark-blue,
+              $main-box-shadow,
+              none,
+              10px,
+              15px 30px
+            );
+          }
+          #cancel-btn {
+            position: absolute;
+
+            right: 0;
+            @include btn(
+              $main-red,
+              $main-dark-blue,
+              $main-box-shadow,
+              none,
+              10px,
+              15px 30px
+            );
+          }
+        }
+      }
+    }
+
+    #logout-btn {
+      button {
+        font-size: 20px;
         @include btn(
           $main-red,
           $main-dark-blue,
@@ -72,7 +87,9 @@
           10px,
           15px 30px
         );
+        width: 100%;
       }
+      width: 100%;
     }
   }
 }

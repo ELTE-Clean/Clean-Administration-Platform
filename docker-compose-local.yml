@@ -9,7 +9,7 @@ services:
             - ./nginx/nginx.conf:/etc/nginx/nginx.conf
         links:
             - backend
-            - frontend
+            # - frontend
             - cpgadmin
             - cleanDB
             - keycloak
@@ -28,13 +28,13 @@ services:
             - cleanDB 
             - keycloak
 
-    frontend:
-        image: frontend:latest
-        ports:
-            - 5001:80
-        hostname: frontend
-        depends_on:
-            - backend
+    # frontend:
+    #     image: frontend:latest
+    #     ports:
+    #         - 5001:80
+    #     hostname: frontend
+    #     depends_on:
+    #         - backend
 
     keycloak:
         image: jboss/keycloak:16.1.0

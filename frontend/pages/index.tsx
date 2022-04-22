@@ -1,15 +1,14 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
-import AddSectionForm from "../components/AddSectionForm";
+import { useContext } from "react";
+import withAuth from "../components/withAuth";
+import { UserContext } from "../context/UserContext";
 
 const Home: NextPage = () => {
-  return (
-    <div>
-      {/* {<Section sectionName="Homework" />} */}
-      {/* {<Task />} */}
-      {/*<AddSectionForm />*/}
-    </div>
-  );
+  const router = useRouter();
+  const { user } = useContext(UserContext);
+
+  return <div></div>;
 };
 
-export default Home;
+export default withAuth(Home);

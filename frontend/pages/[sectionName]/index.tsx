@@ -1,21 +1,42 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Task } from "../../interfaces/userTask";
 import EditSectionForm from "../../components/EditSectionForm";
 import PopUp from "../../components/Popup";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { UserContext } from "../../context/UserContext";
+import withAuth from "../../components/withAuth";
 
 const Section = () => {
-  const { user } = useContext(UserContext);
-  console.log(user);
+  const { sections } = useContext(UserContext);
+  const [buttonEditPopup, setButtonEditPopup] = useState(false);
 
   const router = useRouter();
-  let name = router.query.sectionName;
-
+  const name = router.query.sectionName;
   let isTeacher: Boolean = true;
+
+  const sectionExist = (sectionName: string) => {
+    const sectionNames = sections.message.map(
+      (section: { sectionid: string; groupid: string }) => section.sectionid
+    );
+    return sectionNames.includes(sectionName);
+  };
+
+  useEffect(() => {
+    console.log(sections);
+
+    if (
+      sections.message !== undefined &&
+      typeof sections.message !== "string" &&
+      Object.keys(sections).length > 0
+    ) {
+      if (!sectionExist(name)) {
+        router.push("/custom404");
+      }
+    }
+  }, [sections]);
+
   // Here instead of "tasks" there should be an api call to the backend to get the respective data for sectionName
-  const [buttonEditPopup, setButtonEditPopup] = useState(false);
 
   const tasks = [
     {
@@ -96,4 +117,4 @@ const Section = () => {
   );
 };
 
-export default Section;
+export default withAuth(Section);

@@ -1,30 +1,16 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import { RequestType } from "../enums/requestTypes";
-import useFetch, { fetchCall } from "../hooks/useFetch";
+import { fetchCall } from "../hooks/useFetch";
+import withAuth from "../components/withAuth";
 
 const Profile: NextPage = () => {
   const { user } = useContext(UserContext);
   const [showChangePassForm, setShowChangePassForm] = useState(false);
-  const [profile, setProfile] = useState({});
   const route = useRouter();
-  const [data, loading, error] = useFetch<any>({
-    method: RequestType.GET,
-    url: "users/get/profile",
-  });
-
-  useEffect(() => {
-    setProfile(data);
-  }, [data, loading]);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-  if (!profile) {
-    return <div>Error. No Profile info</div>;
-  }
+  console.log("pro");
 
   let handleLogOut = () => {
     fetchCall({
@@ -36,10 +22,12 @@ const Profile: NextPage = () => {
         return res;
       })
       .then((data) => {
+        localStorage.setItem("isLoggedIn", "false");
+
         route.push("/login");
       })
       .catch((error) => {
-        console.error("Error:", error);
+        console.error(error);
       });
   };
 
@@ -87,28 +75,30 @@ const Profile: NextPage = () => {
       </div>
       <div className="user-info">
         <p>
-          Name:
+          Name:{" "}
           <b>
-            {profile["firstname"]} {profile["lastname"]}
+            {user["firstname"]} {user["lastname"]}
           </b>
         </p>
         <p>
-          Neptun: <b> {profile["uid"]}</b>
+          Neptun: <b> {user["username"]}</b>
         </p>
       </div>
-      <div className="change-pass-btn">
-        {!showChangePassForm && (
-          <button onClick={() => setShowChangePassForm(true)}>
-            change password
-          </button>
-        )}
-        {showChangePassForm && ChangePassForm()}
-      </div>
-      <div className="logout-btn">
-        <button onClick={() => handleLogOut()}>Logout</button>
+      <div className="action-btns">
+        <div className="change-pass-btn">
+          {!showChangePassForm && (
+            <button onClick={() => setShowChangePassForm(true)}>
+              change password
+            </button>
+          )}
+          {showChangePassForm && ChangePassForm()}
+        </div>
+        <div id="logout-btn">
+          <button onClick={() => handleLogOut()}>Logout</button>
+        </div>
       </div>
     </div>
   );
 };
 
-export default Profile;
+export default withAuth(Profile);

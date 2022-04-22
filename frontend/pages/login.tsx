@@ -1,28 +1,20 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable jsx-a11y/alt-text */
 import type { NextPage } from "next";
-import { route } from "next/dist/server/router";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
+import withAuth from "../components/withAuth";
 import { UserContext } from "../context/UserContext";
 import { RequestType } from "../enums/requestTypes";
-import useFetch, { fetchCall } from "../hooks/useFetch";
-
-// export const getStaticProps = async () => {
-//   const res = await fetch("http://localhost:5003/api/v1/login");
-//   const data = await res.json();
-//   return {
-//     props: { d: data },
-//   };
-// };
+import { fetchCall } from "../hooks/useFetch";
 
 const Login: NextPage = () => {
-  // console.log(d);
-  const { setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+  console.log("Login");
 
   let loginHandler = (e: any) => {
     e.preventDefault();
@@ -38,17 +30,35 @@ const Login: NextPage = () => {
       })
       .then((data) => {
         if (data["response"] !== undefined) {
-          setUser(data);
           console.log("Logged In:", data);
+          localStorage.setItem("isLoggedIn", "true");
           router.push("/");
         } else {
           console.log("Permission Denied:", data);
         }
       })
       .catch((error) => {
-        console.error("Error:", error);
+        console.error(error);
+      })
+      .finally(() => {
+        fetchCall({
+          url: "users/get/self",
+          method: RequestType.GET,
+        })
+          .then((response) => {
+            const res = response.json();
+            return res;
+          })
+          .then((data) => {
+            setUser(data);
+            console.log(user);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       });
   };
+
   return (
     <div className="login-container">
       <div className="bc-image-container">
@@ -90,4 +100,4 @@ const Login: NextPage = () => {
   );
 };
 
-export default Login;
+export default withAuth(Login);

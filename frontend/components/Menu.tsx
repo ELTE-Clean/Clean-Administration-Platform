@@ -30,6 +30,14 @@ const Menu = () => {
             </div>
           </Link>
         ))}
+
+        <Link href="/admin" passHref>
+          <div className="section">
+                <div className="section-name">
+                  <h2>Admin Env.</h2>
+                </div>
+          </div>
+        </Link>
       </div>
       <div className="add-section-part">
         <div

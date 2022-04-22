@@ -24,7 +24,16 @@ router.get("/section/all", isAuth, async (req, res, next) => {
 router.post("/section/add", isAuth, protector(["admin", "demonstrator"]), async (req, res, next) => {
     const result = await insertIntoTable('sections', req.body);
     if (result.error) res.status(500).send(JSON.stringify({message: "Transaction Failed"}));
-    res.status(200).send(JSON.stringify({message: "New section added"}));
+    res.status(200).send(JSON.stringify({message: "Section successfully added"}));
+});
+
+/**
+ * Delete a section.
+ */
+ router.delete("/section/delete", isAuth, protector(["admin", "demonstrator"]), async (req, res, next) => {
+    const result = await deleteFromTable('sections', req.body);
+    if (result.error) res.status(500).send(JSON.stringify({message: "Transaction Failed"}));
+    res.status(200).send(JSON.stringify({message: "Section successfully deleted"}));
 });
 
 /**

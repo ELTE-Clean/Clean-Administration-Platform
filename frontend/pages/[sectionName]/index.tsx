@@ -4,12 +4,14 @@ import EditSectionForm from "../../components/EditSectionForm";
 import PopUp from "../../components/Popup";
 import Link from "next/link";
 import { useRouter } from "next/router";
-
+import AssignTeacher from "../../components/AssignTeacher";
+import AddRemoveStudent from "../../components/AddRemoveStudent";
 const Section = () => {
   const router = useRouter();
   let name = router.query.sectionName;
 
   let isTeacher: Boolean = true;
+  let isAdmin: Boolean = true;
   // Here instead of "tasks" there should be an api call to the backend to get the respective data for sectionName
   const [buttonEditPopup, setButtonEditPopup] = useState(false);
 
@@ -39,7 +41,22 @@ const Section = () => {
 
   //   let date = new Date();
 
-  return (
+  return isAdmin ? (
+<div className="section-container">
+      <div className="section-name">
+        <h1>{name}</h1>
+      </div>
+      <AddRemoveStudent
+        
+        popupType="add-remove-student"
+      />
+
+      <AssignTeacher
+       
+        popupType="assign-teacher"
+      />
+    </div>
+  ):(
     <div className="section-container">
       <div className="section-name">
         <h1>{name}</h1>

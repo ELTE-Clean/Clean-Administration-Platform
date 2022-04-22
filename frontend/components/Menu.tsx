@@ -6,6 +6,7 @@ import AddSectionForm from "./AddSectionForm";
 const Menu = () => {
   let userNeptun = "MI3JG2";
   let sections = ["Homeworks", "Progress Tasks", "Mid Term", "End Term"];
+  let isAdmin = true;
   let addSectionCallBack = (sectionToAdd: string) => {
     return sections.includes(sectionToAdd);
   };
@@ -31,13 +32,13 @@ const Menu = () => {
           </Link>
         ))}
 
-        <Link href="/admin" passHref>
+        {isAdmin && <Link href="/admin" passHref>
           <div className="section">
                 <div className="section-name">
                   <h2>Admin Env.</h2>
                 </div>
           </div>
-        </Link>
+        </Link>}
       </div>
       <div className="add-section-part">
         <div

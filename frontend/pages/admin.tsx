@@ -3,6 +3,7 @@ import { useState } from "react";
 import AddRemoveStudent from "../components/AddRemoveStudent";
 import EditSectionForm from "../components/EditSectionForm";
 import { useRouter } from "next/router";
+import AssignTeacher from "../components/AssignTeacher";
 
 const Admin: NextPage = () => {
   const router = useRouter();
@@ -36,11 +37,16 @@ const Admin: NextPage = () => {
         <h1>Admin Enviroment</h1>
       </div>
       <AddRemoveStudent
-            trigger={true}
-            popupType="edit-home-work"
-            component={<EditSectionForm tasks={tasks} sectionName={name} />}
-          />
+        
+        popupType="add-remove-student"
+      />
+
+      <AssignTeacher
+       
+        popupType="assign-teacher"
+      />
     </div>
+
   );
 };
 

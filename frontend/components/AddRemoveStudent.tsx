@@ -1,9 +1,9 @@
 import RichTextEditor from "./RichTextEditor";
 
 const AddTemoveStudent = (props: any) => {
-    return props.trigger ? (
+    return  (
         <div className="AddTemoveStudent-container">
-            <div className={"PopUp-holder"}>
+            <div className={"admin-forms-holder"}>
                 <form>
                     <div className="container">
                         <h1>Add / Remove Students</h1>
@@ -36,8 +36,6 @@ const AddTemoveStudent = (props: any) => {
                 </form>
             </div>
         </div>
-    ) : (
-        <div></div>
     );
 };
 

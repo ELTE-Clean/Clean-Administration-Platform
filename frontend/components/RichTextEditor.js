@@ -64,7 +64,7 @@ class RichTextEditor extends React.Component {
     }
 
     return (
-      <div className={`RichEditor-root ${this.props.classTemp}`}>
+      <div className={`RichEditor-root`}>
         <BlockStyleControls
           editorState={editorState}
           onToggle={this.toggleBlockType}
@@ -81,7 +81,7 @@ class RichTextEditor extends React.Component {
             handleKeyCommand={this.handleKeyCommand}
             keyBindingFn={this.mapKeyToEditorCommand}
             onChange={this.onChange}
-            placeholder={this.props.valueTemp}
+            placeholder="Enter here"
             ref="editor"
             spellCheck={true}
           />

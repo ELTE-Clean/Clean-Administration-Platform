@@ -7,6 +7,9 @@ import { useRouter } from "next/router";
 import { UserContext } from "../../context/UserContext";
 import withAuth from "../../components/withAuth";
 
+import AssignTeacher from "../../components/AssignTeacher";
+import AddRemoveStudent from "../../components/AddRemoveStudent";
+
 const Section = () => {
   const { sections } = useContext(UserContext);
   const [buttonEditPopup, setButtonEditPopup] = useState(false);
@@ -14,6 +17,7 @@ const Section = () => {
   const router = useRouter();
   const name = router.query.sectionName;
   let isTeacher: Boolean = true;
+  let isAdmin: Boolean = false;
 
   const sectionExist = (sectionName: string) => {
     const sectionNames = sections.message.map(
@@ -22,19 +26,19 @@ const Section = () => {
     return sectionNames.includes(sectionName);
   };
 
-  useEffect(() => {
-    console.log(sections);
+  // useEffect(() => {
+  //   console.log(sections);
 
-    if (
-      sections.message !== undefined &&
-      typeof sections.message !== "string" &&
-      Object.keys(sections).length > 0
-    ) {
-      if (!sectionExist(name)) {
-        router.push("/custom404");
-      }
-    }
-  }, [sections]);
+  //   if (
+  //     sections.message !== undefined &&
+  //     typeof sections.message !== "string" &&
+  //     Object.keys(sections).length > 0
+  //   ) {
+  //     if (!sectionExist(name)) {
+  //       router.push("/custom404");
+  //     }
+  //   }
+  // }, [sections]);
 
   // Here instead of "tasks" there should be an api call to the backend to get the respective data for sectionName
 
@@ -64,7 +68,16 @@ const Section = () => {
 
   //   let date = new Date();
 
-  return (
+  return isAdmin ? (
+    <div className="section-container">
+      <div className="section-name">
+        <h1>{name}</h1>
+      </div>
+      <AddRemoveStudent popupType="add-remove-student" />
+
+      <AssignTeacher popupType="assign-teacher" />
+    </div>
+  ) : (
     <div className="section-container">
       <div className="section-name">
         <h1>{name}</h1>

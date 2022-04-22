@@ -12,6 +12,9 @@ const Menu = () => {
   let userNeptun = "MI3JG2";
   // let sections = ["Homeworks", "Progress Tasks", "Mid Term", "End Term"];
 
+  let adminUser = "Admin";
+  let groups = ["Group 1", "Group 2", "Group 3", "Group 4"];
+  let isAdmin = false;
   let addSectionCallBack = (sectionToAdd: string) => {
     return sections.message.includes(sectionToAdd);
   };
@@ -49,8 +52,38 @@ const Menu = () => {
       </div>
     );
   }
+  // let addGroupCallBack = (groupToAdd: string) => {
+  //   return groups.includes(groupToAdd);
+  // };
 
-  return (
+  return isAdmin ? (
+    <div className="menu-container">
+      <div className="profile-icon-neptun">
+        <div className="profile-icon">{adminUser.slice(0, 2)}</div>
+        <div className="profile-neptun">{adminUser}</div>
+      </div>
+
+      <div className="sections">
+        <Link href="/dashboard" passHref>
+          <div className="section">
+            <div className="section-name">
+              <h2>Dashboard</h2>
+            </div>
+          </div>
+        </Link>
+
+        {groups.map((group, idx) => (
+          <Link key={idx} href={`/${group}`} passHref>
+            <div className="section">
+              <div className="section-name">
+                <h2>{group}</h2>
+              </div>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </div>
+  ) : (
     <div className="menu-container">
       <Link href="/profile" passHref>
         <div className="profile-icon-neptun">
@@ -76,19 +109,19 @@ const Menu = () => {
         >
           Add Section
         </div>
-
-        <PopUp
-          trigger={buttonAddSectionPopup}
-          setTrigger={setButtonAddSectionPopup}
-          popupType="add-section"
-          component={
-            <AddSectionForm
-              addSectionCallBack={addSectionCallBack}
-              renderSectionsCB={renderSections}
-            />
-          }
-        />
       </div>
+
+      <PopUp
+        trigger={buttonAddSectionPopup}
+        setTrigger={setButtonAddSectionPopup}
+        popupType="add-section"
+        component={
+          <AddSectionForm
+            addSectionCallBack={addSectionCallBack}
+            renderSectionsCB={renderSections}
+          />
+        }
+      />
     </div>
   );
 };

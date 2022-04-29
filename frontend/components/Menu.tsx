@@ -1,18 +1,89 @@
 import Link from "next/link";
 import PopUp from "./Popup";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AddSectionForm from "./AddSectionForm";
+import { UserContext } from "../context/UserContext";
+import { RequestType } from "../enums/requestTypes";
+import { fetchCall } from "../hooks/useFetch";
 
 const Menu = () => {
+  const { sections, setSections } = useContext(UserContext);
+  const [buttonAddSectionPopup, setButtonAddSectionPopup] = useState(false);
   let userNeptun = "MI3JG2";
-  let sections = ["Homeworks", "Progress Tasks", "Mid Term", "End Term"];
+  // let sections = ["Homeworks", "Progress Tasks", "Mid Term", "End Term"];
+
+  let adminUser = "Admin";
+  let groups = ["Group 1", "Group 2", "Group 3", "Group 4"];
+  let isAdmin = false;
   let addSectionCallBack = (sectionToAdd: string) => {
-    return sections.includes(sectionToAdd);
+    return sections.message.includes(sectionToAdd);
+  };
+  const isUserLoggedIn = () => {
+    return localStorage.getItem("isLoggedIn") == "true";
   };
 
-  const [buttonAddSectionPopup, setButtonAddSectionPopup] = useState(false);
+  const renderSections = () => {
+    fetchCall({
+      url: "db/section/all",
+      method: RequestType.GET,
+    })
+      .then((response) => {
+        const res = response.json();
+        return res;
+      })
+      .then((data) => {
+        setSections(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
-  return (
+  useEffect(() => {
+    if (isUserLoggedIn()) {
+      renderSections();
+    }
+  }, []);
+
+  if (typeof sections.message === "string" || sections.message === undefined) {
+    return (
+      <div>
+        <p></p>
+      </div>
+    );
+  }
+  // let addGroupCallBack = (groupToAdd: string) => {
+  //   return groups.includes(groupToAdd);
+  // };
+
+  return isAdmin ? (
+    <div className="menu-container">
+      <div className="profile-icon-neptun">
+        <div className="profile-icon">{adminUser.slice(0, 2)}</div>
+        <div className="profile-neptun">{adminUser}</div>
+      </div>
+
+      <div className="sections">
+        <Link href="/dashboard" passHref>
+          <div className="section">
+            <div className="section-name">
+              <h2>Dashboard</h2>
+            </div>
+          </div>
+        </Link>
+
+        {groups.map((group, idx) => (
+          <Link key={idx} href={`/${group}`} passHref>
+            <div className="section">
+              <div className="section-name">
+                <h2>{group}</h2>
+              </div>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </div>
+  ) : (
     <div className="menu-container">
       <Link href="/profile" passHref>
         <div className="profile-icon-neptun">
@@ -21,11 +92,11 @@ const Menu = () => {
         </div>
       </Link>
       <div className="sections">
-        {sections.map((sectionName, idx) => (
-          <Link key={idx} href={`/${sectionName}`} passHref>
+        {sections.message.map((sectionName, idx) => (
+          <Link key={idx} href={`/${sectionName.sectionid}`} passHref>
             <div className="section">
               <div className="section-name">
-                <h2>{sectionName}</h2>
+                <h2>{sectionName.sectionid}</h2>
               </div>
             </div>
           </Link>
@@ -38,14 +109,19 @@ const Menu = () => {
         >
           Add Section
         </div>
-
-        <PopUp
-          trigger={buttonAddSectionPopup}
-          setTrigger={setButtonAddSectionPopup}
-          popupType="add-section"
-          component={<AddSectionForm addSectionCallBack={addSectionCallBack} />}
-        />
       </div>
+
+      <PopUp
+        trigger={buttonAddSectionPopup}
+        setTrigger={setButtonAddSectionPopup}
+        popupType="add-section"
+        component={
+          <AddSectionForm
+            addSectionCallBack={addSectionCallBack}
+            renderSectionsCB={renderSections}
+          />
+        }
+      />
     </div>
   );
 };

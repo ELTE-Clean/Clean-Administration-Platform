@@ -1,7 +1,11 @@
+import router from "next/router";
 import { useState } from "react";
+import { RequestType } from "../enums/requestTypes";
+import { fetchCall } from "../hooks/useFetch";
 
 const AddSectionForm = ({
   addSectionCallBack,
+  renderSectionsCB,
 }: {
   addSectionCallBack: any;
 }) => {
@@ -14,7 +18,22 @@ const AddSectionForm = ({
       if (sectionAlreadyIncluded) {
         alert(`Section "${userInput}" already exist!!`);
       } else {
-        console.log("Adding section");
+        fetchCall({
+          url: "db/section/add",
+          method: RequestType.POST,
+          body: { sectionid: userInput, groupid: "Group_1" },
+        })
+          .then((response) => {
+            const res = response.json();
+            return res;
+          })
+          .then((data) => {
+            console.log("Added section", data);
+            renderSectionsCB();
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       }
     }
   };

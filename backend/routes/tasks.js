@@ -65,14 +65,33 @@ const fileUpload = require('express-fileupload');
  * 
  */
 router.post('/create', fileUpload({createParentPath: true}), isAuth, protector(['admin', 'demonstrator']),  async (req, res, next) => {
+    console.log("Files:", req.files);
+    console.log("body: ", req.body);
 
-
-    if(!req.files || !req.files.solution || !req.files.description)
+    /* Check if the the incoming data are complete */
+    const fileNotInForm = !req.files || !req.files.solution || !req.files.description;
+    const fileNotInBody = !req.body  || !req.body.solution  || !req.body.description; 
+    const incompleteFile = fileNotInForm && fileNotInBody;
+    const incompleteBody = !req.body || !req.body.taskid || !req.body.sectionid || !req.body.groupid || !req.body.max;
+    if(incompleteFile || incompleteBody)
         return res.status(400).send({message: "Description or Solution are missing!"});
 
-    console.log(req.body);
-    console.log(req.files.solution.data.toString('utf8'));
-    return res.status(200).send({message: "Files are found"});
+    const solution = req.files.solution.data.toString("utf8") || req.body.solution;
+    const description = req.files.description.data.toString("utf8") || req.body.description;
+
+    /* Inserting the task into the table */
+    const params = {
+        taskid: req.body.taskid,
+        sectionid: req.body.sectionid,
+        groupid: req.body.groupid,
+        max: req.body.max,
+        solution : solution.replace(/\'/g, "''"),
+        description: description.replace(/\'/g, "''"),
+    };
+    const result = await insertIntoTable('tasks', params);
+    if(result.error)
+        return res.status(500).send({message: "Failed to insert task"});
+    return res.status(200).send({message: "Task created successfully!"});
 });
 
 

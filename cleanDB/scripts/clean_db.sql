@@ -90,6 +90,8 @@ CREATE TABLE public.tasks (
     taskid      VARCHAR(50)    NOT NULL,
     sectionid   VARCHAR(50)    NOT NULL,
     groupid     VARCHAR(10)    NOT NULL,
+    description VARCHAR(5000)  NOT NULL, -- Task description (File/Text)
+    solution    VARCHAR(5000)  NOT NULL, -- Task solution to run the script on!
     max         INT            NOT NULL,
     FOREIGN KEY (sectionid, groupid) REFERENCES sections(sectionid, groupid),
     PRIMARY KEY (taskid, sectionid, groupid)
@@ -106,7 +108,8 @@ CREATE TABLE public.grades (
     studentid   CHAR(6)         REFERENCES  users(userid)   NOT NULL,
     taskid      VARCHAR(50)     NOT NULL,
     sectionid   VARCHAR(50)     NOT NULL,
-    grade       INT             NOT NULL,
+    submission  VARCHAR(5000)   DEFAULT NULL, -- 5KB Storage of text. 
+    grade       INT             DEFAULT NULL,
     -- groupid     CHAR(10)    NOT NULL,                                                # Omitted because having groupid would be redundant
     -- FOREIGN KEY (taskid, sectionid) REFERENCES tasks(taskid, sectionid, groupid),    # Does not work without groupid
     PRIMARY KEY (studentid, taskid, sectionid)
@@ -149,17 +152,17 @@ INSERT INTO sections VALUES ('Homework', 'Group_2');
 INSERT INTO sections VALUES ('Midterm', 'Group_1');
 INSERT INTO sections VALUES ('Endterm', 'Group_2');
 
-INSERT INTO tasks VALUES ('Homework 1', 'Homework', 'Group_1', 1);
-INSERT INTO tasks VALUES ('Progress Task 1', 'Progress Task', 'Group_1', 1);
-INSERT INTO tasks VALUES ('Homework 2', 'Homework', 'Group_2', 2);
-INSERT INTO tasks VALUES ('Midterm', 'Midterm', 'Group_1', 3);
-INSERT INTO tasks VALUES ('Endterm', 'Endterm', 'Group_2', 4);
+INSERT INTO tasks VALUES ('Homework 1', 'Homework', 'Group_1', 'desc', 'sol', 1);
+INSERT INTO tasks VALUES ('Progress Task 1', 'Progress Task', 'Group_1', 'desc', 'sol', 1);
+INSERT INTO tasks VALUES ('Homework 2', 'Homework', 'Group_2', 'desc', 'sol', 2);
+INSERT INTO tasks VALUES ('Midterm', 'Midterm', 'Group_1', 'desc', 'sol', 3);
+INSERT INTO tasks VALUES ('Endterm', 'Endterm', 'Group_2', 'desc', 'sol', 4);
 
-INSERT INTO grades VALUES ('81AMIA', 'Homework 1', 'Homework', 5);
-INSERT INTO grades VALUES ('9YV5TX', 'Homework 1', 'Homework', 2);
-INSERT INTO grades VALUES ('9YV5TX', 'Midterm', 'Exam', 3);
-INSERT INTO grades VALUES ('ZEADKD', 'Midterm', 'Exam', 3);
-INSERT INTO grades VALUES ('ZEADKD', 'Endterm', 'Exam', 4);
+INSERT INTO grades VALUES ('81AMIA', 'Homework 1', 'Homework', NULL, 5);
+INSERT INTO grades VALUES ('9YV5TX', 'Homework 1', 'Homework', NULL, 2);
+INSERT INTO grades VALUES ('9YV5TX', 'Midterm', 'Exam', NULL, 3);
+INSERT INTO grades VALUES ('ZEADKD', 'Midterm', 'Exam', NULL, 3);
+INSERT INTO grades VALUES ('ZEADKD', 'Endterm', 'Exam', NULL, 4);
 
 INSERT INTO user_to_group VALUES ('81AMIA', 'Group_1');
 INSERT INTO user_to_group VALUES ('9YV5TX', 'Group_2');

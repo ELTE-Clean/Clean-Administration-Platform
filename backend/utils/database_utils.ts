@@ -167,7 +167,7 @@ export async function selectFromTable(table : string, params? : Object) : Promis
     const qry = { text: qryText };
     log("DEBUG", "[SELECT QUERY]: " + qryText);
 
-    const transInstance = await startTrans()
+    const transInstance : TransactionInstance = await startTrans()
     await execTrans(qry, transInstance);
     await endTrans(transInstance);
     return transInstance;

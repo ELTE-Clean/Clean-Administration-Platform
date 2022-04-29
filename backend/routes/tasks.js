@@ -7,7 +7,7 @@ const insertIntoTable = require('../utils/database_utils').insertIntoTable;
 const deleteFromTable = require('../utils/database_utils').deleteFromTable;
 const isAuth = require('../utils/keycloak_utils').isAuth;
 const protector= require('../utils/keycloak_utils').protector;
-const fileUpload = require('express-fileupload');
+const fileUpload = require('express-fileupload');   // Used to parse the incoming formpost files and insert them into req.files
 
 
 /**
@@ -60,14 +60,13 @@ const fileUpload = require('express-fileupload');
 /**
  * Creates a task.
  * The request must hold two files:
- *  - solution
- *  - description
+ *  - solution   // The one containing the answers (For the grading script)
+ *  - description   // File containing the description of the task
+ * 
+ * The solution and description can be given through the req.body, or passed by a multipart/form_data protocol.
  * 
  */
 router.post('/create', fileUpload({createParentPath: true}), isAuth, protector(['admin', 'demonstrator']),  async (req, res, next) => {
-    console.log("Files:", req.files);
-    console.log("body: ", req.body);
-
     /* Check if the the incoming data are complete */
     const fileNotInForm = !req.files || !req.files.solution || !req.files.description;
     const fileNotInBody = !req.body  || !req.body.solution  || !req.body.description; 

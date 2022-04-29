@@ -63,7 +63,7 @@ router.post("/create", isAuth, protector(["admin", "demonstrator"]), async (req,
         return res.status(400).send(JSON.stringify({message: "No sectoin is given to be deleted"}));
 
     let unsuccess = [];
-    req.body.array.forEach(section => {
+    for(const section of req.body){
         let result;
         if(!section.sectionid)
             result = await deleteFromTable('sections', {groupid: section.groupid});
@@ -74,7 +74,7 @@ router.post("/create", isAuth, protector(["admin", "demonstrator"]), async (req,
 
         if (result.error) 
             unsuccess = [...unsuccess, section]
-    });
+    };
 
     if(unsuccess.length > 0)
         return res.status(200).send(JSON.stringify({message: "Not all sections have been deleted", unsuccess: unsuccess}));

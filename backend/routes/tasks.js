@@ -6,8 +6,8 @@ const selectFromTable = require('../utils/database_utils').selectFromTable;
 const insertIntoTable = require('../utils/database_utils').insertIntoTable;
 const deleteFromTable = require('../utils/database_utils').deleteFromTable;
 const isAuth = require('../utils/keycloak_utils').isAuth;
-const  protector= require('../utils/keycloak_utils').protector;
-
+const protector= require('../utils/keycloak_utils').protector;
+const fileUpload = require('express-fileupload');
 
 
 /**
@@ -17,10 +17,8 @@ const  protector= require('../utils/keycloak_utils').protector;
  * enable them in the query by:
  *  solution=true
  *  description=true
- *  max=true
  */
  router.get("/", isAuth, async (req, res, next) => {
-    const maxEnable = req.query.max == 'true';
     const descriptionEnable = req.query.description == 'true';
     const solutionEnable = req.query.solution == 'true';
 
@@ -43,10 +41,10 @@ const  protector= require('../utils/keycloak_utils').protector;
         let finalShape = {
             taskid: task.taskid, 
             sectionid: task.sectionid, 
-            groupid : task.groupid
+            groupid : task.groupid,
+            max : task.max
         };
-        if(maxEnable)
-            finalShape.max = task.max;
+        
         if(solutionEnable)
             finalShape.solution = task.solution;
         if(descriptionEnable)
@@ -55,6 +53,25 @@ const  protector= require('../utils/keycloak_utils').protector;
     });
 
     return res.status(200).send(JSON.stringify(filtered));
+});
+
+
+
+/**
+ * Creates a task.
+ * The request must hold two files:
+ *  - solution
+ *  - description
+ * 
+ */
+router.post('/create', fileUpload({createParentPath: true}), isAuth, protector(['admin', 'demonstrator']),  async (req, res, next) => {
+    console.log(req.body);
+    console.log(req.files);
+
+    if(!req.files || !req.files.solution || !req.files.description)
+        return res.status(400).send({message: "Description or Solution are missing!"});
+
+    return res.status(200).send({message: "Files are found"});
 });
 
 

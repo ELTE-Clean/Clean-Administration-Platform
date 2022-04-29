@@ -72,12 +72,16 @@ interface KCUserInfoRequest{
  * @param next express Next object
  */
 export const isAuth: express.RequestHandler = (req: express.Request, res: express.Response, next : express.NextFunction) => {
+    const authenticationDisabled : Boolean = (process.env.DISABLE_AUTHENTICATION || '') == 'true';
+    if(authenticationDisabled) 
+        return next();
+    
     keycloak.getGrant(req, res).then((grant) => {
         console.log("[INFO]: User is authenticated.");
-        next();
+        return next();
     }).catch( err => {
         console.log("[INFO]: User is not authenticated. Keycloak.Grant can't be found in the session");
-        next(err);
+        return next(err);
     });
 }
 
@@ -91,6 +95,10 @@ export const isAuth: express.RequestHandler = (req: express.Request, res: expres
  * @param next express Next object
  */
  export const isUnauth: express.RequestHandler = (req: express.Request, res: express.Response, next : express.NextFunction) => {
+    const authenticationDisabled : Boolean = (process.env.DISABLE_AUTHENTICATION || '') == 'true';
+    if(authenticationDisabled) 
+        return next();
+    
     keycloak.getGrant(req, res).then((grant) => {
         console.log("[INFO]: User is authenticated.");
         let err = new Error("User is already logged in");
@@ -422,6 +430,10 @@ export async function updateUserRole(username: string, roles: string[]) : Promis
  * */
  export function protector(roles : string[]) : express.RequestHandler {
     const f : express.RequestHandler = (req : express.Request, res:express.Response, next:express.NextFunction) => {
+        const authorizationDisabled : Boolean = (process.env.DISABLE_AUTHORIZATION || '') == 'true';
+        if(authorizationDisabled) 
+            return next();
+        
         getSelfData(req, res).then(result => {
             if(result.error)
                 return next(result.error as string);

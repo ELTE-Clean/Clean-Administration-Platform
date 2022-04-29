@@ -44,7 +44,7 @@ const fileUpload = require('express-fileupload');
             groupid : task.groupid,
             max : task.max
         };
-        
+
         if(solutionEnable)
             finalShape.solution = task.solution;
         if(descriptionEnable)
@@ -65,12 +65,13 @@ const fileUpload = require('express-fileupload');
  * 
  */
 router.post('/create', fileUpload({createParentPath: true}), isAuth, protector(['admin', 'demonstrator']),  async (req, res, next) => {
-    console.log(req.body);
-    console.log(req.files);
+
 
     if(!req.files || !req.files.solution || !req.files.description)
         return res.status(400).send({message: "Description or Solution are missing!"});
 
+    console.log(req.body);
+    console.log(req.files.solution.data.toString('utf8'));
     return res.status(200).send({message: "Files are found"});
 });
 

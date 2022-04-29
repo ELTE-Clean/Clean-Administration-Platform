@@ -106,7 +106,8 @@ CREATE TABLE public.grades (
     studentid   CHAR(6)         REFERENCES  users(userid)   NOT NULL,
     taskid      VARCHAR(50)     NOT NULL,
     sectionid   VARCHAR(50)     NOT NULL,
-    grade       INT             NOT NULL,
+    submission  VARCHAR(5000)   DEFAULT NULL, -- 5KB Storage of text. 
+    grade       INT             DEFAULT NULL,
     -- groupid     CHAR(10)    NOT NULL,                                                # Omitted because having groupid would be redundant
     -- FOREIGN KEY (taskid, sectionid) REFERENCES tasks(taskid, sectionid, groupid),    # Does not work without groupid
     PRIMARY KEY (studentid, taskid, sectionid)
@@ -155,11 +156,11 @@ INSERT INTO tasks VALUES ('Homework 2', 'Homework', 'Group_2', 2);
 INSERT INTO tasks VALUES ('Midterm', 'Midterm', 'Group_1', 3);
 INSERT INTO tasks VALUES ('Endterm', 'Endterm', 'Group_2', 4);
 
-INSERT INTO grades VALUES ('81AMIA', 'Homework 1', 'Homework', 5);
-INSERT INTO grades VALUES ('9YV5TX', 'Homework 1', 'Homework', 2);
-INSERT INTO grades VALUES ('9YV5TX', 'Midterm', 'Exam', 3);
-INSERT INTO grades VALUES ('ZEADKD', 'Midterm', 'Exam', 3);
-INSERT INTO grades VALUES ('ZEADKD', 'Endterm', 'Exam', 4);
+INSERT INTO grades VALUES ('81AMIA', 'Homework 1', 'Homework', NULL, 5);
+INSERT INTO grades VALUES ('9YV5TX', 'Homework 1', 'Homework', NULL, 2);
+INSERT INTO grades VALUES ('9YV5TX', 'Midterm', 'Exam', NULL, 3);
+INSERT INTO grades VALUES ('ZEADKD', 'Midterm', 'Exam', NULL, 3);
+INSERT INTO grades VALUES ('ZEADKD', 'Endterm', 'Exam', NULL, 4);
 
 INSERT INTO user_to_group VALUES ('81AMIA', 'Group_1');
 INSERT INTO user_to_group VALUES ('9YV5TX', 'Group_2');

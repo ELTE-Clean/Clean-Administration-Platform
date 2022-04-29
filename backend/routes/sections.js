@@ -20,16 +20,7 @@ const  protector= require('../utils/keycloak_utils').protector;
  * 
  */
  router.get("/", isAuth, async (req, res, next) => {
-    let ret;
-    if (!req.query)
-        ret = await selectFromTable('sections');
-    else if(!req.query.groupid)
-        ret = await selectFromTable('sections', {sectionid : section.sectionid});
-    else if(!req.query.sectionid)
-        ret = await selectFromTable('sections', {groupid : section.groupid});
-    else    
-        ret = await selectFromTable('sections', {sectionid : section.sectionid, groupid : section.groupid});
-
+    let ret = await selectFromTable('sections', req.query);
     if (ret.error)
         return res.status(500).send(JSON.stringify({message: "Getting Sections Failed"}));
     
@@ -64,14 +55,7 @@ router.post("/create", isAuth, protector(["admin", "demonstrator"]), async (req,
 
     let unsuccess = [];
     for(const section of req.body){
-        let result;
-        if(!section.sectionid)
-            result = await deleteFromTable('sections', {groupid: section.groupid});
-        else if(!section.groupid)
-            result = await deleteFromTable('sections', {sectionid: section.sectionid});
-        else    
-            result = await deleteFromTable('sections', {sectionid: section.sectionid, groupid: section.groupid});
-
+        let result = await deleteFromTable('sections', {sectionid: section.sectionid, groupid: section.groupid});
         if (result.error) 
             unsuccess = [...unsuccess, section]
     };

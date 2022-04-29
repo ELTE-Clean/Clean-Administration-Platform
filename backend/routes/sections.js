@@ -2,9 +2,7 @@
 
 /* Dependencies Importing */
 const router = require('express-promise-router')();     // Used to handle async request. Will be useful in the future to dodge the pyramid of doom
-const selectFromTable = require('../utils/database_utils').selectFromTable;
-const insertIntoTable = require('../utils/database_utils').insertIntoTable;
-const deleteFromTable = require('../utils/database_utils').deleteFromTable;
+const { selectFromTable, insertIntoTable, deleteFromTable, updateTable } = require('../utils/database_utils');
 const isAuth = require('../utils/keycloak_utils').isAuth;
 const  protector= require('../utils/keycloak_utils').protector;
 
@@ -20,11 +18,11 @@ const  protector= require('../utils/keycloak_utils').protector;
  * 
  */
  router.get("/", isAuth, async (req, res, next) => {
-    let ret = await selectFromTable('sections', req.query);
-    if (ret.error)
+    const result = await selectFromTable('sections');
+    if (result.error)
         return res.status(500).send(JSON.stringify({message: "Getting Sections Failed"}));
     
-    return res.status(200).send(JSON.stringify(ret.result.rows));
+    return res.status(200).send(JSON.stringify(result.result.rows));
 });
 
 
@@ -70,12 +68,18 @@ router.post("/create", isAuth, protector(["admin", "demonstrator"]), async (req,
 
 /**
  * Edit a section
+ * 
+ * req.body: [
+ *              {
+ *                  section: {sectionid, sectionname, groupid},
+ *                  diff: {sectionid?, sectionname?, groupid?}
+ *              }
+ *          ]
  */
  router.put("/update", isAuth, protector(["admin", "demonstrator"]), async (req, res, next) => {
-    const delResult = await deleteFromTable('sections', req.query.old);
-    const insResult = await insertIntoTable('sections', req.query.new);
+    const updateResult = await updateTable('sections', req.body.section, req.body.diff);
 
-    if (delResult.error || insResult.error)
+    if (updateResult.error)
         res.status(500).send(JSON.stringify({message: "Transaction Failed"}));
     res.status(200).send(JSON.stringify({message: "Sections successfully updated"}));
 });

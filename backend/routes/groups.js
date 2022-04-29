@@ -2,11 +2,8 @@
 
 /* Dependencies Importing */
 const router = require('express-promise-router')();     // Used to handle async request. Will be useful in the future to dodge the pyramid of doom
-const selectFromTable = require('../utils/database_utils').selectFromTable;
-const insertIntoTable = require('../utils/database_utils').insertIntoTable;
-const deleteFromTable = require('../utils/database_utils').deleteFromTable;
-const isAuth = require('../utils/keycloak_utils').isAuth;
-const  protector= require('../utils/keycloak_utils').protector;
+const { selectFromTable, insertIntoTable, deleteFromTable, updateTable } = require('../utils/database_utils');
+const { isAuth, protector } = require('../utils/keycloak_utils');
 
 
 

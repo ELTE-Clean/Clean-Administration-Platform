@@ -2,11 +2,8 @@
 
 /* Dependencies Importing */
 const router = require('express-promise-router')();     // Used to handle async request. Will be useful in the future to dodge the pyramid of doom
-const selectFromTable = require('../utils/database_utils').selectFromTable;
-const insertIntoTable = require('../utils/database_utils').insertIntoTable;
-const deleteFromTable = require('../utils/database_utils').deleteFromTable;
-const isAuth = require('../utils/keycloak_utils').isAuth;
-const protector= require('../utils/keycloak_utils').protector;
+const { selectFromTable, insertIntoTable, deleteFromTable, updateTable } = require('../utils/database_utils');
+const { isAuth, protector } = require('../utils/keycloak_utils');
 const fileUpload = require('express-fileupload');   // Used to parse the incoming formpost files and insert them into req.files
 
 
@@ -39,8 +36,9 @@ const fileUpload = require('express-fileupload');   // Used to parse the incomin
     /* Decide what to return */
     const filtered = result.result.rows.map(task => {
         let finalShape = {
-            taskid: task.taskid, 
-            sectionid: task.sectionid, 
+            taskid: task.taskid,
+            taskname: task.taskname,
+            sectionid: task.sectionid,
             groupid : task.groupid,
             max : task.max
         };
@@ -100,18 +98,17 @@ router.post('/create', fileUpload({createParentPath: true}), isAuth, protector([
  * 
  * req.body: [
  *              {
- *                  task: {groupid, sectionid, taskid},
- *                  newtask: {taskid, description, max, solution}
+ *                  task: {taskid, taskname, sectionid, groupid},
+ *                  diff: {taskid?, taskname?, sectionid?, groupid?}
  *              }
  *          ]
  */
  router.put("/update", isAuth, protector(["admin", "demonstrator"]), async (req, res, next) => {
 
-    // const delResult = await deleteFromTable('tasks', req.query.old);
-    // const insResult = await insertIntoTable('tasks', req.query.new);
+    const updateResult = await updateTable('tasks', req.body.task, req.body.diff);
 
-    // if (delResult.error || insResult.error)
-    //     res.status(500).send(JSON.stringify({message: "Transaction Failed"}));
+    if (updateResult.error)
+        res.status(500).send(JSON.stringify({message: "Transaction Failed"}));
     return res.status(200).send(JSON.stringify({message: "Tasks successfully updated"}));
 });
 

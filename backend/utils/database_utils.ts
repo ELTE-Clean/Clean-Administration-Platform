@@ -151,8 +151,8 @@ export async function endTrans(transInst : TransactionInstance) : Promise<void> 
 
 /**
  * Execute a full SELECT query.
- * @param table - Query object hold the data of the query.
- * @param params - Object of key and value pairs which corresponds to the column names and values of the table.
+ * @param table - Table name.
+ * @param params - Object of key and value pairs which correspond to the column names and values of the table.
  * @returns - Transaction instance with the used client and the query result.
  */
 export async function selectFromTable(table : string, params? : Object) : Promise<TransactionInstance> {
@@ -162,7 +162,9 @@ export async function selectFromTable(table : string, params? : Object) : Promis
         const filter = " where " + pairs.join(" and ");
         qryText += filter;
     }
-    qryText += ";"
+    const order = " order by 1"
+
+    qryText += order + ";"
 
     const qry = { text: qryText };
     log("DEBUG", "[SELECT QUERY]: " + qryText);
@@ -175,8 +177,8 @@ export async function selectFromTable(table : string, params? : Object) : Promis
 
 /**
  * Execute a full INSERT query.
- * @param table - Query object hold the data of the query.
- * @param params - Object of key and value pairs which corresponds to the column names and values of the table.
+ * @param table - Table name.
+ * @param params - Object of key and value pairs which correspond to the column names and values of the table.
  * @returns - Transaction instance with the used client and the query result.
  */
 export async function insertIntoTable(table : string, params : Object) : Promise<TransactionInstance> {
@@ -196,8 +198,8 @@ export async function insertIntoTable(table : string, params : Object) : Promise
 
 /**
  * Execute a full DELETE query.
- * @param table - Query object hold the data of the query.
- * @param params - Object of key and value pairs which corresponds to the column names and values of the table.
+ * @param table - Table name.
+ * @param params - Object of key and value pairs which correspond to the column names and values of the table.
  * @returns - Transaction instance with the used client and the query result.
  */
 export async function deleteFromTable(table : string, params : Object) : Promise<TransactionInstance> {
@@ -208,6 +210,29 @@ export async function deleteFromTable(table : string, params : Object) : Promise
 
     const qry = { text: qryText };
     log("DEBUG", "[DELETE QUERY]: " + qryText);
+
+    const transInstance = await startTrans();
+    await execTrans(qry, transInstance);
+    await endTrans(transInstance);
+    return transInstance;
+}
+
+/**
+ * Execute a full UPDATE query.
+ * @param table - Table name.
+ * @param params - Object of key and value pairs which correspond to the column names and values of the table.
+ * @param diff - Object of key and value pairs which correspond to the column names of the table that need to be updated with the new values.
+ * @returns - Transaction instance with the used client and the query result.
+ */
+ export async function updateTable(table : string, params : Object, diff: Object) : Promise<TransactionInstance> {
+    let qryText = "update " + table;
+    const changes = " set " + Object.entries(diff).map( ([key, val]) => key + "='" + val + "'" ).join(", ");
+    const pairs = Object.entries(params).map( ([key, val]) => key + "='" + val + "'" );
+    const filter = " where " + pairs.join(" and ");
+    qryText += changes + filter + ";";
+
+    const qry = { text: qryText };
+    log("DEBUG", "[UPDATE QUERY]: " + qryText);
 
     const transInstance = await startTrans();
     await execTrans(qry, transInstance);

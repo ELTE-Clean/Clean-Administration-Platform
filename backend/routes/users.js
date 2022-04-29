@@ -4,23 +4,21 @@
 const router = require('express-promise-router')();     // Used to handle async request. Will be useful in the future to dodge the pyramid of doom
 const keycloak = require('../utils/keycloak_utils').keycloak;
 const {isAuth, getSelfData, isUnauth, getAllUsersData, createUsers, protector, updateUserRole} = require('../utils/keycloak_utils');
-const selectFromTable = require('../utils/database_utils').selectFromTable;
+const {selectFromTable, insertIntoTable} = require('../utils/database_utils');
 const log = require('../utils/logger_utils').log;
 
 
 
 /* Getters */
-router.get('/get/self', isAuth, async (req, res, next) => {
+router.get('/self', isAuth, async (req, res, next) => {
     log("INFO", `Getting user profile.`);
     const userReqKC = await getSelfData(req, res);
-    console.log(userReqKC);
     if(userReqKC.error){
         log("ERROR", `Error in getting the user data from the access token`);
         return next(userReqKC.error);
     }
 
     const userReqDB = await selectFromTable('users', {username : userReqKC.user.username})
-    console.log(userReqDB);
     if(userReqDB.error){
         log("ERROR", `Error in requesting the user from the databae`);
         return next(userReqKC.error);
@@ -52,7 +50,7 @@ router.get('/get/self', isAuth, async (req, res, next) => {
  * Note:
  *  Only admins or demonstrators have the ability to get all the users.
  */
-router.get('/get/all', isAuth, protector(["admin", "demonstrator"]), async(req, res) => {
+router.get('/', isAuth, protector(["admin", "demonstrator"]), async(req, res) => {
     log("INFO", "All users data have been requested");
     const usersKC_arr = await getAllUsersData();
 
@@ -139,7 +137,19 @@ router.post('/create', isAuth, protector(["admin"]), async (req, res, next) =>{
     }
 
     /* Create users in the database. */
-    // TODO: Insert the users into the database
+    for (const user of Object.entries(req.body)) {
+        const student = {
+            username: user.username, 
+            firstname : user.firstname || "", 
+            lastname : user.lastname || "",
+            userid: user.username
+        };
+        const result = await insertIntoTable('users', student);
+        if (result.error){
+            log("ERROR", `Can't create user: ${user.username} in the database`);
+            return next("User Creation Failed");
+        } 
+    }
 
     return res.status(200).send(insertedUsersKC);
 });

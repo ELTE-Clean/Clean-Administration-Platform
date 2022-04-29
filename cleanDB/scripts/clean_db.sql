@@ -90,6 +90,8 @@ CREATE TABLE public.tasks (
     taskid      VARCHAR(50)    NOT NULL,
     sectionid   VARCHAR(50)    NOT NULL,
     groupid     VARCHAR(10)    NOT NULL,
+    description VARCHAR(5000)  NOT NULL, -- Task description (File/Text)
+    solution    VARCHAR(5000)  NOT NULL, -- Task solution to run the script on!
     max         INT            NOT NULL,
     FOREIGN KEY (sectionid, groupid) REFERENCES sections(sectionid, groupid),
     PRIMARY KEY (taskid, sectionid, groupid)

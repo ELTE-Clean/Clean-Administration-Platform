@@ -3,8 +3,8 @@
 /* Dependencies Importing */
 const router = require('express-promise-router')();     // Used to handle async request. Will be useful in the future to dodge the pyramid of doom
 const keycloak = require('../utils/keycloak_utils').keycloak;
-const {isAuth, getSelfData, isUnauth, getAllUsersData, createUsers, protector, updateUserRole} = require('../utils/keycloak_utils');
-const {selectFromTable, insertIntoTable} = require('../utils/database_utils');
+const { isAuth, getSelfData, isUnauth, getAllUsersData, createUsers, protector, updateUserRole } = require('../utils/keycloak_utils');
+const { selectFromTable, insertIntoTable } = require('../utils/database_utils');
 const log = require('../utils/logger_utils').log;
 
 

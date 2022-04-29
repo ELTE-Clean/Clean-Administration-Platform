@@ -43,76 +43,119 @@ SET default_with_oids = false;
 \connect clean_db
 
 --
--- Name: students; Type: TABLE; Schema: public; Owner: postgres
+-- Name: userSeq; Type: Sequence; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.userSeq MINVALUE 1 START WITH 1 INCREMENT BY 1;
+
+ALTER SEQUENCE public.userSeq OWNER TO postgres;
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.users (
-    userid      CHAR(6)         NOT NULL,
+    userID      INT             DEFAULT nextval('userSeq'),
+    neptun      CHAR(6)         NOT NULL,
     firstname   VARCHAR(20)     NOT NULL,
     lastname    VARCHAR(20)     NOT NULL,
     username    VARCHAR(20)     NOT NULL UNIQUE,
-    PRIMARY KEY(userid)
+    PRIMARY KEY (userID)
 );
 
 
 ALTER TABLE public.users OWNER TO postgres;
 
 --
--- Name: students; Type: TABLE; Schema: public; Owner: postgres
+-- Name: groupSeq; Type: Sequence; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.groupSeq MINVALUE 1 START WITH 1 INCREMENT BY 1;
+
+ALTER SEQUENCE public.groupSeq OWNER TO postgres;
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.groups (
-    groupid     VARCHAR(10)    NOT NULL,
+    groupID     INt            DEFAULT nextval('groupSeq'),
+    groupName   VARCHAR(10)    NOT NULL,
     timetable   VARCHAR(20)    UNIQUE,
-    PRIMARY KEY(groupid)
+    PRIMARY KEY (groupID)
 );
 
 
 ALTER TABLE public.groups OWNER TO postgres;
+
+--
+-- Name: sectionSeq; Type: Sequence; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.sectionSeq MINVALUE 1 START WITH 1 INCREMENT BY 1;
+
+ALTER SEQUENCE public.sectionSeq OWNER TO postgres;
+
 --
 -- Name: sections; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.sections (
-    sectionid  VARCHAR(50)    NOT NULL,
-    groupid    VARCHAR(10)    REFERENCES  groups(groupid)  NOT NULL,
-    PRIMARY KEY (sectionid, groupid)
+    sectionID   INT            DEFAULT nextval('sectionSeq'),
+    sectionName VARCHAR(50)    NOT NULL,
+    groupID     INT            REFERENCES  groups(groupID)  NOT NULL,
+    PRIMARY KEY (sectionID)
 );
 
 
 ALTER TABLE public.sections OWNER TO postgres;
 
 --
+-- Name: taskSeq; Type: Sequence; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.taskSeq MINVALUE 1 START WITH 1 INCREMENT BY 1;
+
+ALTER SEQUENCE public.taskSeq OWNER TO postgres;
+
+--
 -- Name: tasks; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.tasks (
-    taskid      VARCHAR(50)    NOT NULL,
-    sectionid   VARCHAR(50)    NOT NULL,
-    groupid     VARCHAR(10)    NOT NULL,
+    taskID      INT            DEFAULT nextval('taskSeq'),
+    taskName    VARCHAR(50)    NOT NULL,
+    sectionID   INT            REFERENCES  sections(sectionID)  NOT NULL,
+    groupID     INT            REFERENCES  groups(groupID)      NOT NULL,
     description VARCHAR(5000)  NOT NULL, -- Task description (File/Text)
     solution    VARCHAR(5000)  NOT NULL, -- Task solution to run the script on!
     max         INT            NOT NULL,
-    FOREIGN KEY (sectionid, groupid) REFERENCES sections(sectionid, groupid),
-    PRIMARY KEY (taskid, sectionid, groupid)
+    PRIMARY KEY (taskID)
 );
 
 
 ALTER TABLE public.tasks OWNER TO postgres;
 
 --
+-- Name: taskSeq; Type: Sequence; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.gradeSeq MINVALUE 1 START WITH 1 INCREMENT BY 1;
+
+ALTER SEQUENCE public.gradeSeq OWNER TO postgres;
+
+--
 -- Name: grades; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.grades (
-    studentid   CHAR(6)         REFERENCES  users(userid)   NOT NULL,
-    taskid      VARCHAR(50)     NOT NULL,
-    sectionid   VARCHAR(50)     NOT NULL,
+    gradeID     INT             DEFAULT nextval('gradeSeq'),
+    studentID   INT             REFERENCES  users(userID)           NOT NULL,
+    taskID      INT             REFERENCES  tasks(taskID)           NOT NULL,
+    sectionID   INT             REFERENCES  sections(sectionID)     NOT NULL,
     submission  VARCHAR(5000)   DEFAULT NULL, -- 5KB Storage of text. 
     grade       INT             DEFAULT NULL,
-    -- groupid     CHAR(10)    NOT NULL,                                                # Omitted because having groupid would be redundant
-    -- FOREIGN KEY (taskid, sectionid) REFERENCES tasks(taskid, sectionid, groupid),    # Does not work without groupid
-    PRIMARY KEY (studentid, taskid, sectionid)
+    PRIMARY KEY (gradeID)
 );
 
 
@@ -123,9 +166,9 @@ ALTER TABLE public.grades OWNER TO postgres;
 --
 
 CREATE TABLE public.user_to_group (
-    userid      CHAR(6)         REFERENCES users(userid)    NOT NULL,
-    groupid     VARCHAR(10)     REFERENCES groups(groupid)  NOT NULL,
-    PRIMARY KEY (userid, groupid)
+    userID      INT     REFERENCES users(userID)    NOT NULL,
+    groupID     INT     REFERENCES groups(groupID)  NOT NULL,
+    PRIMARY KEY (userID, groupID)
 );
 
 
@@ -134,41 +177,41 @@ ALTER TABLE public.user_to_group OWNER TO postgres;
 
 -- Filling the tables with dummy values
 
-INSERT INTO users VALUES ('81AMIA', 'Judita', 'Fenne', 'student-1');
-INSERT INTO users VALUES ('9YV5TX', 'Hannah', 'Lochana', 'HannaLocha');
-INSERT INTO users VALUES ('ZEADKD', 'Edan', 'Bahadur', 'demonstrator-1');
-INSERT INTO users VALUES ('Q50YI1', 'Dita', 'Bertók', 'Queen');
-INSERT INTO users VALUES ('B8WNS6', 'Georg','Vijay', 'Muscleman');
-INSERT INTO users VALUES ('NM82SK', 'Chaz', 'Saundra', 'Picasso');
+INSERT INTO users (neptun, firstname, lastname, username) VALUES ('81AMIA', 'Judita', 'Fenne', 'student-1');
+INSERT INTO users (neptun, firstname, lastname, username) VALUES ('9YV5TX', 'Hannah', 'Lochana', 'HannaLocha');
+INSERT INTO users (neptun, firstname, lastname, username) VALUES ('ZEADKD', 'Edan', 'Bahadur', 'demonstrator-1');
+INSERT INTO users (neptun, firstname, lastname, username) VALUES ('Q50YI1', 'Dita', 'Bertók', 'Queen');
+INSERT INTO users (neptun, firstname, lastname, username) VALUES ('B8WNS6', 'Georg','Vijay', 'Muscleman');
+INSERT INTO users (neptun, firstname, lastname, username) VALUES ('NM82SK', 'Chaz', 'Saundra', 'Picasso');
 
-INSERT INTO groups VALUES ('Group_1', 'Mon, 12-14');
-INSERT INTO groups VALUES ('Group_2', 'Mon 14-16');
-INSERT INTO groups VALUES ('Group_3', 'Thu 8-10');
-INSERT INTO groups VALUES ('Group_4', 'Fri 12-14');
+INSERT INTO groups (groupName, timetable) VALUES ('Group_1', 'Mon, 12-14');
+INSERT INTO groups (groupName, timetable) VALUES ('Group_2', 'Mon 14-16');
+INSERT INTO groups (groupName, timetable) VALUES ('Group_3', 'Thu 8-10');
+INSERT INTO groups (groupName, timetable) VALUES ('Group_4', 'Fri 12-14');
 
-INSERT INTO sections VALUES ('Homework', 'Group_1');
-INSERT INTO sections VALUES ('Progress Task', 'Group_1');
-INSERT INTO sections VALUES ('Homework', 'Group_2');
-INSERT INTO sections VALUES ('Midterm', 'Group_1');
-INSERT INTO sections VALUES ('Endterm', 'Group_2');
+INSERT INTO sections (sectionName, groupID) VALUES ('Homework', 1);
+INSERT INTO sections (sectionName, groupID) VALUES ('Progress Task', 1);
+INSERT INTO sections (sectionName, groupID) VALUES ('Homework', 2);
+INSERT INTO sections (sectionName, groupID) VALUES ('Midterm', 1);
+INSERT INTO sections (sectionName, groupID) VALUES ('Endterm', 2);
 
-INSERT INTO tasks VALUES ('Homework 1', 'Homework', 'Group_1', 'desc', 'sol', 1);
-INSERT INTO tasks VALUES ('Progress Task 1', 'Progress Task', 'Group_1', 'desc', 'sol', 1);
-INSERT INTO tasks VALUES ('Homework 2', 'Homework', 'Group_2', 'desc', 'sol', 2);
-INSERT INTO tasks VALUES ('Midterm', 'Midterm', 'Group_1', 'desc', 'sol', 3);
-INSERT INTO tasks VALUES ('Endterm', 'Endterm', 'Group_2', 'desc', 'sol', 4);
+INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VALUES ('Homework 1', 1, 1, 'desc', 'sol', 1);
+INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VALUES ('Progress Task 1', 2, 1, 'desc', 'sol', 1);
+INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VALUES ('Homework 2', 3, 2, 'desc', 'sol', 2);
+INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VALUES ('Midterm', 4, 1, 'desc', 'sol', 3);
+INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VALUES ('Endterm', 5, 2, 'desc', 'sol', 4);
 
-INSERT INTO grades VALUES ('81AMIA', 'Homework 1', 'Homework', NULL, 5);
-INSERT INTO grades VALUES ('9YV5TX', 'Homework 1', 'Homework', NULL, 2);
-INSERT INTO grades VALUES ('9YV5TX', 'Midterm', 'Exam', NULL, 3);
-INSERT INTO grades VALUES ('ZEADKD', 'Midterm', 'Exam', NULL, 3);
-INSERT INTO grades VALUES ('ZEADKD', 'Endterm', 'Exam', NULL, 4);
+INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (1, 1, 1, NULL, 5);
+INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (2, 1, 3, NULL, 2);
+INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (2, 4, 5, NULL, 3);
+INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (3, 4, 5, NULL, 3);
+INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (3, 5, 5, NULL, 4);
 
-INSERT INTO user_to_group VALUES ('81AMIA', 'Group_1');
-INSERT INTO user_to_group VALUES ('9YV5TX', 'Group_2');
-INSERT INTO user_to_group VALUES ('ZEADKD', 'Group_3');
-INSERT INTO user_to_group VALUES ('Q50YI1', 'Group_4');
-INSERT INTO user_to_group VALUES ('B8WNS6', 'Group_1');
-INSERT INTO user_to_group VALUES ('B8WNS6', 'Group_2');
-INSERT INTO user_to_group VALUES ('NM82SK', 'Group_3');
-INSERT INTO user_to_group VALUES ('NM82SK', 'Group_4');
+INSERT INTO user_to_group (userID, groupID) VALUES (1, 1);
+INSERT INTO user_to_group (userID, groupID) VALUES (2, 2);
+INSERT INTO user_to_group (userID, groupID) VALUES (3, 3);
+INSERT INTO user_to_group (userID, groupID) VALUES (4, 4);
+INSERT INTO user_to_group (userID, groupID) VALUES (5, 1);
+INSERT INTO user_to_group (userID, groupID) VALUES (5, 2);
+INSERT INTO user_to_group (userID, groupID) VALUES (6, 3);
+INSERT INTO user_to_group (userID, groupID) VALUES (6, 4);

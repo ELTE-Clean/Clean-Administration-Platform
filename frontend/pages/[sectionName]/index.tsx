@@ -17,7 +17,7 @@ const Section = () => {
   const router = useRouter();
   const name = router.query.sectionName;
   let isTeacher: Boolean = true;
-  let isAdmin: Boolean = false;
+  let isAdmin: Boolean = true;
 
   const sectionExist = (sectionName: string) => {
     const sectionNames = sections.message.map(

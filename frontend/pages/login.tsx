@@ -42,7 +42,7 @@ const Login: NextPage = () => {
       })
       .finally(() => {
         fetchCall({
-          url: "users/get/self",
+          url: "users/self",
           method: RequestType.GET,
         })
           .then((response) => {

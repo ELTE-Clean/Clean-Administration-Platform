@@ -4,11 +4,16 @@ import { useContext, useState } from "react";
 import { RequestType } from "../enums/requestTypes";
 import { fetchCall } from "../hooks/useFetch";
 const AddRemoveStudent = (props: any) => {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2b0fa22 (Added basic assign student to a group)
   const [studentInput, setStudentInput] = useState("");
 
   let addStudentHandler = () => {
     if (studentInput.trim() == "") {
       alert("Input cannot be empty!!");
+<<<<<<< HEAD
     } else {
       console.log(studentInput);
       fetchCall({
@@ -26,6 +31,29 @@ const AddRemoveStudent = (props: any) => {
     }
   };
 
+=======
+    }else {
+      console.log(studentInput)
+        fetchCall({
+          url: "groups/assign",
+          method: RequestType.PUT,
+          body: { "userID": parseInt(studentInput), "groupID": 1 },
+        })
+          .then((response) => {
+            const res = response.json();
+            return res;
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+  };
+
+
+
+
+
+>>>>>>> 2b0fa22 (Added basic assign student to a group)
   return (
     <div className="AddTemoveStudent-container">
       <div className={"admin-forms-holder"}>
@@ -63,11 +91,19 @@ const AddRemoveStudent = (props: any) => {
               valueTemp={"Enter neptun codes here... "}
             /> */}
             <div className="form-button">
+<<<<<<< HEAD
               <button
                 type="button"
                 className="submitBtn"
                 onClick={() => addStudentHandler()}
               >
+=======
+              <button 
+                type="button"
+                className="submitBtn"
+                onClick={() => addStudentHandler()}
+                >
+>>>>>>> 2b0fa22 (Added basic assign student to a group)
                 Apply
               </button>
             </div>

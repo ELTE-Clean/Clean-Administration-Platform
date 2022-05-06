@@ -6,8 +6,7 @@ import { Task } from "../interfaces/teacherTask";
 import EditHomeworkForm from "./EditHomeworkForm";
 import PopUp from "./Popup";
 
-const EditSectionForm = (props: { sectionName: any; tasks: any[] }) => {
-  const [sectionName, setSectionName] = useState(props.sectionName);
+const EditSectionForm = (props: { section: any; tasks: any[] }) => {
   const [taskName, setTaskName] = useState("");
   const [tasks, setTasks] = useState(props.tasks);
   const [buttonEditPopup, setButtonEditPopup] = useState(false);
@@ -22,41 +21,62 @@ const EditSectionForm = (props: { sectionName: any; tasks: any[] }) => {
     setTasks(newTasks);
   };
   let addTaskHandler = () => {
-    let allTasksName = tasks.map((task: Task) => task.title);
+    console.log();
 
-    let taskNameAlreadyExist = allTasksName.includes(taskName);
-    if (taskNameAlreadyExist) {
-      alert(`Task "${taskName}" already exist!!`);
-    } else if (taskName.trim() === "") {
-      alert(`Task name cannot be empty!!!`);
-    } else {
-      const newTasks = [...tasks];
-      const newTask = {
-        title: taskName,
-        dueTime: "",
-        dueDate: "",
-        grade: null,
-        gradeOutOf: null,
-      };
-      newTasks.push(newTask);
-      setTasks(newTasks);
-    }
-  };
-
-  let removeSectionHandler = () => {
-    console.log(sectionName);
-
+    // let allTasksName = tasks.map((task: Task) => task.title);
+    // let taskNameAlreadyExist = allTasksName.includes(taskName);
+    // if (taskNameAlreadyExist) {
+    //   alert(`Task "${taskName}" already exist!!`);
+    // } else if (taskName.trim() === "") {
+    //   alert(`Task name cannot be empty!!!`);
+    // } else {
+    //   const newTasks = [...tasks];
+    //   const newTask = {
+    //     title: taskName,
+    //     dueTime: "",
+    //     dueDate: "",
+    //     grade: null,
+    //     gradeOutOf: null,
+    //   };
+    //   newTasks.push(newTask);
+    //   setTasks(newTasks);
+    // }
     fetchCall({
-      url: "sections",
-      method: RequestType.DELETE,
-      body: [{ sectionname: sectionName, groupid: 1 }],
+      url: "tasks/create",
+      method: RequestType.POST,
+      body: {
+        taskname: taskName,
+        groupid: props.section["groupid"],
+        sectionid: props.section["sectionid"],
+      },
     })
       .then((response) => {
         const res = response.json();
         return res;
       })
       .then((data) => {
-        console.log("Removed section", sectionName);
+        console.log("Tasks:", data);
+        setTasks(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  let removeSectionHandler = () => {
+    console.log(props.section["sectionname"]);
+
+    fetchCall({
+      url: "sections",
+      method: RequestType.DELETE,
+      body: [{ sectionname: props.section["sectionname"], groupid: 1 }],
+    })
+      .then((response) => {
+        const res = response.json();
+        return res;
+      })
+      .then((data) => {
+        console.log("Removed section", props.section["sectionname"]);
         router.push("/");
       })
       .catch((error) => {
@@ -64,31 +84,31 @@ const EditSectionForm = (props: { sectionName: any; tasks: any[] }) => {
       });
   };
 
-  let saveHandler = () => {
-    if (sectionName.trim() === "") {
-      alert("section name cannot be empty!!");
-    } else {
-      console.log(sectionName);
-      console.log("saving..");
-    }
-  };
+  // let saveHandler = () => {
+  //   if (sectionName.trim() === "") {
+  //     alert("section name cannot be empty!!");
+  //   } else {
+  //     console.log(props.section["sectionname"]);
+  //     console.log("saving..");
+  //   }
+  // };
   return (
     <div className="container">
-      <h1>Edit {sectionName}</h1>
+      <h1>Edit {props.section["sectionname"]}</h1>
       <br />
       <label>Name:</label>
       <br />
       <input
         type="text"
-        value={sectionName}
-        onChange={(e) => setSectionName(e.target.value.trim())}
+        value={props.section["sectionname"]}
+        // onChange={(e) => setSectionName(e.target.value.trim())}
       />
       <br />
       <br />
       <p>Tasks:</p>
       <br />
       <div className="edit-homework-container">
-        {tasks.map((task: Task, idx: number) => (
+        {/* {tasks.map((task: Task, idx: number) => (
           <div key={idx} className="homework-task-container">
             <div
               className="edit-homework-btn"
@@ -119,7 +139,7 @@ const EditSectionForm = (props: { sectionName: any; tasks: any[] }) => {
               />
             )}
           </div>
-        ))}
+        ))} */}
       </div>
       <br />
 
@@ -147,7 +167,7 @@ const EditSectionForm = (props: { sectionName: any; tasks: any[] }) => {
       <br />
 
       <div className="form-button">
-        <button type="button" className="submitBtn" onClick={saveHandler}>
+        <button type="button" className="submitBtn">
           Save
         </button>
       </div>

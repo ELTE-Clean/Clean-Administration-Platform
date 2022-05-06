@@ -1,4 +1,7 @@
+import router, { useRouter } from "next/router";
 import { useState } from "react";
+import { RequestType } from "../enums/requestTypes";
+import { fetchCall } from "../hooks/useFetch";
 import { Task } from "../interfaces/teacherTask";
 import EditHomeworkForm from "./EditHomeworkForm";
 import PopUp from "./Popup";
@@ -8,6 +11,7 @@ const EditSectionForm = (props: { sectionName: any; tasks: any[] }) => {
   const [taskName, setTaskName] = useState("");
   const [tasks, setTasks] = useState(props.tasks);
   const [buttonEditPopup, setButtonEditPopup] = useState(false);
+  const router = useRouter();
 
   let taskViewHandler = (taskIndex: number) => {
     console.log(`viewing task ${tasks[taskIndex].title}`);
@@ -38,6 +42,28 @@ const EditSectionForm = (props: { sectionName: any; tasks: any[] }) => {
       setTasks(newTasks);
     }
   };
+
+  let removeSectionHandler = () => {
+    console.log(sectionName);
+
+    fetchCall({
+      url: "sections",
+      method: RequestType.DELETE,
+      body: [{ sectionname: sectionName, groupid: 1 }],
+    })
+      .then((response) => {
+        const res = response.json();
+        return res;
+      })
+      .then((data) => {
+        console.log("Removed section", sectionName);
+        router.push("/");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   let saveHandler = () => {
     if (sectionName.trim() === "") {
       alert("section name cannot be empty!!");
@@ -110,6 +136,13 @@ const EditSectionForm = (props: { sectionName: any; tasks: any[] }) => {
         onClick={() => addTaskHandler()}
       >
         Add task
+      </button>
+      <button
+        type="button"
+        className="remove-section-btn"
+        onClick={() => removeSectionHandler()}
+      >
+        Remove section
       </button>
       <br />
 

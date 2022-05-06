@@ -34,3 +34,15 @@
     10px 20px
   );
 }
+
+.remove-section-btn {
+  margin-left: 10px;
+  @include btn(
+    $main-red,
+    $btn-txt-color,
+    $main-box-shadow,
+    none,
+    10px,
+    10px 20px
+  );
+}

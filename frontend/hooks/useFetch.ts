@@ -93,6 +93,7 @@ export const fetchCall = async ({
   const apiPath =`${ROOT_PATH}/${url}`
   const headers: any = {
     "Content-Type" : "application/json",
+    "Access-Control-Allow-Methods": "DELETE"
   };
     
   return await fetch(apiPath, {

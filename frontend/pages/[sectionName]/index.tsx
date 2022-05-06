@@ -9,21 +9,40 @@ import withAuth from "../../components/withAuth";
 
 import AssignTeacher from "../../components/AssignTeacher";
 import AddRemoveStudent from "../../components/AddRemoveStudent";
+import { RequestType } from "../../enums/requestTypes";
+import { fetchCall } from "../../hooks/useFetch";
 
 const Section = () => {
   const { sections } = useContext(UserContext);
   const [buttonEditPopup, setButtonEditPopup] = useState(false);
+  const [section, setSection] = useState({});
+  const [tasks, setTasks] = useState([]);
 
   const router = useRouter();
-  const name = router.query.sectionName;
+  const name: string = router.query.sectionName;
   let isTeacher: Boolean = true;
   let isAdmin: Boolean = false;
+  // const sectionDetails = sections.filter(
+  //   (section: { sectionid: Number; sectionname: string; groupid: Number }) =>
+  //     section["sectionname"] === name
+  // );
+  // setSection(sectionDetails);
 
   const sectionExist = (sectionName: string) => {
-    const sectionNames = sections.message.map(
-      (section: { sectionid: string; groupid: string }) => section.sectionid
+    const sectionNames = sections.map(
+      (section: { sectionid: Number; sectionname: string; groupid: Number }) =>
+        section.sectionname
     );
     return sectionNames.includes(sectionName);
+  };
+
+  const getSectionIdGroupId = (sectionName: string) => {
+    const sectionDetails = sections.filter(
+      (section: { sectionid: Number; sectionname: string; groupid: Number }) =>
+        section["sectionname"] === sectionName
+    );
+
+    return sectionDetails;
   };
 
   // useEffect(() => {
@@ -42,29 +61,61 @@ const Section = () => {
 
   // Here instead of "tasks" there should be an api call to the backend to get the respective data for sectionName
 
-  const tasks = [
-    {
-      title: "HW1",
-      dueTime: "11:59",
-      dueDate: "2022-3-1",
-      grade: null,
-      gradeOutOf: 50,
-    },
-    {
-      title: "HW2",
-      dueTime: "11:59",
-      dueDate: "2022-3-1",
-      grade: null,
-      gradeOutOf: 20,
-    },
-    {
-      title: "HW3",
-      dueTime: "11:59",
-      dueDate: "2022-1-1",
-      grade: 30,
-      gradeOutOf: 30,
-    },
-  ];
+  useEffect(() => {
+    setSection(
+      sections.filter(
+        (section: {
+          sectionid: Number;
+          sectionname: string;
+          groupid: Number;
+        }) => section["sectionname"] === name
+      )[0]
+    );
+    console.log(section);
+
+    fetchCall({
+      url: "tasks",
+      method: RequestType.GET,
+      data: {
+        sectionid: section["sectionid"],
+        groupid: section["groupid"],
+      },
+    })
+      .then((response) => {
+        const res = response.json();
+        return res;
+      })
+      .then((data) => {
+        setTasks(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  // const tasks = [
+  //   {
+  //     title: "HW1",
+  //     dueTime: "11:59",
+  //     dueDate: "2022-3-1",
+  //     grade: null,
+  //     gradeOutOf: 50,
+  //   },
+  //   {
+  //     title: "HW2",
+  //     dueTime: "11:59",
+  //     dueDate: "2022-3-1",
+  //     grade: null,
+  //     gradeOutOf: 20,
+  //   },
+  //   {
+  //     title: "HW3",
+  //     dueTime: "11:59",
+  //     dueDate: "2022-1-1",
+  //     grade: 30,
+  //     gradeOutOf: 30,
+  //   },
+  // ];
 
   //   let date = new Date();
 
@@ -93,32 +144,31 @@ const Section = () => {
             trigger={buttonEditPopup}
             setTrigger={setButtonEditPopup}
             popupType="edit-home-work"
-            component={<EditSectionForm tasks={tasks} sectionName={name} />}
+            component={<EditSectionForm tasks={tasks} section={section} />}
           />
         </div>
       )}
 
       {tasks.map((task, idx) => (
-        <Link key={idx} href={`/${name}/${task.title}`} passHref>
+        <Link key={idx} href={`/${name}/${task["taskname"]}`} passHref>
           <div key={idx} className="section-task">
             <div className="task-title">
-              <h3>{task.title}</h3>
+              <h3>{task["taskname"]}</h3>
             </div>
             <div className="task-info">
               <div className="availability">
                 <p>Open</p>
               </div>
               <div className="deadline">
-                <p>
-                  {task.dueDate} {task.dueTime}
-                </p>
+                <p>{/* {task.dueDate} {task.dueTime} */}2022-10-02 23:59</p>
               </div>
               <div className="grade">
                 {task.grade === null ? (
-                  <p>-/{task.gradeOutOf}</p>
+                  // <p>-/{task.gradeOutOf}</p>
+                  <p>-/{task["max"]}</p>
                 ) : (
                   <p>
-                    {task.grade}/{task.gradeOutOf}
+                    <p>-/{task["max"]}</p>
                   </p>
                 )}
               </div>

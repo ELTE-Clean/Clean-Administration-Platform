@@ -14,9 +14,11 @@ const Menu = () => {
 
   let adminUser = "Admin";
   let groups = ["Group 1", "Group 2", "Group 3", "Group 4"];
-  let isAdmin = true;
+  let isAdmin = false;
   let addSectionCallBack = (sectionToAdd: string) => {
-    return sections.message.includes(sectionToAdd);
+    return sections
+      .map((section) => section["sectionname"])
+      .includes(sectionToAdd);
   };
   const isUserLoggedIn = () => {
     return localStorage.getItem("isLoggedIn") == "true";
@@ -91,9 +93,7 @@ const Menu = () => {
         </div>
       </Link>
       <div className="sections">
-    
-        {
-        sections.map((section, idx) => (
+        {sections.map((section, idx) => (
           <Link key={idx} href={`/${section.sectionname}`} passHref>
             <div className="section">
               <div className="section-name">

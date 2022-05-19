@@ -1,0 +1,293 @@
+.popup-task-container {
+  @include flex(column);
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  // max-height: 100px;
+  height: 100vh;
+  z-index: 99;
+  overflow: auto;
+  background-color: #474e5d7d;
+
+  h1 {
+    color: black;
+    font-weight: bolder;
+  }
+
+  p,
+  label {
+    font-weight: bolder;
+  }
+
+  .PopUp-holder::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .PopUp-holder::-webkit-scrollbar-thumb {
+    border-radius: 30px;
+    background: #c7c7c7;
+  }
+
+  .PopUp-holder {
+    padding: 20px;
+    background-color: #fefefe;
+    // margin: 5% auto 15% auto;
+    overflow-y: scroll;
+
+    width: 50%;
+    max-height: 80%;
+    border-radius: 20px;
+
+    .exit-container {
+      position: relative;
+      text-align: center;
+      margin: 24px 0 12px 0;
+
+      .close-btn {
+        position: absolute;
+        right: 25px;
+        top: 0;
+        color: #000;
+        font-size: 35px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .close-btn:hover {
+        color: $main-red;
+        transform: scale(1.2);
+      }
+    }
+
+    .container {
+      padding: 16px;
+      color: lighten($main-dark-blue, 10%);
+
+      input {
+        @include input(1px solid #ccc);
+        margin-top: 20px;
+      }
+
+      .form-button {
+        margin-top: 10px;
+        position: relative;
+        text-align: center;
+
+        .submitBtn {
+          @include btn(
+            $main-green,
+            $main-dark-blue,
+            $main-box-shadow,
+            none,
+            10px,
+            15px 50px
+          );
+        }
+      }
+    }
+  }
+}
+
+.AddTemoveStudent-container {
+  @include flex(column);
+  // // position: fixed;
+  // left: 0;
+  // top: 0;
+  width: 70%;
+
+  // max-height: 100px;
+  // height: 100vh;
+  h1 {
+    color: black;
+    font-weight: bolder;
+  }
+
+  p,
+  label {
+    font-weight: bolder;
+  }
+
+  .admin-forms-holder::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .admin-forms-holder::-webkit-scrollbar-thumb {
+    border-radius: 30px;
+    background: #c7c7c7;
+  }
+
+  .admin-forms-holder {
+    padding: 20px;
+    background-color: #fefefe;
+    box-shadow: $main-box-shadow;
+    // margin: 5% auto 15% auto;
+    overflow-y: scroll;
+
+    width: 50%;
+    max-height: 80%;
+    border-radius: 20px;
+
+    .container {
+      padding: 16px;
+      color: lighten($main-dark-blue, 10%);
+
+      input {
+        @include input(1px solid #ccc);
+        margin-top: 20px;
+      }
+
+      .form-button {
+        margin-top: 10px;
+        position: relative;
+        text-align: center;
+
+        .submitBtn {
+          @include btn(
+            $main-green,
+            $main-dark-blue,
+            $main-box-shadow,
+            none,
+            10px,
+            15px 50px
+          );
+        }
+      }
+
+      .Radios-area {
+        .Radio-container {
+          padding-right: 29px;
+          float: left;
+          display: block;
+          position: relative;
+          padding-left: 35px;
+          margin-bottom: 12px;
+          cursor: pointer;
+          // font-size: 22px;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+
+          input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+          }
+        }
+      }
+
+      .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 15px;
+        width: 15px;
+        background-color: #eee;
+        border-radius: 50%;
+      }
+
+      input ~ .checkmark {
+        background-color: #ccc;
+      }
+
+      input:checked ~ .checkmark {
+        background-color: #2196f3;
+      }
+
+      .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+      }
+
+      input:checked ~ .checkmark:after {
+        display: block;
+      }
+
+      .checkmark:after {
+        top: 4px;
+        left: 4px;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: white;
+      }
+    }
+  }
+}
+
+.assign-teacher-container {
+  @include flex(column);
+  // position: fixed;
+  margin-top: 60px;
+  width: 70%;
+
+  // max-height: 100px;
+  // height: 50vh;
+  h1 {
+    color: black;
+    font-weight: bolder;
+  }
+
+  p,
+  label {
+    font-weight: bolder;
+  }
+
+  .admin-forms-holder::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .admin-forms-holder::-webkit-scrollbar-thumb {
+    border-radius: 30px;
+    background: #c7c7c7;
+  }
+
+  .admin-forms-holder {
+    padding: 20px;
+    background-color: #fefefe;
+    // margin: 5% auto 15% auto;
+    box-shadow: $main-box-shadow;
+    overflow-y: scroll;
+
+    width: 50%;
+    max-height: 80%;
+    border-radius: 20px;
+
+    .container {
+      padding: 16px;
+      color: lighten($main-dark-blue, 10%);
+
+      input {
+        @include input(1px solid #ccc);
+        margin-top: 20px;
+      }
+
+      .form-button {
+        margin-top: 10px;
+        position: relative;
+        text-align: center;
+
+        .submitBtn {
+          @include btn(
+            $main-green,
+            $main-dark-blue,
+            $main-box-shadow,
+            none,
+            10px,
+            15px 50px
+          );
+        }
+      }
+    }
+  }
+}
+
+#ADTextArea {
+  width: 100%;
+  padding: 10px;
+  resize: none;
+  border: 1px solid #ccc;
+  outline: none;
+}

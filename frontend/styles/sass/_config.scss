@@ -1,0 +1,81 @@
+//colors
+$main-green: #acf19b;
+$main-red: #fbabab;
+$btn-txt-color: #e6e0e0;
+$main-dark-blue: #2b2d42;
+$main-light-blue: #8d99ae;
+
+//general variables
+$padding: 20px;
+$border-radius: 25px;
+$main-box-shadow: 1px 1px 10px #00000044;
+
+//fonts
+
+//mixins
+@mixin flex($direction) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+@mixin titles() {
+  margin-bottom: 50px;
+  h1 {
+    color: $main-light-blue;
+    text-decoration: underline;
+    font-size: 60px;
+    font-weight: bolder;
+  }
+}
+@mixin btn($bc-color, $color, $box-shadow, $border, $border-radius, $padding) {
+  box-shadow: $box-shadow;
+  padding: $padding;
+  background-color: $bc-color;
+  color: $color;
+  text-align: center;
+  border: $border;
+  border-radius: $border-radius;
+  outline: none;
+  cursor: pointer;
+  font-weight: bolder;
+  &:hover {
+    transition: 0.2s;
+    background-color: darken($bc-color, 10%);
+  }
+}
+
+@mixin input($border) {
+  outline: none;
+  border: $border;
+  width: 250px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border-radius: 6px;
+  box-sizing: border-box;
+  &::placeholder {
+    color: rgb(207, 207, 207);
+    text-align: left;
+  }
+}
+
+@mixin clearFix {
+  &:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
+
+@mixin removeSign {
+  color: $main-red;
+  cursor: pointer;
+  font-size: 40px;
+  font-weight: bolder;
+  // &:hover {
+  //   transition: 0.2s;
+  //   transform: rotate(90deg);
+  // }
+}

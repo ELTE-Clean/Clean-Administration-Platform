@@ -9,6 +9,8 @@
 # Package lock ignoring
 *package-lock.json
 *node_modules/*
+*Clean*System*Files/*
+*student-files/*
 
 # Runtime data
 pids
@@ -98,3 +100,10 @@ Thumbs.db
 
 #cache files
 *.cache
+
+#config files(Mainly for the prepros.config)
+*.config
+
+#css files
+*.css
+*.css.map

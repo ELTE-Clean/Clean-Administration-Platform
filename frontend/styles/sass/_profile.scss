@@ -1,0 +1,95 @@
+.profile-container {
+  @include flex(column);
+  align-items: flex-start;
+  .title {
+    @include titles();
+  }
+  .user-info {
+    p {
+      font-size: 40px;
+    }
+    b {
+      color: $main-light-blue;
+      text-decoration: underline;
+    }
+  }
+  .action-btns {
+    @include flex(column);
+    justify-content: space-between;
+    .change-pass-btn {
+      button {
+        @include btn(
+          $main-dark-blue,
+          #fff,
+          $main-box-shadow,
+          none,
+          10px,
+          15px 8px
+        );
+        font-size: 20px;
+        margin: 30px 0;
+      }
+
+      #pass-change-form {
+        width: 30vw;
+        padding: 20px 0;
+        br {
+          margin: 100px 0;
+        }
+        label {
+          font-size: 20px;
+          color: $main-dark-blue;
+          font-weight: bolder;
+        }
+        input {
+          @include input(1px solid #ccc);
+          padding: 20px;
+          margin: 20px 0;
+          width: 100%;
+        }
+        .form-btns {
+          position: relative;
+          #change-btn {
+            @include btn(
+              $main-green,
+              $main-dark-blue,
+              $main-box-shadow,
+              none,
+              10px,
+              15px 30px
+            );
+          }
+          #cancel-btn {
+            position: absolute;
+
+            right: 0;
+            @include btn(
+              $main-red,
+              $main-dark-blue,
+              $main-box-shadow,
+              none,
+              10px,
+              15px 30px
+            );
+          }
+        }
+      }
+    }
+
+    #logout-btn {
+      button {
+        font-size: 20px;
+        @include btn(
+          $main-red,
+          $main-dark-blue,
+          $main-box-shadow,
+          none,
+          10px,
+          15px 30px
+        );
+        width: 100%;
+      }
+      width: 100%;
+    }
+  }
+}

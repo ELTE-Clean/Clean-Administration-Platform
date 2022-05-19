@@ -1,0 +1,36 @@
+.edit-homework-container {
+  @include flex(column);
+  gap: 5px;
+
+  .homework-task-container {
+    @include flex(row);
+    width: 100%;
+    justify-content: space-between;
+    .edit-homework-btn {
+      width: 90%;
+      @include btn(
+        $main-light-blue,
+        $btn-txt-color,
+        $main-box-shadow,
+        1px,
+        5px,
+        15px 32px
+      );
+      text-align: left;
+    }
+    .remove-task-btn {
+      @include removeSign();
+    }
+  }
+}
+.add-task-btn {
+  margin: 20px 0;
+  @include btn(
+    $main-dark-blue,
+    $btn-txt-color,
+    $main-box-shadow,
+    none,
+    10px,
+    10px 20px
+  );
+}

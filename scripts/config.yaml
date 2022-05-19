@@ -1,0 +1,20 @@
+teacher_file: "teacher.icl"
+test_questions:
+  - q1:
+      function_name: addInt
+      test_cases:
+        - 1 2
+        - 5 13
+        - 12 99
+  - q2:
+      function_name: subInt
+      test_cases:
+        - 3 4
+        - 3 2
+        - 23 32
+
+student_files:
+  - ./student-files/mi3jg2.icl
+  - ./student-files/ju2hg4.icl
+  - ./student-files/mi3jg2.icl
+  - ./student-files/ju2hg4.icl

@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "preserveConstEnums": true,
+      "strict": true,
+      "declaration": true,
+      "target": "es2015",
+      "esModuleInterop": true
+    },
+      "include": [
+          "./"
+      ],
+      "exclude": [
+          "*.js"
+      ]
+}

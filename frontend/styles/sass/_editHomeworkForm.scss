@@ -1,0 +1,27 @@
+.EditHomeworkFormContainer {
+  .test-name {
+    h1 {
+    }
+  }
+  .edit-homework-data {
+    input {
+      @include input(1px solid #ccc);
+    }
+    .edit-homework-info {
+      @include flex(row);
+      justify-content: space-between;
+      .info-chunk {
+        // float: left;
+        // margin: 10px;
+      }
+    }
+  }
+  .save-changes {
+    text-align: center;
+    margin-top: 50px;
+    button {
+      @include btn($main-green, $main-dark-blue, none, none, 50px, 15px 30px);
+      font-weight: bolder;
+    }
+  }
+}

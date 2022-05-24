@@ -77,7 +77,7 @@ const Section = () => {
         }) => section["sectionname"] === name
       )[0]
     );
-    console.log(section);
+    console.log(section["sectionid"]);
 
     fetchCall({
       url: "tasks",

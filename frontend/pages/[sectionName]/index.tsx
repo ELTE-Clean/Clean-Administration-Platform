@@ -22,11 +22,6 @@ const Section = () => {
   const name: string = router.query.sectionName;
   let isTeacher: Boolean = true;
   let isAdmin: Boolean = false;
-  // const sectionDetails = sections.filter(
-  //   (section: { sectionid: Number; sectionname: string; groupid: Number }) =>
-  //     section["sectionname"] === name
-  // );
-  // setSection(sectionDetails);
 
   const sectionExist = (sectionName: string) => {
     const sectionNames = sections.map(
@@ -45,85 +40,46 @@ const Section = () => {
     return sectionDetails;
   };
 
-  // useEffect(() => {
-  //   console.log(sections);
-
-  //   if (
-  //     sections.message !== undefined &&
-  //     typeof sections.message !== "string" &&
-  //     Object.keys(sections).length > 0
-  //   ) {
-  //     if (!sectionExist(name)) {
-  //       router.push("/custom404");
-  //     }
-  //   }
-  // }, [sections]);
-
-  // Here instead of "tasks" there should be an api call to the backend to get the respective data for sectionName
-
   useEffect(() => {
-    // let s = sections.filter(
-    //   (section: { sectionid: Number; sectionname: string; groupid: Number }) =>
-    //     section["sectionname"] === name
-    // )[0];
-    // console.log(s);
+    let querystring = require("querystring");
+    let tempSection = sections.filter(
+      (section: { sectionid: Number; sectionname: string; groupid: Number }) =>
+        section["sectionname"] === name
+    )[0];
+    setSection(tempSection);
 
-    setSection(
-      sections.filter(
-        (section: {
-          sectionid: Number;
-          sectionname: string;
-          groupid: Number;
-        }) => section["sectionname"] === name
-      )[0]
-    );
-    console.log(section["sectionid"]);
-
-    fetchCall({
-      url: "tasks",
-      method: RequestType.GET,
-      data: {
+    try {
+      querystring = querystring.stringify({
         sectionid: section["sectionid"],
         groupid: section["groupid"],
-      },
+      });
+    } catch (error) {
+      console.log("empty");
+      querystring = "";
+    }
+
+    fetchCall({
+      url: "tasks?" + querystring,
+      method: RequestType.GET,
     })
       .then((response) => {
         const res = response.json();
         return res;
       })
       .then((data) => {
+        // console.log(data);
         setTasks(data);
       })
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+    console.log(section);
+    return () => {
+      setSection({}); // This worked for me
+    };
+  }, [name, section, sections]);
 
-  // const tasks = [
-  //   {
-  //     title: "HW1",
-  //     dueTime: "11:59",
-  //     dueDate: "2022-3-1",
-  //     grade: null,
-  //     gradeOutOf: 50,
-  //   },
-  //   {
-  //     title: "HW2",
-  //     dueTime: "11:59",
-  //     dueDate: "2022-3-1",
-  //     grade: null,
-  //     gradeOutOf: 20,
-  //   },
-  //   {
-  //     title: "HW3",
-  //     dueTime: "11:59",
-  //     dueDate: "2022-1-1",
-  //     grade: 30,
-  //     gradeOutOf: 30,
-  //   },
-  // ];
-
-  //   let date = new Date();
+  console.log(section);
 
   return isAdmin ? (
     <div className="section-container">

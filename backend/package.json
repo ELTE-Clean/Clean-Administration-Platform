@@ -11,7 +11,7 @@
     "transpile:ts": "babel --presets @babel/preset-typescript  ./ --out-dir dist/ --extensions \".ts,tsx\"  --ignore ./dist/,./node_modules,./.babelrc,./npm-debug.log,./tsconfig.json",
     "buildts": "npm run type-check && npm run transpile:ts",
     "transpile:js": "babel --presets @babel/preset-env  ./ --out-dir dist/ --extensions \".js\"  --ignore ./dist/,./node_modules,./.babelrc,./npm-debug.log,./tsconfig.json",
-    "post-build": "copyfiles package.json Dockerfile dist/",
+    "post-build": "copyfiles package.json Dockerfile dist/ && copyfiles ../scripts/CorrectTest.py dist/scripts/CorrectTest.py",
     "build": "rimraf dist/ && npm run buildts && npm run transpile:js && npm run post-build",
     "start": "npm run build && npm install && node dist/server.js"
   },

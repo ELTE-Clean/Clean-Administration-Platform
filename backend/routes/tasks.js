@@ -15,39 +15,42 @@ const fs = require('fs');
  *  solution=true
  *  description=true
  */
-router.get("/", isAuth, async (req, res, next) => {
-  const descriptionEnable = req.query.description == "true";
-  const solutionEnable = req.query.solution == "true";
+ router.get("/", isAuth, async (req, res, next) => {
+    const descriptionEnable = req.query.description == 'true';
+    const solutionEnable = req.query.solution == 'true';
 
-  /* Construction of the query parameters */
-  let parameters = {};
-  if (req.query.sectionid) parameters.sectionID = req.query.sectionid;
-  if (req.query.groupid) parameters.groupID = req.query.groupid;
-  if (req.query.taskid) parameters.taskID = req.query.taskid;
+    /* Construction of the query parameters */
+    let parameters = {};
+    if(req.data.sectionid)
+        parameters.sectionid = req.query.sectionid;
+    if(req.query.groupid)
+        parameters.groupid = req.query.groupid;
+    if(req.query.taskid)
+        parameters.taskid = req.query.taskid;
 
-  /* Get task/s */
-  const result = await selectFromTable("tasks", parameters);
-  if (result.error)
-    return res
-      .status(500)
-      .send(JSON.stringify({ message: "Transaction Failed" }));
+    /* Get task/s */
+    const result = await selectFromTable('tasks', parameters);
+    if (result.error) 
+        return res.status(500).send(JSON.stringify({message: "Transaction Failed"}));
 
-  /* Decide what to return */
-  const filtered = result.result.rows.map((task) => {
-    let finalShape = {
-      taskid: task.taskID,
-      taskname: task.taskname,
-      sectionid: task.sectionID,
-      groupid: task.groupID,
-      max: task.max,
-    };
+    /* Decide what to return */
+    const filtered = result.result.rows.map(task => {
+        let finalShape = {
+            taskid: task.taskid,
+            taskname: task.taskname,
+            sectionid: task.sectionid,
+            groupid : task.groupid,
+            max : task.max
+        };
 
-    if (solutionEnable) finalShape.solution = task.solution;
-    if (descriptionEnable) finalShape.description = task.description;
-    return finalShape;
-  });
+        if(solutionEnable)
+            finalShape.solution = task.solution;
+        if(descriptionEnable)
+            finalShape.description = task.description;
+        return finalShape;
+    });
 
-  return res.status(200).send(JSON.stringify(filtered));
+    return res.status(200).send(JSON.stringify(filtered));
 });
 
 /**
@@ -59,42 +62,32 @@ router.get("/", isAuth, async (req, res, next) => {
  * The solution and description can be given through the req.body, or passed by a multipart/form_data protocol.
  *
  */
-router.post(
-  "/create",
-  fileUpload({ createParentPath: true }),
-  isAuth,
-  protector(["admin", "demonstrator"]),
-  async (req, res, next) => {
+router.post("/create",fileUpload({ createParentPath: true }),isAuth, protector(["admin", "demonstrator"]),async (req, res, next) => {
     /* Check if the the incoming data are complete */
-    const solExists =
-      (req.files && req.files.solution) || (req.body && req.body.solution);
-    const descExists =
-      (req.files && req.files.description) ||
-      (req.body && req.body.description);
-    const incompleteFile = !solExists && !descExists;
-    const incompleteBody =
-      !req.body || !req.body.taskid || !req.body.sectionid || !req.body.groupid;
-    // if(incompleteFile || incompleteBody)
-    //     return res.status(400).send({message: "Description or Solution are missing!"});
+    const fileNotInForm = !req.files || !req.files.solution || !req.files.description;
+    const fileNotInBody = !req.body  || !req.body.solution  || !req.body.description; 
+    const incompleteFile = fileNotInForm && fileNotInBody;
+    const incompleteBody = !req.body || !req.body.taskid || !req.body.sectionid || !req.body.groupid || !req.body.max;
+    if(incompleteFile || incompleteBody)
+        return res.status(400).send({message: "Description or Solution are missing!"});
 
-    const params = req.body;
+    const solution = req.files.solution.data.toString("utf8") || req.body.solution;
+    const description = req.files.description.data.toString("utf8") || req.body.description;
 
-    if (solExists) {
-      const sol = req.files.solution.data.toString("utf8") || req.body.solution;
-      params.solution = sol.replace(/\'/g, "''");
-    }
-    if (descExists) {
-      desc =
-        req.files.description.data.toString("utf8") || req.body.description;
-      params.description = desc.replace(/\'/g, "''");
-    }
-
-    const result = await insertIntoTable("tasks", params);
-    if (result.error)
-      return res.status(500).send({ message: "Failed to insert task" });
-    return res.status(200).send({ message: "Task created successfully!" });
-  }
-);
+    /* Inserting the task into the table */
+    const params = {
+        taskid: req.body.taskid,
+        sectionid: req.body.sectionid,
+        groupid: req.body.groupid,
+        max: req.body.max,
+        solution : solution.replace(/^.*module.*$/g,'').replace(/\'/g, "''"),
+        description: description.replace(/\'/g, "''"),
+    };
+    const result = await insertIntoTable('tasks', params);
+    if(result.error)
+        return res.status(500).send({message: "Failed to insert task"});
+    return res.status(200).send({message: "Task created successfully!"});
+});
 
 /**
  * delete task/s
@@ -174,26 +167,36 @@ router.post("/:taskID/grade", isAuth, protector(["admin", "demonstrator"]), asyn
     fs.mkdirSync(taskDir);
     fs.writeFile(taskDir + 'teacher.icl', taskRecord.results.rows[0].solution);
     studentSolutionRecord.result.rows.forEach(row => {
+        if(!row.solution) 
+            return;
         const fileName = taskDir + row.studentID.toString() + '.icl';
+        log("DEBUG", "Creating Student File: " + fileName);
         fs.writeFile(fileName, row.submission, (err) => { if (err) log("ERROR", err.toString()); });
     });
     
-    /* */
+    /* Check if all files are created. */
     let allFileExists = false;
+    let repeats = 0;
+    let maxRepeats = 3;
     while(!allFileExists){
-        studentSolutionRecord.result.rows.forEach(row => {
+        if(repeats >= maxRepeats) return res.status(400).send({message: "Not all files"});
+        repeats++;
+        await delay(1000); // Waiting for 1 second
+        const allStudentsExist = studentSolutionRecord.result.rows.reduce( (accum, row) => {
+            if(!row.solution) 
+                return;
             const fileName = taskDir + row.studentID.toString() + '.icl';
-            
+            if(fs.existsSync(fileName)) return accum && true;
         });
+        allFileExists = fs.existsSync(taskDir + 'teacher.icl') && allStudentsExist;
+        console.log("Repeat: ", repeats, ", maxRepeats: ", maxRepeats);
     }
 
     /* Create the configuration for the python script */
 
-
     /* Run the script on all the folder contents */
 
     /* Return the script results */
-
 
 });
 

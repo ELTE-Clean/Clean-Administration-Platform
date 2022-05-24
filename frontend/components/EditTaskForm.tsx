@@ -50,7 +50,7 @@ const EditTaskForm = (props: any) => {
       console.log("Adding function");
     }
   };
-
+  let deleteTaskHandler = () => {};
   let saveHandler = () => {
     if (taskName === "") {
       alert("Task name cannot be empty!!!");
@@ -81,7 +81,10 @@ const EditTaskForm = (props: any) => {
             value={taskDescription}
             onChange={(e) => setTaskDescription(e.target.value.trim())}
           /> */}
-          <RichTextEditor classTemp={"description-area"} valueTemp={taskDescription}/>
+          <RichTextEditor
+            classTemp={"description-area"}
+            valueTemp={taskDescription}
+          />
 
           <br />
           <br />
@@ -168,6 +171,13 @@ const EditTaskForm = (props: any) => {
             Add
           </button>
           <br />
+          <button
+            type="button"
+            className="delete-task-btn"
+            onClick={deleteTaskHandler}
+          >
+            Delete task
+          </button>
         </div>
       </div>
 

@@ -52,10 +52,7 @@ router.post(
 
 /**
  * Delete section/s from a table with given parameters. The operation is a junction AND operation.
- * req.body: [{sectionid, groupid}]
- *   * If "GROUP ID" is null, then sections with the given ID are deleted
- *   * if "SECTION ID" is null, then all sections belong to the given group id are deleted
- *   * IF "SECTION ID and GROUP ID" are defined, delete that specific section
+ * req.body: {sectionid}
  */
 router.delete(
   "/",
@@ -68,13 +65,14 @@ router.delete(
         .send(JSON.stringify({ message: "No section is given to be deleted" }));
 
     let unsuccess = [];
-    for (const section of req.body) {
-      let result = await deleteFromTable("sections", {
-        sectionname: section.sectionname,
-        groupid: section.groupid,
-      });
-      if (result.error) unsuccess = [...unsuccess, section];
-    }
+    let result1 = await deleteFromTable("grades", req.body);
+    if (result1.error) unsuccess = [...unsuccess, section];
+
+    let result2 = await deleteFromTable("tasks", req.body);
+    if (result2.error) unsuccess = [...unsuccess, section];
+
+    let result3 = await deleteFromTable("sections", req.body);
+    if (result3.error) unsuccess = [...unsuccess, section];
 
     if (unsuccess.length > 0)
       return res.status(200).send(

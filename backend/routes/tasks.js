@@ -5,7 +5,7 @@ const router = require('express-promise-router')();     // Used to handle async 
 const { selectFromTable, insertIntoTable, deleteFromTable, updateTable } = require('../utils/database_utils');
 const { isAuth, protector } = require('../utils/keycloak_utils');
 const fileUpload = require('express-fileupload');   // Used to parse the incoming formpost files and insert them into req.files
-
+const fs = require('fs');
 
 /**
  * Get all tasks. The given query defines the behavior of the endpoint.
@@ -93,6 +93,8 @@ router.post('/create', fileUpload({createParentPath: true}), isAuth, protector([
 
 
 
+
+
 /**
  * update task/s
  * 
@@ -111,5 +113,55 @@ router.post('/create', fileUpload({createParentPath: true}), isAuth, protector([
         res.status(500).send(JSON.stringify({message: "Transaction Failed"}));
     return res.status(200).send(JSON.stringify({message: "Tasks successfully updated"}));
 });
+
+
+
+
+
+/**
+ * Grade a given task and returns the results of the grading.
+ * 
+ */
+router.post("/:taskID/grade", isAuth, protector(["admin", "demonstrator"]), async (req, res, next) => {
+    const tid = req.params.taskID;
+    const gid = req.body.groupID;
+
+    /* Validation layers*/
+
+    /* Get the task and solutions records */
+    const taskRecord = await selectFromTable('tasks', {taskID: tid});
+    const studentSolutionRecord = await selectFromTable('grades', {taskID: tid});
+    console.log(studentSolution.result.rows);
+    console.log(taskRecord.result.rows);
+    
+    /* Save the text of the database to a folder */
+    const taskDir = './grades/tasks/' + tid + '/';
+    fs.rmSync(taskDir, { recursive: true, force: true });
+    fs.mkdirSync(taskDir);
+    fs.writeFile(taskDir + 'teacher.icl', taskRecord.results.rows[0].solution);
+    studentSolutionRecord.result.rows.forEach(row => {
+        const fileName = taskDir + row.studentID.toString() + '.icl';
+        fs.writeFile(fileName, row.submission, (err) => { if (err) log("ERROR", err.toString()); });
+    });
+    
+    /* */
+    let allFileExists = false;
+    while(!allFileExists){
+        studentSolutionRecord.result.rows.forEach(row => {
+            const fileName = taskDir + row.studentID.toString() + '.icl';
+            
+        });
+    }
+
+    /* Create the configuration for the python script */
+
+
+    /* Run the script on all the folder contents */
+
+    /* Return the script results */
+
+
+});
+
 
 module.exports = router;

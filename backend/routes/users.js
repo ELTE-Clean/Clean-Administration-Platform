@@ -134,12 +134,12 @@ router.post('/create', isAuth, protector(["admin"]), async (req, res, next) =>{
     }
 
     /* Create users in the database. */
-    for (const user of Object.entries(req.body)) {
+    for (const user of req.body.users) {
         const student = {
             username: user.username, 
             firstname : user.firstname || "", 
             lastname : user.lastname || "",
-            userid: user.username
+            neptun: user.username
         };
         const result = await insertIntoTable('users', student);
         if (result.error){

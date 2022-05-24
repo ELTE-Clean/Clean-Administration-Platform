@@ -14,7 +14,7 @@ const Menu = () => {
 
   let adminUser = "Admin";
   let groups = ["Group 1", "Group 2", "Group 3", "Group 4"];
-  let isAdmin = false;
+  let isAdmin = true;
   let addSectionCallBack = (sectionToAdd: string) => {
     return sections
       .map((section) => section["sectionname"])
@@ -70,6 +70,14 @@ const Menu = () => {
           <div className="section">
             <div className="section-name">
               <h2>Dashboard</h2>
+            </div>
+          </div>
+        </Link>
+        
+        <Link href="/create_student" passHref>
+          <div className="section">
+            <div className="section-name">
+              <h2>Create Student</h2>
             </div>
           </div>
         </Link>

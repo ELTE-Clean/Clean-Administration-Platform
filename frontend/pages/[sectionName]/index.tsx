@@ -62,6 +62,12 @@ const Section = () => {
   // Here instead of "tasks" there should be an api call to the backend to get the respective data for sectionName
 
   useEffect(() => {
+    // let s = sections.filter(
+    //   (section: { sectionid: Number; sectionname: string; groupid: Number }) =>
+    //     section["sectionname"] === name
+    // )[0];
+    // console.log(s);
+
     setSection(
       sections.filter(
         (section: {

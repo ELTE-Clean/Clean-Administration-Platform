@@ -21,7 +21,7 @@ const fs = require('fs');
 
     /* Construction of the query parameters */
     let parameters = {};
-    if(req.query.sectionid)
+    if(req.data.sectionid)
         parameters.sectionid = req.query.sectionid;
     if(req.query.groupid)
         parameters.groupid = req.query.groupid;
@@ -82,7 +82,7 @@ router.post('/create', fileUpload({createParentPath: true}), isAuth, protector([
         sectionid: req.body.sectionid,
         groupid: req.body.groupid,
         max: req.body.max,
-        solution : solution.replace(/\'/g, "''"),
+        solution : solution.replace(/module*$/g,'').replace(/\'/g, "''"),
         description: description.replace(/\'/g, "''"),
     };
     const result = await insertIntoTable('tasks', params);
@@ -140,26 +140,36 @@ router.post("/:taskID/grade", isAuth, protector(["admin", "demonstrator"]), asyn
     fs.mkdirSync(taskDir);
     fs.writeFile(taskDir + 'teacher.icl', taskRecord.results.rows[0].solution);
     studentSolutionRecord.result.rows.forEach(row => {
+        if(!row.solution) 
+            return;
         const fileName = taskDir + row.studentID.toString() + '.icl';
+        log("DEBUG", "Creating Student File: " + fileName);
         fs.writeFile(fileName, row.submission, (err) => { if (err) log("ERROR", err.toString()); });
     });
     
-    /* */
+    /* Check if all files are created. */
     let allFileExists = false;
+    let repeats = 0;
+    let maxRepeats = 3;
     while(!allFileExists){
-        studentSolutionRecord.result.rows.forEach(row => {
+        if(repeats >= maxRepeats) return res.status(400).send({message: "Not all files"});
+        repeats++;
+        await delay(1000); // Waiting for 1 second
+        const allStudentsExist = studentSolutionRecord.result.rows.reduce( (accum, row) => {
+            if(!row.solution) 
+                return;
             const fileName = taskDir + row.studentID.toString() + '.icl';
-            
+            if(fs.existsSync(fileName)) return accum && true;
         });
+        allFileExists = fs.existsSync(taskDir + 'teacher.icl') && allStudentsExist;
+        console.log("Repeat: ", repeats, ", maxRepeats: ", maxRepeats);
     }
 
     /* Create the configuration for the python script */
 
-
     /* Run the script on all the folder contents */
 
     /* Return the script results */
-
 
 });
 

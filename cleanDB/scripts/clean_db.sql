@@ -195,17 +195,6 @@ INSERT INTO sections (sectionName, groupID) VALUES ('Homework', 2);
 INSERT INTO sections (sectionName, groupID) VALUES ('Midterm', 1);
 INSERT INTO sections (sectionName, groupID) VALUES ('Endterm', 2);
 
-INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VALUES ('Homework 1', 1, 1, 'desc', 'sol', 1);
-INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VALUES ('Progress Task 1', 2, 1, 'desc', 'sol', 1);
-INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VALUES ('Homework 2', 3, 2, 'desc', 'sol', 2);
-INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VALUES ('Midterm', 4, 1, 'desc', 'sol', 3);
-INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VALUES ('Endterm', 5, 2, 'desc', 'sol', 4);
-
-INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (1, 1, 1, NULL, 5);
-INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (2, 1, 3, NULL, 2);
-INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (2, 4, 5, NULL, 3);
-INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (3, 4, 5, NULL, 3);
-INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (3, 5, 5, NULL, 4);
 
 INSERT INTO user_to_group (userID, groupID) VALUES (1, 1);
 INSERT INTO user_to_group (userID, groupID) VALUES (2, 2);
@@ -215,3 +204,90 @@ INSERT INTO user_to_group (userID, groupID) VALUES (5, 1);
 INSERT INTO user_to_group (userID, groupID) VALUES (5, 2);
 INSERT INTO user_to_group (userID, groupID) VALUES (6, 3);
 INSERT INTO user_to_group (userID, groupID) VALUES (6, 4);
+
+
+
+
+---------------------- Teacher tasks and files Dumb data
+INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VALUES ('Homework 1', 1, 1, 'desc', 'module teacher
+import StdEnv 
+
+
+addInt :: Int Int -> Int
+addInt a b = a + b
+
+subInt :: Int Int -> Int
+subInt a b = a - b
+
+', 1);
+INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VALUES ('Progress Task 1', 2, 1, 'desc', 'module teacher
+import StdEnv 
+
+
+addInt :: Int Int -> Int
+addInt a b = a + b
+
+subInt :: Int Int -> Int
+subInt a b = a - b
+
+', 1);
+INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VALUES ('Homework 2', 3, 2, 'desc', 'module teacher
+import StdEnv 
+
+
+addInt :: Int Int -> Int
+addInt a b = a + b
+
+subInt :: Int Int -> Int
+subInt a b = a - b
+
+', 2);
+INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VALUES ('Midterm', 4, 1, 'desc', 'module teacher
+import StdEnv 
+
+
+addInt :: Int Int -> Int
+addInt a b = a + b
+
+subInt :: Int Int -> Int
+subInt a b = a - b
+
+', 3);
+INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VALUES ('Endterm', 5, 2, 'desc', 'module teacher
+import StdEnv 
+
+
+addInt :: Int Int -> Int
+addInt a b = a + b
+
+subInt :: Int Int -> Int
+subInt a b = a - b
+
+', 4);
+
+---------------------- Students files Dumb data
+INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (1, 1, 1, "import StdEnv 
+
+addInt :: Int Int -> Int
+addInt a b = a + b
+
+subInt :: Int Int -> Int
+subInt a b = a - b", 5);
+INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (2, 1, 3, "import StdEnv 
+
+addInt :: Int Int -> Int
+addInt a b = a + b
+
+subInt :: Int Int -> Int
+subInt a b = a - b", 2);
+INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (2, 4, 5, "import StdEnv 
+
+
+addInt :: Int Int -> Int
+addInt a b = a + b
+
+subInt :: Int Int -> Int
+subInt a b = a - b
+", 3);
+INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (3, 4, 5, NULL, 3);
+INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (3, 5, 5, NULL, 4);

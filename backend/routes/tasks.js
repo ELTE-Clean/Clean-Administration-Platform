@@ -155,18 +155,28 @@ router.put(
 /**
  * Grade a given task and returns the results of the grading.
  * 
+ * Call the endpoit with
+ * tasks/1/grade , where the 1 is the task id.
+ * 
  */
 router.post("/:taskID/grade", isAuth, protector(["admin", "demonstrator"]), async (req, res, next) => {
     const tid = req.params.taskID;
     const gid = req.body.groupID;
-    
-
-    /* TODO: Validation layers*/
 
     /* Get the task and solutions records */
     const taskRecord = await selectFromTable('tasks', {taskID: tid});
-    const studentSolutionRecord = await selectFromTable('grades', {taskID: tid});
+    if(taskRecord.error)
+        return next(taskRecord.error);
+    if(taskRecord.result.rows.length < 1)
+        return res.status(404).send(JSON.stringify({message: "Task does not exist"}));
+    if(!taskRecord.result.rows[0].solution)
+        return res.status(404).send(JSON.stringify({message: "No teacher solution is given"}));
     
+    const studentSolutionRecord = await selectFromTable('grades', {taskID: tid});
+    if(studentSolutionRecord.error)
+        return next(studentSolutionRecord.error);
+
+
     /* Create Directories */
     const taskDir = './grades/tasks/' + tid + '/';
     fs.rmSync(taskDir, { recursive: true, force: true });
@@ -186,6 +196,7 @@ router.post("/:taskID/grade", isAuth, protector(["admin", "demonstrator"]), asyn
     log("INFO", "Creating Teacher Solution File" );
     fs.writeFileSync(taskDir + 'teacher.icl', taskRecord.result.rows[0].solution, (err) => {
         log("ERROR", "Failed to write into file: " + taskDir + 'teacher.icl');
+        return next("writeFileSync aborted");
     });
     config += `student_files:\n`;
     studentSolutionRecord.result.rows.forEach(row => {
@@ -206,7 +217,7 @@ router.post("/:taskID/grade", isAuth, protector(["admin", "demonstrator"]), asyn
     fs.writeFileSync(configPath, config, (err) => { 
         if (err) {
             log("ERROR", err.toString());
-            return res.status(500).send(JSON.stringify({message: "Can't generate correction configuration"}));
+            return next("Can't generate correction configuration");
         }
     });
     
@@ -216,14 +227,12 @@ router.post("/:taskID/grade", isAuth, protector(["admin", "demonstrator"]), asyn
     const execRes = await exec(scriptCode);
     if(execRes.stderr){
         log("ERROR", "Execution Result: " + execRes.stderr);
-        return res.status(500).send(JSON.stringify({message: "Failed to run the correction script"}));
+        return next("Failed to run the correction script");
     }
     log("DEBUG", "Execution Result: " + execRes.stdout);
-
-
+    
     /* Return the script results */
-    return res.status(200).send(JSON.stringify({message: "Everything is good", result: execRes.stdout}));
-   
+    return res.status(200).send(JSON.stringify({message: "Request Was Successfull", result: execRes.stdout}));
 });
 
 

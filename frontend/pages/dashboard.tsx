@@ -3,7 +3,7 @@ import { useState } from "react";
 import AddRemoveStudent from "../components/AddRemoveStudent";
 import EditSectionForm from "../components/EditSectionForm";
 import { useRouter } from "next/router";
-import AssignTeacher from "../components/AssignTeacher";
+// import AssignTeacher from "../components/AssignTeacher";
 import AddGroup from "../components/AddGroup";
 
 const dashboard: NextPage = () => {

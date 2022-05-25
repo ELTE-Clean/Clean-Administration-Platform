@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { UserContext } from "../../context/UserContext";
 import withAuth from "../../components/withAuth";
 
-import AssignTeacher from "../../components/AssignTeacher";
+// import AssignTeacher from "../../components/AssignTeacher";
 import AddRemoveStudent from "../../components/AddRemoveStudent";
 import { RequestType } from "../../enums/requestTypes";
 import { fetchCall } from "../../hooks/useFetch";
@@ -77,7 +77,7 @@ const Section = () => {
         }) => section["sectionname"] === name
       )[0]
     );
-    console.log(section["sectionid"]);
+    // console.log(section["sectionid"]);
 
     fetchCall({
       url: "tasks",
@@ -132,7 +132,7 @@ const Section = () => {
       </div>
       <AddRemoveStudent popupType="add-remove-student" />
 
-      <AssignTeacher popupType="assign-teacher" />
+      {/* <AssignTeacher popupType="assign-teacher" /> */}
     </div>
   ) : (
     <div className="section-container">

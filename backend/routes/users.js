@@ -98,14 +98,15 @@ router.get('/', isAuth, protector(["admin", "demonstrator"]), async(req, res) =>
 /**
  * Takes a list of users and creates them in both the keycloak and database with random passwords.
  * Pre-conditions:
- *  Request Body Contains: users: [
+ *  Request Body Contains: body{ 
+ *                           users: [
  *                              {username: char[20], // unique username (maps database to keycloak) (can be neptun code)
  *                               firstname:char[20], // firstname
  *                               lastname:char[20],  // lastname
  *                               uid: char[6]},
  *                               roles: string[]
  *                           ]      // unique id (can be neptun code.)
- *
+ *                        }
  * Returns:
  *  [{username, password}]
  *

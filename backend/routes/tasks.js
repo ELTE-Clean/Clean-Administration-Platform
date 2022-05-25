@@ -6,6 +6,9 @@ const { selectFromTable, insertIntoTable, deleteFromTable, updateTable } = requi
 const { isAuth, protector } = require('../utils/keycloak_utils');
 const fileUpload = require('express-fileupload');   // Used to parse the incoming formpost files and insert them into req.files
 const fs = require('fs');
+const {log} = require('../utils/logger_utils');
+const {exec} = require('child_process');
+
 
 /**
  * Get all tasks. The given query defines the behavior of the endpoint.
@@ -125,51 +128,67 @@ router.post('/create', fileUpload({createParentPath: true}), isAuth, protector([
 router.post("/:taskID/grade", isAuth, protector(["admin", "demonstrator"]), async (req, res, next) => {
     const tid = req.params.taskID;
     const gid = req.body.groupID;
+    let config = `teacher_file: "teacher.icl"\n`;
 
-    /* Validation layers*/
+    /* TODO: Validation layers*/
 
     /* Get the task and solutions records */
     const taskRecord = await selectFromTable('tasks', {taskID: tid});
     const studentSolutionRecord = await selectFromTable('grades', {taskID: tid});
-    console.log(studentSolution.result.rows);
-    console.log(taskRecord.result.rows);
     
-    /* Save the text of the database to a folder */
+    /* Create Directories */
     const taskDir = './grades/tasks/' + tid + '/';
     fs.rmSync(taskDir, { recursive: true, force: true });
-    fs.mkdirSync(taskDir);
-    fs.writeFile(taskDir + 'teacher.icl', taskRecord.results.rows[0].solution);
-    studentSolutionRecord.result.rows.forEach(row => {
-        if(!row.solution) 
-            return;
-        const fileName = taskDir + row.studentID.toString() + '.icl';
-        log("DEBUG", "Creating Student File: " + fileName);
-        fs.writeFile(fileName, row.submission, (err) => { if (err) log("ERROR", err.toString()); });
-    });
-    
-    /* Check if all files are created. */
-    let allFileExists = false;
-    let repeats = 0;
-    let maxRepeats = 3;
-    while(!allFileExists){
-        if(repeats >= maxRepeats) return res.status(400).send({message: "Not all files"});
-        repeats++;
-        await delay(1000); // Waiting for 1 second
-        const allStudentsExist = studentSolutionRecord.result.rows.reduce( (accum, row) => {
-            if(!row.solution) 
-                return;
-            const fileName = taskDir + row.studentID.toString() + '.icl';
-            if(fs.existsSync(fileName)) return accum && true;
-        });
-        allFileExists = fs.existsSync(taskDir + 'teacher.icl') && allStudentsExist;
-        console.log("Repeat: ", repeats, ", maxRepeats: ", maxRepeats);
+    var directories = taskDir.split('/');
+    var directories = directories.slice(1, directories.length-1);
+    let accum = "./";
+    for(let dir of directories){
+        accum += dir + "/";
+        if(fs.existsSync(accum))
+            continue;
+        log("DEBUG", "Creating Directory" + accum);
+        fs.mkdirSync(accum);
     }
 
-    /* Create the configuration for the python script */
+    /* Create Teacher and Student files */
+    log("INFO", "Creating Teacher Solution File" );
+    fs.writeFileSync(taskDir + 'teacher.icl', taskRecord.result.rows[0].solution, (err) => {
+        log("ERROR", "Failed to write into file: " + taskDir + 'teacher.icl');
+    });
+    config += `student_files:\n`;
+    studentSolutionRecord.result.rows.forEach(row => {
+        if(!row.submission) 
+            return;
+        const fileName = taskDir + row.studentid.toString() + '.icl';
+        const code = "module " + row.studentid.toString() + "\n" + row.submission;
+        log("INFO", "Creating Student File: " + fileName);
+        config += `\t- ${fileName}\n`; 
+        fs.writeFileSync(fileName, code, (err) => { if (err) log("ERROR", err.toString());});
+    });
+    config += taskRecord.result.rows[0].testquestions.replace(/\\t/g, '\t').toString('utf8');
+    config = config.replace(/\t/g, ' ');
+    log("DEBUG", `Correction Script Configuration: \n${config}`);
 
+    /* Create the configuration for the python script */
+    const configPath = taskDir + 'config.yml';
+    fs.writeFileSync(configPath, config, (err) => { 
+        if (err) {
+            log("ERROR", err.toString());
+            return res.status(500).send(JSON.stringify({message: "Can't generate correction configuration"}));
+        }
+    });
+    
     /* Run the script on all the folder contents */
+    const {stdout, stderr} = await exec('python ./scripts/scripts/CorrectTest.py ' + configPath);
+    if(stderr){
+        log("ERROR", "Failed to execute the correction script");
+        return res.status(500).send(JSON.stringify({message: "Script Execution Failed"}));
+    }
+    console.log("Script output: ", stdout);
+
 
     /* Return the script results */
+    res.status(200).send(JSON.stringify({message: "Everything is good"}));
 
 });
 

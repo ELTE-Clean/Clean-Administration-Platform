@@ -224,17 +224,17 @@ subInt a b = a - b
 '
 test_questions:
 \t- q1:
-\t\tfunction_name: addInt
-\t\ttest_cases:
-\t\t\t- 1 2
-\t\t\t- 5 13
-\t\t\t- 12 99
+\t\t\tfunction_name: addInt
+\t\t\ttest_cases:
+\t\t\t\t- 1 2
+\t\t\t\t- 5 13
+\t\t\t\t- 12 99
 \t- q2:
-\t\tfunction_name: subInt
-\t\ttest_cases:
-\t\t\t- 3 4
-\t\t\t- 3 2
-\t\t\t- 23 32
+\t\t\tfunction_name: subInt
+\t\t\ttest_cases:
+\t\t\t\t- 3 4
+\t\t\t\t- 3 2
+\t\t\t\t- 23 32
 '
 , 1);
 INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VALUES ('Progress Task 1', 2, 1, 'desc', 'module teacher

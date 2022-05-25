@@ -7,7 +7,11 @@ const { isAuth, protector } = require('../utils/keycloak_utils');
 const fileUpload = require('express-fileupload');   // Used to parse the incoming formpost files and insert them into req.files
 const fs = require('fs');
 const {log} = require('../utils/logger_utils');
-const {exec} = require('child_process');
+//const util = require('util');
+//const exec = require('child_process').exec; //util.promisify();
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
+
 
 
 /**
@@ -155,7 +159,7 @@ router.put(
 router.post("/:taskID/grade", isAuth, protector(["admin", "demonstrator"]), async (req, res, next) => {
     const tid = req.params.taskID;
     const gid = req.body.groupID;
-    let config = `teacher_file: "teacher.icl"\n`;
+    
 
     /* TODO: Validation layers*/
 
@@ -178,6 +182,7 @@ router.post("/:taskID/grade", isAuth, protector(["admin", "demonstrator"]), asyn
     }
 
     /* Create Teacher and Student files */
+    let config = `teacher_file: ` + taskDir + 'teacher.icl' + `\n`;
     log("INFO", "Creating Teacher Solution File" );
     fs.writeFileSync(taskDir + 'teacher.icl', taskRecord.result.rows[0].solution, (err) => {
         log("ERROR", "Failed to write into file: " + taskDir + 'teacher.icl');
@@ -192,8 +197,8 @@ router.post("/:taskID/grade", isAuth, protector(["admin", "demonstrator"]), asyn
         config += `\t- ${fileName}\n`; 
         fs.writeFileSync(fileName, code, (err) => { if (err) log("ERROR", err.toString());});
     });
-    config += taskRecord.result.rows[0].testquestions.replace(/\\t/g, '\t').toString('utf8');
-    config = config.replace(/\t/g, ' ');
+    config += taskRecord.result.rows[0].testquestions.replace(/\\t/g, '  ');
+    config = config.replace(/\t/g, '  ');
     log("DEBUG", `Correction Script Configuration: \n${config}`);
 
     /* Create the configuration for the python script */
@@ -206,17 +211,19 @@ router.post("/:taskID/grade", isAuth, protector(["admin", "demonstrator"]), asyn
     });
     
     /* Run the script on all the folder contents */
-    const {stdout, stderr} = await exec('python ./scripts/scripts/CorrectTest.py ' + configPath);
-    if(stderr){
-        log("ERROR", "Failed to execute the correction script");
-        return res.status(500).send(JSON.stringify({message: "Script Execution Failed"}));
+    const scriptCode = "python ./scripts/scripts/CorrectTest.py -f " + configPath + " -tn 1";
+    log("DEBUG", "Executing Script: " + scriptCode);
+    const execRes = await exec(scriptCode);
+    if(execRes.stderr){
+        log("ERROR", "Execution Result: " + execRes.stderr);
+        return res.status(500).send(JSON.stringify({message: "Failed to run the correction script"}));
     }
-    console.log("Script output: ", stdout);
+    log("DEBUG", "Execution Result: " + execRes.stdout);
 
 
     /* Return the script results */
-    res.status(200).send(JSON.stringify({message: "Everything is good"}));
-
+    return res.status(200).send(JSON.stringify({message: "Everything is good", result: execRes.stdout}));
+   
 });
 
 

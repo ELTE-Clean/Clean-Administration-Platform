@@ -10,13 +10,13 @@ const Task = () => {
   let { sectionName, taskName } = router.query;
 
   const task = {
-    title: "HW1",
+    taskid: 5,
+    taskName: "HW1",
     dutTme: "11:59",
     dutDate: "2022-3-1",
     grade: null,
-    gradeOutOf: 50,
+    max: 50,
     description: "Please dont forget to upload the .icl file",
-    attachedFiles: ["mi3jg2-20220320.icl", "mi3jg2-20220320.icl"],
     testCases: [
       { name: "test1", testList: ["[1,2,3]", "[1,2,3,4,5]"] },
       { name: "test2", testList: ["[1,2,3]", "[1,2,3,4,5]"] },
@@ -102,20 +102,6 @@ const Task = () => {
           <div className="description-body">
             <p>{task.description}</p>
           </div>
-        </div>
-      )}
-      {task.attachedFiles === null ? (
-        ""
-      ) : (
-        <div className="task-attachments">
-          <div className="title">
-            <h1>Attachments</h1>
-          </div>
-          {task.attachedFiles.map((attachedFile: string, idx: number) => (
-            <div className="attachment" key={idx}>
-              <p>{attachedFile}</p>
-            </div>
-          ))}
         </div>
       )}
       <div className="upload-area">

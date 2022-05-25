@@ -53,8 +53,8 @@ const AddRemoveStudent = (props: any) => {
             <textarea
               name=""
               id="ADTextArea"
-              cols="30"
-              rows="10"
+              cols={30}
+              rows={10}
               onChange={(e) => setStudentInput(e.target.value)}
               placeholder="Paste neptun names..."
             ></textarea>

@@ -8,6 +8,7 @@ import PopUp from "./Popup";
 
 const EditSectionForm = (props: { section: any; tasks: any[] }) => {
   const [taskName, setTaskName] = useState("");
+  const [sectionName, setSectionName] = useState(props.section["sectionname"]);
   const [tasks, setTasks] = useState(props.tasks);
   const [buttonEditPopup, setButtonEditPopup] = useState(false);
   const router = useRouter();
@@ -23,24 +24,25 @@ const EditSectionForm = (props: { section: any; tasks: any[] }) => {
   let addTaskHandler = () => {
     console.log();
 
-    // let allTasksName = tasks.map((task: Task) => task.title);
-    // let taskNameAlreadyExist = allTasksName.includes(taskName);
-    // if (taskNameAlreadyExist) {
-    //   alert(`Task "${taskName}" already exist!!`);
-    // } else if (taskName.trim() === "") {
-    //   alert(`Task name cannot be empty!!!`);
-    // } else {
-    //   const newTasks = [...tasks];
-    //   const newTask = {
-    //     title: taskName,
-    //     dueTime: "",
-    //     dueDate: "",
-    //     grade: null,
-    //     gradeOutOf: null,
-    //   };
-    //   newTasks.push(newTask);
-    //   setTasks(newTasks);
-    // }
+    let allTasksName = props.tasks.map((task: Task) => task.taskname);
+    let taskNameAlreadyExist = allTasksName.includes(taskName);
+    if (taskNameAlreadyExist) {
+      alert(`Task "${taskName}" already exist!!`);
+    } else if (taskName.trim() === "") {
+      alert(`Task name cannot be empty!!!`);
+    } else {
+      const newTasks = [...props.tasks];
+      const newTask = {
+        title: taskName,
+        dueTime: "",
+        dueDate: "",
+        grade: null,
+        gradeOutOf: null,
+      };
+      newTasks.push(newTask);
+      setTasks(newTasks);
+    }
+
     fetchCall({
       url: "tasks/create",
       method: RequestType.POST,
@@ -85,7 +87,7 @@ const EditSectionForm = (props: { section: any; tasks: any[] }) => {
   };
 
   // let saveHandler = () => {
-  //   if (sectionName.trim() === "") {
+  //   if (sectionName === "") {
   //     alert("section name cannot be empty!!");
   //   } else {
   //     console.log(props.section["sectionname"]);
@@ -94,27 +96,27 @@ const EditSectionForm = (props: { section: any; tasks: any[] }) => {
   // };
   return (
     <div className="container">
-      <h1>Edit {props.section["sectionname"]}</h1>
+      <h1>Edit {sectionName}</h1>
       <br />
       <label>Name:</label>
       <br />
       <input
         type="text"
-        value={props.section["sectionname"]}
-        // onChange={(e) => setSectionName(e.target.value.trim())}
+        value={sectionName}
+        onChange={(e) => setSectionName(e.target.value.trim())}
       />
       <br />
       <br />
       <p>Tasks:</p>
       <br />
       <div className="edit-homework-container">
-        {/* {tasks.map((task: Task, idx: number) => (
+        {props.tasks.map((task: Task, idx: number) => (
           <div key={idx} className="homework-task-container">
             <div
               className="edit-homework-btn"
               onClick={() => setButtonEditPopup(true)}
             >
-              {task.title}
+              {task.taskname}
             </div>
             <div
               className="remove-task-btn"
@@ -139,7 +141,7 @@ const EditSectionForm = (props: { section: any; tasks: any[] }) => {
               />
             )}
           </div>
-        ))} */}
+        ))}
       </div>
       <br />
 

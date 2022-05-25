@@ -16,7 +16,20 @@ fi;
 if [ $1 -ne 2 ]
 then 
     # Building the backend
-    z
+    echo "Building the express backend...";
+    cd backend;
+    npm install;
+    npm run build;
+    cd dist;
+    npm install --only=production
+    docker build . -t backend:latest;
+    if [ $? -ne 0 ]
+    then 
+        echo "Failed to build the image... Exitting with code $?";
+        exit;
+    fi;
+    cd ..;
+    cd ..;
 
     echo "----------------------------------------------------------------------------------- ";
 

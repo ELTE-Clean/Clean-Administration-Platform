@@ -1,11 +1,4 @@
-import {
-  BaseSyntheticEvent,
-  ReactChild,
-  ReactFragment,
-  ReactPortal,
-  useState,
-} from "react";
-import internal from "stream";
+import { BaseSyntheticEvent, useState } from "react";
 import EditTestCasesForm from "./EditTestCasesForm";
 import RichTextEditor from "./RichTextEditor";
 import PopUp from "./Popup";
@@ -15,6 +8,7 @@ import { fetchCall } from "../hooks/useFetch";
 
 const EditTaskForm = (props: any) => {
   const [taskName, setTaskName] = useState(props.task.title);
+  const [testCase, setTestCase] = useState({});
   const [taskDescription, setTaskDescription] = useState(
     props.task.description
   );
@@ -25,9 +19,9 @@ const EditTaskForm = (props: any) => {
   let handelFileUpload = (e: BaseSyntheticEvent) => {
     let latestFile = e.target.files[0].name;
     setUploadedFileName(latestFile);
-
     // later send file to the server
   };
+  console.log(props.task);
 
   let uploadedSubmitBtnStyle = {
     backgroundColor: "#acf19b",
@@ -42,6 +36,12 @@ const EditTaskForm = (props: any) => {
     console.log("Handling viewing");
   };
 
+  let popTestCase = (testCaseId: number) => {
+    const testCase = props.task.testCases[testCaseId];
+    setTestCase(testCase);
+    setButtonEditPopup(true);
+  };
+
   let removeFuncHandler = (taskIndex: number) => {
     console.log(`removing This function data`);
   };
@@ -54,10 +54,8 @@ const EditTaskForm = (props: any) => {
     }
   };
   let deleteTaskHandler = () => {
-    console.log(props.task);
-
     // fetchCall({
-    //   url: "task",
+    //   url: "tasks",
     //   method: RequestType.DELETE,
     //   body: [{ taskid: props.section["sectionname"], sectionid: 1 }],
     // })
@@ -78,6 +76,24 @@ const EditTaskForm = (props: any) => {
       alert("Task name cannot be empty!!!");
     } else {
       console.log("Handling task name change");
+      console.log(props.task);
+
+      fetchCall({
+        url: "tasks/update",
+        method: RequestType.PUT,
+        body: { task: { taskid: props.taskid }, diff: { taskname: "HW222" } },
+      })
+        .then((response) => {
+          const res = response.json();
+          return res;
+        })
+        .then((data) => {
+          console.log("Saved Task", taskName);
+          router.push("/");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     }
   };
 
@@ -97,12 +113,7 @@ const EditTaskForm = (props: any) => {
           <br />
           <br />
           <h3>Description:</h3>
-          {/* <textarea
-            className="description-area"
-            name="description"
-            value={taskDescription}
-            onChange={(e) => setTaskDescription(e.target.value.trim())}
-          /> */}
+
           <RichTextEditor
             classTemp={"description-area"}
             valueTemp={taskDescription}
@@ -111,20 +122,7 @@ const EditTaskForm = (props: any) => {
           <br />
           <br />
 
-          <h3>Attach files:</h3>
-          {props.task.attachedFiles === null ? (
-            ""
-          ) : (
-            <div className="edit-this-hw-task-attachments">
-              {props.task.attachedFiles.map(
-                (attachedFile: string, idx: number) => (
-                  <div key={idx} className="attachment">
-                    <p>{attachedFile}</p>
-                  </div>
-                )
-              )}
-            </div>
-          )}
+          <h3>Solution file:</h3>
 
           <div className="edit-homework-upload-area">
             <label
@@ -155,7 +153,7 @@ const EditTaskForm = (props: any) => {
               <div key={idx} className="homework-task-container">
                 <div
                   className="edit-homework-btn"
-                  onClick={() => setButtonEditPopup(true)}
+                  onClick={() => popTestCase(idx)}
                 >
                   {testCase.name}
                 </div>
@@ -165,15 +163,15 @@ const EditTaskForm = (props: any) => {
                 >
                   &times;
                 </div>
-
-                <PopUp
-                  trigger={buttonEditPopup}
-                  setTrigger={setButtonEditPopup}
-                  popupType="edit-this-homework"
-                  component={<EditTestCasesForm testCaseData={testCase} />}
-                />
               </div>
             ))}
+            <PopUp
+              trigger={buttonEditPopup}
+              setTrigger={setButtonEditPopup}
+              popupType="edit-this-homework"
+              component={<EditTestCasesForm testCaseData={testCase} />}
+            />
+            ;
           </div>
 
           <br />

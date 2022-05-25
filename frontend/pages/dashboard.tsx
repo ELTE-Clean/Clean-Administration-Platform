@@ -4,6 +4,7 @@ import AddRemoveStudent from "../components/AddRemoveStudent";
 import EditSectionForm from "../components/EditSectionForm";
 import { useRouter } from "next/router";
 // import AssignTeacher from "../components/AssignTeacher";
+import Create_Student from "../components/CreateStudentForm";
 import AddGroup from "../components/AddGroup";
 
 const dashboard: NextPage = () => {
@@ -15,6 +16,7 @@ const dashboard: NextPage = () => {
         <h1>Dashboard</h1>
       </div>
       <AddGroup addGroupCallBack={undefined} />
+      <Create_Student  />
     </div>
 
   );

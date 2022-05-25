@@ -74,13 +74,13 @@ const Menu = () => {
           </div>
         </Link>
         
-        <Link href="/create_student" passHref>
+        {/* <Link href="/create_student" passHref>
           <div className="section">
             <div className="section-name">
               <h2>Create Student</h2>
             </div>
           </div>
-        </Link>
+        </Link> */}
 
         {groups.map((group, idx) => (
           <Link key={idx} href={`/${group}`} passHref>

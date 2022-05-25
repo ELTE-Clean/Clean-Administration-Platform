@@ -4,7 +4,7 @@
 const router = require('express-promise-router')();     // Used to handle async request. Will be useful in the future to dodge the pyramid of doom
 const keycloak = require('../utils/keycloak_utils').keycloak;
 const { isAuth, getSelfData, isUnauth, getAllUsersData, createUsers, protector, updateUserRole } = require('../utils/keycloak_utils');
-const { selectFromTable, insertIntoTable } = require('../utils/database_utils');
+const { selectFromTable, insertIntoTable, deleteFromTable } = require('../utils/database_utils');
 const log = require('../utils/logger_utils').log;
 
 
@@ -20,8 +20,8 @@ router.get('/self', isAuth, async (req, res, next) => {
 
     const userReqDB = await selectFromTable('users', {username : userReqKC.user.username})
     if(userReqDB.error){
-        log("ERROR", `Error in requesting the user from the databae`);
-        return next(userReqKC.error);
+        log("ERROR", `Error in requesting the user from the database`);
+        return next(userReqDB.error);
     }else if(userReqDB.result.rowCount == 0){
         log("ERROR", `User Not found`);
         return next("No such user exists in the Database. It exists only in our keycloak server.");
@@ -136,10 +136,10 @@ router.post('/create', isAuth, protector(["admin"]), async (req, res, next) =>{
     /* Create users in the database. */
     for (const user of Object.entries(req.body)) {
         const student = {
+            neptun: user.neptun,
             username: user.username, 
             firstname : user.firstname || "", 
-            lastname : user.lastname || "",
-            userid: user.username
+            lastname : user.lastname || ""
         };
         const result = await insertIntoTable('users', student);
         if (result.error){
@@ -182,6 +182,47 @@ router.put(
     return res.status(201).send({ message: "Role updates successfully" });
   }
 );
+
+/**
+ * Takes a list of users and deletes them in both the keycloak and database with random passwords.
+ * Request Body Contains: users: [{userid}]
+ */
+ router.delete('/', isAuth, protector(["admin"]), async (req, res, next) =>{
+  if(!req.body.users)
+      return next("'users' is not defined in the request body");
+
+  // TODO: Delete users from keycloak
+
+  /* Delete users in the database. */
+  for (const user of Object.entries(req.body)) {
+    if(!user.userid){
+      log("ERROR", `userid must be supplied in the delete request`);
+      return next("User Deletion Failed");
+    }
+
+    const param = {userid: user.userid}
+
+    let result = await deleteFromTable('user_to_group', param);
+    if (result.error){
+      log("ERROR", `Can't delete userid: ${param.userid} from their groups in the database`);
+      return next("User Deletion Failed");
+    }
+
+    result = await deleteFromTable('grades', param);
+    if (result.error){
+        log("ERROR", `Can't delete userid: ${param.userid}'s grades in the database`);
+        return next("User Deletion Failed");
+    } 
+
+    result = await deleteFromTable('users', param);
+    if (result.error){
+        log("ERROR", `Can't delete userid: ${param.userid} in the database`);
+        return next("User Deletion Failed");
+    }
+  }
+
+  return res.status(200).send(JSON.stringify({message: "Users successfully deleted from the database"}));
+});
 
 /// TODO: User password update.
 

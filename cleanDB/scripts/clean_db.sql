@@ -123,13 +123,14 @@ ALTER SEQUENCE public.taskSeq OWNER TO postgres;
 --
 
 CREATE TABLE public.tasks (
-    taskID      INT            DEFAULT nextval('taskSeq'),
-    taskName    VARCHAR(50)    NOT NULL,
-    sectionID   INT            REFERENCES  sections(sectionID)  NOT NULL,
-    groupID     INT            REFERENCES  groups(groupID)      NOT NULL,
-    description VARCHAR(5000)  NULL, -- Task description (File/Text)
-    solution    VARCHAR(5000)  NULL, -- Task solution to run the script on!
-    max         INT            NULL,
+    taskID          INT            DEFAULT nextval('taskSeq'),
+    taskName        VARCHAR(50)    NOT NULL,
+    sectionID       INT            REFERENCES  sections(sectionID)  NOT NULL,
+    groupID         INT            REFERENCES  groups(groupID)      NOT NULL,
+    description     VARCHAR(5000)  NOT NULL, -- Task description (File/Text)
+    solution        VARCHAR(5000)  NOT NULL, -- Task solution to run the script on!
+    testQuestions   VARCHAR(1000), -- Test cases for the configuration
+    max             INT            NOT NULL,
     PRIMARY KEY (taskID)
 );
 
@@ -152,7 +153,6 @@ CREATE TABLE public.grades (
     gradeID     INT             DEFAULT nextval('gradeSeq'),
     userID      INT             REFERENCES  users(userID)           NOT NULL,
     taskID      INT             REFERENCES  tasks(taskID)           NOT NULL,
-    sectionID   INT             REFERENCES  sections(sectionID)     NOT NULL,
     submission  VARCHAR(5000)   DEFAULT NULL, -- 5KB Storage of text. 
     grade       INT             DEFAULT NULL,
     PRIMARY KEY (gradeID)
@@ -209,7 +209,7 @@ INSERT INTO user_to_group (userID, groupID) VALUES (6, 4);
 
 
 ---------------------- Teacher tasks and files Dumb data
-INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VALUES ('Homework 1', 1, 1, 'desc', 'module teacher
+INSERT INTO tasks (taskName, sectionID, groupID, description, solution, testQuestions,  max) VALUES ('Homework 1', 1, 1, 'desc', 'module teacher
 import StdEnv 
 
 
@@ -219,7 +219,23 @@ addInt a b = a + b
 subInt :: Int Int -> Int
 subInt a b = a - b
 
-', 1);
+', 
+'
+test_questions:
+\t- q1:
+\t\tfunction_name: addInt
+\t\ttest_cases:
+\t\t\t- 1 2
+\t\t\t- 5 13
+\t\t\t- 12 99
+\t- q2:
+\t\tfunction_name: subInt
+\t\ttest_cases:
+\t\t\t- 3 4
+\t\t\t- 3 2
+\t\t\t- 23 32
+'
+, 1);
 INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VALUES ('Progress Task 1', 2, 1, 'desc', 'module teacher
 import StdEnv 
 
@@ -266,21 +282,21 @@ subInt a b = a - b
 ', 4);
 
 ---------------------- Students files Dumb data
-INSERT INTO grades (userID, taskID, sectionID, submission, grade) VALUES (1, 1, 1, "import StdEnv 
+INSERT INTO grades (userID, taskID, submission, grade) VALUES (1, 1, 1, "import StdEnv 
 
 addInt :: Int Int -> Int
 addInt a b = a + b
 
 subInt :: Int Int -> Int
 subInt a b = a - b", 5);
-INSERT INTO grades (userID, taskID, sectionID, submission, grade) VALUES (2, 1, 3, "import StdEnv 
+INSERT INTO grades (userID, taskID, submission, grade) VALUES (2, 1, 3, "import StdEnv 
 
 addInt :: Int Int -> Int
 addInt a b = a + b
 
 subInt :: Int Int -> Int
 subInt a b = a - b", 2);
-INSERT INTO grades (userID, taskID, sectionID, submission, grade) VALUES (2, 4, 5, "import StdEnv 
+INSERT INTO grades (userID, taskID, submission, grade) VALUES (2, 4, "import StdEnv 
 
 
 addInt :: Int Int -> Int
@@ -289,5 +305,5 @@ addInt a b = a + b
 subInt :: Int Int -> Int
 subInt a b = a - b
 ", 3);
-INSERT INTO grades (userID, taskID, sectionID, submission, grade) VALUES (3, 4, 5, NULL, 3);
-INSERT INTO grades (userID, taskID, sectionID, submission, grade) VALUES (3, 5, 5, NULL, 4);
+INSERT INTO grades (userID, taskID, submission, grade) VALUES (3, 4, NULL, 3);
+INSERT INTO grades (userID, taskID, submission, grade) VALUES (3, 5, NULL, 4);

@@ -105,7 +105,6 @@ const EditTaskForm = (props: any) => {
           <br />
           <br />
           <h3>Description:</h3>
-
           <RichTextEditor
             classTemp={"description-area"}
             valueTemp={taskDescription}

@@ -113,14 +113,14 @@ const EditSectionForm = (props: { section: any; tasks: any[] }) => {
   // };
   return (
     <div className="container">
-      <h1>Edit {sectionName}</h1>
+      <h1>Edit {props.section["sectionname"]}</h1>
       <br />
       <h2>Change section name</h2>
       <br />
       <input
         type="text"
-        value={sectionName}
-        onChange={(e) => setSectionName(e.target.value.trim())}
+        value={props.section["sectionname"]}
+        // onChange={(e) => setSectionName(e.target.value.trim())}
       />
       <br />
       <br />

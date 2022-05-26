@@ -94,14 +94,15 @@ router.get('/', isAuth, protector(["admin", "demonstrator"]), async(req, res) =>
 /**
  * Takes a list of users and creates them in both the keycloak and database with random passwords.
  * Pre-conditions:
- *  Request Body Contains: users: [
+ *  Request Body Contains: body{ 
+ *                           users: [
  *                              {username: char[20], // unique username (maps database to keycloak) (can be neptun code)
  *                               firstname:char[20], // firstname
  *                               lastname:char[20],  // lastname
  *                               uid: char[6]},
  *                               roles: string[]
  *                           ]      // unique id (can be neptun code.)
- *
+ *                        }
  * Returns:
  *  [{username, password}]
  *
@@ -182,40 +183,41 @@ router.delete('/', isAuth, protector(["admin"]), async (req, res, next) =>{
 
     /* Delete users in the database. */
     for (const user of req.body.users) {
-        if(!user.userid){
-            log("ERROR", `userid must be supplied in the delete request`);
+        if(!user.username){
+            log("ERROR", `username must be supplied in the delete request`);
             return next("User Deletion Failed");
         }
-        const param = {userid: user.userid}
+        const param = {username: user.username}
 
         /* Get user data from database */
         let result = await selectFromTable('users', param);
         if (result.error){
-          log("ERROR", `Can't retrieve userid: ${param.userid} from the database`);
+          log("ERROR", `Can't retrieve userid: ${param.username} from the database`);
           return next("User Query Failed");
         }
         
         /* Delete user from keycloak */
         const username = result.result.rows[0].username;
+        const userid = result.result.rows[0].userid;
         if(!(await deleteUser(username)))
             continue;
 
         /* Delete the user data from database */
-        result = await deleteFromTable('user_to_group', param);
+        result = await deleteFromTable('user_to_group', {userid: userid});
         if (result.error){
-            log("ERROR", `Can't delete userid: ${param.userid} from their groups in the database`);
+            log("ERROR", `Can't delete userid: ${userid} from their groups in the database`);
             return next("User Deletion Failed");
         }
 
-        result = await deleteFromTable('grades', param);
+        result = await deleteFromTable('grades', {userid: userid});
         if (result.error){
-            log("ERROR", `Can't delete userid: ${param.userid}'s grades in the database`);
+            log("ERROR", `Can't delete userid: ${userid}'s grades in the database`);
             return next("User Deletion Failed");
         } 
 
-        result = await deleteFromTable('users', param);
+        result = await deleteFromTable('users', {userid: userid});
         if (result.error){
-            log("ERROR", `Can't delete userid: ${param.userid} in the database`);
+            log("ERROR", `Can't delete userid: ${userid} in the database`);
             return next("User Deletion Failed");
         }
     }

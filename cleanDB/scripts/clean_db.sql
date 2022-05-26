@@ -126,7 +126,7 @@ CREATE TABLE public.tasks (
     taskID          INT            DEFAULT nextval('taskSeq'),
     taskName        VARCHAR(50)    NOT NULL,
     sectionID       INT            REFERENCES  sections(sectionID)  NOT NULL,
-    groupID         INT            REFERENCES  groups(groupID)      NOT NULL,
+    -- groupID         INT            REFERENCES  groups(groupID)      NOT NULL,
     description     VARCHAR(5000)  NOT NULL, -- Task description (File/Text)
     solution        VARCHAR(5000)  NOT NULL, -- Task solution to run the script on!
     testQuestions   VARCHAR(1000), -- Test cases for the configuration
@@ -192,7 +192,7 @@ INSERT INTO groups (groupName, timetable) VALUES ('Group_4', 'Fri 12-14');
 INSERT INTO sections (sectionName, groupID) VALUES ('Homework', 1);
 INSERT INTO sections (sectionName, groupID) VALUES ('Progress Task', 1);
 INSERT INTO sections (sectionName, groupID) VALUES ('Homework', 2);
-INSERT INTO sections (sectionName, groupID) VALUES ('Midterm', 1);
+INSERT INTO sections (sectionName, groupID) VALUES ('Midterm', 4);
 INSERT INTO sections (sectionName, groupID) VALUES ('Endterm', 2);
 
 
@@ -209,7 +209,7 @@ INSERT INTO user_to_group (userID, groupID) VALUES (6, 4);
 
 
 ---------------------- Teacher tasks and files Dumb data
-INSERT INTO tasks (taskName, sectionID, groupID, description, solution, testQuestions,  max) VALUES ('Homework 1', 1, 1, 'desc', 'module teacher
+INSERT INTO tasks (taskName, sectionID, description, solution, testQuestions,  max) VALUES ('Homework 1', 1, 'desc', 'module teacher
 import StdEnv 
 
 
@@ -236,7 +236,7 @@ test_questions:
 \t\t\t\t- 23 32
 '
 , 1);
-INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VALUES ('Progress Task 1', 2, 1, 'desc', 'module teacher
+INSERT INTO tasks (taskName, sectionID, description, solution, max) VALUES ('Progress Task 1', 2, 'desc', 'module teacher
 import StdEnv 
 
 
@@ -247,7 +247,7 @@ subInt :: Int Int -> Int
 subInt a b = a - b
 
 ', 1);
-INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VALUES ('Homework 2', 3, 2, 'desc', 'module teacher
+INSERT INTO tasks (taskName, sectionID, description, solution, max) VALUES ('Homework 2', 3, 'desc', 'module teacher
 import StdEnv 
 
 
@@ -258,7 +258,7 @@ subInt :: Int Int -> Int
 subInt a b = a - b
 
 ', 2);
-INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VALUES ('Midterm', 4, 1, 'desc', 'module teacher
+INSERT INTO tasks (taskName, sectionID, description, solution,testQuestions, max) VALUES ('Midterm', 4, 'desc', 'module teacher
 import StdEnv 
 
 
@@ -268,8 +268,24 @@ addInt a b = a + b
 subInt :: Int Int -> Int
 subInt a b = a - b
 
-', 3);
-INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VALUES ('Endterm', 5, 2, 'desc', 'module teacher
+', 
+'
+test_questions:
+\t- q1:
+\t\t\tfunction_name: addInt
+\t\t\ttest_cases:
+\t\t\t\t- 1 2
+\t\t\t\t- 5 13
+\t\t\t\t- 12 99
+\t- q2:
+\t\t\tfunction_name: subInt
+\t\t\ttest_cases:
+\t\t\t\t- 3 4
+\t\t\t\t- 3 2
+\t\t\t\t- 23 32
+'
+, 3);
+INSERT INTO tasks (taskName, sectionID, description, solution, max) VALUES ('Endterm', 5, 'desc', 'module teacher
 import StdEnv 
 
 
@@ -296,14 +312,6 @@ addInt a b = a + b
 
 subInt :: Int Int -> Int
 subInt a b = a - b', 2);
-INSERT INTO grades (userID, taskID, submission, grade) VALUES (2, 4, 'import StdEnv 
 
-
-addInt :: Int Int -> Int
-addInt a b = a + b
-
-subInt :: Int Int -> Int
-subInt a b = a - b
-', 3);
-INSERT INTO grades (userID, taskID, submission, grade) VALUES (3, 4, NULL, 3);
-INSERT INTO grades (userID, taskID, submission, grade) VALUES (3, 5, NULL, 4);
+-- INSERT INTO grades (userID, taskID, submission, grade) VALUES (6, 4, NULL, 3);
+-- INSERT INTO grades (userID, taskID, submission, grade) VALUES (3, 5, NULL, 4);

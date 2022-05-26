@@ -150,7 +150,7 @@ ALTER SEQUENCE public.gradeSeq OWNER TO postgres;
 
 CREATE TABLE public.grades (
     gradeID     INT             DEFAULT nextval('gradeSeq'),
-    studentID   INT             REFERENCES  users(userID)           NOT NULL,
+    userID      INT             REFERENCES  users(userID)           NOT NULL,
     taskID      INT             REFERENCES  tasks(taskID)           NOT NULL,
     sectionID   INT             REFERENCES  sections(sectionID)     NOT NULL,
     submission  VARCHAR(5000)   DEFAULT NULL, -- 5KB Storage of text. 
@@ -201,11 +201,11 @@ INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VAL
 INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VALUES ('Midterm', 4, 1, 'desc', 'sol', 3);
 INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VALUES ('Endterm', 5, 2, 'desc', 'sol', 4);
 
-INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (1, 1, 1, NULL, 5);
-INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (2, 1, 3, NULL, 2);
-INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (2, 4, 5, NULL, 3);
-INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (3, 4, 5, NULL, 3);
-INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (3, 5, 5, NULL, 4);
+INSERT INTO grades (userID, taskID, sectionID, submission, grade) VALUES (1, 1, 1, NULL, 5);
+INSERT INTO grades (userID, taskID, sectionID, submission, grade) VALUES (2, 1, 3, NULL, 2);
+INSERT INTO grades (userID, taskID, sectionID, submission, grade) VALUES (2, 4, 5, NULL, 3);
+INSERT INTO grades (userID, taskID, sectionID, submission, grade) VALUES (3, 4, 5, NULL, 3);
+INSERT INTO grades (userID, taskID, sectionID, submission, grade) VALUES (3, 5, 5, NULL, 4);
 
 INSERT INTO user_to_group (userID, groupID) VALUES (1, 1);
 INSERT INTO user_to_group (userID, groupID) VALUES (2, 2);

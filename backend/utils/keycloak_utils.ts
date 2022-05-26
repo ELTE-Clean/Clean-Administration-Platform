@@ -298,7 +298,7 @@ export async function createUsers(users: KCUserData[]) : Promise<Map<string, str
         }
         let password = (Math.random() + 1).toString(36).substring(7);
         let userRepr = {
-            id : user.keycloak_id,
+            // id : user.keycloak_id,
             email : user.email,
             emailVerified : user.email_verified,
             enabled : true,
@@ -322,6 +322,43 @@ export async function createUsers(users: KCUserData[]) : Promise<Map<string, str
     }
 
     return insertedUsers;
+}
+
+/**
+ * Deletes a user from keycloak
+ * @param username - the username of the user. 
+ * @returns - True if user successfully deleted, otherwise, false.
+ */
+export async function deleteUser(username: string): Promise<Boolean> {
+    /* Creating client access token */
+    var at : string = "";
+    try{
+        at = await createClientAccessToken();
+    }catch(error){
+        log("ERROR", error as string);
+        return false;
+    }
+
+    /* Getting user keycloak id*/
+    const userReq : KCUserInfoRequest = await getUserData (username);
+    if(userReq.error){
+        log("ERROR", "Failed to get user data");
+        return false;
+    }
+
+    /* Deleting user from Keycloak */
+    const reqRes = await execReq(
+        "delete", 
+        `${KEYCLOAK_HOST}admin/realms/${REALM_NAME}/users/${userReq.user?.keycloak_id}`,
+        {},
+        {'Content-Type': 'application/json', Authorization: 'Bearer ' + at }
+    );
+    if(reqRes.error){
+        log("ERROR", reqRes.error);
+        return false;
+    }
+
+    return true;
 }
 
 

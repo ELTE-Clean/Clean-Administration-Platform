@@ -131,6 +131,8 @@ CREATE TABLE public.tasks (
     solution        VARCHAR(5000)  NOT NULL, -- Task solution to run the script on!
     testQuestions   VARCHAR(1000), -- Test cases for the configuration
     max             INT            NOT NULL,
+    expiryDate      DATE,
+    expiryTime      TIME,
     PRIMARY KEY (taskID)
 );
 

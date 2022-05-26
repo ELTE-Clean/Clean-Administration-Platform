@@ -123,6 +123,7 @@ ALTER SEQUENCE public.taskSeq OWNER TO postgres;
 --
 
 CREATE TABLE public.tasks (
+<<<<<<< HEAD
     taskID          INT            DEFAULT nextval('taskSeq'),
     taskName        VARCHAR(50)    NOT NULL,
     sectionID       INT            REFERENCES  sections(sectionID)  NOT NULL,
@@ -131,8 +132,20 @@ CREATE TABLE public.tasks (
     solution        VARCHAR(5000)  NOT NULL, -- Task solution to run the script on!
     testQuestions   VARCHAR(1000), -- Test cases for the configuration
     max             INT            NOT NULL,
+<<<<<<< HEAD
     expiryDate      DATE,
     expiryTime      TIME,
+=======
+=======
+    taskID      INT            DEFAULT nextval('taskSeq'),
+    taskName    VARCHAR(50)    NOT NULL,
+    sectionID   INT            REFERENCES  sections(sectionID)  NOT NULL,
+    groupID     INT            REFERENCES  groups(groupID)      NOT NULL,
+    description VARCHAR(5000)  NULL, -- Task description (File/Text)
+    solution    VARCHAR(5000)  NULL, -- Task solution to run the script on!
+    max         INT            NULL,
+>>>>>>> 4a38981 (Make task solution, description, max grade optional)
+>>>>>>> 9d3878b (Rebasing...)
     PRIMARY KEY (taskID)
 );
 
@@ -169,9 +182,15 @@ ALTER TABLE public.grades OWNER TO postgres;
 --
 
 CREATE TABLE public.user_to_group (
+<<<<<<< HEAD
     userID      INT             REFERENCES users(userID)    NOT NULL,
     groupID     INT             REFERENCES groups(groupID)  NOT NULL,
     PRIMARY KEY (userID, groupID)
+=======
+    neptun      VARCHAR(6)     REFERENCES users(neptun)    NOT NULL,
+    groupID     INT            REFERENCES groups(groupID)  NOT NULL,
+    PRIMARY KEY (neptun, groupID)
+>>>>>>> 4a38981 (Make task solution, description, max grade optional)
 );
 
 
@@ -198,6 +217,7 @@ INSERT INTO sections (sectionName, groupID) VALUES ('Homework', 2);
 INSERT INTO sections (sectionName, groupID) VALUES ('Midterm', 4);
 INSERT INTO sections (sectionName, groupID) VALUES ('Endterm', 2);
 
+<<<<<<< HEAD
 
 INSERT INTO user_to_group (userID, groupID) VALUES (1, 1);
 INSERT INTO user_to_group (userID, groupID) VALUES (2, 2);
@@ -312,3 +332,26 @@ subInt a b = a - b', 2);
 
 -- INSERT INTO grades (userID, taskID, submission, grade) VALUES (6, 4, NULL, 3);
 -- INSERT INTO grades (userID, taskID, submission, grade) VALUES (3, 5, NULL, 4);
+=======
+INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VALUES ('Homework 1', 1, 1, 'desc', 'sol', 1);
+INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VALUES ('Progress Task 1', 2, 1, 'desc', 'sol', 1);
+INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VALUES ('Homework 2', 3, 2, 'desc', 'sol', 2);
+INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VALUES ('Midterm', 4, 1, 'desc', 'sol', 3);
+INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VALUES ('Endterm', 5, 2, 'desc', 'sol', 4);
+INSERT INTO tasks (taskName, sectionID, groupID) VALUES ('Homework 3', 3, 2);
+
+INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (1, 1, 1, NULL, 5);
+INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (2, 1, 3, NULL, 2);
+INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (2, 4, 5, NULL, 3);
+INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (3, 4, 5, NULL, 3);
+INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (3, 5, 5, NULL, 4);
+
+INSERT INTO user_to_group (neptun, groupID) VALUES ('81AMIA', 1);
+INSERT INTO user_to_group (neptun, groupID) VALUES ('9YV5TX', 2);
+INSERT INTO user_to_group (neptun, groupID) VALUES ('ZEADKD', 3);
+INSERT INTO user_to_group (neptun, groupID) VALUES ('Q50YI1', 4);
+INSERT INTO user_to_group (neptun, groupID) VALUES ('B8WNS6', 1);
+INSERT INTO user_to_group (neptun, groupID) VALUES ('B8WNS6', 2);
+INSERT INTO user_to_group (neptun, groupID) VALUES ('NM82SK', 3);
+INSERT INTO user_to_group (neptun, groupID) VALUES ('NM82SK', 4);
+>>>>>>> 3fceb46 (Rebasing...)

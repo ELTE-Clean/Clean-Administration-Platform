@@ -14,7 +14,6 @@ const AddRemoveStudent = (props: any) => {
   let addStudentHandler = () => {
     if (studentNeptun.trim() == "") {
       alert("Input cannot be empty!!");
-
     } else {
       console.log(studentNeptun);
       fetchCall({

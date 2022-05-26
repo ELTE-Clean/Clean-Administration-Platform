@@ -105,18 +105,19 @@ router.post("/create",fileUpload({ createParentPath: true }),isAuth, protector([
  *              }
  *          ]
  */
-router.delete("/",isAuth,protector(["admin", "demonstrator"]),async (req, res, next) => {
+router.delete("/",isAuth, protector(["admin", "demonstrator"]), async (req, res, next) => {
     if(!req.body.taskID)
         return res.status(400).send(JSON.stringify({message: "taskID not found"}));
     
-    let result = await deleteFromTable("grades", {taskID:  req.body.taskID});
+    const params = {taskID: req.body.taskID};
+    let result = await deleteFromTable("grades", params );
     if (result.error)
         return res.status(500).send(JSON.stringify({ message: "Transaction Failed" }));
 
-    result = await deleteFromTable("tasks", {taskID:  req.body.taskID});
+    result = await deleteFromTable("tasks", params);
     if (result.error)
         return res.status(500).send(JSON.stringify({ message: "Transaction Failed" }));
-    return res.status(200).send(JSON.stringify({ message: "Tasks successfully updated" }));
+    return res.status(200).send(JSON.stringify({ message: "Task successfully deleted" }));
 });
 
 

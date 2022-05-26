@@ -14,7 +14,7 @@ const Menu = () => {
 
   let adminUser = "Admin";
   let groups = ["Group 1", "Group 2", "Group 3", "Group 4"];
-  let isAdmin = true;
+  let isAdmin = false;
   let addSectionCallBack = (sectionToAdd: string) => {
     return sections
       .map((section) => section["sectionname"])
@@ -95,12 +95,16 @@ const Menu = () => {
       </Link>
       <div className="sections">
 <<<<<<< HEAD
+<<<<<<< HEAD
         {sections.map((section, idx) => (
 =======
     
         {
         sections.map((section, idx) => (
 >>>>>>> 2b0fa22 (Added basic assign student to a group)
+=======
+        {sections.map((section, idx) => (
+>>>>>>> 88f105c (connected delete section endpoint)
           <Link key={idx} href={`/${section.sectionname}`} passHref>
             <div className="section">
               <div className="section-name">

@@ -54,32 +54,30 @@ const Section = () => {
         groupid: section["groupid"],
       });
     } catch (error) {
-      console.log("empty");
       querystring = "";
+      return null;
     }
-
-    fetchCall({
-      url: "tasks?" + querystring,
-      method: RequestType.GET,
-    })
-      .then((response) => {
-        const res = response.json();
-        return res;
+    if (Object.keys(section).length > 0) {
+      fetchCall({
+        url: "tasks?" + querystring,
+        method: RequestType.GET,
       })
-      .then((data) => {
-        // console.log(data);
-        setTasks(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-    console.log(section);
-    return () => {
-      setSection({}); // This worked for me
-    };
+        .then((response) => {
+          const res = response.json();
+          return res;
+        })
+        .then((data) => {
+          // console.log(data);
+          setTasks(data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+      return () => {
+        setSection({}); // This worked for me
+      };
+    }
   }, [name, section, sections]);
-
-  console.log(section);
 
   return isAdmin ? (
     <div className="section-container">

@@ -159,18 +159,18 @@ const EditSectionForm = (props: { section: any; tasks: any[] }) => {
       >
         Add task
       </button>
-      <button
-        type="button"
-        className="remove-section-btn"
-        onClick={() => removeSectionHandler()}
-      >
-        Remove section
-      </button>
       <br />
 
       <div className="form-button">
         <button type="button" className="submitBtn">
           Save
+        </button>
+        <button
+          type="button"
+          className="remove-section-btn"
+          onClick={() => removeSectionHandler()}
+        >
+          Remove section
         </button>
       </div>
     </div>

@@ -1,5 +1,5 @@
 docker-compose -f docker-compose-local.yml rm -s -f backend;
 cd backend;
-./build.sh;
+./buil--- d.sh;
 cd ..;
 docker-compose -f docker-compose-local.yml up -d;

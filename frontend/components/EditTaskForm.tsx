@@ -54,22 +54,22 @@ const EditTaskForm = (props: any) => {
     }
   };
   let deleteTaskHandler = () => {
-    // fetchCall({
-    //   url: "tasks",
-    //   method: RequestType.DELETE,
-    //   body: [{ taskid: props.section["sectionname"], sectionid: 1 }],
-    // })
-    //   .then((response) => {
-    //     const res = response.json();
-    //     return res;
-    //   })
-    //   .then((data) => {
-    //     console.log("Removed section", props.section["sectionname"]);
-    //     router.push("/");
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
+    fetchCall({
+      url: "tasks",
+      method: RequestType.DELETE,
+      body: { taskid: props.task["taskid"] },
+    })
+      .then((response) => {
+        const res = response.json();
+        return res;
+      })
+      .then((data) => {
+        console.log("Removed task", props.task["taskid"]);
+        router.push("/");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
   let saveHandler = () => {
     if (taskName === "") {
@@ -190,14 +190,6 @@ const EditTaskForm = (props: any) => {
           >
             Add
           </button>
-          <br />
-          <button
-            type="button"
-            className="delete-task-btn"
-            onClick={deleteTaskHandler}
-          >
-            Delete task
-          </button>
         </div>
       </div>
 
@@ -208,6 +200,13 @@ const EditTaskForm = (props: any) => {
           onClick={() => saveHandler()}
         >
           Save
+        </button>
+        <button
+          type="button"
+          className="delete-task-btn"
+          onClick={deleteTaskHandler}
+        >
+          Delete task
         </button>
       </div>
     </div>

@@ -21,16 +21,12 @@ const Section = () => {
   const router = useRouter();
   const name: string = router.query.sectionName;
   let isTeacher: Boolean = true;
-<<<<<<< HEAD
   let isAdmin: Boolean = true;
   // const sectionDetails = sections.filter(
   //   (section: { sectionid: Number; sectionname: string; groupid: Number }) =>
   //     section["sectionname"] === name
   // );
   // setSection(sectionDetails);
-=======
-  let isAdmin: Boolean = false;
->>>>>>> 3722f49 (Rebasing...)
 
   const sectionExist = (sectionName: string) => {
     const sectionNames = sections.map(

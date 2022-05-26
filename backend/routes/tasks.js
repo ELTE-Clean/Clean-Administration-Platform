@@ -72,27 +72,24 @@ const exec = util.promisify(require('child_process').exec);
  */
 router.post("/create",fileUpload({ createParentPath: true }),isAuth, protector(["admin", "demonstrator"]),async (req, res, next) => {
     /* Check if the the incoming data are complete */
-    const fileNotInForm = !req.files || !req.files.solution || !req.files.description;
-    const fileNotInBody = !req.body  || !req.body.solution  || !req.body.description; 
-    const incompleteFile = fileNotInForm && fileNotInBody;
-    const incompleteBody = !req.body || !req.body.name || !req.body.sectionid;
-    if(incompleteFile || incompleteBody)
-        return res.status(400).send({message: "Missing input parameters!"});
+    const solExists = (req.files && req.files.solution) || (req.body  && req.body.solution);
+    const descExists = (req.files && req.files.description) || (req.body  && req.body.description);
+    const incompleteFile = !solExists && !descExists;
+    const incompleteBody = !req.body || !req.body.taskid || !req.body.sectionid || !req.body.groupid;
+    // if(incompleteFile || incompleteBody)
+    //     return res.status(400).send({message: "Description or Solution are missing!"});
 
-    const solution = req.files?.solution.data.toString("utf8") || req.body.solution;
-    const description = req.files?.description.data.toString("utf8") || req.body.description;
+    const params = req.body;
 
-    const ts = new Date();
-    /* Inserting the task into the table */
-    const params = {
-        sectionid: req.body.sectionid,
-        max: req.body.maxGrade,
-        taskname: req.body.name,
-        expiryDate : req.body.dueDate  || `${ts.getFullYear()}-${ts.getMonth()}-${ts.getDay()}`,
-        expiryTime : req.body.dueTime ||  `${ts.getHours()}:${ts.getMinutes()}:${ts.getSeconds()}`,
-        solution : solution.replace(/^.*module.*$/g,'').replace(/\'/g, "''"),
-        description: description.replace(/\'/g, "''"),
-    };
+    if (solExists) {
+        const sol = req.files.solution.data.toString("utf8") || req.body.solution;
+        params.solution = sol.replace(/\'/g, "''");
+    }
+    if (descExists) {
+        desc = req.files.description.data.toString("utf8") || req.body.description;
+        params.description = desc.replace(/\'/g, "''");
+    }
+    
     const result = await insertIntoTable('tasks', params);
     if(result.error)
         return res.status(500).send({message: "Failed to insert task"});

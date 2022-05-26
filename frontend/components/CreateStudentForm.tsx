@@ -7,18 +7,21 @@ const CreateStudentForm = (props: any) => {
   const [studentFirstName, setStudentFirstName] = useState("");
   const [studentLastName, setStudentLastName] = useState("");
   const [studentNeptun, setStudentNeptun] = useState("");
+  const [studentRole, setStudentRole] = useState("");
 
   let createStudentHandler = () => {
+    let studentRoleVar = studentRole.split(",");
     const users = [
             {username: studentNeptun , 
              firstname: studentFirstName,
              lastname: studentLastName, 
-             roles: ["student"],
+             roles: studentRoleVar,
              uid: studentNeptun},
          ] 
     console.log(studentFirstName);
     console.log(studentLastName);
     console.log(studentNeptun);
+    console.log(studentRoleVar);
     if (studentFirstName.trim() == "" || studentLastName.trim() == "" || studentNeptun.trim() == "") {
       alert("Input cannot be empty!!");
     } else {
@@ -91,6 +94,18 @@ const CreateStudentForm = (props: any) => {
               placeholder="Write Name here..."
               name="studentLastName"
               onChange={(e) => setStudentNeptun(e.target.value)}
+              required
+            />
+
+
+      <br />
+            <label>Student Role:(ex. student,demonstrator)</label>
+            <br />
+            <input
+              type="text"
+              placeholder="Write Name here..."
+              name="studentLastName"
+              onChange={(e) => setStudentRole(e.target.value)}
               required
             />
             

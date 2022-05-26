@@ -202,19 +202,11 @@ INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VAL
 INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VALUES ('Endterm', 5, 2, 'desc', 'sol', 4);
 INSERT INTO tasks (taskName, sectionID, groupID) VALUES ('Homework 3', 3, 2);
 
-<<<<<<< HEAD
-INSERT INTO grades (userID, taskID, sectionID, submission, grade) VALUES (1, 1, 1, NULL, 5);
-INSERT INTO grades (userID, taskID, sectionID, submission, grade) VALUES (2, 1, 3, NULL, 2);
-INSERT INTO grades (userID, taskID, sectionID, submission, grade) VALUES (2, 4, 5, NULL, 3);
-INSERT INTO grades (userID, taskID, sectionID, submission, grade) VALUES (3, 4, 5, NULL, 3);
-INSERT INTO grades (userID, taskID, sectionID, submission, grade) VALUES (3, 5, 5, NULL, 4);
-=======
 INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (1, 1, 1, NULL, 5);
 INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (2, 2, 2, NULL, 2);
 INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (2, 3, 3, NULL, 3);
 INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (3, 4, 4, NULL, 3);
 INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (3, 5, 5, NULL, 4);
->>>>>>> connect delete task endpoint
 
 INSERT INTO user_to_group (neptun, groupID) VALUES ('81AMIA', 1);
 INSERT INTO user_to_group (neptun, groupID) VALUES ('9YV5TX', 2);

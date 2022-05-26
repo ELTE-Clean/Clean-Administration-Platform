@@ -9,6 +9,9 @@ import internal from "stream";
 import EditTestCasesForm from "./EditTestCasesForm";
 import RichTextEditor from "./RichTextEditor";
 import PopUp from "./Popup";
+import router from "next/router";
+import { RequestType } from "../enums/requestTypes";
+import { fetchCall } from "../hooks/useFetch";
 
 const EditTaskForm = (props: any) => {
   const [taskName, setTaskName] = useState(props.task.title);
@@ -50,7 +53,26 @@ const EditTaskForm = (props: any) => {
       console.log("Adding function");
     }
   };
-  let deleteTaskHandler = () => {};
+  let deleteTaskHandler = () => {
+    console.log(props.task);
+
+    // fetchCall({
+    //   url: "task",
+    //   method: RequestType.DELETE,
+    //   body: [{ taskid: props.section["sectionname"], sectionid: 1 }],
+    // })
+    //   .then((response) => {
+    //     const res = response.json();
+    //     return res;
+    //   })
+    //   .then((data) => {
+    //     console.log("Removed section", props.section["sectionname"]);
+    //     router.push("/");
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   });
+  };
   let saveHandler = () => {
     if (taskName === "") {
       alert("Task name cannot be empty!!!");

@@ -166,9 +166,9 @@ ALTER TABLE public.grades OWNER TO postgres;
 --
 
 CREATE TABLE public.user_to_group (
-    neptun      VARCHAR(6)     REFERENCES users(neptun)    NOT NULL,
-    groupID     INT            REFERENCES groups(groupID)  NOT NULL,
-    PRIMARY KEY (neptun, groupID)
+    userID      INT             REFERENCES users(userID)    NOT NULL,
+    groupID     INT             REFERENCES groups(groupID)  NOT NULL,
+    PRIMARY KEY (userID, groupID)
 );
 
 
@@ -282,21 +282,21 @@ subInt a b = a - b
 ', 4);
 
 ---------------------- Students files Dumb data
-INSERT INTO grades (userID, taskID, submission, grade) VALUES (1, 1, "import StdEnv 
+INSERT INTO grades (userID, taskID, submission, grade) VALUES (1, 1, 'import StdEnv 
 
 addInt :: Int Int -> Int
 addInt a b = a + b
 
 subInt :: Int Int -> Int
-subInt a b = a - b", 5);
-INSERT INTO grades (userID, taskID, submission, grade) VALUES (2, 1, "import StdEnv 
+subInt a b = a - b', 5);
+INSERT INTO grades (userID, taskID, submission, grade) VALUES (2, 1, 'import StdEnv 
 
 addInt :: Int Int -> Int
 addInt a b = a + b
 
 subInt :: Int Int -> Int
-subInt a b = a - b", 2);
-INSERT INTO grades (userID, taskID, submission, grade) VALUES (2, 4, "import StdEnv 
+subInt a b = a - b', 2);
+INSERT INTO grades (userID, taskID, submission, grade) VALUES (2, 4, 'import StdEnv 
 
 
 addInt :: Int Int -> Int
@@ -304,6 +304,6 @@ addInt a b = a + b
 
 subInt :: Int Int -> Int
 subInt a b = a - b
-", 3);
+', 3);
 INSERT INTO grades (userID, taskID, submission, grade) VALUES (3, 4, NULL, 3);
 INSERT INTO grades (userID, taskID, submission, grade) VALUES (3, 5, NULL, 4);

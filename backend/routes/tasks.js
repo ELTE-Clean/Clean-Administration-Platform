@@ -7,8 +7,6 @@ const { isAuth, protector } = require('../utils/keycloak_utils');
 const fileUpload = require('express-fileupload');   // Used to parse the incoming formpost files and insert them into req.files
 const fs = require('fs');
 const {log} = require('../utils/logger_utils');
-//const util = require('util');
-//const exec = require('child_process').exec; //util.promisify();
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 
@@ -60,6 +58,7 @@ const exec = util.promisify(require('child_process').exec);
     return res.status(200).send(JSON.stringify(filtered));
 });
 
+
 /**
  * Creates a task.
  * The request must hold two files:
@@ -87,11 +86,7 @@ router.post("/create",fileUpload({ createParentPath: true }),isAuth, protector([
         sectionid: req.body.sectionid,
         groupid: req.body.groupid,
         max: req.body.max,
-<<<<<<< HEAD
         solution : solution.replace(/^.*module.*$/g,'').replace(/\'/g, "''"),
-=======
-        solution : solution.replace(/module*$/g,'').replace(/\'/g, "''"),
->>>>>>> 57007f1ec520e4cfacd58a8cc3e52c76fd92bdaf
         description: description.replace(/\'/g, "''"),
     };
     const result = await insertIntoTable('tasks', params);
@@ -99,6 +94,7 @@ router.post("/create",fileUpload({ createParentPath: true }),isAuth, protector([
         return res.status(500).send({message: "Failed to insert task"});
     return res.status(200).send({message: "Task created successfully!"});
 });
+
 
 /**
  * delete task/s
@@ -109,23 +105,12 @@ router.post("/create",fileUpload({ createParentPath: true }),isAuth, protector([
  *              }
  *          ]
  */
-router.delete(
-  "/",
-  isAuth,
-  protector(["admin", "demonstrator"]),
-  async (req, res, next) => {
+router.delete("/",isAuth,protector(["admin", "demonstrator"]),async (req, res, next) => {
     const result = await deleteFromTable("tasks", req.body);
-
     if (result.error)
-      res.status(500).send(JSON.stringify({ message: "Transaction Failed" }));
-    return res
-      .status(200)
-      .send(JSON.stringify({ message: "Tasks successfully updated" }));
-  }
-);
-
-
-
+        res.status(500).send(JSON.stringify({ message: "Transaction Failed" }));
+    return res.status(200).send(JSON.stringify({ message: "Tasks successfully updated" }));
+});
 
 
 /**
@@ -138,24 +123,12 @@ router.delete(
  *              }
  *          ]
  */
-router.put(
-  "/update",
-  isAuth,
-  protector(["admin", "demonstrator"]),
-  async (req, res, next) => {
-    const updateResult = await updateTable(
-      "tasks",
-      req.body.task,
-      req.body.diff
-    );
-
+router.put("/update",isAuth,protector(["admin", "demonstrator"]),async (req, res, next) => {
+    const updateResult = await updateTable("tasks",req.body.task,req.body.diff);
     if (updateResult.error)
         res.status(500).send(JSON.stringify({message: "Transaction Failed"}));
     return res.status(200).send(JSON.stringify({message: "Tasks successfully updated"}));
 });
-
-
-
 
 
 /**
@@ -182,7 +155,6 @@ router.post("/:taskID/grade", isAuth, protector(["admin", "demonstrator"]), asyn
     if(studentSolutionRecord.error)
         return next(studentSolutionRecord.error);
 
-
     /* Create Directories */
     const taskDir = './grades/tasks/' + tid + '/';
     fs.rmSync(taskDir, { recursive: true, force: true });
@@ -208,8 +180,8 @@ router.post("/:taskID/grade", isAuth, protector(["admin", "demonstrator"]), asyn
     studentSolutionRecord.result.rows.forEach(row => {
         if(!row.submission) 
             return;
-        const fileName = taskDir + row.studentid.toString() + '.icl';
-        const code = "module " + row.studentid.toString() + "\n" + row.submission;
+        const fileName = taskDir + row.userid.toString() + '.icl';
+        const code = "module " + row.userid.toString() + "\n" + row.submission;
         log("INFO", "Creating Student File: " + fileName);
         config += `\t- ${fileName}\n`; 
         fs.writeFileSync(fileName, code, (err) => { if (err) log("ERROR", err.toString());});
@@ -242,8 +214,4 @@ router.post("/:taskID/grade", isAuth, protector(["admin", "demonstrator"]), asyn
 });
 
 
-<<<<<<< HEAD
 module.exports = router;
-=======
-module.exports = router;
->>>>>>> 57007f1ec520e4cfacd58a8cc3e52c76fd92bdaf

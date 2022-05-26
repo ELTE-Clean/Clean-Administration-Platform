@@ -10,12 +10,12 @@ import { useRouter } from "next/router";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [user, setUser] = useState({});
-  const [sections, setSections] = useState({});
+  const [sections, setSections] = useState([]);
 
   useEffect(() => {
     if (isUserLoggedIn()) {
       fetchCall({
-        url: "users/get/self",
+        url: "users/self",
         method: RequestType.GET,
       })
         .then((response) => {

@@ -16,7 +16,9 @@ const Menu = () => {
   let groups = ["Group 1", "Group 2", "Group 3", "Group 4"];
   let isAdmin = false;
   let addSectionCallBack = (sectionToAdd: string) => {
-    return sections.message.includes(sectionToAdd);
+    return sections
+      .map((section) => section["sectionname"])
+      .includes(sectionToAdd);
   };
   const isUserLoggedIn = () => {
     return localStorage.getItem("isLoggedIn") == "true";
@@ -24,7 +26,7 @@ const Menu = () => {
 
   const renderSections = () => {
     fetchCall({
-      url: "db/section/all",
+      url: "sections",
       method: RequestType.GET,
     })
       .then((response) => {
@@ -33,6 +35,7 @@ const Menu = () => {
       })
       .then((data) => {
         setSections(data);
+        console.log(data);
       })
       .catch((error) => {
         console.error(error);
@@ -45,17 +48,16 @@ const Menu = () => {
     }
   }, []);
 
-  if (typeof sections.message === "string" || sections.message === undefined) {
+  if (sections.message !== undefined) {
     return (
       <div>
         <p></p>
       </div>
     );
   }
-  // let addGroupCallBack = (groupToAdd: string) => {
-  //   return groups.includes(groupToAdd);
-  // };
-
+  let addGroupCallBack = (groupToAdd: string) => {
+    return groups.includes(groupToAdd);
+  };
   return isAdmin ? (
     <div className="menu-container">
       <div className="profile-icon-neptun">
@@ -92,11 +94,11 @@ const Menu = () => {
         </div>
       </Link>
       <div className="sections">
-        {sections.message.map((sectionName, idx) => (
-          <Link key={idx} href={`/${sectionName.sectionid}`} passHref>
+        {sections.map((section, idx) => (
+          <Link key={idx} href={`/${section.sectionname}`} passHref>
             <div className="section">
               <div className="section-name">
-                <h2>{sectionName.sectionid}</h2>
+                <h2>{section.sectionname}</h2>
               </div>
             </div>
           </Link>

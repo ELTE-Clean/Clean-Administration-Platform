@@ -19,9 +19,9 @@ const AddSectionForm = ({
         alert(`Section "${userInput}" already exist!!`);
       } else {
         fetchCall({
-          url: "db/section/add",
+          url: "sections/create",
           method: RequestType.POST,
-          body: { sectionid: userInput, groupid: "Group_1" },
+          body: { sectionname: userInput, groupid: 1 },
         })
           .then((response) => {
             const res = response.json();

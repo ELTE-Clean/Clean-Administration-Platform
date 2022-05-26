@@ -1,13 +1,16 @@
+import router, { useRouter } from "next/router";
 import { useState } from "react";
+import { RequestType } from "../enums/requestTypes";
+import { fetchCall } from "../hooks/useFetch";
 import { Task } from "../interfaces/teacherTask";
 import EditHomeworkForm from "./EditHomeworkForm";
 import PopUp from "./Popup";
 
-const EditSectionForm = (props: { sectionName: any; tasks: any[] }) => {
-  const [sectionName, setSectionName] = useState(props.sectionName);
+const EditSectionForm = (props: { section: any; tasks: any[] }) => {
   const [taskName, setTaskName] = useState("");
   const [tasks, setTasks] = useState(props.tasks);
   const [buttonEditPopup, setButtonEditPopup] = useState(false);
+  const router = useRouter();
 
   let taskViewHandler = (taskIndex: number) => {
     console.log(`viewing task ${tasks[taskIndex].title}`);
@@ -18,51 +21,94 @@ const EditSectionForm = (props: { sectionName: any; tasks: any[] }) => {
     setTasks(newTasks);
   };
   let addTaskHandler = () => {
-    let allTasksName = tasks.map((task: Task) => task.title);
+    console.log();
 
-    let taskNameAlreadyExist = allTasksName.includes(taskName);
-    if (taskNameAlreadyExist) {
-      alert(`Task "${taskName}" already exist!!`);
-    } else if (taskName.trim() === "") {
-      alert(`Task name cannot be empty!!!`);
-    } else {
-      const newTasks = [...tasks];
-      const newTask = {
-        title: taskName,
-        dueTime: "",
-        dueDate: "",
-        grade: null,
-        gradeOutOf: null,
-      };
-      newTasks.push(newTask);
-      setTasks(newTasks);
-    }
+    // let allTasksName = tasks.map((task: Task) => task.title);
+    // let taskNameAlreadyExist = allTasksName.includes(taskName);
+    // if (taskNameAlreadyExist) {
+    //   alert(`Task "${taskName}" already exist!!`);
+    // } else if (taskName.trim() === "") {
+    //   alert(`Task name cannot be empty!!!`);
+    // } else {
+    //   const newTasks = [...tasks];
+    //   const newTask = {
+    //     title: taskName,
+    //     dueTime: "",
+    //     dueDate: "",
+    //     grade: null,
+    //     gradeOutOf: null,
+    //   };
+    //   newTasks.push(newTask);
+    //   setTasks(newTasks);
+    // }
+    fetchCall({
+      url: "tasks/create",
+      method: RequestType.POST,
+      body: {
+        taskname: taskName,
+        groupid: props.section["groupid"],
+        sectionid: props.section["sectionid"],
+      },
+    })
+      .then((response) => {
+        const res = response.json();
+        return res;
+      })
+      .then((data) => {
+        console.log("Tasks:", data);
+        setTasks(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
-  let saveHandler = () => {
-    if (sectionName.trim() === "") {
-      alert("section name cannot be empty!!");
-    } else {
-      console.log(sectionName);
-      console.log("saving..");
-    }
+
+  let removeSectionHandler = () => {
+    const sectionId = props.section.sectionid;
+
+    fetchCall({
+      url: "sections",
+      method: RequestType.DELETE,
+      body: { sectionid: sectionId },
+    })
+      .then((response) => {
+        const res = response.json();
+        return res;
+      })
+      .then((data) => {
+        console.log("Removed section", props.section["sectionname"]);
+        router.push("/");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
+
+  // let saveHandler = () => {
+  //   if (sectionName.trim() === "") {
+  //     alert("section name cannot be empty!!");
+  //   } else {
+  //     console.log(props.section["sectionname"]);
+  //     console.log("saving..");
+  //   }
+  // };
   return (
     <div className="container">
-      <h1>Edit {sectionName}</h1>
+      <h1>Edit {props.section["sectionname"]}</h1>
       <br />
       <label>Name:</label>
       <br />
       <input
         type="text"
-        value={sectionName}
-        onChange={(e) => setSectionName(e.target.value.trim())}
+        value={props.section["sectionname"]}
+        // onChange={(e) => setSectionName(e.target.value.trim())}
       />
       <br />
       <br />
       <p>Tasks:</p>
       <br />
       <div className="edit-homework-container">
-        {tasks.map((task: Task, idx: number) => (
+        {/* {tasks.map((task: Task, idx: number) => (
           <div key={idx} className="homework-task-container">
             <div
               className="edit-homework-btn"
@@ -93,7 +139,7 @@ const EditSectionForm = (props: { sectionName: any; tasks: any[] }) => {
               />
             )}
           </div>
-        ))}
+        ))} */}
       </div>
       <br />
 
@@ -111,10 +157,17 @@ const EditSectionForm = (props: { sectionName: any; tasks: any[] }) => {
       >
         Add task
       </button>
+      <button
+        type="button"
+        className="remove-section-btn"
+        onClick={() => removeSectionHandler()}
+      >
+        Remove section
+      </button>
       <br />
 
       <div className="form-button">
-        <button type="button" className="submitBtn" onClick={saveHandler}>
+        <button type="button" className="submitBtn">
           Save
         </button>
       </div>

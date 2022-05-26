@@ -106,9 +106,16 @@ router.post("/create",fileUpload({ createParentPath: true }),isAuth, protector([
  *          ]
  */
 router.delete("/",isAuth,protector(["admin", "demonstrator"]),async (req, res, next) => {
-    const result = await deleteFromTable("tasks", req.body);
+    if(!req.body.taskID)
+        return res.status(400).send(JSON.stringify({message: "taskID not found"}));
+    
+    let result = await deleteFromTable("grades", {taskID:  req.body.taskID});
     if (result.error)
-        res.status(500).send(JSON.stringify({ message: "Transaction Failed" }));
+        return res.status(500).send(JSON.stringify({ message: "Transaction Failed" }));
+
+    result = await deleteFromTable("tasks", {taskID:  req.body.taskID});
+    if (result.error)
+        return res.status(500).send(JSON.stringify({ message: "Transaction Failed" }));
     return res.status(200).send(JSON.stringify({ message: "Tasks successfully updated" }));
 });
 
@@ -128,6 +135,36 @@ router.put("/update",isAuth,protector(["admin", "demonstrator"]),async (req, res
     if (updateResult.error)
         res.status(500).send(JSON.stringify({message: "Transaction Failed"}));
     return res.status(200).send(JSON.stringify({message: "Tasks successfully updated"}));
+});
+
+
+router.post("/:taskID/submit", fileUpload({ createParentPath: true }), isAuth, protector(["student"]), async (req, res, next) => {
+    
+    console.log(req.body, req.files);
+    if(!req.body.userID)
+        return res.status(400).send(JSON.stringify({message: "Request body must contain userID"}));
+
+    const fileNotInForm = !req.files || !req.files.submission;
+    const fileNotInBody = !req.body  || !req.body.submission;
+    const incompleteFile = fileNotInForm && fileNotInBody;
+    if(incompleteFile)
+        return res.status(400).send(JSON.stringify({message: "No Answer is uploaded"}));
+
+    const uid = req.body.userID;
+    const tid = req.params.taskID;
+    let submission = req.files.submission.data.toString("utf8") || req.body.submission;
+
+    submission = submission.replace(/^.*module.*$/g, '');
+    console.log(submission);
+
+    let result = await insertIntoTable('grades', {userID : uid, taskID: tid, submission: submission });
+    if(result.error){
+        log("ERROR", result.error.toString());
+        return next("Submitting answer failed");
+    }
+    log("INFO", "A submission has been inserted");
+
+    return res.status(200).send(JSON.stringify({message: "Sumbission is Successfull"}));
 });
 
 

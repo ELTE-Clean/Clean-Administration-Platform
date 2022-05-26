@@ -142,6 +142,18 @@ const CreateStudentForm = (props: any) => {
               onChange={(e) => setStudentNeptun(e.target.value)}
               required
             />
+
+
+      <br />
+            <label>Student Role:(ex. student,demonstrator)</label>
+            <br />
+            <input
+              type="text"
+              placeholder="Write Name here..."
+              name="studentLastName"
+              onChange={(e) => setStudentRole(e.target.value)}
+              required
+            />
             
 
 

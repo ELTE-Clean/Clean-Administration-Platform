@@ -282,21 +282,35 @@ subInt a b = a - b
 ', 4);
 
 ---------------------- Students files Dumb data
+<<<<<<< HEAD
 INSERT INTO grades (userID, taskID, submission, grade) VALUES (1, 1, 1, "import StdEnv 
+=======
+INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (1, 1, 1, 'import StdEnv 
+>>>>>>> 57007f1ec520e4cfacd58a8cc3e52c76fd92bdaf
 
 addInt :: Int Int -> Int
 addInt a b = a + b
 
 subInt :: Int Int -> Int
+<<<<<<< HEAD
 subInt a b = a - b", 5);
 INSERT INTO grades (userID, taskID, submission, grade) VALUES (2, 1, 3, "import StdEnv 
+=======
+subInt a b = a - b', 5);
+INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (2, 1, 3, 'import StdEnv 
+>>>>>>> 57007f1ec520e4cfacd58a8cc3e52c76fd92bdaf
 
 addInt :: Int Int -> Int
 addInt a b = a + b
 
 subInt :: Int Int -> Int
+<<<<<<< HEAD
 subInt a b = a - b", 2);
 INSERT INTO grades (userID, taskID, submission, grade) VALUES (2, 4, "import StdEnv 
+=======
+subInt a b = a - b', 2);
+INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (2, 4, 5, 'import StdEnv 
+>>>>>>> 57007f1ec520e4cfacd58a8cc3e52c76fd92bdaf
 
 
 addInt :: Int Int -> Int
@@ -304,6 +318,12 @@ addInt a b = a + b
 
 subInt :: Int Int -> Int
 subInt a b = a - b
+<<<<<<< HEAD
 ", 3);
 INSERT INTO grades (userID, taskID, submission, grade) VALUES (3, 4, NULL, 3);
 INSERT INTO grades (userID, taskID, submission, grade) VALUES (3, 5, NULL, 4);
+=======
+', 3);
+INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (3, 4, 5, NULL, 3);
+INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (3, 5, 5, NULL, 4);
+>>>>>>> 57007f1ec520e4cfacd58a8cc3e52c76fd92bdaf

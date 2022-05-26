@@ -87,7 +87,11 @@ router.post("/create",fileUpload({ createParentPath: true }),isAuth, protector([
         sectionid: req.body.sectionid,
         groupid: req.body.groupid,
         max: req.body.max,
+<<<<<<< HEAD
         solution : solution.replace(/^.*module.*$/g,'').replace(/\'/g, "''"),
+=======
+        solution : solution.replace(/module*$/g,'').replace(/\'/g, "''"),
+>>>>>>> 57007f1ec520e4cfacd58a8cc3e52c76fd92bdaf
         description: description.replace(/\'/g, "''"),
     };
     const result = await insertIntoTable('tasks', params);
@@ -119,6 +123,8 @@ router.delete(
       .send(JSON.stringify({ message: "Tasks successfully updated" }));
   }
 );
+
+
 
 
 
@@ -236,4 +242,8 @@ router.post("/:taskID/grade", isAuth, protector(["admin", "demonstrator"]), asyn
 });
 
 
+<<<<<<< HEAD
 module.exports = router;
+=======
+module.exports = router;
+>>>>>>> 57007f1ec520e4cfacd58a8cc3e52c76fd92bdaf

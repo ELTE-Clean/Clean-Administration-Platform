@@ -6,7 +6,16 @@ const { selectFromTable, insertIntoTable, deleteFromTable, updateTable } = requi
 const { isAuth, protector } = require('../utils/keycloak_utils');
 
 
-
+/**
+ * Creates a new group
+ * req.body: {groupname, timetable?}
+ */
+ router.post("/create", isAuth, protector(["admin", "demonstrator"]), async (req, res, next) => {
+    const result = await insertIntoTable('groups', req.body);
+    if (result.error) 
+        return res.status(500).send(JSON.stringify({message: "Transaction Failed"}));
+    return res.status(200).send(JSON.stringify({message: "Group successfully created"}));
+});
 
 /**
  * Assign a user to a group. Only admins can do this...
@@ -17,7 +26,6 @@ const { isAuth, protector } = require('../utils/keycloak_utils');
         return res.status(500).send(JSON.stringify({message: "Transaction Failed"}));
     return res.status(200).send(JSON.stringify({message: "User successfully assigned to group"}));
 });
-
 
 /**
  * Unassign a user from group. Only admins can do this...

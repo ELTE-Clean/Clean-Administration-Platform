@@ -1,48 +1,74 @@
-.edit-homework-container {
-  @include flex(column);
-  gap: 5px;
+.container {
+  input {
+    @include input(solid black 1px);
+  }
 
-  .homework-task-container {
-    @include flex(row);
-    width: 100%;
+  .create-task-form {
+    @include flex(column);
+    align-items: flex-start;
     justify-content: space-between;
-    .edit-homework-btn {
-      width: 90%;
+    .task-meta-data {
+      @include flex(row);
+      justify-content: flex-start;
+      label {
+        color: #000;
+      }
+      input {
+        margin-right: 20px;
+      }
+    }
+    .desc-area {
+      width: 100%;
+      .field {
+        label {
+          color: #000;
+        }
+        .description-area::-webkit-scrollbar {
+          width: 5px;
+        }
+        .description-area::-webkit-scrollbar-thumb {
+          min-height: 100px;
+          border-radius: 30px;
+          background: #c7c7c7;
+        }
+        .description-area {
+          margin-top: 10px;
+          width: 90%;
+          min-height: 250px;
+          max-height: 250px;
+          padding: 12px 20px;
+          box-sizing: border-box;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          font-size: 16px;
+          overflow: auto;
+          width: 100%;
+        }
+      }
+    }
+    .add-task-btn {
+      margin: 20px auto;
+      width: 30%;
       @include btn(
-        $main-light-blue,
+        $main-dark-blue,
         $btn-txt-color,
         $main-box-shadow,
-        1px,
-        5px,
-        15px 32px
+        none,
+        10px,
+        10px 20px
       );
-      text-align: left;
-    }
-    .remove-task-btn {
-      @include removeSign();
     }
   }
-}
-.add-task-btn {
-  margin: 20px 0;
-  @include btn(
-    $main-dark-blue,
-    $btn-txt-color,
-    $main-box-shadow,
-    none,
-    10px,
-    10px 20px
-  );
-}
 
-.remove-section-btn {
-  margin-left: 10px;
-  @include btn(
-    $main-red,
-    $btn-txt-color,
-    $main-box-shadow,
-    none,
-    10px,
-    15px 20px
-  );
+  .remove-section-btn {
+    margin-left: 10px;
+    @include btn(
+      $main-red,
+      $btn-txt-color,
+      $main-box-shadow,
+      none,
+      10px,
+      15px 20px
+    );
+  }
 }

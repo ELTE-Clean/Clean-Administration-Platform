@@ -107,3 +107,8 @@ Thumbs.db
 #css files
 *.css
 *.css.map
+
+#clean system files
+Clean*System*Files/
+*.o
+*.abc

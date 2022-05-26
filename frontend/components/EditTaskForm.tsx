@@ -5,6 +5,7 @@ import PopUp from "./Popup";
 import router from "next/router";
 import { RequestType } from "../enums/requestTypes";
 import { fetchCall } from "../hooks/useFetch";
+import FileUpload from "./FileUpload";
 
 const EditTaskForm = (props: any) => {
   const [taskName, setTaskName] = useState(props.task.title);
@@ -13,24 +14,15 @@ const EditTaskForm = (props: any) => {
     props.task.description
   );
   const [functionName, setFunctionName] = useState("");
-  const [uploadedFileName, setUploadedFileName] = useState("");
   const [buttonEditPopup, setButtonEditPopup] = useState(false);
 
-  let handelFileUpload = (e: BaseSyntheticEvent) => {
-    let latestFile = e.target.files[0].name;
-    setUploadedFileName(latestFile);
+  let handelFileUpload = (file: File) => {
+    let latestFile = file.name;
+    console.log(latestFile);
+    // setUploadedFileName(latestFile);
     // later send file to the server
   };
   console.log(props.task);
-
-  let uploadedSubmitBtnStyle = {
-    backgroundColor: "#acf19b",
-  };
-
-  let uploadedBtnStyle = {
-    border: "3px solid #acf19b",
-    color: "#acf19b",
-  };
 
   let funcViewHandler = (taskIndex: number) => {
     console.log("Handling viewing");
@@ -125,22 +117,7 @@ const EditTaskForm = (props: any) => {
           <h3>Solution file:</h3>
 
           <div className="edit-homework-upload-area">
-            <label
-              htmlFor="file-upload"
-              className="custom-file-upload"
-              style={uploadedFileName === "" ? {} : { ...uploadedBtnStyle }}
-            >
-              Add file
-            </label>
-            <input id="file-upload" onChange={handelFileUpload} type="file" />
-            <input
-              type="text"
-              name=""
-              id="uploaded-file"
-              placeholder="No file chosen"
-              readOnly
-              value={uploadedFileName}
-            />
+            <FileUpload getCB={handelFileUpload} />
           </div>
         </div>
         {/* <div className="vertical"></div> */}

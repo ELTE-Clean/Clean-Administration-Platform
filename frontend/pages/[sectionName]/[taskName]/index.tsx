@@ -4,11 +4,12 @@ import EditTaskForm from "../../../components/EditTaskForm";
 import PopUp from "../../../components/Popup";
 import Image from "next/image";
 import withAuth from "../../../components/withAuth";
+import FileUpload from "../../../components/FileUpload";
 
 const Task = () => {
   const router = useRouter();
   let { sectionName, taskName } = router.query;
-
+  const [uploaded, setUploaded] = useState(false);
   const task = {
     taskid: 5,
     taskName: "HW1",
@@ -32,11 +33,11 @@ const Task = () => {
   let uploadedSubmitBtnStyle = {
     backgroundColor: "#acf19b",
   };
-  const [uploadedFileName, setUploadedFileName] = useState("");
 
-  let handelFileUpload = (e: BaseSyntheticEvent) => {
-    let latestFile = e.target.files[0].name;
-    setUploadedFileName(latestFile);
+  let handelFileUpload = (file: File) => {
+    let latestFile = file.name;
+    setUploaded(true);
+    console.log(latestFile);
 
     // later send file to the server
   };
@@ -104,31 +105,27 @@ const Task = () => {
           </div>
         </div>
       )}
-      <div className="upload-area">
-        <label
-          htmlFor="file-upload"
-          className="custom-file-upload"
-          style={uploadedFileName === "" ? {} : { ...uploadedBtnStyle }}
-        >
-          Upload
-        </label>
-        <input id="file-upload" onChange={handelFileUpload} type="file" />
-        <input
-          type="text"
-          name=""
-          id="uploaded-file"
-          placeholder="No file chosen"
-          readOnly
-          value={uploadedFileName}
-        />
-        <div id="submit-btn">
-          <button
-            style={uploadedFileName === "" ? {} : { ...uploadedSubmitBtnStyle }}
-          >
-            submit
-          </button>
+      {!isTeacher && (
+        <div className="upload-area">
+          <FileUpload getCB={handelFileUpload} />
+          <div id="submit-btn">
+            <button style={!uploaded ? {} : { ...uploadedSubmitBtnStyle }}>
+              submit
+            </button>
+          </div>
         </div>
-      </div>
+      )}
+      {isTeacher && (
+        <div className="submissions-area">
+          <div id="submission">
+            <p>Sub</p>
+            <p>Sub</p>
+            <p>Sub</p>
+            <p>Sub</p>
+            <p>Sub</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

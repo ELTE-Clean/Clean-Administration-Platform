@@ -1,16 +1,26 @@
 import router, { useRouter } from "next/router";
-import { useState } from "react";
+import React, { useState } from "react";
 import { RequestType } from "../enums/requestTypes";
 import { fetchCall } from "../hooks/useFetch";
 import { Task } from "../interfaces/teacherTask";
 import EditHomeworkForm from "./EditHomeworkForm";
+import FileUpload from "./FileUpload";
 import PopUp from "./Popup";
+import RichTextEditor from "./RichTextEditor";
 
 const EditSectionForm = (props: { section: any; tasks: any[] }) => {
   const [taskName, setTaskName] = useState("");
   const [sectionName, setSectionName] = useState(props.section["sectionname"]);
   const [tasks, setTasks] = useState(props.tasks);
-  const [buttonEditPopup, setButtonEditPopup] = useState(false);
+  const [task, setTask] = useState({
+    name: "",
+    description: "",
+    dueDate: "",
+    dueTime: "",
+    maxGrade: "",
+    solution: "",
+  });
+
   const router = useRouter();
 
   let taskViewHandler = (taskIndex: number) => {
@@ -21,48 +31,54 @@ const EditSectionForm = (props: { section: any; tasks: any[] }) => {
     newTasks.splice(taskIndex, 1);
     setTasks(newTasks);
   };
+
+  let handleFileUpload = (file: File) => {
+    let latestFile = file.name;
+    console.log(latestFile);
+  };
+
   let addTaskHandler = () => {
-    console.log();
+    console.log(task);
 
-    let allTasksName = props.tasks.map((task: Task) => task.taskname);
-    let taskNameAlreadyExist = allTasksName.includes(taskName);
-    if (taskNameAlreadyExist) {
-      alert(`Task "${taskName}" already exist!!`);
-    } else if (taskName.trim() === "") {
-      alert(`Task name cannot be empty!!!`);
-    } else {
-      const newTasks = [...props.tasks];
-      const newTask = {
-        title: taskName,
-        dueTime: "",
-        dueDate: "",
-        grade: null,
-        gradeOutOf: null,
-      };
-      newTasks.push(newTask);
-      setTasks(newTasks);
-    }
+    // let allTasksName = props.tasks.map((task: Task) => task.taskname);
+    // let taskNameAlreadyExist = allTasksName.includes(taskName);
+    // if (taskNameAlreadyExist) {
+    //   alert(`Task "${taskName}" already exist!!`);
+    // } else if (taskName.trim() === "") {
+    //   alert(`Task name cannot be empty!!!`);
+    // } else {
+    //   const newTasks = [...props.tasks];
+    //   const newTask = {
+    //     title: taskName,
+    //     dueTime: "",
+    //     dueDate: "",
+    //     grade: null,
+    //     gradeOutOf: null,
+    //   };
+    //   newTasks.push(newTask);
+    //   setTasks(newTasks);
+    // }
 
-    fetchCall({
-      url: "tasks/create",
-      method: RequestType.POST,
-      body: {
-        taskname: taskName,
-        groupid: props.section["groupid"],
-        sectionid: props.section["sectionid"],
-      },
-    })
-      .then((response) => {
-        const res = response.json();
-        return res;
-      })
-      .then((data) => {
-        console.log("Tasks:", data);
-        setTasks(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    // fetchCall({
+    //   url: "tasks/create",
+    //   method: RequestType.POST,
+    //   body: {
+    //     taskname: taskName,
+    //     groupid: props.section["groupid"],
+    //     sectionid: props.section["sectionid"],
+    //   },
+    // })
+    //   .then((response) => {
+    //     const res = response.json();
+    //     return res;
+    //   })
+    //   .then((data) => {
+    //     console.log("Tasks:", data);
+    //     setTasks(data);
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   });
   };
 
   let removeSectionHandler = () => {
@@ -85,6 +101,7 @@ const EditSectionForm = (props: { section: any; tasks: any[] }) => {
         console.error(error);
       });
   };
+  <br />;
 
   // let saveHandler = () => {
   //   if (sectionName === "") {
@@ -98,7 +115,7 @@ const EditSectionForm = (props: { section: any; tasks: any[] }) => {
     <div className="container">
       <h1>Edit {sectionName}</h1>
       <br />
-      <label>Name:</label>
+      <h2>Change section name</h2>
       <br />
       <input
         type="text"
@@ -107,59 +124,71 @@ const EditSectionForm = (props: { section: any; tasks: any[] }) => {
       />
       <br />
       <br />
-      <p>Tasks:</p>
+      <h2>Create task</h2>
       <br />
-      <div className="edit-homework-container">
-        {props.tasks.map((task: Task, idx: number) => (
-          <div key={idx} className="homework-task-container">
-            <div
-              className="edit-homework-btn"
-              onClick={() => setButtonEditPopup(true)}
-            >
-              {task.taskname}
-            </div>
-            <div
-              className="remove-task-btn"
-              onClick={() => removeTaskHandler(idx)}
-            >
-              &times;
-            </div>
 
-            <PopUp
-              trigger={buttonEditPopup}
-              setTrigger={setButtonEditPopup}
-              popupType="edit-this-homework-data"
-              component={<EditHomeworkForm taskData={task} />}
+      <form action="" className="create-task-form">
+        <div className="task-meta-data">
+          <div className="field">
+            <label>* Task name:</label>
+            <br />
+            <input
+              type="text"
+              placeholder="Write the task..."
+              onChange={(e) => setTask({ ...task, name: e.target.value })}
             />
-
-            {buttonEditPopup && (
-              <PopUp
-                trigger={buttonEditPopup}
-                setTrigger={setButtonEditPopup}
-                popupType="edit-this-homework-data"
-                component={<EditHomeworkForm taskData={task} />}
-              />
-            )}
           </div>
-        ))}
-      </div>
-      <br />
-
-      <p>Tasks Name:</p>
-      <input
-        type="text"
-        placeholder="Write the name of your task"
-        onChange={(e) => setTaskName(e.target.value)}
-      />
-      <br />
-      <button
-        type="button"
-        className="add-task-btn"
-        onClick={() => addTaskHandler()}
-      >
-        Add task
-      </button>
-      <br />
+          <div className="field">
+            <label>Due date</label>
+            <br />
+            <input
+              type="date"
+              placeholder="Write the due date..."
+              onChange={(e) => setTask({ ...task, dueDate: e.target.value })}
+            />
+          </div>
+          <div className="field">
+            <label>Due time</label>
+            <br />
+            <input
+              type="time"
+              placeholder="Write the due time..."
+              onChange={(e) => setTask({ ...task, dueTime: e.target.value })}
+            />
+          </div>
+          <div className="field">
+            <label>Maximum grade:</label>
+            <br />
+            <input
+              type="number"
+              placeholder="Maximum grade for the task..."
+              onChange={(e) => setTask({ ...task, maxGrade: e.target.value })}
+            />
+          </div>
+          <div className="field">
+            <label>Task solution:</label>
+            <br />
+            <FileUpload getCB={handleFileUpload} />
+          </div>
+        </div>
+        <div className="desc-area">
+          <div className="field">
+            <label>Description:</label>
+            <br />
+            <br />
+            <RichTextEditor classTemp={"description-area"} valueTemp={""} />
+            <br />
+          </div>
+        </div>
+        <button
+          type="button"
+          className="add-task-btn"
+          onClick={() => addTaskHandler()}
+        >
+          Add task
+        </button>
+        <br />
+      </form>
 
       <div className="form-button">
         <button type="button" className="submitBtn">

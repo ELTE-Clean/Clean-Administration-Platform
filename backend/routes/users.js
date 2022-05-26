@@ -3,7 +3,7 @@
 /* Dependencies Importing */
 const router = require('express-promise-router')();     // Used to handle async request. Will be useful in the future to dodge the pyramid of doom
 const keycloak = require('../utils/keycloak_utils').keycloak;
-const { isAuth, getSelfData, isUnauth, getAllUsersData, createUsers, protector, updateUserRole } = require('../utils/keycloak_utils');
+const { isAuth, getSelfData, isUnauth, getAllUsersData, createUsers, protector, updateUserRole, deleteUser } = require('../utils/keycloak_utils');
 const { selectFromTable, insertIntoTable, deleteFromTable } = require('../utils/database_utils');
 const log = require('../utils/logger_utils').log;
 
@@ -55,20 +55,20 @@ router.get('/', isAuth, protector(["admin", "demonstrator"]), async(req, res) =>
     /* Transform the array to a map (username => keycloak user data) */
     const usersKC_map = new Map();
     usersKC_arr.forEach((userKC) => {
-      if (!usersKC_map.has(userKC.username))
-        usersKC_map.set(userKC.username, userKC);
-      else {
-        const ukc = usersKC_map.get(userKC.username); // .roles + userKC.roles;
-        ukc.roles += userKC.roles;
-        usersKC_map.set(userKC.username, ukc);
-      }
+        if (!usersKC_map.has(userKC.username))
+            usersKC_map.set(userKC.username, userKC);
+        else {
+            const ukc = usersKC_map.get(userKC.username); // .roles + userKC.roles;
+            ukc.roles += userKC.roles;
+            usersKC_map.set(userKC.username, ukc);
+        }
     });
 
     /* Get all users from the database */
     const userReqDB = await execQuery({ text: `SELECT * FROM users` });
     if (userReqDB.error) {
-      log("ERROR", `Error in requesting the user from the databae`);
-      return next(userReqKC.error);
+        log("ERROR", `Error in requesting the user from the databae`);
+        return next(userReqKC.error);
     }
 
     /* Return the users that correspond to a keycloak username only */
@@ -77,23 +77,19 @@ router.get('/', isAuth, protector(["admin", "demonstrator"]), async(req, res) =>
       const username = userDB.username.replace(/\s/g, ""); // Since our usernames in the database have white spaces in the end, we remove them :)
       if (!usersKC_map.has(username)) continue;
       const kcuser = usersKC_map.get(username);
-      ret = [
-        ...ret,
-        {
+      ret = [ ...ret,{
           uid: userDB.id,
           kcid: kcuser.keycloak_id,
           username: kcuser.username,
           firstname: userDB.firstname.replace(/[ \t]+$/g, ""), // Until we remove whitespaces from database
           lastname: userDB.lastname.replace(/[ \t]+$/g, ""), // Until we remove whitespaces from database
           roles: kcuser.roles,
-        },
-      ];
+        }];
     }
 
     log("INFO", "All users data have been returned successfully");
     res.status(200).send(ret);
-  }
-);
+});
 
 /**
  * Takes a list of users and creates them in both the keycloak and database with random passwords.
@@ -134,7 +130,7 @@ router.post('/create', isAuth, protector(["admin"]), async (req, res, next) =>{
     }
 
     /* Create users in the database. */
-    for (const user of Object.entries(req.body)) {
+    for (const user of req.body.users) {
         const student = {
             neptun: user.neptun,
             username: user.username, 
@@ -161,20 +157,11 @@ router.post('/create', isAuth, protector(["admin"]), async (req, res, next) =>{
  *  status: 201
  *  object: {message}
  */
-router.put(
-  "/update/role",
-  isAuth,
-  protector(["admin"]),
-  async (req, res, next) => {
+router.put("/update/role", isAuth, protector(["admin"]), async (req, res, next) => {
     if (!req.body.roles || !req.body.username || req.body.roles.length === 0)
-      return next("'role' is not defined in the request body");
+        return next("'role' is not defined in the request body");
 
-    log(
-      "INFO",
-      `Assigning ${
-        req.body.username
-      } the following roles: ${req.body.roles.toString()}`
-    );
+    log("INFO", `Assigning ${req.body.username} the following roles: ${req.body.roles.toString()}`);
     const updated = await updateUserRole(req.body.username, req.body.roles);
     if (!updated) return next("Role of the user did not update");
 
@@ -183,45 +170,56 @@ router.put(
   }
 );
 
+
 /**
  * Takes a list of users and deletes them in both the keycloak and database with random passwords.
  * Request Body Contains: users: [{userid}]
  */
- router.delete('/', isAuth, protector(["admin"]), async (req, res, next) =>{
-  if(!req.body.users)
-      return next("'users' is not defined in the request body");
+router.delete('/', isAuth, protector(["admin"]), async (req, res, next) =>{
+    if(!req.body.users)
+        return next("'users' is not defined in the request body");
 
-  // TODO: Delete users from keycloak
+    /* Delete users in the database. */
+    for (const user of Object.entries(req.body)) {
+        if(!user.userid){
+            log("ERROR", `userid must be supplied in the delete request`);
+            return next("User Deletion Failed");
+        }
+        const param = {userid: user.userid}
 
-  /* Delete users in the database. */
-  for (const user of Object.entries(req.body)) {
-    if(!user.userid){
-      log("ERROR", `userid must be supplied in the delete request`);
-      return next("User Deletion Failed");
+        /* Get user data from database */
+        let result = await selectFromTable('users', param);
+        if (result.error){
+          log("ERROR", `Can't retrieve userid: ${param.userid} from the database`);
+          return next("User Query Failed");
+        }
+        
+        /* Delete user from keycloak */
+        const username = result.result.rows[0].username;
+        if(!(await deleteUser(username)))
+            continue;
+
+        /* Delete the user data from database */
+        result = await deleteFromTable('user_to_group', param);
+        if (result.error){
+            log("ERROR", `Can't delete userid: ${param.userid} from their groups in the database`);
+            return next("User Deletion Failed");
+        }
+
+        result = await deleteFromTable('grades', param);
+        if (result.error){
+            log("ERROR", `Can't delete userid: ${param.userid}'s grades in the database`);
+            return next("User Deletion Failed");
+        } 
+
+        result = await deleteFromTable('users', param);
+        if (result.error){
+            log("ERROR", `Can't delete userid: ${param.userid} in the database`);
+            return next("User Deletion Failed");
+        }
     }
 
-    const param = {userid: user.userid}
-
-    let result = await deleteFromTable('user_to_group', param);
-    if (result.error){
-      log("ERROR", `Can't delete userid: ${param.userid} from their groups in the database`);
-      return next("User Deletion Failed");
-    }
-
-    result = await deleteFromTable('grades', param);
-    if (result.error){
-        log("ERROR", `Can't delete userid: ${param.userid}'s grades in the database`);
-        return next("User Deletion Failed");
-    } 
-
-    result = await deleteFromTable('users', param);
-    if (result.error){
-        log("ERROR", `Can't delete userid: ${param.userid} in the database`);
-        return next("User Deletion Failed");
-    }
-  }
-
-  return res.status(200).send(JSON.stringify({message: "Users successfully deleted from the database"}));
+    return res.status(200).send(JSON.stringify({message: "Users successfully deleted from the database"}));
 });
 
 /// TODO: User password update.

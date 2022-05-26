@@ -113,11 +113,11 @@ router.post('/create', isAuth, protector(["admin"]), async (req, res, next) =>{
     /* Create users in keycloak */
     const users_kc = req.body.users.map(user => {
         return {
-            keycloak_id: "",
+            // keycloak_id: "",
             username: user.username,
             email_verified : user.email_verified || false,
             roles : user.roles,
-            email : user.email 
+            email : user.email  || ""
         };
     });
     var insertedUsersKC = [];
@@ -131,8 +131,9 @@ router.post('/create', isAuth, protector(["admin"]), async (req, res, next) =>{
 
     /* Create users in the database. */
     for (const user of req.body.users) {
+        console.log(user);
         const student = {
-            neptun: user.neptun,
+            neptun: user.neptun || "",
             username: user.username, 
             firstname : user.firstname || "", 
             lastname : user.lastname || ""
@@ -180,7 +181,7 @@ router.delete('/', isAuth, protector(["admin"]), async (req, res, next) =>{
         return next("'users' is not defined in the request body");
 
     /* Delete users in the database. */
-    for (const user of Object.entries(req.body)) {
+    for (const user of req.body.users) {
         if(!user.userid){
             log("ERROR", `userid must be supplied in the delete request`);
             return next("User Deletion Failed");

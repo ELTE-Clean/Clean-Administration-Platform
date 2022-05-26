@@ -298,7 +298,7 @@ export async function createUsers(users: KCUserData[]) : Promise<Map<string, str
         }
         let password = (Math.random() + 1).toString(36).substring(7);
         let userRepr = {
-            id : user.keycloak_id,
+            // id : user.keycloak_id,
             email : user.email,
             emailVerified : user.email_verified,
             enabled : true,

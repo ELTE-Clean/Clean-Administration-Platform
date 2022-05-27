@@ -53,7 +53,6 @@ const Section = () => {
     )[0];
     setSection(tempSection);
 
-<<<<<<< HEAD
     try {
       querystring = querystring.stringify({
         sectionid: section["sectionid"],
@@ -63,18 +62,6 @@ const Section = () => {
       console.log("empty");
       querystring = "";
     }
-=======
-    setSection(
-      sections.filter(
-        (section: {
-          sectionid: Number;
-          sectionname: string;
-          groupid: Number;
-        }) => section["sectionname"] === name
-      )[0]
-    );
-    console.log(section["sectionid"]);
->>>>>>> 396506c (change admin user feature)
 
     fetchCall({
       url: "tasks?" + querystring,

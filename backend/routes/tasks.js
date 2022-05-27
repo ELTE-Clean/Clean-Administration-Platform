@@ -43,10 +43,9 @@ const exec = util.promisify(require('child_process').exec);
             taskid: task.taskid,
             taskname: task.taskname,
             sectionid: task.sectionid,
-            groupid : task.groupid,
             max : task.max,
-            dueDate : task.expiryDate,
-            dueTime : task.expiryTime
+            dueDate : task.expirydate,
+            dueTime : task.expirytime
         };
 
         if(solutionEnable)
@@ -54,7 +53,7 @@ const exec = util.promisify(require('child_process').exec);
         if(descriptionEnable)
             finalShape.description = task.description;
         if(testCasesEnable)
-            finalShape.testcasesText = task.testQuestions;
+            finalShape.testcasesText = task.testquestions;
         return finalShape;
     });
 

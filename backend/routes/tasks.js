@@ -26,7 +26,7 @@ const exec = util.promisify(require('child_process').exec);
 
     /* Construction of the query parameters */
     let parameters = {};
-    if(req.data.sectionid)
+    if(req.query.sectionid)
         parameters.sectionid = req.query.sectionid;
     if(req.query.groupid)
         parameters.groupid = req.query.groupid;
@@ -109,33 +109,68 @@ router.post("/create",fileUpload({ createParentPath: true }),isAuth, protector([
  *              }
  *          ]
  */
-router.delete("/",isAuth,protector(["admin", "demonstrator"]),async (req, res, next) => {
+router.delete("/",isAuth, protector(["admin", "demonstrator"]), async (req, res, next) => {
     if(!req.body.taskID)
         return res.status(400).send(JSON.stringify({message: "taskID not found"}));
     
-    let result = await deleteFromTable("grades", {taskID:  req.body.taskID});
+    const params = {taskID: req.body.taskID};
+    let result = await deleteFromTable("grades", params );
     if (result.error)
         return res.status(500).send(JSON.stringify({ message: "Transaction Failed" }));
 
-    result = await deleteFromTable("tasks", {taskID:  req.body.taskID});
+    result = await deleteFromTable("tasks", params);
     if (result.error)
         return res.status(500).send(JSON.stringify({ message: "Transaction Failed" }));
-    return res.status(200).send(JSON.stringify({ message: "Tasks successfully updated" }));
+    return res.status(200).send(JSON.stringify({ message: "Task successfully deleted" }));
 });
 
 
 /**
  * update task/s
  *
- * req.body: [
- *              {
- *                  task: {taskid, taskname, sectionid, groupid},
- *                  diff: {taskid?, taskname?, sectionid?, groupid?}
+ * 
+ * req.body:    {
+ *                  diff: {taskname?, sectionid?, solution?, testcases?, description?, expiryDate?, expiryTime?}
  *              }
- *          ]
+ *          
+ * req.files: {solution? , description? }
+ * NOTE:
+ *  Date : yy-mm-dd ... E.g: 2022-11-13
+ *  Time : h:m:s ... E.g: 10:02:10
  */
-router.put("/update",isAuth,protector(["admin", "demonstrator"]),async (req, res, next) => {
-    const updateResult = await updateTable("tasks",req.body.task,req.body.diff);
+router.put("/:taskID/update",fileUpload({ createParentPath: true }), isAuth, protector(["admin", "demonstrator"]),async (req, res, next) => {
+    const tid = req.params.taskID;
+    let result = await selectFromTable("tasks", {taskID:tid});
+    if (result.error)
+        res.status(500).send(JSON.stringify({message: "Transaction Failed"}));
+    
+    const oldTask = result.result.rows[0];
+
+    let configYaml = "test_questions:\n";
+    req.body.testcases.forEach((question, i) => {
+        configYaml += `\t- q${i}:\n`
+        configYaml += `\t\tfunction_name: ${question.functionname}\n`;
+        configYaml += `\t\ttest_cases:\n`;
+        question.parameters.forEach(parameter => {
+            configYaml += `\t\t\t- ${parameter}\n`;
+        });
+    })
+
+    let ts = new Date();
+
+    const params = {
+        solution : req.files?.solution.data.toString("utf8") || req.body.solution || oldTask.solution,
+        description : req.files?.description.data.toString("utf8") || req.body.description || oldTask.description,
+        taskname : req.body.taskname || oldTask.taskName,
+        sectionid : req.body.sectionid || oldTask.sectionID,
+        expiryDate : req.body.dueDate || oldTask.expiryDate || `${ts.getFullYear()}-${ts.getMonth()}-${ts.getDay()}`,
+        expiryTime : req.body.dueTime || oldTask.expiryTime|| `${ts.getHours()}:${ts.getMinutes()}:${ts.getSeconds()}`,
+        testquestions : configYaml || oldTask.testQuestions
+    };
+
+    console.log(params);
+    
+    const updateResult = await updateTable("tasks", {taskID: tid}, params);
     if (updateResult.error)
         res.status(500).send(JSON.stringify({message: "Transaction Failed"}));
     return res.status(200).send(JSON.stringify({message: "Tasks successfully updated"}));

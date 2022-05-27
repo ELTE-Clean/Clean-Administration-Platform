@@ -123,15 +123,6 @@ ALTER SEQUENCE public.taskSeq OWNER TO postgres;
 --
 
 CREATE TABLE public.tasks (
-<<<<<<< HEAD
-    taskID      INT            DEFAULT nextval('taskSeq'),
-    taskName    VARCHAR(50)    NOT NULL,
-    sectionID   INT            REFERENCES  sections(sectionID)  NOT NULL,
-    groupID     INT            REFERENCES  groups(groupID)      NOT NULL,
-    description VARCHAR(5000)  NULL, -- Task description (File/Text)
-    solution    VARCHAR(5000)  NULL, -- Task solution to run the script on!
-    max         INT            NULL,
-=======
     taskID          INT            DEFAULT nextval('taskSeq'),
     taskName        VARCHAR(50)    NOT NULL,
     sectionID       INT            REFERENCES  sections(sectionID)  NOT NULL,
@@ -140,7 +131,8 @@ CREATE TABLE public.tasks (
     solution        VARCHAR(5000)  NOT NULL, -- Task solution to run the script on!
     testQuestions   VARCHAR(1000), -- Test cases for the configuration
     max             INT            NOT NULL,
->>>>>>> development
+    expiryDate      DATE,
+    expiryTime      TIME,
     PRIMARY KEY (taskID)
 );
 
@@ -176,15 +168,9 @@ ALTER TABLE public.grades OWNER TO postgres;
 --
 
 CREATE TABLE public.user_to_group (
-<<<<<<< HEAD
-    neptun      VARCHAR(6)     REFERENCES users(neptun)    NOT NULL,
-    groupID     INT            REFERENCES groups(groupID)  NOT NULL,
-    PRIMARY KEY (neptun, groupID)
-=======
     userID      INT             REFERENCES users(userID)    NOT NULL,
     groupID     INT             REFERENCES groups(groupID)  NOT NULL,
     PRIMARY KEY (userID, groupID)
->>>>>>> development
 );
 
 

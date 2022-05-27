@@ -35,7 +35,11 @@ const Menu = () => {
       })
       .then((data) => {
         setSections(data);
+<<<<<<< HEAD
         console.log(data);
+=======
+        console.log(sections);
+>>>>>>> 33bb646 (connected add task endpoint)
       })
       .catch((error) => {
         console.error(error);

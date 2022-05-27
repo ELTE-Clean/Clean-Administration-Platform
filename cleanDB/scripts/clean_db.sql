@@ -123,11 +123,6 @@ ALTER SEQUENCE public.taskSeq OWNER TO postgres;
 --
 
 CREATE TABLE public.tasks (
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> d07066e (Connected Admin endpoints)
     taskID          INT            DEFAULT nextval('taskSeq'),
     taskName        VARCHAR(50)    NOT NULL,
     sectionID       INT            REFERENCES  sections(sectionID)  NOT NULL,
@@ -136,28 +131,8 @@ CREATE TABLE public.tasks (
     solution        VARCHAR(5000)  NOT NULL, -- Task solution to run the script on!
     testQuestions   VARCHAR(1000), -- Test cases for the configuration
     max             INT            NOT NULL,
-<<<<<<< HEAD
-<<<<<<< HEAD
     expiryDate      DATE,
     expiryTime      TIME,
-=======
-=======
-=======
->>>>>>> 0183be8 (Rebasing...)
-    taskID      INT            DEFAULT nextval('taskSeq'),
-    taskName    VARCHAR(50)    NOT NULL,
-    sectionID   INT            REFERENCES  sections(sectionID)  NOT NULL,
-    groupID     INT            REFERENCES  groups(groupID)      NOT NULL,
-    description VARCHAR(5000)  NULL, -- Task description (File/Text)
-    solution    VARCHAR(5000)  NULL, -- Task solution to run the script on!
-    max         INT            NULL,
-<<<<<<< HEAD
->>>>>>> 4a38981 (Make task solution, description, max grade optional)
->>>>>>> 9d3878b (Rebasing...)
-=======
->>>>>>> 0183be8 (Rebasing...)
-=======
->>>>>>> d07066e (Connected Admin endpoints)
     PRIMARY KEY (taskID)
 );
 

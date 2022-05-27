@@ -51,7 +51,7 @@ const Section = () => {
     try {
       querystring = querystring.stringify({
         sectionid: section["sectionid"],
-        groupid: section["groupid"],
+        // groupid: section["groupid"],
       });
     } catch (error) {
       console.log("empty");

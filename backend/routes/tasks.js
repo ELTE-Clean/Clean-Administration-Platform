@@ -146,10 +146,9 @@ router.post("/create",fileUpload({ createParentPath: true }),isAuth, protector([
     return res.status(200).send({message: "Task created successfully!"});
 });
 
-
 /**
  * delete task/s
- *
+ * 
  * req.body: [
  *              {
  *                  taskid, taskname, sectionid, groupid
@@ -170,7 +169,6 @@ router.delete("/",isAuth, protector(["admin", "demonstrator"]), async (req, res,
         return res.status(500).send(JSON.stringify({ message: "Transaction Failed" }));
     return res.status(200).send(JSON.stringify({ message: "Task successfully deleted" }));
 });
-
 
 /**
  * update task/s

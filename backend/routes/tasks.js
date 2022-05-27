@@ -23,13 +23,12 @@ const exec = util.promisify(require('child_process').exec);
  router.get("/", isAuth, async (req, res, next) => {
     const descriptionEnable = req.query.description == 'true';
     const solutionEnable = req.query.solution == 'true';
+    const testCasesEnable = req.query.testcases == 'true';
 
     /* Construction of the query parameters */
     let parameters = {};
     if(req.query.sectionid)
         parameters.sectionid = req.query.sectionid;
-    if(req.query.groupid)
-        parameters.groupid = req.query.groupid;
     if(req.query.taskid)
         parameters.taskid = req.query.taskid;
 
@@ -54,6 +53,8 @@ const exec = util.promisify(require('child_process').exec);
             finalShape.solution = task.solution;
         if(descriptionEnable)
             finalShape.description = task.description;
+        if(testCasesEnable)
+            finalShape.testcasesText = task.testQuestions;
         return finalShape;
     });
 

@@ -132,12 +132,20 @@ router.post('/create', isAuth, protector(["admin"]), async (req, res, next) =>{
 
     /* Create users in the database. */
     for (const user of req.body.users) {
+<<<<<<< HEAD
         console.log(user);
+=======
+>>>>>>> cf3c87d (Connected create student endpoint)
         const student = {
             neptun: user.neptun || "",
             username: user.username, 
             firstname : user.firstname || "", 
+<<<<<<< HEAD
             lastname : user.lastname || ""
+=======
+            lastname : user.lastname || "",
+            neptun: user.username
+>>>>>>> cf3c87d (Connected create student endpoint)
         };
         const result = await insertIntoTable('users', student);
         if (result.error){

@@ -4,12 +4,8 @@ import { useContext, useState } from "react";
 import { RequestType } from "../enums/requestTypes";
 import { fetchCall } from "../hooks/useFetch";
 const AddRemoveStudent = (props: any) => {
-
   const [studentNeptun, setStudentNeptun] = useState("");
   const [adminChoice, setAdminChoice] = useState("");
-
-  const [studentInput, setStudentInput] = useState("");
-
 
   let addStudentHandler = () => {
     if (studentNeptun.trim() == "") {
@@ -64,7 +60,6 @@ const AddRemoveStudent = (props: any) => {
       console.log("Please choose to add or remove")
     }
   }
-
   return (
     <div className="AddTemoveStudent-container">
       <div className={"admin-forms-holder"}>

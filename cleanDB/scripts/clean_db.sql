@@ -131,8 +131,11 @@ CREATE TABLE public.tasks (
     solution        VARCHAR(5000)  NOT NULL, -- Task solution to run the script on!
     testQuestions   VARCHAR(1000), -- Test cases for the configuration
     max             INT            NOT NULL,
+<<<<<<< HEAD
     expiryDate      DATE,
     expiryTime      TIME,
+=======
+>>>>>>> d07066e (Connected Admin endpoints)
     PRIMARY KEY (taskID)
 );
 
@@ -218,6 +221,7 @@ addInt :: Int Int -> Int
 addInt a b = a + b
 subInt :: Int Int -> Int
 subInt a b = a - b
+<<<<<<< HEAD
 ',
 '
 [
@@ -230,6 +234,23 @@ subInt a b = a - b
         "parameters": ["3 4", "3 2", "23 32"]
     }
 ]
+=======
+', 
+'
+test_questions:
+\t- q1:
+\t\t\tfunction_name: addInt
+\t\t\ttest_cases:
+\t\t\t\t- 1 2
+\t\t\t\t- 5 13
+\t\t\t\t- 12 99
+\t- q2:
+\t\t\tfunction_name: subInt
+\t\t\ttest_cases:
+\t\t\t\t- 3 4
+\t\t\t\t- 3 2
+\t\t\t\t- 23 32
+>>>>>>> d07066e (Connected Admin endpoints)
 '
 , 1);
 INSERT INTO tasks (taskName, sectionID, description, solution, max) VALUES ('Progress Task 1', 2, 'desc', 'module teacher
@@ -254,6 +275,7 @@ subInt :: Int Int -> Int
 subInt a b = a - b
 ', 
 '
+<<<<<<< HEAD
 [
     {
         "functionname": "addInt", 
@@ -264,6 +286,21 @@ subInt a b = a - b
         "parameters": ["3 4", "3 2", "23 32"]
     }
 ]
+=======
+test_questions:
+\t- q1:
+\t\t\tfunction_name: addInt
+\t\t\ttest_cases:
+\t\t\t\t- 1 2
+\t\t\t\t- 5 13
+\t\t\t\t- 12 99
+\t- q2:
+\t\t\tfunction_name: subInt
+\t\t\ttest_cases:
+\t\t\t\t- 3 4
+\t\t\t\t- 3 2
+\t\t\t\t- 23 32
+>>>>>>> d07066e (Connected Admin endpoints)
 '
 , 3);
 INSERT INTO tasks (taskName, sectionID, description, solution, max) VALUES ('Endterm', 5, 'desc', 'module teacher
@@ -275,7 +312,11 @@ subInt a b = a - b
 ', 4);
 
 ---------------------- Students files Dumb data
+<<<<<<< HEAD
 INSERT INTO grades (userID, taskID, filename, submission, grade) VALUES (1, 1, 'midterm (2).icl','import StdEnv 
+=======
+INSERT INTO grades (userID, taskID, submission, grade) VALUES (1, 1, 'import StdEnv 
+>>>>>>> d07066e (Connected Admin endpoints)
 addInt :: Int Int -> Int
 addInt a b = a + b
 subInt :: Int Int -> Int

@@ -124,6 +124,7 @@ ALTER SEQUENCE public.taskSeq OWNER TO postgres;
 
 CREATE TABLE public.tasks (
 <<<<<<< HEAD
+<<<<<<< HEAD
     taskID          INT            DEFAULT nextval('taskSeq'),
     taskName        VARCHAR(50)    NOT NULL,
     sectionID       INT            REFERENCES  sections(sectionID)  NOT NULL,
@@ -137,6 +138,8 @@ CREATE TABLE public.tasks (
     expiryTime      TIME,
 =======
 =======
+=======
+>>>>>>> 0183be8 (Rebasing...)
     taskID      INT            DEFAULT nextval('taskSeq'),
     taskName    VARCHAR(50)    NOT NULL,
     sectionID   INT            REFERENCES  sections(sectionID)  NOT NULL,
@@ -144,8 +147,11 @@ CREATE TABLE public.tasks (
     description VARCHAR(5000)  NULL, -- Task description (File/Text)
     solution    VARCHAR(5000)  NULL, -- Task solution to run the script on!
     max         INT            NULL,
+<<<<<<< HEAD
 >>>>>>> 4a38981 (Make task solution, description, max grade optional)
 >>>>>>> 9d3878b (Rebasing...)
+=======
+>>>>>>> 0183be8 (Rebasing...)
     PRIMARY KEY (taskID)
 );
 
@@ -182,15 +188,9 @@ ALTER TABLE public.grades OWNER TO postgres;
 --
 
 CREATE TABLE public.user_to_group (
-<<<<<<< HEAD
-    userID      INT             REFERENCES users(userID)    NOT NULL,
-    groupID     INT             REFERENCES groups(groupID)  NOT NULL,
-    PRIMARY KEY (userID, groupID)
-=======
     neptun      VARCHAR(6)     REFERENCES users(neptun)    NOT NULL,
     groupID     INT            REFERENCES groups(groupID)  NOT NULL,
     PRIMARY KEY (neptun, groupID)
->>>>>>> 4a38981 (Make task solution, description, max grade optional)
 );
 
 

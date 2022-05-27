@@ -15,7 +15,7 @@ const AddRemoveStudent = (props: any) => {
       fetchCall({
         url: "groups/assign",
         method: RequestType.PUT,
-        body: { neptun: studentNeptun, groupID: 1 },
+        body: { userID: studentNeptun, groupID: 1 },
       })
         .then((response) => {
           const res = response.json();
@@ -36,7 +36,7 @@ const AddRemoveStudent = (props: any) => {
       fetchCall({
         url: "groups/unassign",
         method: RequestType.DELETE,
-        body: { neptun: studentNeptun, groupID: 1 },
+        body: { userID: studentNeptun, groupID: 1 },
       })
         .then((response) => {
           const res = response.json();

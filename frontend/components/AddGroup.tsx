@@ -1,23 +1,35 @@
 import { useState } from "react";
-
-const AddGroup = (/*{
-    addGroupCallBack,
-  }: {
-    addGroupCallBack: any;
-  }*/) => {
+import { RequestType } from "../enums/requestTypes";
+import { fetchCall } from "../hooks/useFetch";
+import router, { useRouter } from "next/router";
+const AddGroup = () => {
   const [userInput, setUserInput] = useState("");
-  // let addGroupHandler = () => {
-  //     if (userInput.trim() == "") {
-  //       alert("Input cannot be empty!!");
-  //     } else {
-  //       let groupAlreadyIncluded = addGroupCallBack(userInput);
-  //       if (groupAlreadyIncluded) {
-  //         alert(`Group "${userInput}" already exist!!`);
-  //       } else {
-  //         console.log("Adding group");
-  //       }
-  //     }
-  //   };
+  const router = useRouter();
+
+
+
+  let addGroupHandler = () => {
+    if (userInput.trim() == "") {
+      alert("Input cannot be empty!!");
+    } else {
+      console.log(userInput);
+      fetchCall({
+        url: "groups/create",
+        method: RequestType.POST,
+        body: { groupName: userInput},
+      })
+        .then((response) => {
+          const res = response.json();
+          return res;
+        })
+        .then((data) => {
+          router.push("/");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  };
 
   return (
     <div className="assign-teacher-container">
@@ -41,7 +53,7 @@ const AddGroup = (/*{
               <button
                 type="button"
                 className="submitBtn"
-                //onClick={() => addGroupHandler()}
+                onClick={() => addGroupHandler()}
               >
                 Add
               </button>

@@ -75,19 +75,19 @@ router.post("/create",fileUpload({ createParentPath: true }),isAuth, protector([
     const fileNotInForm = !req.files || !req.files.solution || !req.files.description;
     const fileNotInBody = !req.body  || !req.body.solution  || !req.body.description; 
     const incompleteFile = fileNotInForm && fileNotInBody;
-    const incompleteBody = !req.body || !req.body.taskid || !req.body.sectionid || !req.body.groupid || !req.body.max;
+    const incompleteBody = !req.body || !req.body.name || !req.body.sectionid;
     if(incompleteFile || incompleteBody)
-        return res.status(400).send({message: "Description or Solution are missing!"});
+        return res.status(400).send({message: "Missing input parameters!"});
 
-    const solution = req.files.solution.data.toString("utf8") || req.body.solution;
-    const description = req.files.description.data.toString("utf8") || req.body.description;
+    const solution = req.files?.solution.data.toString("utf8") || req.body.solution;
+    const description = req.files?.description.data.toString("utf8") || req.body.description;
 
     const ts = new Date();
     /* Inserting the task into the table */
     const params = {
         sectionid: req.body.sectionid,
-        groupid: req.body.groupid,
-        max: req.body.max,
+        max: req.body.maxGrade,
+        taskname: req.body.name,
         expiryDate : req.body.dueDate  || `${ts.getFullYear()}-${ts.getMonth()}-${ts.getDay()}`,
         expiryTime : req.body.dueTime ||  `${ts.getHours()}:${ts.getMinutes()}:${ts.getSeconds()}`,
         solution : solution.replace(/^.*module.*$/g,'').replace(/\'/g, "''"),

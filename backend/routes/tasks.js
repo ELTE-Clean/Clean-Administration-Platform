@@ -45,7 +45,9 @@ const exec = util.promisify(require('child_process').exec);
             taskname: task.taskname,
             sectionid: task.sectionid,
             groupid : task.groupid,
-            max : task.max
+            max : task.max,
+            dueDate : task.expiryDate,
+            dueTime : task.expiryTime
         };
 
         if(solutionEnable)
@@ -80,12 +82,14 @@ router.post("/create",fileUpload({ createParentPath: true }),isAuth, protector([
     const solution = req.files.solution.data.toString("utf8") || req.body.solution;
     const description = req.files.description.data.toString("utf8") || req.body.description;
 
+    const ts = new Date();
     /* Inserting the task into the table */
     const params = {
-        taskid: req.body.taskid,
         sectionid: req.body.sectionid,
         groupid: req.body.groupid,
         max: req.body.max,
+        expiryDate : req.body.dueDate  || `${ts.getFullYear()}-${ts.getMonth()}-${ts.getDay()}`,
+        expiryTime : req.body.dueTime ||  `${ts.getHours()}:${ts.getMinutes()}:${ts.getSeconds()}`,
         solution : solution.replace(/^.*module.*$/g,'').replace(/\'/g, "''"),
         description: description.replace(/\'/g, "''"),
     };
@@ -164,8 +168,6 @@ router.put("/:taskID/update",fileUpload({ createParentPath: true }), isAuth, pro
         testquestions : configYaml || oldTask.testQuestions
     };
 
-    console.log(params);
-    
     const updateResult = await updateTable("tasks", {taskID: tid}, params);
     if (updateResult.error)
         res.status(500).send(JSON.stringify({message: "Transaction Failed"}));

@@ -94,30 +94,23 @@ router.post("/create",fileUpload({ createParentPath: true }),isAuth, protector([
     return res.status(200).send({message: "Task created successfully!"});
 });
 
-
 /**
  * delete task/s
- *
+ * 
  * req.body: [
  *              {
  *                  taskid, taskname, sectionid, groupid
  *              }
  *          ]
  */
-router.delete("/",isAuth,protector(["admin", "demonstrator"]),async (req, res, next) => {
-    if(!req.body.taskID)
-        return res.status(400).send(JSON.stringify({message: "taskID not found"}));
-    
-    let result = await deleteFromTable("grades", {taskID:  req.body.taskID});
-    if (result.error)
-        return res.status(500).send(JSON.stringify({ message: "Transaction Failed" }));
+ router.delete("/", isAuth, protector(["admin", "demonstrator"]), async (req, res, next) => {
 
-    result = await deleteFromTable("tasks", {taskID:  req.body.taskID});
+    const result = await deleteFromTable('tasks', req.body);
+
     if (result.error)
-        return res.status(500).send(JSON.stringify({ message: "Transaction Failed" }));
-    return res.status(200).send(JSON.stringify({ message: "Tasks successfully updated" }));
+        res.status(500).send(JSON.stringify({message: "Transaction Failed"}));
+    return res.status(200).send(JSON.stringify({message: "Tasks successfully updated"}));
 });
-
 
 /**
  * update task/s

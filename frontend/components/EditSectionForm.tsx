@@ -64,20 +64,12 @@ const EditSectionForm = (props: { section: any; tasks: any[] }) => {
   };
 
   let removeSectionHandler = () => {
-<<<<<<< HEAD
     const sectionId = props.section.sectionid;
-=======
-    console.log(props.section["sectionname"]);
->>>>>>> 33bb646 (connected add task endpoint)
 
     fetchCall({
       url: "sections",
       method: RequestType.DELETE,
-<<<<<<< HEAD
       body: { sectionid: sectionId },
-=======
-      body: [{ sectionname: props.section["sectionname"], groupid: 1 }],
->>>>>>> 33bb646 (connected add task endpoint)
     })
       .then((response) => {
         const res = response.json();

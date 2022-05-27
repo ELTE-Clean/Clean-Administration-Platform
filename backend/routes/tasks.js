@@ -31,7 +31,7 @@ const exec = util.promisify(require('child_process').exec);
     if(req.query.sectionid)
         parameters.sectionid = req.query.sectionid;
     if(req.query.taskid)
-        parameters.taskid = req.query.taskid;
+        parameters.taskID = req.query.taskid;
 
     /* Get task/s */
     const result = await selectFromTable('tasks', parameters);
@@ -42,7 +42,7 @@ const exec = util.promisify(require('child_process').exec);
     const filtered = result.result.rows.map(task => {
         
         let finalShape = {
-            taskid: task.taskid,
+            taskid: task.taskID,
             taskname: task.taskname,
             sectionid: task.sectionid,
             max : task.max,

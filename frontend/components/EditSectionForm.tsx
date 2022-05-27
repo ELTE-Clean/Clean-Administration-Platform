@@ -122,14 +122,12 @@ const EditSectionForm = (props: { section: any; tasks: any[] }) => {
             >
               &times;
             </div>
-
             <PopUp
               trigger={buttonEditPopup}
               setTrigger={setButtonEditPopup}
               popupType="edit-this-homework-data"
               component={<EditHomeworkForm taskData={task} />}
             />
-
             {buttonEditPopup && (
               <PopUp
                 trigger={buttonEditPopup}

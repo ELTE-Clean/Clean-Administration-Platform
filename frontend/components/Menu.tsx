@@ -133,10 +133,7 @@ const Menu = () => {
         </div>
       </Link>
       <div className="sections">
-
-
         {sections.map((section, idx) => (
-
           <Link key={idx} href={`/${section.sectionname}`} passHref>
             <div className="section">
               <div className="section-name">

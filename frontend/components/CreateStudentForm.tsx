@@ -8,6 +8,7 @@ const CreateStudentForm = (props: any) => {
   const [studentLastName, setStudentLastName] = useState("");
   const [studentNeptun, setStudentNeptun] = useState("");
   const [studentRole, setStudentRole] = useState("");
+  const [adminChoice, setAdminChoice] = useState("");
 
   let createStudentHandler = () => {
     let studentRoleVar = studentRole.split(",");
@@ -40,24 +41,69 @@ const CreateStudentForm = (props: any) => {
     }
   };
 
+
+
+  let deleteStudentHandler = () => {
+    const users = [{username: studentNeptun}] 
+    if (studentNeptun.trim() == "") {
+      alert("Input cannot be empty!!");
+    } else {
+      fetchCall({
+        url: "users",
+        method: RequestType.DELETE,
+        body: {users},
+      })
+        .then((response) => {
+          const res = response.json();
+          return res;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  };
+
+
+  let submitHandler = () =>{
+    console.log(adminChoice);
+    if (adminChoice == "Add"){
+      createStudentHandler();
+    }else if (adminChoice == "Remove"){
+      deleteStudentHandler();
+    }
+    else {
+      console.log("Please choose to add or remove")
+    }
+  }
+
   return (
     <div className="AddTemoveStudent-container">
       <div className={"admin-forms-holder"}>
         <form>
           <div className="container">
-            <h1>Create / Remove Student</h1>
+            <h1>Create / Remove User</h1>
             <br />
             <p>Make sure neptun codes are seperated by new lines</p>
             <br />
             <div className="Radios-area">
               <label className="Radio-container">
                 Add
-                <input type="radio" name="radio" />
+                <input
+                 type="radio"
+                 name="radio"
+                 value="Add"
+                 onChange={(e) => setAdminChoice(e.target.value)}
+                 />
                 <span className="checkmark"></span>
               </label>
               <label className="Radio-container">
                 Remove
-                <input type="radio" name="radio" />
+                <input
+                type="radio" 
+                name="radio"
+                value="Remove"
+                onChange={(e) => setAdminChoice(e.target.value)}
+                 />
                 <span className="checkmark"></span>
               </label>
             </div>
@@ -115,7 +161,7 @@ const CreateStudentForm = (props: any) => {
               <button
                 type="button"
                 className="submitBtn"
-                onClick={() => createStudentHandler()}
+                onClick={() => submitHandler()}
               >
                 Apply
               </button>

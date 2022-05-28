@@ -10,7 +10,6 @@ const Profile: NextPage = () => {
   const { user } = useContext(UserContext);
   const [showChangePassForm, setShowChangePassForm] = useState(false);
   const route = useRouter();
-  console.log("pro");
 
   let handleLogOut = () => {
     fetchCall({

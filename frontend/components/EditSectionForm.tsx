@@ -14,7 +14,7 @@ const EditSectionForm = (props: { section: any; tasks: any[] }) => {
   const [tasks, setTasks] = useState(props.tasks);
   const [task, setTask] = useState({
     name: "",
-    description: "",
+    description: "d",
     dueDate: "",
     dueTime: "",
     maxGrade: "",
@@ -34,6 +34,7 @@ const EditSectionForm = (props: { section: any; tasks: any[] }) => {
 
   let handleFileUpload = (file: File) => {
     let latestFile = file.name;
+    setTask({ ...task, solution: file });
     console.log(latestFile);
   };
 
@@ -59,30 +60,31 @@ const EditSectionForm = (props: { section: any; tasks: any[] }) => {
     //   setTasks(newTasks);
     // }
 
-    // fetchCall({
-    //   url: "tasks/create",
-    //   method: RequestType.POST,
-    //   body: {
-    //     taskname: taskName,
-    //     groupid: props.section["groupid"],
-    //     sectionid: props.section["sectionid"],
-    //   },
-    // })
-    //   .then((response) => {
-    //     const res = response.json();
-    //     return res;
-    //   })
-    //   .then((data) => {
-    //     console.log("Tasks:", data);
-    //     setTasks(data);
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
+    fetchCall({
+      url: "tasks/create",
+      method: RequestType.POST,
+      body: {
+        ...task,
+        groupid: props.section["groupid"],
+        sectionid: props.section["sectionid"],
+      },
+    })
+      .then((response) => {
+        const res = response.json();
+        return res;
+      })
+      .then((data) => {
+        console.log("Tasks:", data);
+        // setTasks(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   let removeSectionHandler = () => {
     const sectionId = props.section.sectionid;
+    console.log("hey", sectionId);
 
     fetchCall({
       url: "sections",
@@ -104,7 +106,7 @@ const EditSectionForm = (props: { section: any; tasks: any[] }) => {
   <br />;
 
   // let saveHandler = () => {
-  //   if (sectionName === "") {
+  //   if (sectionName.trim() === "") {
   //     alert("section name cannot be empty!!");
   //   } else {
   //     console.log(props.section["sectionname"]);
@@ -113,21 +115,21 @@ const EditSectionForm = (props: { section: any; tasks: any[] }) => {
   // };
   return (
     <div className="container">
-      <h1>Edit {props.section["sectionname"]}</h1>
+      <h1>Edit {sectionName}</h1>
       <br />
       <h2>Change section name</h2>
       <br />
       <input
         type="text"
-        value={props.section["sectionname"]}
-        // onChange={(e) => setSectionName(e.target.value.trim())}
+        value={sectionName}
+        onChange={(e) => setSectionName(e.target.value)}
       />
       <br />
       <br />
       <h2>Create task</h2>
       <br />
 
-      <form action="" className="create-task-form">
+      <div className="create-task-form">
         <div className="task-meta-data">
           <div className="field">
             <label>* Task name:</label>
@@ -176,7 +178,11 @@ const EditSectionForm = (props: { section: any; tasks: any[] }) => {
             <label>Description:</label>
             <br />
             <br />
-            <RichTextEditor classTemp={"description-area"} valueTemp={""} />
+            <RichTextEditor
+              classTemp={"description-area"}
+              valueTemp={""}
+              onChange={(value) => setTask({ ...task, description: value })}
+            />
             <br />
           </div>
         </div>
@@ -188,7 +194,7 @@ const EditSectionForm = (props: { section: any; tasks: any[] }) => {
           Add task
         </button>
         <br />
-      </form>
+      </div>
 
       <div className="form-button">
         <button type="button" className="submitBtn">

@@ -6,11 +6,8 @@ const EditTestCasesForm = (props: {
     name: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined;
   };
 }) => {
-  console.log(props.testCaseData);
-
   const [testCases, setTestCases] = useState(props.testCaseData.testList);
   const [newTestCase, setNewTestCase] = useState("");
-  console.log(testCases);
 
   let handleInputChange = (value: string, idx: number) => {
     let tempTestCases = [...testCases];

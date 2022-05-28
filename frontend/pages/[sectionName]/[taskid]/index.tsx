@@ -1,31 +1,36 @@
 import { useRouter } from "next/router";
-import { BaseSyntheticEvent, useState } from "react";
+import { BaseSyntheticEvent, useEffect, useState } from "react";
 import EditTaskForm from "../../../components/EditTaskForm";
 import PopUp from "../../../components/Popup";
 import Image from "next/image";
 import withAuth from "../../../components/withAuth";
 import FileUpload from "../../../components/FileUpload";
+import { RequestType } from "../../../enums/requestTypes";
+import { fetchCall } from "../../../hooks/useFetch";
 
 const Task = () => {
-  const router = useRouter();
-  let { sectionName, taskName } = router.query;
   const [uploaded, setUploaded] = useState(false);
-  const task = {
-    taskid: 5,
-    taskName: "HW1",
-    dutTme: "11:59",
-    dutDate: "2022-3-1",
-    grade: null,
-    max: 50,
-    description: "Please dont forget to upload the .icl file",
-    testCases: [
-      { name: "test1", testList: ["[1,2,3]", "[1,2,3,4,5]"] },
-      { name: "test2", testList: ["[1,2,3]", "[1,2,3,4,5]"] },
-      { name: "test3", testList: ["[1,2,3]", "[1,2,3,4,5]"] },
-    ],
-  };
-  let isTeacher: Boolean = true;
   const [buttonEditPopup, setButtonEditPopup] = useState(false);
+  const [task, setTask] = useState({});
+  const router = useRouter();
+  let { sectionName, taskid } = router.query;
+  let submissions = [];
+
+  // const task = {
+  //   taskID: 5,
+  //   taskName: "HW1",
+  //   dutTme: "11:59",
+  //   dutDate: "2022-3-1",
+  //   grade: null,
+  //   max: 50,
+  //   description: "Please dont forget to upload the .icl file",
+  //   testCases: [
+  //     { name: "test1", testList: ["[1,2,3]", "[1,2,3,4,5]"] },
+  //     { name: "test2", testList: ["[1,2,3]", "[1,2,3,4,5]"] },
+  //     { name: "test3", testList: ["[1,2,3]", "[1,2,3,4,5]"] },
+  //   ],
+  // };
+  let isTeacher: Boolean = true;
   let uploadedBtnStyle = {
     border: "3px solid #acf19b",
     color: "#acf19b",
@@ -46,6 +51,36 @@ const Task = () => {
     console.log("Running script...");
   };
 
+  useEffect(() => {
+    let querystring = require("querystring");
+
+    try {
+      querystring = querystring.stringify({
+        taskid: taskid,
+        description: true,
+        solution: true,
+        testcases: true,
+      });
+    } catch (error) {
+      querystring = "";
+    }
+    fetchCall({
+      url: "tasks?" + querystring,
+      method: RequestType.GET,
+    })
+      .then((response) => {
+        const res = response.json();
+        return res;
+      })
+      .then((data) => {
+        setTask(data[0]);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    // return () => setTask({});
+  }, [taskid]);
+
   return (
     <div className="task-container">
       <div className="run-script" onClick={() => handleScriptRun()}>
@@ -58,7 +93,7 @@ const Task = () => {
         />
       </div>
       <div className="task-title">
-        <h1>{taskName}</h1>
+        <h1>{task["taskname"]}</h1>
       </div>
       <div className="task-info">
         <div className="availability">
@@ -66,16 +101,16 @@ const Task = () => {
         </div>
         <div className="deadline">
           <p>
-            {task.dutDate} {task.dutTme}
+            {task["dueDate"]} {task["dueTime"]}
           </p>
         </div>
         <div className="grade">
-          {task.grade === null ? (
-            <p>-/{task.gradeOutOf}</p>
-          ) : (
+          {task["grade"] !== undefined ? (
             <p>
-              {task.grade}/{task.gradeOutOf}pts
+              {task["grade"]}/{task["max"]}
             </p>
+          ) : (
+            <p>-/{task["max"]}</p>
           )}
         </div>
       </div>
@@ -93,7 +128,7 @@ const Task = () => {
           />
         </div>
       )}
-      {task.description === null ? (
+      {task["description"] === null ? (
         ""
       ) : (
         <div className="task-description">
@@ -101,7 +136,7 @@ const Task = () => {
             <h1>Description</h1>
           </div>
           <div className="description-body">
-            <p>{task.description}</p>
+            <p>{task["description"]}</p>
           </div>
         </div>
       )}
@@ -115,8 +150,11 @@ const Task = () => {
           </div>
         </div>
       )}
-      {isTeacher && (
+      {isTeacher && submissions.length > 0 && (
         <div className="submissions-area">
+          <div className="title">
+            <h1>Submissions</h1>
+          </div>
           <div id="submission">
             <p>Sub</p>
             <p>Sub</p>

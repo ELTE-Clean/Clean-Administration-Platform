@@ -26,11 +26,11 @@ const exec = util.promisify(require("child_process").exec);
 router.get("/", isAuth, async (req, res, next) => {
   const descriptionEnable = req.query.description == "true";
   const solutionEnable = req.query.solution == "true";
+  const testCasesEnable = req.query.testcases == "true";
 
   /* Construction of the query parameters */
   let parameters = {};
   if (req.query.sectionid) parameters.sectionid = req.query.sectionid;
-  if (req.query.groupid) parameters.groupid = req.query.groupid;
   if (req.query.taskid) parameters.taskid = req.query.taskid;
 
   /* Get task/s */
@@ -46,12 +46,14 @@ router.get("/", isAuth, async (req, res, next) => {
       taskid: task.taskid,
       taskname: task.taskname,
       sectionid: task.sectionid,
-      groupid: task.groupid,
       max: task.max,
+      dueDate: task.expirydate,
+      dueTime: task.expirytime,
     };
 
     if (solutionEnable) finalShape.solution = task.solution;
     if (descriptionEnable) finalShape.description = task.description;
+    if (testCasesEnable) finalShape.testcasesText = task.testquestions;
     return finalShape;
   });
 
@@ -79,28 +81,27 @@ router.post(
     const fileNotInBody =
       !req.body || !req.body.solution || !req.body.description;
     const incompleteFile = fileNotInForm && fileNotInBody;
-    const incompleteBody =
-      !req.body ||
-      !req.body.taskid ||
-      !req.body.sectionid ||
-      !req.body.groupid ||
-      !req.body.max;
+    const incompleteBody = !req.body || !req.body.name || !req.body.sectionid;
     if (incompleteFile || incompleteBody)
-      return res
-        .status(400)
-        .send({ message: "Description or Solution are missing!" });
+      return res.status(400).send({ message: "Missing input parameters!" });
 
     const solution =
-      req.files.solution.data.toString("utf8") || req.body.solution;
+      req.files?.solution.data.toString("utf8") || req.body.solution;
     const description =
-      req.files.description.data.toString("utf8") || req.body.description;
+      req.files?.description.data.toString("utf8") || req.body.description;
 
+    const ts = new Date();
     /* Inserting the task into the table */
     const params = {
-      taskid: req.body.taskid,
       sectionid: req.body.sectionid,
-      groupid: req.body.groupid,
-      max: req.body.max,
+      max: req.body.maxGrade,
+      taskname: req.body.name,
+      expiryDate:
+        req.body.dueDate ||
+        `${ts.getFullYear()}-${ts.getMonth()}-${ts.getDay()}`,
+      expiryTime:
+        req.body.dueTime ||
+        `${ts.getHours()}:${ts.getMinutes()}:${ts.getSeconds()}`,
       solution: solution.replace(/^.*module.*$/g, "").replace(/\'/g, "''"),
       description: description.replace(/\'/g, "''"),
     };
@@ -207,8 +208,6 @@ router.put(
         `${ts.getHours()}:${ts.getMinutes()}:${ts.getSeconds()}`,
       testquestions: configYaml || oldTask.testQuestions,
     };
-
-    console.log(params);
 
     const updateResult = await updateTable("tasks", { taskID: tid }, params);
     if (updateResult.error)
@@ -356,12 +355,14 @@ router.post(
     log("DEBUG", "Execution Result: " + execRes.stdout);
 
     /* Return the script results */
-    return res.status(200).send(
-      JSON.stringify({
-        message: "Request Was Successfull",
-        result: execRes.stdout,
-      })
-    );
+    return res
+      .status(200)
+      .send(
+        JSON.stringify({
+          message: "Request Was Successfull",
+          result: execRes.stdout,
+        })
+      );
   }
 );
 

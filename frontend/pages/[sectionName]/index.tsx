@@ -15,7 +15,7 @@ import { fetchCall } from "../../hooks/useFetch";
 const Section = () => {
   const { sections } = useContext(UserContext);
   const [buttonEditPopup, setButtonEditPopup] = useState(false);
-  const [section, setSection] = useState({});
+  const [section, setSection] = useState({ sectionid: "" });
   const [tasks, setTasks] = useState([]);
 
   const router = useRouter();
@@ -31,15 +31,6 @@ const Section = () => {
     return sectionNames.includes(sectionName);
   };
 
-  const getSectionIdGroupId = (sectionName: string) => {
-    const sectionDetails = sections.filter(
-      (section: { sectionid: Number; sectionname: string; groupid: Number }) =>
-        section["sectionname"] === sectionName
-    );
-
-    return sectionDetails;
-  };
-
   useEffect(() => {
     let querystring = require("querystring");
     let tempSection = sections.filter(
@@ -51,32 +42,28 @@ const Section = () => {
     try {
       querystring = querystring.stringify({
         sectionid: section["sectionid"],
-        groupid: section["groupid"],
+        description: true,
+        solution: true,
+        testcases: true,
       });
     } catch (error) {
       querystring = "";
-      return null;
     }
-    if (Object.keys(section).length > 0) {
-      fetchCall({
-        url: "tasks?" + querystring,
-        method: RequestType.GET,
+    fetchCall({
+      url: "tasks?" + querystring,
+      method: RequestType.GET,
+    })
+      .then((response) => {
+        const res = response.json();
+        return res;
       })
-        .then((response) => {
-          const res = response.json();
-          return res;
-        })
-        .then((data) => {
-          // console.log(data);
-          setTasks(data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-      return () => {
-        setSection({}); // This worked for me
-      };
-    }
+      .then((data) => {
+        // console.log(data);
+        setTasks(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, [name, section, sections]);
 
   return isAdmin ? (
@@ -110,7 +97,7 @@ const Section = () => {
       )}
 
       {tasks.map((task, idx) => (
-        <Link key={idx} href={`/${name}/${task["taskname"]}`} passHref>
+        <Link key={idx} href={`/${name}/${task["taskid"]}`} passHref>
           <div key={idx} className="section-task">
             <div className="task-title">
               <h3>{task["taskname"]}</h3>

@@ -60,13 +60,29 @@
       }
     }
 
+    .dates-solution {
+      @include flex(row);
+      justify-content: space-between;
+    }
+
     .edit-homework-upload-area {
       @include flex(row);
       width: 100%;
       justify-content: flex-start;
       bottom: 0;
-      margin-bottom: 100px;
     }
+  }
+  .add-task-btn {
+    margin: 20px auto;
+    width: 130px;
+    @include btn(
+      $main-dark-blue,
+      $btn-txt-color,
+      $main-box-shadow,
+      none,
+      10px,
+      10px 20px
+    );
   }
   .right-section {
     min-width: 50%;

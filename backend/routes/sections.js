@@ -65,13 +65,14 @@ router.delete(
         .send(JSON.stringify({ message: "No section is given to be deleted" }));
 
     let unsuccess = [];
-    for (const section of req.body) {
-      let result = await deleteFromTable("sections", {
-        sectionname: section.sectionname,
-        groupid: section.groupid,
-      });
-      if (result.error) unsuccess = [...unsuccess, section];
-    }
+    let result1 = await deleteFromTable("grades", req.body);
+    if (result1.error) unsuccess = [...unsuccess, section];
+
+    let result2 = await deleteFromTable("tasks", req.body);
+    if (result2.error) unsuccess = [...unsuccess, section];
+
+    let result3 = await deleteFromTable("sections", req.body);
+    if (result3.error) unsuccess = [...unsuccess, section];
 
     if (unsuccess.length > 0)
       return res.status(200).send(

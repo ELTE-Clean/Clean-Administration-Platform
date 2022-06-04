@@ -17,7 +17,7 @@ const CreateStudentForm = (props: any) => {
              firstname: studentFirstName,
              lastname: studentLastName, 
              roles: studentRoleVar,
-             uid: studentNeptun},
+             neptun: studentNeptun},
          ] 
     console.log(studentFirstName);
     console.log(studentLastName);
@@ -138,7 +138,7 @@ const CreateStudentForm = (props: any) => {
             <input
               type="text"
               placeholder="Write Name here..."
-              name="studentLastName"
+              name="studentNeptun"
               onChange={(e) => setStudentNeptun(e.target.value)}
               required
             />
@@ -150,23 +150,12 @@ const CreateStudentForm = (props: any) => {
             <input
               type="text"
               placeholder="Write Name here..."
-              name="studentLastName"
+              name="studentRole"
               onChange={(e) => setStudentRole(e.target.value)}
               required
             />
             
 
-
-      <br />
-            <label>Student Role:(ex. student,demonstrator)</label>
-            <br />
-            <input
-              type="text"
-              placeholder="Write Name here..."
-              name="studentLastName"
-              onChange={(e) => setStudentRole(e.target.value)}
-              required
-            />
             
 
 

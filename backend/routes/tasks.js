@@ -29,11 +29,9 @@ const exec = util.promisify(require('child_process').exec);
     /* Construction of the query parameters */
     let parameters = {};
     if(req.query.sectionid)
-        parameters.sectionID = req.query.sectionid;
-    if(req.query.groupid)
-        parameters.groupID = req.query.groupid;
+        parameters.sectionid = req.query.sectionid;
     if(req.query.taskid)
-        parameters.taskID = req.query.taskid;
+        parameters.taskid = req.query.taskid;
 
     /* Get task/s */
     const result = await selectFromTable('tasks', parameters);
@@ -44,7 +42,7 @@ const exec = util.promisify(require('child_process').exec);
     const filtered = result.result.rows.map(task => {
         
         let finalShape = {
-            taskid: task.taskID,
+            taskid: task.taskid,
             taskname: task.taskname,
             sectionid: task.sectionid,
             max : task.max,
@@ -148,23 +146,31 @@ router.post("/create",fileUpload({ createParentPath: true }),isAuth, protector([
     return res.status(200).send({message: "Task created successfully!"});
 });
 
+
 /**
  * delete task/s
- * 
+ *
  * req.body: [
  *              {
  *                  taskid, taskname, sectionid, groupid
  *              }
  *          ]
  */
- router.delete("/", isAuth, protector(["admin", "demonstrator"]), async (req, res, next) => {
-
-    const result = await deleteFromTable('tasks', req.body);
-
+router.delete("/",isAuth, protector(["admin", "demonstrator"]), async (req, res, next) => {
+    if(!req.body.taskID)
+        return res.status(400).send(JSON.stringify({message: "taskID not found"}));
+    
+    const params = {taskID: req.body.taskID};
+    let result = await deleteFromTable("grades", params );
     if (result.error)
-        res.status(500).send(JSON.stringify({message: "Transaction Failed"}));
-    return res.status(200).send(JSON.stringify({message: "Tasks successfully updated"}));
+        return res.status(500).send(JSON.stringify({ message: "Transaction Failed" }));
+
+    result = await deleteFromTable("tasks", params);
+    if (result.error)
+        return res.status(500).send(JSON.stringify({ message: "Transaction Failed" }));
+    return res.status(200).send(JSON.stringify({ message: "Task successfully deleted" }));
 });
+
 
 /**
  * update task/s

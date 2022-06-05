@@ -15,10 +15,11 @@ const exec = util.promisify(require('child_process').exec);
 /**
  * Get all tasks. The given query defines the behavior of the endpoint.
  * For instance, if sectionid is given, then we get the section id part..
- * By default, we don't send the description, maxgrade, nor the solution. To request these,
+ * By default, we don't send the description, test cases, nor the solution. To request these,
  * enable them in the query by:
  *  solution=true
  *  description=true
+ *  testcases=true
  */
  router.get("/", isAuth, async (req, res, next) => {
     const descriptionEnable = req.query.description == 'true';
@@ -58,6 +59,48 @@ const exec = util.promisify(require('child_process').exec);
     });
 
     return res.status(200).send(JSON.stringify(filtered));
+});
+
+
+/**
+ * Get specific task submission details. If a user ID is specified in the query, 
+ * then we return the submission of that specific user. 
+ * If not, we return all the submissions of the users assigned with that task.
+ * By default, we don't send the submission itself. To request this,
+ * enable it in the query by:
+ *  submission=true
+ * The solution will be appended at the end of the result.
+ */
+ router.get("/:taskID/submissions", isAuth, async (req, res, next) => {
+    const submissionEnable = req.query.submission == 'true';
+
+    const tid = req.params.taskID;
+    const uid = req.query.userID;
+
+    /* Construction of the query parameters */
+    let parameters = {taskID: tid};
+    if (uid) parameters.userID = uid;
+
+    /* Get grade/s */
+    const result = await selectFromTable('grades', parameters);
+    if (result.error) 
+        return res.status(500).send(JSON.stringify({message: "Transaction Failed"}));
+    
+    const data = result.result.rows.map(sub => {
+        let finalShape = {
+            userid: sub.userid,
+            taskid: sub.taskid,
+            gradeid: sub.gradeid,
+            grade: sub.grade
+        };
+
+        if(submissionEnable)
+            finalShape.submission = sub.submission;
+
+        return finalShape;
+    });
+
+    return res.status(200).send(JSON.stringify(data));
 });
 
 

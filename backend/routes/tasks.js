@@ -94,8 +94,10 @@ const exec = util.promisify(require('child_process').exec);
             grade: sub.grade
         };
 
-        if(submissionEnable)
+        if (submissionEnable) {
+            finalShape.filename = sub.filename;
             finalShape.submission = sub.submission;
+        }
 
         return finalShape;
     });
@@ -128,13 +130,14 @@ router.post("/create",fileUpload({ createParentPath: true }),isAuth, protector([
     const ts = new Date();
     /* Inserting the task into the table */
     const params = {
-        sectionid: req.body.sectionid,
-        max: req.body.maxGrade,
+        sectionid : req.body.sectionid,
+        max : req.body.maxGrade,
         taskname: req.body.name,
         expiryDate : req.body.dueDate  || `${ts.getFullYear()}-${ts.getMonth()}-${ts.getDay()}`,
         expiryTime : req.body.dueTime ||  `${ts.getHours()}:${ts.getMinutes()}:${ts.getSeconds()}`,
         solution : solution.replace(/^.*module.*$/g,'').replace(/\'/g, "''"),
-        description: description.replace(/\'/g, "''"),
+        description : description.replace(/\'/g, "''"),
+        testquestions : req.body.testcases
     };
     const result = await insertIntoTable('tasks', params);
     if(result.error)
@@ -189,16 +192,6 @@ router.put("/:taskID/update",fileUpload({ createParentPath: true }), isAuth, pro
     
     const oldTask = result.result.rows[0];
 
-    let configYaml = "test_questions:\n";
-    req.body.testcases.forEach((question, i) => {
-        configYaml += `\t- q${i}:\n`
-        configYaml += `\t\tfunction_name: ${question.functionname}\n`;
-        configYaml += `\t\ttest_cases:\n`;
-        question.parameters.forEach(parameter => {
-            configYaml += `\t\t\t- ${parameter}\n`;
-        });
-    })
-
     let ts = new Date();
 
     const params = {
@@ -208,7 +201,7 @@ router.put("/:taskID/update",fileUpload({ createParentPath: true }), isAuth, pro
         sectionid : req.body.sectionid || oldTask.sectionID,
         expiryDate : req.body.dueDate || oldTask.expiryDate || `${ts.getFullYear()}-${ts.getMonth()}-${ts.getDay()}`,
         expiryTime : req.body.dueTime || oldTask.expiryTime|| `${ts.getHours()}:${ts.getMinutes()}:${ts.getSeconds()}`,
-        testquestions : configYaml || oldTask.testQuestions
+        testquestions : req.body.testcases || oldTask.testQuestions
     };
 
     const updateResult = await updateTable("tasks", {taskID: tid}, params);
@@ -232,12 +225,13 @@ router.post("/:taskID/submit", fileUpload({ createParentPath: true }), isAuth, p
 
     const uid = req.body.userID;
     const tid = req.params.taskID;
+    const filename = req.files.submission.name.toString("utf8") || req.body.filename;
     let submission = req.files.submission.data.toString("utf8") || req.body.submission;
 
     submission = submission.replace(/^.*module.*$/g, '');
     console.log(submission);
 
-    let result = await insertIntoTable('grades', {userID : uid, taskID: tid, submission: submission });
+    let result = await insertIntoTable('grades', {userID : uid, taskID: tid, filename: filename, submission: submission });
     if(result.error){
         log("ERROR", result.error.toString());
         return next("Submitting answer failed");
@@ -303,7 +297,19 @@ router.post("/:taskID/grade", isAuth, protector(["admin", "demonstrator"]), asyn
         config += `\t- ${fileName}\n`; 
         fs.writeFileSync(fileName, code, (err) => { if (err) log("ERROR", err.toString());});
     });
-    config += taskRecord.result.rows[0].testquestions.replace(/\\t/g, '  ');
+
+    /* Convert test cases to yaml */
+    let testYaml = "test_questions:\n";
+    JSON.parse(taskRecord.result.rows[0].testquestions).forEach((question, i) => {
+        testYaml += `\t- q${i}:\n`
+        testYaml += `\t\tfunction_name: ${question.functionname}\n`;
+        testYaml += `\t\ttest_cases:\n`;
+        question.parameters.forEach(parameter => {
+            testYaml += `\t\t\t- ${parameter}\n`;
+        });
+    });
+
+    config += testYaml.replace(/\\t/g, '  ');
     config = config.replace(/\t/g, '  ');
     log("DEBUG", `Correction Script Configuration: \n${config}`);
 

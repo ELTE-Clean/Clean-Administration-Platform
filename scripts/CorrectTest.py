@@ -76,9 +76,9 @@ class CorrectTest:
             file_path)
         pass_str = f"Compiling {file_name_without_icl}\nGenerating code for {file_name_without_icl}\nLinking {file_name_without_icl}"
         for index, question in enumerate(self.test_questions):
-            function_name = question[f'q{index + 1}']["function_name"]
+            function_name = question["function_name"]
             function_tests = {}
-            for test in question[f'q{index + 1}']["test_cases"]:
+            for test in question["test_cases"]:
                 with open(file_path, 'a') as write_obj:
                     write_obj.write(f'Start = {function_name} {test}\n')
 

@@ -56,7 +56,7 @@ const Task = () => {
     console.log("Running script...");
     const taskNum = (getNumb(taskName));
     fetchCall({
-      url: "tasks/"+taskNum+"/grade",
+      url: `tasks/${taskNum}/grade`,
       method: RequestType.POST,
     })
       .then((response) => {

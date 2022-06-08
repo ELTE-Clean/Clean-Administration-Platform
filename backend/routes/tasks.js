@@ -177,7 +177,7 @@ router.delete("/",isAuth, protector(["admin", "demonstrator"]), async (req, res,
  *
  * 
  * req.body:    {
- *                  diff: {taskname?, sectionid?, solution?, testcases?, description?, expiryDate?, expiryTime?}
+ *                  taskname?, sectionid?, solution?, testcases?, description?, expiryDate?, expiryTime?
  *              }
  *          
  * req.files: {solution? , description? }
@@ -244,13 +244,13 @@ router.post("/:taskID/submit", fileUpload({ createParentPath: true }), isAuth, p
 
 
 /**
- * Grade a given task and returns the results of the grading.
+ * Grade a given task and returns the results of the automatic evaluation.
  * 
- * Call the endpoit with
- * tasks/1/grade , where the 1 is the task id.
+ * Call the endpoint with
+ * tasks/1/evaluate , where the 1 is the task id.
  * 
  */
-router.post("/:taskID/grade", isAuth, protector(["admin", "demonstrator"]), async (req, res, next) => {
+router.post("/:taskID/evaluate", isAuth, protector(["admin", "demonstrator"]), async (req, res, next) => {
     const tid = req.params.taskID;
     const gid = req.body.groupID;
 
@@ -334,8 +334,39 @@ router.post("/:taskID/grade", isAuth, protector(["admin", "demonstrator"]), asyn
     log("DEBUG", "Execution Result: " + execRes.stdout);
     
     /* Return the script results */
-    return res.status(200).send(JSON.stringify({message: "Request Was Successfull", result: execRes.stdout}));
+    return res.status(200).send(JSON.stringify({message: "Request Was Successful", result: execRes.stdout}));
 });
 
+/**
+ * Grade a given submission.
+ * 
+ * req.body:    {
+ *                  userid, taskid, grade
+ *              }
+ * 
+ *              OR
+ *
+ *              {
+ *                  gradeid, grade
+ *              }
+ */
+router.put("/grade", isAuth, protector(["admin", "demonstrator"]), async (req, res, next) => {
+
+    const submission = {};
+    if (req.body.taskID && req.body.groupID) {
+        submission.userID = req.body.userID;
+        submission.taskID = req.body.taskID;
+    } 
+    else if (req.body.gradeid) {
+        submission.gradeID = req.body.gradeID;
+    }
+    else return res.status(400).send(JSON.stringify({message: "Request body must contain userID and taskID or just gradeID"}));
+    
+    const result = await updateTable("grades", submission, {grade: req.body.grade})
+    if (result.error)
+        return res.status(500).send(JSON.stringify({ message: "Transaction Failed" }));
+
+    return res.status(200).send(JSON.stringify(result.result.rows));
+});
 
 module.exports = router;

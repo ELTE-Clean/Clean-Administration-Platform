@@ -1,5 +1,6 @@
 from concurrent.futures import ThreadPoolExecutor
 import datetime
+from distutils.log import error
 import subprocess
 from time import time
 import yaml
@@ -72,13 +73,12 @@ class CorrectTest:
     def test_file(self, file_path):
         file_result = {}
         self.removeStartFromFile(file_path)
-        prior_path, file_name_without_icl, ignore = self.get_student_name_from_path(
-            file_path)
+        prior_path, file_name_without_icl, ignore = self.get_student_name_from_path(file_path)
         pass_str = f"Compiling {file_name_without_icl}\nGenerating code for {file_name_without_icl}\nLinking {file_name_without_icl}"
         for index, question in enumerate(self.test_questions):
-            function_name = question["function_name"]
+            function_name = question[f'q{index}']["function_name"]
             function_tests = {}
-            for test in question["test_cases"]:
+            for test in question[f'q{index}']["test_cases"]:
                 with open(file_path, 'a') as write_obj:
                     write_obj.write(f'Start = {function_name} {test}\n')
 

@@ -40,12 +40,13 @@ const exec = util.promisify(require('child_process').exec);
 
     /* Decide what to return */
     const filtered = result.result.rows.map(task => {
+        
         let finalShape = {
             taskid: task.taskid,
             taskname: task.taskname,
             sectionid: task.sectionid,
             max : task.max,
-            dueDate : task.expirydate,
+            dueDate : task.expirydate?.toISOString().split('T')[0],
             dueTime : task.expirytime
         };
 

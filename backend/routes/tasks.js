@@ -18,38 +18,48 @@ const exec = util.promisify(require("child_process").exec);
 /**
  * Get all tasks. The given query defines the behavior of the endpoint.
  * For instance, if sectionid is given, then we get the section id part..
- * By default, we don't send the description, maxgrade, nor the solution. To request these,
+ * By default, we don't send the description, test cases, nor the solution. To request these,
  * enable them in the query by:
  *  solution=true
  *  description=true
+ *  testcases=true
  */
-router.get("/", isAuth, async (req, res, next) => {
-  const descriptionEnable = req.query.description == "true";
-  const solutionEnable = req.query.solution == "true";
-  const testCasesEnable = req.query.testcases == "true";
+ router.get("/", isAuth, async (req, res, next) => {
+    const descriptionEnable = req.query.description == 'true';
+    const solutionEnable = req.query.solution == 'true';
+    const testCasesEnable = req.query.testcases == 'true';
 
-  /* Construction of the query parameters */
-  let parameters = {};
-  if (req.query.sectionid) parameters.sectionid = req.query.sectionid;
-  if (req.query.taskid) parameters.taskid = req.query.taskid;
+    /* Construction of the query parameters */
+    let parameters = {};
+    if(req.query.sectionid)
+        parameters.sectionid = req.query.sectionid;
+    if(req.query.taskid)
+        parameters.taskid = req.query.taskid;
 
-  /* Get task/s */
-  const result = await selectFromTable("tasks", parameters);
-  if (result.error)
-    return res
-      .status(500)
-      .send(JSON.stringify({ message: "Transaction Failed" }));
+    /* Get task/s */
+    const result = await selectFromTable('tasks', parameters);
+    if (result.error) 
+        return res.status(500).send(JSON.stringify({message: "Transaction Failed"}));
 
-  /* Decide what to return */
-  const filtered = result.result.rows.map((task) => {
-    let finalShape = {
-      taskid: task.taskid,
-      taskname: task.taskname,
-      sectionid: task.sectionid,
-      max: task.max,
-      dueDate: task.expirydate,
-      dueTime: task.expirytime,
-    };
+    /* Decide what to return */
+    const filtered = result.result.rows.map(task => {
+        let finalShape = {
+            taskid: task.taskid,
+            taskname: task.taskname,
+            sectionid: task.sectionid,
+            max : task.max,
+            dueDate : task.expirydate,
+            dueTime : task.expirytime
+        };
+
+        if(solutionEnable)
+            finalShape.solution = task.solution;
+        if(descriptionEnable)
+            finalShape.description = task.description;
+        if(testCasesEnable)
+            finalShape.testcasesText = task.testquestions;
+        return finalShape;
+    });
 
     if (solutionEnable) finalShape.solution = task.solution;
     if (descriptionEnable) finalShape.description = task.description;
@@ -59,6 +69,48 @@ router.get("/", isAuth, async (req, res, next) => {
 
   return res.status(200).send(JSON.stringify(filtered));
 });
+
+/**
+ * Get specific task submission details. If a user ID is specified in the query, 
+ * then we return the submission of that specific user. 
+ * If not, we return all the submissions of the users assigned with that task.
+ * By default, we don't send the submission itself. To request this,
+ * enable it in the query by:
+ *  submission=true
+ * The solution will be appended at the end of the result.
+ */
+ router.get("/:taskID/submissions", isAuth, async (req, res, next) => {
+    const submissionEnable = req.query.submission == 'true';
+
+    const tid = req.params.taskID;
+    const uid = req.query.userID;
+
+    /* Construction of the query parameters */
+    let parameters = {taskID: tid};
+    if (uid) parameters.userID = uid;
+
+    /* Get grade/s */
+    const result = await selectFromTable('grades', parameters);
+    if (result.error) 
+        return res.status(500).send(JSON.stringify({message: "Transaction Failed"}));
+    
+    const data = result.result.rows.map(sub => {
+        let finalShape = {
+            userid: sub.userid,
+            taskid: sub.taskid,
+            gradeid: sub.gradeid,
+            grade: sub.grade
+        };
+
+        if(submissionEnable)
+            finalShape.submission = sub.submission;
+
+        return finalShape;
+    });
+
+    return res.status(200).send(JSON.stringify(data));
+});
+
 
 /**
  * Creates a task.
@@ -82,28 +134,22 @@ router.post(
       !req.body || !req.body.solution || !req.body.description;
     const incompleteFile = fileNotInForm && fileNotInBody;
     const incompleteBody = !req.body || !req.body.name || !req.body.sectionid;
-    if (incompleteFile || incompleteBody)
-      return res.status(400).send({ message: "Missing input parameters!" });
+    if(incompleteFile || incompleteBody)
+        return res.status(400).send({message: "Missing input parameters!"});
 
-    const solution =
-      req.files?.solution.data.toString("utf8") || req.body.solution;
-    const description =
-      req.files?.description.data.toString("utf8") || req.body.description;
+    const solution = req.files?.solution.data.toString("utf8") || req.body.solution;
+    const description = req.files?.description.data.toString("utf8") || req.body.description;
 
     const ts = new Date();
     /* Inserting the task into the table */
     const params = {
-      sectionid: req.body.sectionid,
-      max: req.body.maxGrade,
-      taskname: req.body.name,
-      expiryDate:
-        req.body.dueDate ||
-        `${ts.getFullYear()}-${ts.getMonth()}-${ts.getDay()}`,
-      expiryTime:
-        req.body.dueTime ||
-        `${ts.getHours()}:${ts.getMinutes()}:${ts.getSeconds()}`,
-      solution: solution.replace(/^.*module.*$/g, "").replace(/\'/g, "''"),
-      description: description.replace(/\'/g, "''"),
+        sectionid: req.body.sectionid,
+        max: req.body.maxGrade,
+        taskname: req.body.name,
+        expiryDate : req.body.dueDate  || `${ts.getFullYear()}-${ts.getMonth()}-${ts.getDay()}`,
+        expiryTime : req.body.dueTime ||  `${ts.getHours()}:${ts.getMinutes()}:${ts.getSeconds()}`,
+        solution : solution.replace(/^.*module.*$/g,'').replace(/\'/g, "''"),
+        description: description.replace(/\'/g, "''"),
     };
     const result = await insertIntoTable("tasks", params);
     if (result.error)
@@ -209,7 +255,7 @@ router.put(
       testquestions: configYaml || oldTask.testQuestions,
     };
 
-    const updateResult = await updateTable("tasks", { taskID: tid }, params);
+    const updateResult = await updateTable("tasks", {taskID: tid}, params);
     if (updateResult.error)
       res.status(500).send(JSON.stringify({ message: "Transaction Failed" }));
     return res
@@ -231,14 +277,10 @@ router.post(
         .send(JSON.stringify({ message: "Request body must contain userID" }));
 
     const fileNotInForm = !req.files || !req.files.submission;
-    const fileNotInBody = !req.body || !req.body.submission;
-    const incompleteFile = fileNotInForm && fileNotInBody;
-    if (incompleteFile)
-      return res
-        .status(400)
-        .send(JSON.stringify({ message: "No Answer is uploaded" }));
+    const fileNotInBody = !req.body || !req.body.submission;    let result = await selectFromTable("tasks", { taskID: tid });
+    if (result.error)
+      res.status(500).send(JSON.stringify({ message: "Transaction Failed" }));
 
-    const uid = req.body.userID;
     const tid = req.params.taskID;
     let submission =
       req.files.submission.data.toString("utf8") || req.body.submission;
@@ -350,7 +392,10 @@ router.post(
     const execRes = await exec(scriptCode);
     if (execRes.stderr) {
       log("ERROR", "Execution Result: " + execRes.stderr);
-      return next("Failed to run the correction script");
+      return nex    let result = await selectFromTable("tasks", { taskID: tid });
+      if (result.error)
+        res.status(500).send(JSON.stringify({ message: "Transaction Failed" }));
+  ("Failed to run the correction script");
     }
     log("DEBUG", "Execution Result: " + execRes.stdout);
 

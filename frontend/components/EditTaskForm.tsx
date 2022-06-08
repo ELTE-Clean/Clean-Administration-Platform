@@ -9,26 +9,24 @@ import FileUpload from "./FileUpload";
 
 const EditTaskForm = (props: any) => {
   const [task, setTask] = useState({
+    taskid: props.task["taskid"],
+    sectionid: props.task["sectionid"],
     taskName: props.task["taskname"],
     description: props.task["description"],
-    testCases: props.task["testcases"],
+    testCases:
+      props.task["testcases"] === undefined ? [] : props.task["testcases"],
     solution: props.task["solution"],
-    dutDate: props.task["dutDate"],
-    dutTime: props.task["dutTime"],
+    dueDate: props.task["dutDate"],
+    dueTime: props.task["dutTime"],
   });
-  const [taskName, setTaskName] = useState(props.task["taskname"]);
+
   const [testCase, setTestCase] = useState({});
-  const [taskDescription, setTaskDescription] = useState(
-    props.task["description"]
-  );
   const [functionName, setFunctionName] = useState("");
   const [buttonEditPopup, setButtonEditPopup] = useState(false);
 
   let handelFileUpload = (file: File) => {
-    let latestFile = file.name;
-    console.log(latestFile);
-    // setUploadedFileName(latestFile);
-    // later send file to the server
+    // let latestFile = file.name;
+    setTask({ ...task, solution: file });
   };
 
   let funcViewHandler = (taskIndex: number) => {
@@ -54,13 +52,13 @@ const EditTaskForm = (props: any) => {
     } else {
       console.log("Adding function");
       let newTestCasesSet;
-      if (task["testCases"] !== undefined) {
+      if (task["testCases"] === undefined) {
+        newTestCasesSet = [{ name: funcName, parameter: [] }];
+      } else {
         newTestCasesSet = [
           ...task["testCases"],
-          { name: funcName, testList: [] },
+          { name: funcName, parameter: [] },
         ];
-      } else {
-        newTestCasesSet = [{ name: funcName, testList: [] }];
       }
       setTask({ ...task, testCases: newTestCasesSet });
     }
@@ -69,7 +67,7 @@ const EditTaskForm = (props: any) => {
     fetchCall({
       url: "tasks",
       method: RequestType.DELETE,
-      body: { taskID: props.task["taskid"] },
+      body: { taskID: task["taskid"] },
     })
       .then((response) => {
         const res = response.json();
@@ -84,23 +82,22 @@ const EditTaskForm = (props: any) => {
       });
   };
   let saveHandler = () => {
-    if (taskName === "") {
+    if (task["taskName"].trim() === "") {
       alert("Task name cannot be empty!!!");
     } else {
-      console.log("Handling task name change");
-      console.log(props.task);
+      console.log(task);
 
       fetchCall({
-        url: "tasks/update",
+        url: `tasks/${task["taskid"]}/update`,
         method: RequestType.PUT,
-        body: { task: { taskID: props.taskID }, diff: { taskname: "HW222" } },
+        body: { diff: task },
       })
         .then((response) => {
           const res = response.json();
           return res;
         })
         .then((data) => {
-          console.log("Saved Task", taskName);
+          console.log("Saved Task", task["taskName"]);
           router.push("/");
         })
         .catch((error) => {
@@ -111,7 +108,7 @@ const EditTaskForm = (props: any) => {
 
   return (
     <div className="container">
-      <h1>Edit - {taskName}</h1>
+      <h1>Edit - {task["taskName"]}</h1>
       <br />
       <div className="two-section-container">
         <div className="left-section">
@@ -119,27 +116,36 @@ const EditTaskForm = (props: any) => {
           <h3>Name:</h3>
           <input
             type="text"
-            value={taskName}
-            onChange={(e) => setTaskName(e.target.value)}
+            value={task["taskName"]}
+            onChange={(e) => setTask({ ...task, taskName: e.target.value })}
           />
           <br />
           <br />
           <h3>Description:</h3>
-          <RichTextEditor
+          {/* <RichTextEditor
             classTemp={"description-area"}
             valueTemp={taskDescription}
             onChange={(value) => setTaskDescription(value)}
+          /> */}
+          <textarea
+            onChange={(e) => setTask({ ...task, description: e.target.value })}
           />
 
           <br />
           <div className="dates-solution">
             <div>
               <h3>Due date</h3>
-              <input type="date" />
+              <input
+                type="date"
+                onChange={(e) => setTask({ ...task, dueDate: e.target.value })}
+              />
             </div>
             <div>
               <h3>Due time</h3>
-              <input type="time" />
+              <input
+                type="time"
+                onChange={(e) => setTask({ ...task, dueTime: e.target.value })}
+              />
             </div>
             <div>
               <h3>Solution file:</h3>

@@ -12,24 +12,10 @@ const Task = () => {
   const [uploaded, setUploaded] = useState(false);
   const [buttonEditPopup, setButtonEditPopup] = useState(false);
   const [task, setTask] = useState({});
+  const [submissions, setSubmissions] = useState([]);
   const router = useRouter();
   let { sectionName, taskid } = router.query;
-  let submissions = [];
 
-  // const task = {
-  //   taskID: 5,
-  //   taskName: "HW1",
-  //   dutTme: "11:59",
-  //   dutDate: "2022-3-1",
-  //   grade: null,
-  //   max: 50,
-  //   description: "Please dont forget to upload the .icl file",
-  //   testCases: [
-  //     { name: "test1", testList: ["[1,2,3]", "[1,2,3,4,5]"] },
-  //     { name: "test2", testList: ["[1,2,3]", "[1,2,3,4,5]"] },
-  //     { name: "test3", testList: ["[1,2,3]", "[1,2,3,4,5]"] },
-  //   ],
-  // };
   let isTeacher: Boolean = true;
   let uploadedBtnStyle = {
     border: "3px solid #acf19b",
@@ -78,7 +64,21 @@ const Task = () => {
       .catch((error) => {
         console.error(error);
       });
-    // return () => setTask({});
+    fetchCall({
+      url: `tasks/${taskid}/submissions?submission=true`,
+      method: RequestType.GET,
+    })
+      .then((response) => {
+        const res = response.json();
+        return res;
+      })
+      .then((data) => {
+        console.log(data);
+        setSubmissions(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, [taskid]);
 
   return (
@@ -155,12 +155,18 @@ const Task = () => {
           <div className="title">
             <h1>Submissions</h1>
           </div>
-          <div id="submission">
-            <p>Sub</p>
-            <p>Sub</p>
-            <p>Sub</p>
-            <p>Sub</p>
-            <p>Sub</p>
+          <div id="submissions">
+            {submissions.map((submission, idx) => (
+              <div key={idx}>
+                <p>
+                  Userid: {submission.userid} - Usergrade: {submission.grade}
+                </p>
+                <p>
+                  solution: {submission.submission} - Usergrade:{" "}
+                  {submission.grade}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       )}

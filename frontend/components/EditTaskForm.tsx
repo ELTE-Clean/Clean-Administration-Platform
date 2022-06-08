@@ -11,9 +11,9 @@ const EditTaskForm = (props: any) => {
   const [task, setTask] = useState({
     taskid: props.task["taskid"],
     sectionid: props.task["sectionid"],
-    taskName: props.task["taskname"],
+    taskname: props.task["taskname"],
     description: props.task["description"],
-    testCases:
+    testcases:
       props.task["testcases"] === undefined ? [] : props.task["testcases"],
     solution: props.task["solution"],
     dueDate: props.task["dutDate"],
@@ -34,15 +34,15 @@ const EditTaskForm = (props: any) => {
   };
 
   let popTestCase = (testCaseId: number) => {
-    const testCase = task["testCases"][testCaseId];
+    const testCase = task["testcases"][testCaseId];
     setTestCase(testCase);
     setButtonEditPopup(true);
   };
 
   let removeFuncHandler = (taskIndex: number) => {
-    let testCases = task["testCases"];
-    testCases.splice(taskIndex, 1);
-    setTask({ ...task, testCases: testCases });
+    let testcases = task["testcases"];
+    testcases.splice(taskIndex, 1);
+    setTask({ ...task, testcases: testcases });
   };
 
   let addFuncHandler = () => {
@@ -52,15 +52,15 @@ const EditTaskForm = (props: any) => {
     } else {
       console.log("Adding function");
       let newTestCasesSet;
-      if (task["testCases"] === undefined) {
+      if (task["testcases"] === undefined) {
         newTestCasesSet = [{ name: funcName, parameter: [] }];
       } else {
         newTestCasesSet = [
-          ...task["testCases"],
+          ...task["testcases"],
           { name: funcName, parameter: [] },
         ];
       }
-      setTask({ ...task, testCases: newTestCasesSet });
+      setTask({ ...task, testcases: newTestCasesSet });
     }
   };
   let deleteTaskHandler = () => {
@@ -82,7 +82,7 @@ const EditTaskForm = (props: any) => {
       });
   };
   let saveHandler = () => {
-    if (task["taskName"].trim() === "") {
+    if (task["taskname"].trim() === "") {
       alert("Task name cannot be empty!!!");
     } else {
       console.log(task);
@@ -90,14 +90,14 @@ const EditTaskForm = (props: any) => {
       fetchCall({
         url: `tasks/${task["taskid"]}/update`,
         method: RequestType.PUT,
-        body: { diff: task },
+        body: task,
       })
         .then((response) => {
           const res = response.json();
           return res;
         })
         .then((data) => {
-          console.log("Saved Task", task["taskName"]);
+          console.log("Saved Task", task["taskname"]);
           router.push("/");
         })
         .catch((error) => {
@@ -108,7 +108,7 @@ const EditTaskForm = (props: any) => {
 
   return (
     <div className="container">
-      <h1>Edit - {task["taskName"]}</h1>
+      <h1>Edit - {task["taskname"]}</h1>
       <br />
       <div className="two-section-container">
         <div className="left-section">
@@ -116,8 +116,8 @@ const EditTaskForm = (props: any) => {
           <h3>Name:</h3>
           <input
             type="text"
-            value={task["taskName"]}
-            onChange={(e) => setTask({ ...task, taskName: e.target.value })}
+            value={task["taskname"]}
+            onChange={(e) => setTask({ ...task, taskname: e.target.value })}
           />
           <br />
           <br />
@@ -161,12 +161,12 @@ const EditTaskForm = (props: any) => {
         <div className="right-section">
           <h3>Test Case</h3>
           <br />
-          {task["testCases"] === undefined && (
+          {task["testcases"] === undefined && (
             <p>No test cases yet for this task</p>
           )}
-          {task["testCases"] !== undefined && (
+          {task["testcases"] !== undefined && (
             <div className="edit-homework-container">
-              {task["testCases"].map((testCase: any, idx: number) => (
+              {task["testcases"].map((testCase: any, idx: number) => (
                 <div key={idx} className="homework-task-container">
                   <div
                     className="edit-homework-btn"

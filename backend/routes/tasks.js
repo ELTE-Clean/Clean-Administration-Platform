@@ -303,8 +303,8 @@ router.post("/:taskID/evaluate", isAuth, protector(["admin", "demonstrator"]), a
     let testYaml = "test_questions:\n";
     JSON.parse(taskRecord.result.rows[0].testquestions).forEach((question, i) => {
         testYaml += `\t- q${i}:\n`
-        testYaml += `\t\tfunction_name: ${question.functionname}\n`;
-        testYaml += `\t\ttest_cases:\n`;
+        testYaml += `\t\t\tfunction_name: ${question.functionname}\n`;
+        testYaml += `\t\t\ttest_cases:\n`;
         question.parameters.forEach(parameter => {
             testYaml += `\t\t\t- ${parameter}\n`;
         });

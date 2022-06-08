@@ -1,12 +1,12 @@
 teacher_file: "teacher.icl"
 test_questions:
-  - q1:
+  - q0:
       function_name: addInt
       test_cases:
         - 1 2
         - 5 13
         - 12 99
-  - q2:
+  - q1:
       function_name: subInt
       test_cases:
         - 3 4

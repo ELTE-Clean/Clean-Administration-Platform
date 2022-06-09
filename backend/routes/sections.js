@@ -51,7 +51,7 @@ router.post(
 );
 
 /**
- * Delete section/s from a table with given parameters. The operation is a junction AND operation.
+ * Delete section from a table with given parameters. The operation is a junction AND operation.
  * req.body: {sectionid}
  */
 router.delete(
@@ -63,30 +63,30 @@ router.delete(
       return res
         .status(400)
         .send(JSON.stringify({ message: "No section is given to be deleted" }));
+      
+    const section = await selectFromTable("sections", req.body);
+    if (section.error) next("Could not get section");
+    if (section.result.rowCount === 0) next("Section does not exist");
 
-    let unsuccess = [];
-    let result1 = await deleteFromTable("grades", req.body);
-    if (result1.error) unsuccess = [...unsuccess, section];
+    const tasksToRemove = await selectFromTable("tasks", req.body);
+    if (tasksToRemove.error) next("Could not get tasks associated with section");
 
-    let result2 = await deleteFromTable("tasks", req.body);
-    if (result2.error) unsuccess = [...unsuccess, section];
+    tasksToRemove.result.rows.forEach(async task => {
+      const result = await deleteFromTable("grades", {taskid: task.taskid});
+      if (result.error) next("Could not delete task submission (grade) associated with section");
+    });
 
-    let result3 = await deleteFromTable("sections", req.body);
-    if (result3.error) unsuccess = [...unsuccess, section];
+    const taskDelResult = await deleteFromTable("tasks", req.body);
+    if (taskDelResult.error) next("Could not delete task associated with section");
 
-    if (unsuccess.length > 0)
-      return res.status(200).send(
-        JSON.stringify({
-          message: "Not all sections have been deleted",
-          unsuccess: unsuccess,
-        })
+    const sectionDelResult = await deleteFromTable("sections", req.body);
+    if (sectionDelResult.error) next("Could not delete section");
+
+    return res
+      .status(200)
+      .send(
+        JSON.stringify({ message: "Section has been deleted successfully" })
       );
-    else
-      return res
-        .status(200)
-        .send(
-          JSON.stringify({ message: "Sections have been deleted successfully" })
-        );
   }
 );
 

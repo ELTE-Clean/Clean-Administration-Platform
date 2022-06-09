@@ -222,7 +222,7 @@ router.post("/:taskID/submit", fileUpload({ createParentPath: true }), isAuth, p
     const fileNotInBody = !req.body  || !req.body.submission;
     const incompleteFile = fileNotInForm && fileNotInBody;
     if(incompleteFile)
-        return res.status(400).send(JSON.stringify({message: "No Answer is uploaded"}));
+        return res.status(400).send(JSON.stringify({message: "No answer is uploaded"}));
 
     const uid = req.body.userID;
     const tid = req.params.taskID;
@@ -239,7 +239,7 @@ router.post("/:taskID/submit", fileUpload({ createParentPath: true }), isAuth, p
     }
     log("INFO", "A submission has been inserted");
 
-    return res.status(200).send(JSON.stringify({message: "Sumbission is Successfull"}));
+    return res.status(200).send(JSON.stringify({message: "Sumbission is Successful"}));
 });
 
 
@@ -353,7 +353,7 @@ router.post("/:taskID/evaluate", isAuth, protector(["admin", "demonstrator"]), a
 router.put("/grade", isAuth, protector(["admin", "demonstrator"]), async (req, res, next) => {
 
     const submission = {};
-    if (req.body.taskID && req.body.groupID) {
+    if (req.body.userID && req.body.taskID) {
         submission.userID = req.body.userID;
         submission.taskID = req.body.taskID;
     } 

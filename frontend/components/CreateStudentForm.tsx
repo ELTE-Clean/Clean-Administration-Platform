@@ -150,19 +150,6 @@ const CreateStudentForm = (props: any) => {
             <input
               type="text"
               placeholder="Write Name here..."
-              name="studentLastName"
-              onChange={(e) => setStudentRole(e.target.value)}
-              required
-            />
-            
-
-
-      <br />
-            <label>Student Role:(ex. student,demonstrator)</label>
-            <br />
-            <input
-              type="text"
-              placeholder="Write Name here..."
               name="studentRole"
               onChange={(e) => setStudentRole(e.target.value)}
               required

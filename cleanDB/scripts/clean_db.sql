@@ -155,6 +155,7 @@ CREATE TABLE public.grades (
     gradeID     INT             DEFAULT nextval('gradeSeq'),
     userID      INT             REFERENCES  users(userID)           NOT NULL,
     taskID      INT             REFERENCES  tasks(taskID)           NOT NULL,
+    filename    VARCHAR(50),
     submission  VARCHAR(5000)   DEFAULT NULL, -- 5KB Storage of text. 
     grade       INT             DEFAULT NULL,
     PRIMARY KEY (gradeID)
@@ -217,21 +218,18 @@ addInt :: Int Int -> Int
 addInt a b = a + b
 subInt :: Int Int -> Int
 subInt a b = a - b
-', 
+',
 '
-test_questions:
-\t- q1:
-\t\t\tfunction_name: addInt
-\t\t\ttest_cases:
-\t\t\t\t- 1 2
-\t\t\t\t- 5 13
-\t\t\t\t- 12 99
-\t- q2:
-\t\t\tfunction_name: subInt
-\t\t\ttest_cases:
-\t\t\t\t- 3 4
-\t\t\t\t- 3 2
-\t\t\t\t- 23 32
+[
+    {
+        "functionname": "addInt", 
+        "parameters": ["1 2", "5 13", "12 99"]
+    },
+    {
+        "functionname": "subInt", 
+        "parameters": ["3 4", "3 2", "23 32"]
+    }
+]
 '
 , 1);
 INSERT INTO tasks (taskName, sectionID, description, solution, max) VALUES ('Progress Task 1', 2, 'desc', 'module teacher
@@ -256,19 +254,16 @@ subInt :: Int Int -> Int
 subInt a b = a - b
 ', 
 '
-test_questions:
-\t- q1:
-\t\t\tfunction_name: addInt
-\t\t\ttest_cases:
-\t\t\t\t- 1 2
-\t\t\t\t- 5 13
-\t\t\t\t- 12 99
-\t- q2:
-\t\t\tfunction_name: subInt
-\t\t\ttest_cases:
-\t\t\t\t- 3 4
-\t\t\t\t- 3 2
-\t\t\t\t- 23 32
+[
+    {
+        "functionname": "addInt", 
+        "parameters": ["1 2", "5 13", "12 99"]
+    },
+    {
+        "functionname": "subInt", 
+        "parameters": ["3 4", "3 2", "23 32"]
+    }
+]
 '
 , 3);
 INSERT INTO tasks (taskName, sectionID, description, solution, max) VALUES ('Endterm', 5, 'desc', 'module teacher
@@ -280,7 +275,7 @@ subInt a b = a - b
 ', 4);
 
 ---------------------- Students files Dumb data
-INSERT INTO grades (userID, taskID, submission, grade) VALUES (1, 1, 'import StdEnv 
+INSERT INTO grades (userID, taskID, filename, submission, grade) VALUES (1, 1, 'midterm (2).icl','import StdEnv 
 addInt :: Int Int -> Int
 addInt a b = a + b
 subInt :: Int Int -> Int

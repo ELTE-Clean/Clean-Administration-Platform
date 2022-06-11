@@ -95,7 +95,6 @@ const Section = () => {
           />
         </div>
       )}
-
       {tasks.map((task, idx) => (
         <Link key={idx} href={`/${name}/${task["taskid"]}`} passHref>
           <div key={idx} className="section-task">
@@ -104,20 +103,19 @@ const Section = () => {
             </div>
             <div className="task-info">
               <div className="availability">
-                <p>Open</p>
+                {isTaskOpen(`${task["dueDate"]} ${task["dueTime"]}`) ? (
+                  <p>Open</p>
+                ) : task["dueDate"] === undefined ||
+                  task["dueDate"] === null ? (
+                  <p>No deadline</p>
+                ) : (
+                  <p>Closed</p>
+                )}
               </div>
               <div className="deadline">
-                <p>{/* {task.dueDate} {task.dueTime} */}2022-10-02 23:59</p>
-              </div>
-              <div className="grade">
-                {task.grade === null ? (
-                  // <p>-/{task.gradeOutOf}</p>
-                  <p>-/{task["max"]}</p>
-                ) : (
-                  <p>
-                    <p>-/{task["max"]}</p>
-                  </p>
-                )}
+                <p>
+                  {task["dueDate"]} {task["dueTime"]}
+                </p>
               </div>
             </div>
           </div>

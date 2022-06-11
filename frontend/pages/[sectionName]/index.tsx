@@ -31,6 +31,17 @@ const Section = () => {
     return sectionNames.includes(sectionName);
   };
 
+  let isTaskOpen = (dateStr: string) => {
+    const currentDateObj = new Date();
+    const passedDateObj = new Date(dateStr);
+    return (
+      currentDateObj.getTime() < passedDateObj.getTime() &&
+      currentDateObj.getDate() <= passedDateObj.getDate() &&
+      currentDateObj.getMonth() + 1 <= passedDateObj.getMonth() + 1 &&
+      currentDateObj.getFullYear() <= passedDateObj.getFullYear()
+    );
+  };
+
   useEffect(() => {
     let querystring = require("querystring");
     let tempSection = sections.filter(

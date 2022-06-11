@@ -53,6 +53,7 @@ const Section = () => {
     try {
       querystring = querystring.stringify({
         sectionid: section["sectionid"],
+        // groupid: section["groupid"],
         description: true,
         solution: true,
         testcases: true,

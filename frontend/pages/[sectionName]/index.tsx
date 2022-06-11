@@ -15,7 +15,7 @@ import { fetchCall } from "../../hooks/useFetch";
 const Section = () => {
   const { sections } = useContext(UserContext);
   const [buttonEditPopup, setButtonEditPopup] = useState(false);
-  const [section, setSection] = useState({});
+  const [section, setSection] = useState({ sectionid: "" });
   const [tasks, setTasks] = useState([]);
 
   const router = useRouter();
@@ -31,13 +31,15 @@ const Section = () => {
     return sectionNames.includes(sectionName);
   };
 
-  const getSectionIdGroupId = (sectionName: string) => {
-    const sectionDetails = sections.filter(
-      (section: { sectionid: Number; sectionname: string; groupid: Number }) =>
-        section["sectionname"] === sectionName
+  let isTaskOpen = (dateStr: string) => {
+    const currentDateObj = new Date();
+    const passedDateObj = new Date(dateStr);
+    return (
+      currentDateObj.getTime() < passedDateObj.getTime() &&
+      currentDateObj.getDate() <= passedDateObj.getDate() &&
+      currentDateObj.getMonth() + 1 <= passedDateObj.getMonth() + 1 &&
+      currentDateObj.getFullYear() <= passedDateObj.getFullYear()
     );
-
-    return sectionDetails;
   };
 
   useEffect(() => {
@@ -52,12 +54,13 @@ const Section = () => {
       querystring = querystring.stringify({
         sectionid: section["sectionid"],
         // groupid: section["groupid"],
+        description: true,
+        solution: true,
+        testcases: true,
       });
     } catch (error) {
-      console.log("empty");
       querystring = "";
     }
-
     fetchCall({
       url: "tasks?" + querystring,
       method: RequestType.GET,
@@ -73,13 +76,7 @@ const Section = () => {
       .catch((error) => {
         console.error(error);
       });
-    console.log(section);
-    return () => {
-      setSection({}); // This worked for me
-    };
   }, [name, section, sections]);
-
-  console.log(section);
 
   return isAdmin ? (
     <div className="section-container">
@@ -110,29 +107,27 @@ const Section = () => {
           />
         </div>
       )}
-
       {tasks.map((task, idx) => (
-        <Link key={idx} href={`/${name}/${task["taskname"]}`} passHref>
+        <Link key={idx} href={`/${name}/${task["taskid"]}`} passHref>
           <div key={idx} className="section-task">
             <div className="task-title">
               <h3>{task["taskname"]}</h3>
             </div>
             <div className="task-info">
               <div className="availability">
-                <p>Open</p>
+                {isTaskOpen(`${task["dueDate"]} ${task["dueTime"]}`) ? (
+                  <p>Open</p>
+                ) : task["dueDate"] === undefined ||
+                  task["dueDate"] === null ? (
+                  <p>No deadline</p>
+                ) : (
+                  <p>Closed</p>
+                )}
               </div>
               <div className="deadline">
-                <p>{/* {task.dueDate} {task.dueTime} */}2022-10-02 23:59</p>
-              </div>
-              <div className="grade">
-                {task.grade === null ? (
-                  // <p>-/{task.gradeOutOf}</p>
-                  <p>-/{task["max"]}</p>
-                ) : (
-                  <p>
-                    <p>-/{task["max"]}</p>
-                  </p>
-                )}
+                <p>
+                  {task["dueDate"]} {task["dueTime"]}
+                </p>
               </div>
             </div>
           </div>

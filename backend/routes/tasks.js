@@ -409,14 +409,12 @@ router.post(
     log("DEBUG", "Execution Result: " + execRes.stdout);
 
     /* Return the script results */
-    return res
-      .status(200)
-      .send(
-        JSON.stringify({
-          message: "Request Was Successful",
-          result: execRes.stdout,
-        })
-      );
+    return res.status(200).send(
+      JSON.stringify({
+        message: "Request Was Successful",
+        result: execRes.stdout,
+      })
+    );
   }
 );
 
@@ -445,14 +443,12 @@ router.put(
     } else if (req.body.gradeid) {
       submission.gradeID = req.body.gradeID;
     } else
-      return res
-        .status(400)
-        .send(
-          JSON.stringify({
-            message:
-              "Request body must contain userID and taskID or just gradeID",
-          })
-        );
+      return res.status(400).send(
+        JSON.stringify({
+          message:
+            "Request body must contain userID and taskID or just gradeID",
+        })
+      );
 
     const result = await updateTable("grades", submission, {
       grade: req.body.grade,

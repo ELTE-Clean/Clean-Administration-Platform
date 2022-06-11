@@ -214,14 +214,10 @@ INSERT INTO user_to_group (userID, groupID) VALUES (6, 4);
 ---------------------- Teacher tasks and files Dumb data
 INSERT INTO tasks (taskName, sectionID, description, solution, testQuestions,  max) VALUES ('Homework 1', 1, 'desc', 'module teacher
 import StdEnv 
-
-
 addInt :: Int Int -> Int
 addInt a b = a + b
-
 subInt :: Int Int -> Int
 subInt a b = a - b
-
 ',
 '
 [
@@ -238,36 +234,24 @@ subInt a b = a - b
 , 1);
 INSERT INTO tasks (taskName, sectionID, description, solution, max) VALUES ('Progress Task 1', 2, 'desc', 'module teacher
 import StdEnv 
-
-
 addInt :: Int Int -> Int
 addInt a b = a + b
-
 subInt :: Int Int -> Int
 subInt a b = a - b
-
 ', 1);
 INSERT INTO tasks (taskName, sectionID, description, solution, max) VALUES ('Homework 2', 3, 'desc', 'module teacher
 import StdEnv 
-
-
 addInt :: Int Int -> Int
 addInt a b = a + b
-
 subInt :: Int Int -> Int
 subInt a b = a - b
-
 ', 2);
 INSERT INTO tasks (taskName, sectionID, description, solution,testQuestions, max) VALUES ('Midterm', 4, 'desc', 'module teacher
 import StdEnv 
-
-
 addInt :: Int Int -> Int
 addInt a b = a + b
-
 subInt :: Int Int -> Int
 subInt a b = a - b
-
 ', 
 '
 [
@@ -284,29 +268,21 @@ subInt a b = a - b
 , 3);
 INSERT INTO tasks (taskName, sectionID, description, solution, max) VALUES ('Endterm', 5, 'desc', 'module teacher
 import StdEnv 
-
-
 addInt :: Int Int -> Int
 addInt a b = a + b
-
 subInt :: Int Int -> Int
 subInt a b = a - b
-
 ', 4);
 
 ---------------------- Students files Dumb data
 INSERT INTO grades (userID, taskID, filename, submission, grade) VALUES (1, 1, 'midterm (2).icl','import StdEnv 
-
 addInt :: Int Int -> Int
 addInt a b = a + b
-
 subInt :: Int Int -> Int
 subInt a b = a - b', 5);
 INSERT INTO grades (userID, taskID, submission, grade) VALUES (2, 1, 'import StdEnv 
-
 addInt :: Int Int -> Int
 addInt a b = a + b
-
 subInt :: Int Int -> Int
 subInt a b = a - b', 2);
 

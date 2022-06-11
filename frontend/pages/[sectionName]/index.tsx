@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { UserContext } from "../../context/UserContext";
 import withAuth from "../../components/withAuth";
 
-import AssignTeacher from "../../components/AssignTeacher";
+// import AssignTeacher from "../../components/AssignTeacher";
 import AddRemoveStudent from "../../components/AddRemoveStudent";
 import { RequestType } from "../../enums/requestTypes";
 import { fetchCall } from "../../hooks/useFetch";
@@ -21,7 +21,12 @@ const Section = () => {
   const router = useRouter();
   const name: string = router.query.sectionName;
   let isTeacher: Boolean = true;
-  let isAdmin: Boolean = false;
+  let isAdmin: Boolean = true;
+  // const sectionDetails = sections.filter(
+  //   (section: { sectionid: Number; sectionname: string; groupid: Number }) =>
+  //     section["sectionname"] === name
+  // );
+  // setSection(sectionDetails);
 
   const sectionExist = (sectionName: string) => {
     const sectionNames = sections.map(
@@ -85,7 +90,7 @@ const Section = () => {
       </div>
       <AddRemoveStudent popupType="add-remove-student" />
 
-      <AssignTeacher popupType="assign-teacher" />
+      {/* <AssignTeacher popupType="assign-teacher" /> */}
     </div>
   ) : (
     <div className="section-container">

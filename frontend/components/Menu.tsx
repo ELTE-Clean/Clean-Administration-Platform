@@ -8,13 +8,14 @@ import { fetchCall } from "../hooks/useFetch";
 
 const Menu = () => {
   const { sections, setSections } = useContext(UserContext);
+  const [groups, setGroups] = useState([]);
   const [buttonAddSectionPopup, setButtonAddSectionPopup] = useState(false);
   let userNeptun = "MI3JG2";
   // let sections = ["Homeworks", "Progress Tasks", "Mid Term", "End Term"];
 
   let adminUser = "Admin";
-  let groups = ["Group 1", "Group 2", "Group 3", "Group 4"];
-  let isAdmin = false;
+  // let groups = ["Group 1", "Group 2", "Group 3", "Group 4"];
+  let isAdmin = true;
   let addSectionCallBack = (sectionToAdd: string) => {
     return sections
       .map((section) => section["sectionname"])
@@ -23,6 +24,35 @@ const Menu = () => {
   const isUserLoggedIn = () => {
     return localStorage.getItem("isLoggedIn") == "true";
   };
+
+  let addGroupCallBack = () => {
+    return groups
+      .map((group) => group["groupname"]);
+  };
+
+
+  const renderGroups = () => {
+    console.log("Hello world!");
+    fetchCall({
+      url: "groups",
+      method: RequestType.GET,
+    })
+      .then((response) => {
+        const res = response.json();
+        return res;
+      })
+      .then((data) => {
+        let infor = data.results.map((res) => res["groupname"])
+        setGroups(infor);
+        console.log(infor);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+
+
 
   const renderSections = () => {
     fetchCall({
@@ -44,8 +74,10 @@ const Menu = () => {
 
   useEffect(() => {
     if (isUserLoggedIn()) {
-      renderSections();
+      renderSections(); 
+      renderGroups();
     }
+
   }, []);
 
   if (sections.message !== undefined) {
@@ -55,9 +87,8 @@ const Menu = () => {
       </div>
     );
   }
-  let addGroupCallBack = (groupToAdd: string) => {
-    return groups.includes(groupToAdd);
-  };
+
+
   return isAdmin ? (
     <div className="menu-container">
       <div className="profile-icon-neptun">
@@ -73,6 +104,14 @@ const Menu = () => {
             </div>
           </div>
         </Link>
+        
+        {/* <Link href="/create_student" passHref>
+          <div className="section">
+            <div className="section-name">
+              <h2>Create Student</h2>
+            </div>
+          </div>
+        </Link> */}
 
         {groups.map((group, idx) => (
           <Link key={idx} href={`/${group}`} passHref>

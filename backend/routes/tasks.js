@@ -48,7 +48,7 @@ router.get("/", isAuth, async (req, res, next) => {
       taskname: task.taskname,
       sectionid: task.sectionid,
       max: task.max,
-      dueDate: task.expirydate,
+      dueDate: task.expirydate?.toISOString().split("T")[0],
       dueTime: task.expirytime,
     };
 
@@ -201,7 +201,7 @@ router.delete(
  *
  *
  * req.body:    {
- *                  diff: {taskname?, sectionid?, solution?, testcases?, description?, expiryDate?, expiryTime?}
+ *                  taskname?, sectionid?, solution?, testcases?, description?, expiryDate?, expiryTime?
  *              }
  *
  * req.files: {solution? , description? }
@@ -273,7 +273,7 @@ router.post(
     if (incompleteFile)
       return res
         .status(400)
-        .send(JSON.stringify({ message: "No Answer is uploaded" }));
+        .send(JSON.stringify({ message: "No answer is uploaded" }));
 
     const uid = req.body.userID;
     const tid = req.params.taskID;
@@ -299,19 +299,19 @@ router.post(
 
     return res
       .status(200)
-      .send(JSON.stringify({ message: "Sumbission is Successfull" }));
+      .send(JSON.stringify({ message: "Sumbission is Successful" }));
   }
 );
 
 /**
- * Grade a given task and returns the results of the grading.
+ * Grade a given task and returns the results of the automatic evaluation.
  *
- * Call the endpoit with
- * tasks/1/grade , where the 1 is the task id.
+ * Call the endpoint with
+ * tasks/1/evaluate , where the 1 is the task id.
  *
  */
 router.post(
-  "/:taskID/grade",
+  "/:taskID/evaluate",
   isAuth,
   protector(["admin", "demonstrator"]),
   async (req, res, next) => {
@@ -376,8 +376,8 @@ router.post(
     JSON.parse(taskRecord.result.rows[0].testquestions).forEach(
       (question, i) => {
         testYaml += `\t- q${i}:\n`;
-        testYaml += `\t\tfunction_name: ${question.functionname}\n`;
-        testYaml += `\t\ttest_cases:\n`;
+        testYaml += `\t\t\tfunction_name: ${question.functionname}\n`;
+        testYaml += `\t\t\ttest_cases:\n`;
         question.parameters.forEach((parameter) => {
           testYaml += `\t\t\t- ${parameter}\n`;
         });
@@ -413,10 +413,56 @@ router.post(
       .status(200)
       .send(
         JSON.stringify({
-          message: "Request Was Successfull",
+          message: "Request Was Successful",
           result: execRes.stdout,
         })
       );
+  }
+);
+
+/**
+ * Grade a given submission.
+ *
+ * req.body:    {
+ *                  userid, taskid, grade
+ *              }
+ *
+ *              OR
+ *
+ *              {
+ *                  gradeid, grade
+ *              }
+ */
+router.put(
+  "/grade",
+  isAuth,
+  protector(["admin", "demonstrator"]),
+  async (req, res, next) => {
+    const submission = {};
+    if (req.body.userID && req.body.taskID) {
+      submission.userID = req.body.userID;
+      submission.taskID = req.body.taskID;
+    } else if (req.body.gradeid) {
+      submission.gradeID = req.body.gradeID;
+    } else
+      return res
+        .status(400)
+        .send(
+          JSON.stringify({
+            message:
+              "Request body must contain userID and taskID or just gradeID",
+          })
+        );
+
+    const result = await updateTable("grades", submission, {
+      grade: req.body.grade,
+    });
+    if (result.error)
+      return res
+        .status(500)
+        .send(JSON.stringify({ message: "Transaction Failed" }));
+
+    return res.status(200).send(JSON.stringify(result.result.rows));
   }
 );
 

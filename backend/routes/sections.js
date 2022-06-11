@@ -63,21 +63,26 @@ router.delete(
       return res
         .status(400)
         .send(JSON.stringify({ message: "No section is given to be deleted" }));
-      
+
     const section = await selectFromTable("sections", req.body);
     if (section.error) next("Could not get section");
     if (section.result.rowCount === 0) next("Section does not exist");
 
     const tasksToRemove = await selectFromTable("tasks", req.body);
-    if (tasksToRemove.error) next("Could not get tasks associated with section");
+    if (tasksToRemove.error)
+      next("Could not get tasks associated with section");
 
-    tasksToRemove.result.rows.forEach(async task => {
-      const result = await deleteFromTable("grades", {taskid: task.taskid});
-      if (result.error) next("Could not delete task submission (grade) associated with section");
+    tasksToRemove.result.rows.forEach(async (task) => {
+      const result = await deleteFromTable("grades", { taskid: task.taskid });
+      if (result.error)
+        next(
+          "Could not delete task submission (grade) associated with section"
+        );
     });
 
     const taskDelResult = await deleteFromTable("tasks", req.body);
-    if (taskDelResult.error) next("Could not delete task associated with section");
+    if (taskDelResult.error)
+      next("Could not delete task associated with section");
 
     const sectionDelResult = await deleteFromTable("sections", req.body);
     if (sectionDelResult.error) next("Could not delete section");

@@ -66,14 +66,23 @@
 
       input {
         @include input(1px solid #ccc);
-        margin-top: 20px;
       }
 
       .form-button {
         margin-top: 10px;
         position: relative;
         text-align: center;
-
+        .delete-task-btn {
+          margin-left: 60px;
+          @include btn(
+            $main-red,
+            #fff,
+            $main-box-shadow,
+            none,
+            10px,
+            15px 40px
+          );
+        }
         .submitBtn {
           @include btn(
             $main-green,

@@ -35,7 +35,7 @@ const Menu = () => {
       })
       .then((data) => {
         setSections(data);
-        console.log(data);
+        // console.log(data);
       })
       .catch((error) => {
         console.error(error);

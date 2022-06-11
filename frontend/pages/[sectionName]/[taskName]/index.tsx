@@ -4,7 +4,8 @@ import EditTaskForm from "../../../components/EditTaskForm";
 import PopUp from "../../../components/Popup";
 import Image from "next/image";
 import withAuth from "../../../components/withAuth";
-
+import { RequestType } from "../../../enums/requestTypes";
+import { fetchCall } from "../../../hooks/useFetch";
 const Task = () => {
   const router = useRouter();
   let { sectionName, taskName } = router.query;
@@ -41,8 +42,33 @@ const Task = () => {
     // later send file to the server
   };
 
+  let getNumb = (str) =>{
+    var matches = str.match(/(\d+)/);
+    if (matches){
+      return matches[0];
+    }else{
+      return 1
+    }
+    // return (matches.length > 0)? matches[0]: 1 ;
+  }
+
   let handleScriptRun = () => {
     console.log("Running script...");
+    const taskNum = (getNumb(taskName));
+    fetchCall({
+      url: `tasks/${taskNum}/grade`,
+      method: RequestType.POST,
+    })
+      .then((response) => {
+        const res = response.json();
+        return res;
+      })
+      .then((data) => {
+        console.log(data.result);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (

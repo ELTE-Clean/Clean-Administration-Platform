@@ -27,7 +27,6 @@ const AddRemoveStudent = (props: any) => {
     }
   };
 
-
   let removeStudentHandler = () => {
     if (studentNeptun.trim() == "") {
       alert("Input cannot be empty!!");
@@ -48,24 +47,22 @@ const AddRemoveStudent = (props: any) => {
     }
   };
 
-
-  let submitHandler = () =>{
+  let submitHandler = () => {
     console.log(adminChoice);
-    if (adminChoice == "Add"){
+    if (adminChoice == "Add") {
       addStudentHandler();
-    }else if (adminChoice == "Remove"){
+    } else if (adminChoice == "Remove") {
       removeStudentHandler();
+    } else {
+      console.log("Please choose to add or remove");
     }
-    else {
-      console.log("Please choose to add or remove")
-    }
-  }
+  };
   return (
     <div className="AddTemoveStudent-container">
       <div className={"admin-forms-holder"}>
         <form>
           <div className="container">
-            <h1>Add / Remove  user in a group</h1>
+            <h1>Add / Remove user in a group</h1>
             <br />
             {/* <p>Make sure neptun codes are seperated by new lines</p> */}
             <br />
@@ -73,21 +70,21 @@ const AddRemoveStudent = (props: any) => {
               <label className="Radio-container">
                 Add
                 <input
-                 type="radio"
-                 name="radio"
-                 value="Add"
-                 onChange={(e) => setAdminChoice(e.target.value)}
-                 />
+                  type="radio"
+                  name="radio"
+                  value="Add"
+                  onChange={(e) => setAdminChoice(e.target.value)}
+                />
                 <span className="checkmark"></span>
               </label>
               <label className="Radio-container">
                 Remove
                 <input
-                type="radio" 
-                name="radio"
-                value="Remove"
-                onChange={(e) => setAdminChoice(e.target.value)}
-                 />
+                  type="radio"
+                  name="radio"
+                  value="Remove"
+                  onChange={(e) => setAdminChoice(e.target.value)}
+                />
                 <span className="checkmark"></span>
               </label>
             </div>
@@ -103,8 +100,6 @@ const AddRemoveStudent = (props: any) => {
               onChange={(e) => setStudentNeptun(e.target.value)}
               required
             />
-
-
 
             <div className="form-button">
               <button

@@ -2,13 +2,12 @@ import { ReactChild, ReactFragment, ReactPortal, useState } from "react";
 
 const EditTestCasesForm = (props: {
   testCaseData: {
-    testList: any;
+    parameter: any;
     name: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined;
   };
 }) => {
-  const [testCases, setTestCases] = useState(props.testCaseData.testList);
+  const [testCases, setTestCases] = useState(props.testCaseData.parameter);
   const [newTestCase, setNewTestCase] = useState("");
-  console.log(testCases);
 
   let handleInputChange = (value: string, idx: number) => {
     let tempTestCases = [...testCases];
@@ -29,6 +28,7 @@ const EditTestCasesForm = (props: {
   };
   let handleSavingTestCase = () => {
     console.log("Handling saving test case");
+    // props.saveTestsCB();
   };
   return (
     <div className="TestCasesFormContainer">

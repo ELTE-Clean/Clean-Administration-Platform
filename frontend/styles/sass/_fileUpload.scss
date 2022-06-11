@@ -1,0 +1,13 @@
+.FileUpload-container {
+  .custom-file-input {
+    min-width: 300px;
+    border: none;
+  }
+  .custom-file-input::-webkit-file-upload-button {
+    // visibility: hidden;
+    border: none;
+    background: transparent;
+    width: 60%;
+    text-align: left;
+  }
+}

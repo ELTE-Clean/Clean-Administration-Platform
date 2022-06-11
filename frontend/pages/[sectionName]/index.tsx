@@ -21,7 +21,7 @@ const Section = () => {
   const router = useRouter();
   const name: string = router.query.sectionName;
   let isTeacher: Boolean = true;
-  let isAdmin: Boolean = true;
+  let isAdmin: Boolean = false;
   // const sectionDetails = sections.filter(
   //   (section: { sectionid: Number; sectionname: string; groupid: Number }) =>
   //     section["sectionname"] === name

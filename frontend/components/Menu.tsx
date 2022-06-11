@@ -15,7 +15,7 @@ const Menu = () => {
 
   let adminUser = "Admin";
   // let groups = ["Group 1", "Group 2", "Group 3", "Group 4"];
-  let isAdmin = true;
+  let isAdmin = false;
   let addSectionCallBack = (sectionToAdd: string) => {
     return sections
       .map((section) => section["sectionname"])
@@ -26,13 +26,10 @@ const Menu = () => {
   };
 
   let addGroupCallBack = () => {
-    return groups
-      .map((group) => group["groupname"]);
+    return groups.map((group) => group["groupname"]);
   };
 
-
   const renderGroups = () => {
-    console.log("Hello world!");
     fetchCall({
       url: "groups",
       method: RequestType.GET,
@@ -42,7 +39,7 @@ const Menu = () => {
         return res;
       })
       .then((data) => {
-        let infor = data.results.map((res) => res["groupname"])
+        let infor = data.results.map((res) => res["groupname"]);
         setGroups(infor);
         console.log(infor);
       })
@@ -50,9 +47,6 @@ const Menu = () => {
         console.error(error);
       });
   };
-
-
-
 
   const renderSections = () => {
     fetchCall({
@@ -74,10 +68,9 @@ const Menu = () => {
 
   useEffect(() => {
     if (isUserLoggedIn()) {
-      renderSections(); 
+      renderSections();
       renderGroups();
     }
-
   }, []);
 
   if (sections.message !== undefined) {
@@ -87,7 +80,6 @@ const Menu = () => {
       </div>
     );
   }
-
 
   return isAdmin ? (
     <div className="menu-container">
@@ -104,7 +96,7 @@ const Menu = () => {
             </div>
           </div>
         </Link>
-        
+
         {/* <Link href="/create_student" passHref>
           <div className="section">
             <div className="section-name">

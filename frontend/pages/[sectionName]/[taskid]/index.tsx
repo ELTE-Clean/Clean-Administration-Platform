@@ -4,14 +4,14 @@ import EditTaskForm from "../../../components/EditTaskForm";
 import PopUp from "../../../components/Popup";
 import Image from "next/image";
 import withAuth from "../../../components/withAuth";
-import FileUpload from "../../../components/FileUpload";
 import { RequestType } from "../../../enums/requestTypes";
 import { fetchCall } from "../../../hooks/useFetch";
-
+import FileUpload from "../../../components/FileUpload";
 const Task = () => {
   const [uploaded, setUploaded] = useState(false);
   const [buttonEditPopup, setButtonEditPopup] = useState(false);
   const [task, setTask] = useState({});
+  const [uploadedFileName, setUploadedFileName] = useState("");
   const [submissions, setSubmissions] = useState([]);
   const router = useRouter();
   let { sectionName, taskid } = router.query;
@@ -25,16 +25,26 @@ const Task = () => {
     backgroundColor: "#acf19b",
   };
 
-  let handelFileUpload = (file: File) => {
-    let latestFile = file.name;
-    setUploaded(true);
-    console.log(latestFile);
-
-    // later send file to the server
+  let handelFileUpload = (e: BaseSyntheticEvent) => {
+    let latestFile = e.target.files[0].name;
+    setUploadedFileName(latestFile);
   };
 
   let handleScriptRun = () => {
-    console.log("Running script...");
+    fetchCall({
+      url: `tasks/${taskid}/grade`,
+      method: RequestType.POST,
+    })
+      .then((response) => {
+        const res = response.json();
+        return res;
+      })
+      .then((data) => {
+        console.log(data.result);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   useEffect(() => {
@@ -64,6 +74,7 @@ const Task = () => {
       .catch((error) => {
         console.error(error);
       });
+    console.log(sectionName);
     fetchCall({
       url: `tasks/${taskid}/submissions?submission=true`,
       method: RequestType.GET,
@@ -159,11 +170,12 @@ const Task = () => {
             {submissions.map((submission, idx) => (
               <div key={idx}>
                 <p>
-                  Userid: {submission.userid} - Usergrade: {submission.grade}
+                  Userid: {submission["userid"]} - Usergrade:{" "}
+                  {submission["grade"]}
                 </p>
                 <p>
-                  solution: {submission.submission} - Usergrade:{" "}
-                  {submission.grade}
+                  solution: {submission["submission"]} - Usergrade:{" "}
+                  {submission["grade"]}
                 </p>
               </div>
             ))}

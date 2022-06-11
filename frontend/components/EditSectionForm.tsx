@@ -18,7 +18,7 @@ const EditSectionForm = (props: { section: any; tasks: any[] }) => {
     dueDate: "",
     dueTime: "",
     maxGrade: "",
-    solution: "",
+    solution: "x",
   });
 
   const router = useRouter();
@@ -34,7 +34,7 @@ const EditSectionForm = (props: { section: any; tasks: any[] }) => {
 
   let handleFileUpload = (file: File) => {
     let latestFile = file.name;
-    setTask({ ...task, solution: file });
+    // setTask({ ...task, solution: file });
     console.log(latestFile);
   };
 
@@ -178,10 +178,10 @@ const EditSectionForm = (props: { section: any; tasks: any[] }) => {
             <label>Description:</label>
             <br />
             <br />
-            <RichTextEditor
-              classTemp={"description-area"}
-              valueTemp={""}
-              onChange={(value) => setTask({ ...task, description: value })}
+            <textarea
+              onChange={(e) =>
+                setTask({ ...task, description: e.target.value })
+              }
             />
             <br />
           </div>

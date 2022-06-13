@@ -5,29 +5,52 @@ import AddSectionForm from "./AddSectionForm";
 import { UserContext } from "../context/UserContext";
 import { RequestType } from "../enums/requestTypes";
 import { fetchCall } from "../hooks/useFetch";
+import withAuth from "./withAuth";
 
 const Menu = () => {
   const { sections, setSections } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [groups, setGroups] = useState([]);
   const [buttonAddSectionPopup, setButtonAddSectionPopup] = useState(false);
-  let userNeptun = "MI3JG2";
-  // let sections = ["Homeworks", "Progress Tasks", "Mid Term", "End Term"];
+  // if (user["firstname"] === undefined) {
+    //   return (
+      //     <div>
+      //       <p></p>
+  //     </div>
+  //   );
+  // }
+  
+  const adminUser = user["firstname"];
+  const userNeptun = "MI3JG2";
+  const isAdmin = user["roles"]?.includes("admin");
+  const isTeacher = user["roles"]?.includes("demonstrator");
+  console.log(isAdmin,isTeacher);
+  
+  useEffect(() => {
+    if (isUserLoggedIn()) {
+      renderSections();
+      renderGroups();
+    }
+  },[]);
 
-  let adminUser = "Admin";
-  // let groups = ["Group 1", "Group 2", "Group 3", "Group 4"];
-  let isAdmin = false;
+
   let addSectionCallBack = (sectionToAdd: string) => {
     return sections
-      .map((section) => section["sectionname"])
+      .map((section: { [x: string]: any; }) => section["sectionname"])
       .includes(sectionToAdd);
   };
   const isUserLoggedIn = () => {
-    return localStorage.getItem("isLoggedIn") == "true";
+    if (typeof window !== undefined){
+      return localStorage.getItem("isLoggedIn") == "true";
+    }
+    return false
   };
 
-  let addGroupCallBack = () => {
-    return groups.map((group) => group["groupname"]);
-  };
+  // let addGroupCallBack = () => {
+  //   return groups.map((group) => group["groupname"]);
+  // };
+  console.log(isTeacher);
+  
 
   const renderGroups = () => {
     fetchCall({
@@ -39,9 +62,8 @@ const Menu = () => {
         return res;
       })
       .then((data) => {
-        let infor = data.results.map((res) => res["groupname"]);
+        let infor = data.results.map((res: { [x: string]: any; }) => res["groupname"]);
         setGroups(infor);
-        console.log(infor);
       })
       .catch((error) => {
         console.error(error);
@@ -66,27 +88,14 @@ const Menu = () => {
       });
   };
 
-  useEffect(() => {
-    if (isUserLoggedIn()) {
-      renderSections();
-      renderGroups();
-    }
-  }, []);
-
-  if (sections.message !== undefined) {
-    return (
-      <div>
-        <p></p>
-      </div>
-    );
-  }
-
   return isAdmin ? (
     <div className="menu-container">
-      <div className="profile-icon-neptun">
-        <div className="profile-icon">{adminUser.slice(0, 2)}</div>
-        <div className="profile-neptun">{adminUser}</div>
-      </div>
+      <Link href="/profile" passHref>
+        <div className="profile-icon-neptun">
+          <div className="profile-icon">{adminUser.slice(0, 2)}</div>
+          <div className="profile-neptun">{adminUser}</div>
+        </div>
+      </Link>
 
       <div className="sections">
         <Link href="/dashboard" passHref>
@@ -96,14 +105,6 @@ const Menu = () => {
             </div>
           </div>
         </Link>
-
-        {/* <Link href="/create_student" passHref>
-          <div className="section">
-            <div className="section-name">
-              <h2>Create Student</h2>
-            </div>
-          </div>
-        </Link> */}
 
         {groups.map((group, idx) => (
           <Link key={idx} href={`/${group}`} passHref>
@@ -135,6 +136,7 @@ const Menu = () => {
           </Link>
         ))}
       </div>
+      {isTeacher && 
       <div className="add-section-part">
         <div
           className="add-section-btn"
@@ -142,9 +144,7 @@ const Menu = () => {
         >
           Add Section
         </div>
-      </div>
-
-      <PopUp
+      </div> && <PopUp
         trigger={buttonAddSectionPopup}
         setTrigger={setButtonAddSectionPopup}
         popupType="add-section"
@@ -154,9 +154,9 @@ const Menu = () => {
             renderSectionsCB={renderSections}
           />
         }
-      />
+      />}
     </div>
   );
 };
 
-export default Menu;
+export default withAuth(Menu);

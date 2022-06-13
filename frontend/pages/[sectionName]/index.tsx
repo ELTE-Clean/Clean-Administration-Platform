@@ -11,22 +11,25 @@ import withAuth from "../../components/withAuth";
 import AddRemoveStudent from "../../components/AddRemoveStudent";
 import { RequestType } from "../../enums/requestTypes";
 import { fetchCall } from "../../hooks/useFetch";
+import AssignTeacher from "../../components/AssignTeacher";
 
 const Section = () => {
-  const { sections } = useContext(UserContext);
+  const { user, sections } = useContext(UserContext);
   const [buttonEditPopup, setButtonEditPopup] = useState(false);
   const [section, setSection] = useState({ sectionid: "" });
   const [tasks, setTasks] = useState([]);
 
   const router = useRouter();
   const name: string = router.query.sectionName;
-  let isTeacher: Boolean = true;
-  let isAdmin: Boolean = false;
+
+  let isTeacher: Boolean = user["roles"].includes("demonstrator");
+  let isAdmin: Boolean = user["roles"].includes("admin");
   // const sectionDetails = sections.filter(
   //   (section: { sectionid: Number; sectionname: string; groupid: Number }) =>
   //     section["sectionname"] === name
   // );
   // setSection(sectionDetails);
+  console.log(user);
 
   const sectionExist = (sectionName: string) => {
     const sectionNames = sections.map(
@@ -89,8 +92,7 @@ const Section = () => {
         <h1>{name}</h1>
       </div>
       <AddRemoveStudent popupType="add-remove-student" />
-
-      {/* <AssignTeacher popupType="assign-teacher" /> */}
+      <AssignTeacher popupType="assign-teacher" />
     </div>
   ) : (
     <div className="section-container">

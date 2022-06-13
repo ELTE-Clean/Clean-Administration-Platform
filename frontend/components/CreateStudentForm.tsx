@@ -72,7 +72,7 @@ const CreateStudentForm = (props: any) => {
       deleteStudentHandler();
     }
     else {
-      console.log("Please choose to add or remove")
+      alert("Please choose to add or remove")
     }
   }
 

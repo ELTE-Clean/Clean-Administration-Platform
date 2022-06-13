@@ -1,13 +1,13 @@
 import { useRouter } from "next/router";
 import { UserContext } from "../context/UserContext";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { RequestType } from "../enums/requestTypes";
 import { fetchCall } from "../hooks/useFetch";
 
 const withAuth = (Component) => {
   const AuthenticatedComponent = () => {
     const router = useRouter();
-    const { user } = useContext(UserContext);
+    // const { user } = useContext(UserContext);
 
     const isUserLoggedIn = () => {
       if (typeof window !== "undefined") {
@@ -24,15 +24,16 @@ const withAuth = (Component) => {
           router.push("/profile");
         }
       }
-    }, []);
+    });
 
-    const renderCondition =
-      (isUserLoggedIn() && router.asPath !== "/login") ||
-      (!isUserLoggedIn() && router.asPath === "/login");
 
-    return renderCondition ? <Component /> : null;
+    // const renderCondition =
+    //   (isUserLoggedIn() && router.asPath !== "/login") ||
+    //   (!isUserLoggedIn() && router.asPath === "/login");
+    
+    return  <Component /> ;
   };
-
+  
   return AuthenticatedComponent;
 };
 

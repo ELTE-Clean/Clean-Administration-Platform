@@ -31,7 +31,10 @@ function MyApp({ Component, pageProps }: AppProps) {
     }
   }, []);
   const isUserLoggedIn = () => {
-    return localStorage.getItem("isLoggedIn") == "true";
+    if (typeof window !== undefined){
+      return localStorage.getItem("isLoggedIn") == "true";
+    }
+    return false;
   };
 
   // const value = useMemo(() => ({ user, setUser }), [user, setUser]);

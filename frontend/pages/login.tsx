@@ -21,7 +21,7 @@ const Login: NextPage = () => {
     fetchCall({
       url: "login",
       method: RequestType.POST,
-      body: { username: username, password: password },
+      body: { username: username.toLowerCase(), password: password },
     })
       .then((response) => {
         const res = response.json();
@@ -31,30 +31,29 @@ const Login: NextPage = () => {
         if (data["response"] !== undefined) {
           console.log("Logged In:", data);
           localStorage.setItem("isLoggedIn", "true");
+          fetchCall({
+            url: "users/self",
+            method: RequestType.GET,
+          })
+            .then((response) => {
+              const res = response.json();
+              return res;
+            })
+            .then((data) => {
+              setUser(data);
+            })
+            .catch((error) => {
+              // console.error(error);
+            });
+
           router.push("/");
         } else {
-          console.log("Permission Denied:", data);
+          throw new Error('Wrong credentials!');
         }
       })
       .catch((error) => {
-        console.error(error);
+        alert(error);
       })
-      .finally(() => {
-        fetchCall({
-          url: "users/self",
-          method: RequestType.GET,
-        })
-          .then((response) => {
-            const res = response.json();
-            return res;
-          })
-          .then((data) => {
-            setUser(data);
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-      });
   };
 
   return (

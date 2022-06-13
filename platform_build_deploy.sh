@@ -20,6 +20,7 @@ then
     cd backend;
     npm install;
     npm run build;
+    sleep 10
     cd dist;
     npm install --only=production
     docker build . -t backend:latest;

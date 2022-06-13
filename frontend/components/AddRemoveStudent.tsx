@@ -54,7 +54,7 @@ const AddRemoveStudent = (props: any) => {
     } else if (adminChoice == "Remove") {
       removeStudentHandler();
     } else {
-      console.log("Please choose to add or remove");
+      alert("Please choose to add or remove");
     }
   };
   return (

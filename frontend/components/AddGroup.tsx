@@ -23,6 +23,8 @@ const AddGroup = () => {
           return res;
         })
         .then((data) => {
+          console.log(data);
+          
           router.push("/");
         })
         .catch((error) => {

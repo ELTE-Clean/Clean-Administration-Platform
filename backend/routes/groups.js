@@ -80,7 +80,7 @@ router.get("/", isAuth, protector(["admin", "demonstrator"]), async (req, res, n
     }
 
     /* If userID not found, get its id from querying the database... */
-    let uid;
+    let uid = req.body.userID;
     if(!req.body.userID && req.body.neptun){
         const result = await selectFromTable('users', {neptun: req.body.neptun});
         if (result.error) 
@@ -91,7 +91,7 @@ router.get("/", isAuth, protector(["admin", "demonstrator"]), async (req, res, n
     }
 
     /* Get Group ID if groupName exists */
-    let gid;
+    let gid = req.body.groupID;
     if(!req.body.groupID && req.body.groupName){
         const result = await selectFromTable('groups', {groupname: req.body.groupName});
         if (result.error) 
@@ -129,7 +129,7 @@ router.delete("/unassign", isAuth, protector(["admin"]), async (req, res, next) 
     }
 
     /* If userID not found, get its id from querying the database... */
-    let uid;
+    let uid = req.body.userID;
     if(!req.body.userID && req.body.neptun){
         const result = await selectFromTable('users', {neptun: req.body.neptun});
         if (result.error) 
@@ -140,7 +140,7 @@ router.delete("/unassign", isAuth, protector(["admin"]), async (req, res, next) 
     }
 
     /* Get Group ID if groupName exists */
-    let gid;
+    let gid = req.body.groupID;
     if(!req.body.groupID && req.body.groupName){
         const result = await selectFromTable('groups', {groupname: req.body.groupName});
         if (result.error) 

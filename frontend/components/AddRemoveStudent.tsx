@@ -7,6 +7,31 @@ const AddRemoveStudent = (props: any) => {
   const [studentNeptun, setStudentNeptun] = useState("");
   const [adminChoice, setAdminChoice] = useState("");
 
+
+
+  const getUsers = () => {
+    fetchCall({
+      url: "users/self",
+      method: RequestType.GET,
+    })
+      .then((response) => {
+        const res = response.json();
+        return res;
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+
+
+
+
+
+
   let addStudentHandler = () => {
     if (studentNeptun.trim() == "") {
       alert("Input cannot be empty!!");
@@ -48,6 +73,7 @@ const AddRemoveStudent = (props: any) => {
   };
 
   let submitHandler = () => {
+    getUsers();
     console.log(adminChoice);
     if (adminChoice == "Add") {
       addStudentHandler();

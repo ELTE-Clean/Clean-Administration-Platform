@@ -15,7 +15,7 @@ const Menu = () => {
 
   let adminUser = "Admin";
   // let groups = ["Group 1", "Group 2", "Group 3", "Group 4"];
-  let isAdmin = false;
+  let isAdmin = true;
   let addSectionCallBack = (sectionToAdd: string) => {
     return sections
       .map((section) => section["sectionname"])

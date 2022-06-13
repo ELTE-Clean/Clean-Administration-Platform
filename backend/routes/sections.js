@@ -75,9 +75,7 @@ router.delete(
     tasksToRemove.result.rows.forEach(async (task) => {
       const result = await deleteFromTable("grades", { taskid: task.taskid });
       if (result.error)
-        next(
-          "Could not delete task submission (grade) associated with section"
-        );
+        next("Could not delete task submission (grade) associated with section");
     });
 
     const taskDelResult = await deleteFromTable("tasks", req.body);

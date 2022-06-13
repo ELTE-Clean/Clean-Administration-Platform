@@ -80,7 +80,7 @@ ALTER SEQUENCE public.groupSeq OWNER TO postgres;
 
 CREATE TABLE public.groups (
     groupID     INt            DEFAULT nextval('groupSeq'),
-    groupName   VARCHAR(10)    NOT NULL,
+    groupName   VARCHAR(10)    UNIQUE NOT NULL,
     timetable   VARCHAR(20)    UNIQUE,
     PRIMARY KEY (groupID)
 );

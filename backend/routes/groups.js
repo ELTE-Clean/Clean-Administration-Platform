@@ -75,39 +75,63 @@ router.delete("/unassign", isAuth, protector(["admin"]), async (req, res, next) 
 
 /**
  * Delete a group. Only admins can do this...
- * req.body: {groupid}
+ * req.body: {groupid | groupName}
  */
  router.delete("/", isAuth, protector(["admin"]), async (req, res, next) => {
-    const group = await selectFromTable('groups', req.body);
+    const groupID = req.body.groupid || req.body.groupID;
+    const groupName = req.body.groupname || req.body.groupName;
+    if(!groupID && !groupName)
+        return res.status(404).send(JSON.stringify({message: "Missing input values!"}));
+
+    let parameters = {};
+    if(groupName){
+        parameters.groupName = groupName;
+    }
+    if(groupID){
+        parameters.groupID = groupID;
+    }
+
+    /* Get gropu data */
+    const group = await selectFromTable('groups', parameters);
     if (group.error) next("Could not get group");
-    if (group.result.rowCount === 0) next("Group does not exist");
+    if (group.result.rowCount === 0)
+        return next("Group does not exist");
 
-    const unassignStudentsResult = await deleteFromTable('user_to_group', req.body);
-    if (unassignStudentsResult.error) next("Could not unnasign students from group");
+    /* Delete users assigned to group */
+    const unassignStudentsResult = await deleteFromTable('user_to_group', parameters);
+    if (unassignStudentsResult.error) 
+        return next("Could not unnasign students from group");
 
-    const sections = await selectFromTable("sections", req.body);
-    if (sections.error) next("Could not get sections associated with group");
+    /* Get sections related to the group */
+    const sections = await selectFromTable("sections", {groupID: groupID});
+    if (sections.error) 
+        return next("Could not get sections associated with group");
 
+    /* Delete each section data */
     sections.result.rows.forEach(async (section) =>{
+        /* Tasks related to sections */
         const tasksToRemove = await selectFromTable("tasks", { sectionid: section.sectionid });
         if (tasksToRemove.error)
-          next("Could not get tasks associated with section");
+            return next("Could not get tasks associated with section");
 
+        /* Remove grades in the task */
         tasksToRemove.result.rows.forEach(async (task) => {
           const result = await deleteFromTable("grades", { taskid: task.taskid });
           if (result.error)
-            next("Could not delete task submission (grade) associated with section");
+            return next("Could not delete task submission (grade) associated with section");
         });
 
         const taskDelResult = await deleteFromTable("tasks", req.body);
         if (taskDelResult.error)
-          next("Could not delete task associated with section");
+            return next("Could not delete task associated with section");
 
+        /* Delete the section after its data are deleted */
         const sectionDelResult = await deleteFromTable("sections", req.body);
-        if (sectionDelResult.error) next("Could not delete section");
+        if (sectionDelResult.error) 
+            return next("Could not delete section");
     })
 
-    const result = await deleteFromTable('groups', req.body);
+    const result = await deleteFromTable('groups', parameters);
     if (result.error)
         return res.status(500).send(JSON.stringify({message: "Transaction Failed"}));
     return res.status(200).send(JSON.stringify({message: "Group has been deleted successfully"}));

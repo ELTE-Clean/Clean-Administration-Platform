@@ -78,7 +78,8 @@ router.get('/', isAuth, protector(["admin", "demonstrator"]), async(req, res) =>
       if (!usersKC_map.has(username)) continue;
       const kcuser = usersKC_map.get(username);
       ret = [ ...ret,{
-          uid: userDB.id,
+          uid: userDB.userid,
+          neptun: userDB.neptun,
           kcid: kcuser.keycloak_id,
           username: kcuser.username,
           firstname: userDB.firstname.replace(/[ \t]+$/g, ""), // Until we remove whitespaces from database

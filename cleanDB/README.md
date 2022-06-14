@@ -1,10 +1,10 @@
 # Database component
 
-The database is powered by PostgreSQL and contains 2 servers: auth_db and clean_db.
+The database is powered by PostgreSQL and contains 2 databases: auth_db and clean_db.
 
-The auth_db server is used by keycloak to store all of its necessary information and should not be touched directly. Instead, the Keycloak UI should be used.
+The auth_db database is used by keycloak to store all of its necessary information and should not be touched directly. Instead, the Keycloak UI should be used.
 
-The clean_db server is used and designed by us to store website and user data. You can view the tables either through the pgadmin web UI or by accessing the cleanDB container directly. 
+The clean_db database is used and designed by us to store website and user data. You can view the tables either through the pgadmin web UI or by accessing the cleanDB container directly. 
 
 Commands needed to get to the tables in the container:
 ```

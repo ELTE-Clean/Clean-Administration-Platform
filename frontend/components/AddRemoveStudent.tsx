@@ -2,32 +2,11 @@ import RichTextEditor from "./RichTextEditor";
 // import { useState } from "react";
 import { useContext, useState } from "react";
 import { RequestType } from "../enums/requestTypes";
-import { fetchCall } from "../hooks/useFetch";
+import useFetch, { fetchCall } from "../hooks/useFetch";
 const AddRemoveStudent = (props: any) => {
   const [studentNeptun, setStudentNeptun] = useState("");
   const [adminChoice, setAdminChoice] = useState("");
-
-
-
-  const getUsers = () => {
-    fetchCall({
-      url: "users/self",
-      method: RequestType.GET,
-    })
-      .then((response) => {
-        const res = response.json();
-        return res;
-      })
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
-
-
+  const [users, setUsers] = useFetch({ url: "users", method: RequestType.GET});
 
 
 
@@ -36,7 +15,6 @@ const AddRemoveStudent = (props: any) => {
     if (studentNeptun.trim() == "") {
       alert("Input cannot be empty!!");
     } else {
-      console.log(studentNeptun);
       fetchCall({
         url: "groups/assign",
         method: RequestType.PUT,
@@ -72,8 +50,35 @@ const AddRemoveStudent = (props: any) => {
     }
   };
 
+
+
+  const getUsers = () => {
+    fetchCall({
+      url: "users",
+      method: RequestType.GET,
+    })
+      .then((response) => {
+        const res = response.json();
+        return res;
+      })
+      .then((data) => {
+        setUsers(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+
+  let searchUser = () =>{
+    // console.log(users);
+    users.forEach(element => {
+      console.log(element);
+    });
+  }
   let submitHandler = () => {
-    getUsers();
+    searchUser();
     console.log(adminChoice);
     if (adminChoice == "Add") {
       addStudentHandler();

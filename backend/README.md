@@ -1,6 +1,6 @@
 # Backend Component
 
-The backend runs an [express.js](https://expressjs.com/) server, which is a fast, unopinionated, minimalist web framework for [node](https://nodejs.org/en/). It exposes a wide vereity of endpoints to manipulate the internal data, thus, can be used as a REST API. Third party applications may use the backend API, yet they must be authorized and able to store cookie informations returned by the backend.
+The backend runs an [express.js](https://expressjs.com/) server, which is a fast, unopinionated, minimalist web framework for [node](https://nodejs.org/en/).
 
 ## Getting Started
 
@@ -15,7 +15,7 @@ sh build.sh
 The backend is dependent on the other components to run correctly, so it has to be deployed in the same environment using Docker. In the root of the project, run:
 
 ```bash
-docker-compose -f docker-compose-local.yml up -d;
+docker-compose -f docker-compose-local.yml up -d
 ```
 
 Open [http://localhost:5000](http://localhost:5000) with your browser to see Nginx running.

@@ -186,12 +186,12 @@ router.delete("/unassign", isAuth, protector(["admin"]), async (req, res, next) 
         return next("Group does not exist");
 
     /* Delete users assigned to group */
-    const unassignStudentsResult = await deleteFromTable('user_to_group', parameters);
+    const unassignStudentsResult = await deleteFromTable('user_to_group', { groupid: group.result.rows[0].groupid });
     if (unassignStudentsResult.error) 
         return next("Could not unnasign students from group");
 
     /* Get sections related to the group */
-    const sections = await selectFromTable("sections", {groupID: group.result.rows[0].groupID});
+    const sections = await selectFromTable("sections", { groupid: group.result.rows[0].groupid });
     if (sections.error) 
         return next("Could not get sections associated with group");
 
@@ -209,15 +209,15 @@ router.delete("/unassign", isAuth, protector(["admin"]), async (req, res, next) 
             return next("Could not delete task submission (grade) associated with section");
         });
 
-        const taskDelResult = await deleteFromTable("tasks", req.body);
+        const taskDelResult = await deleteFromTable("tasks", { sectionid: section.sectionid });
         if (taskDelResult.error)
-            return next("Could not delete task associated with section");
-
-        /* Delete the section after its data are deleted */
-        const sectionDelResult = await deleteFromTable("sections", req.body);
-        if (sectionDelResult.error) 
-            return next("Could not delete section");
+            return next("Could not delete tasks associated with section");
     })
+
+    /* Delete sections after their data are deleted */
+    const sectionDelResult = await deleteFromTable("sections", { groupid: group.result.rows[0].groupid });
+    if (sectionDelResult.error) 
+        return next("Could not delete sections associated with group");
 
     const result = await deleteFromTable('groups', parameters);
     if (result.error)

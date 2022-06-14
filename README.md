@@ -1,117 +1,19 @@
-# Clean-Administration-Platform
+# Clean Administration Platform
 
-## Technologies
+A platform created to enhance the users, both students and demonstrators, experience in orchastrating the *Functional Programming Course* being taught at the University of *Eotvos Lorand*, in which *Clean Programming Language* is used.
 
-## Front-End:
- - Next.JS 
- - React.JS
- - Typescript
+This repository holds all the components required to deploy the project. They are explained individually in their corresponding *Readme* files. Yet, a breif overview is given below.
 
+---
+## Deploy and Build
+First of all, make sure to have both *docker* and *docker-compose* installed on your machine. *Docker* is used to build simple virtualized microservices and encapsulates them in a so-called *images* (Which are deployed as *containers*), while *docker-compose* ease the process of creating a single network comprising the project microservices, thus, acting as a premise. Furthermore, *node* and *npm* are primary to download the required modules and build the project. 
 
-## Back-End:
- - Express.js
- - Postgresql
- - Auth: keycloak
- - To test if the Keycloak Authentication works: 
-    * `docker exec -it clean_administration_platform_backend_1 sh`
-    * `wget -O - --header 'Content-Type: application/x-www-form-urlencoded' --post-data "username=teacher-1&password=123&client_id=cap-app&client_secret=aQX4Vdbe7PhQTPCwRdeOwIdQzbpGkOdw&grant_type=password" "http://nginx/auth/realms/CAP/protocol/openid-connect/token"`
-    * Means: 
-    * You will get an access_token + refresh_token. The previous means that the authentication was valid as a teacher. You can access the application freely.
+The project can be deployed on a *Windows Operating System*, however, the deployer would have to go through the process of porting. However, for *Linux* machines and subsystems, the project can be built and/or deployed easily through running the given shell script at the root of the repository (`./platform_build_deploy.sh`). The script takes extra arguments to define its behavior. Executing `./platform_build_deploy.sh` alone shows the arguments and their behaviours (*Build Only*, *Deploy Only*, *Build and Deploy*).
 
+If all the aforementioned pre-requisites are installed correctly, the project will be built and/or deployed. If an error occurs, mostly there are some missing utilities (e.g *docker*). To check if the project is running correctly, type `docker-compose -f docker-compose-local.yml ps`. The previous command shows all the container and their status.
 
-Env: Docker K8S
-Automation: Python
+---
 
-## Application architecture
-![Untitled Diagram drawio](https://user-images.githubusercontent.com/48254077/153008152-10429da8-3431-4b5e-a9b9-46ac501ccd35.png)
+## Components Relationship
+As said, a single image may describe a thousand words. The following figure shows the connection between all the components provided within a successfull deployment:
 
-## Example student report for now
-
-<details>
-<summary>MI3JG2</summary>
-<br>
-<ul>
-<li>
-      <details>
-      <summary>addInt</summary>
-      <br>
-      Test case: 1 2<br>
-      Teacher result: 3<br>
-      Student result: 3<br>
-      --------------------------------------------------<br>
-      Test case: 1 3<br>
-      Teacher result: 4<br>
-      Student result: 4<br>
-      </details>
-</li>
-<li>
-      <details>
-      <summary>subInt</summary>
-      <br>
-      Test case: 1 2<br>
-      Teacher result: 3<br>
-      Student result: 3<br>
-      --------------------------------------------------<br>
-      Test case: 1 3<br>
-      Teacher result: 4<br>
-      Student result: 4<br>
-      </details>
-</li>
-<ul>
-</details>
-
-<details>
-<summary>HJ3FT6</summary>
-<br>
-<ul>
-<li>
-      <details>
-      <summary>addInt</summary>
-      <br>
-      Test case: 1 2<br>
-      Teacher result: 3<br>
-      Student result: 3<br>
-      --------------------------------------------------<br>
-      Test case: 1 3<br>
-      Teacher result: 4<br>
-      Student result: 4<br>
-      </details>
-</li>
-<ul>
-</details>
-<details>
-<summary>HU5TY7</summary>
-<br>
-<ul>
-<li>
-      <details>
-      <summary>addInt</summary>
-      <br>
-      Test case: 1 2<br>
-      Teacher result: 3<br>
-      Student result: 3<br>
-      --------------------------------------------------<br>
-      Test case: 1 3<br>
-      Teacher result: 4<br>
-      Student result: 4<br>
-      </details>
-</li>
-<li>
-      <details>
-      <summary>subInt</summary>
-      <br>
-      Test case: 1 2<br>
-      Teacher result: 3<br>
-      Student result: 3<br>
-      --------------------------------------------------<br>
-      Test case: 1 3<br>
-      Teacher result: 4<br>
-      Student result: 4<br>
-      </details>
-</li>
-<ul>
-</details>
-
-To view the full debug logs add the following lines to the keycloak .env file.
-* KEYCLOAK_LOGLEVEL=DEBUG
-* ROOT_LOGLEVEL=DEBUG

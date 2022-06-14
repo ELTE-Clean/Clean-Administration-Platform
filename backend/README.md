@@ -1,6 +1,6 @@
 # Backend Component
 
-The backend runs an [express.js](https://expressjs.com/) server, which is a fast, unopinionated, minimalist web framework for [node](https://nodejs.org/en/).
+The backend runs an [express.js](https://expressjs.com/) server, which is a fast, unopinionated, minimalist web framework for [node](https://nodejs.org/en/). It exposes a wide vereity of endpoints to manipulate the internal data, thus, can be used as a REST API. Third party applications may use the backend API, yet they must be authorized and able to store cookie informations returned by the backend.
 
 ## Getting Started
 

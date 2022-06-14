@@ -191,7 +191,7 @@ router.delete("/unassign", isAuth, protector(["admin"]), async (req, res, next) 
         return next("Could not unnasign students from group");
 
     /* Get sections related to the group */
-    const sections = await selectFromTable("sections", {groupID: groupID});
+    const sections = await selectFromTable("sections", {groupID: group.result.rows[0].groupID});
     if (sections.error) 
         return next("Could not get sections associated with group");
 

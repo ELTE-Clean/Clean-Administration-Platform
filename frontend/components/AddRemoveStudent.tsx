@@ -2,20 +2,33 @@ import RichTextEditor from "./RichTextEditor";
 // import { useState } from "react";
 import { useContext, useState } from "react";
 import { RequestType } from "../enums/requestTypes";
-import { fetchCall } from "../hooks/useFetch";
+import useFetch, { fetchCall } from "../hooks/useFetch";
 const AddRemoveStudent = (props: any) => {
   const [studentNeptun, setStudentNeptun] = useState("");
   const [adminChoice, setAdminChoice] = useState("");
+  const [users, setUsers] = useFetch({ url: "users", method: RequestType.GET});
 
-  let addStudentHandler = () => {
+
+
+
+
+
+
+
+
+
+
+
+
+
+  let addStudentHandler = (userData) => {
     if (studentNeptun.trim() == "") {
       alert("Input cannot be empty!!");
     } else {
-      console.log(studentNeptun);
       fetchCall({
         url: "groups/assign",
         method: RequestType.PUT,
-        body: { userID: studentNeptun, groupID: 1 },
+        body: { userID: userData["uid"], groupID: 1 },
       })
         .then((response) => {
           const res = response.json();
@@ -27,7 +40,7 @@ const AddRemoveStudent = (props: any) => {
     }
   };
 
-  let removeStudentHandler = () => {
+  let removeStudentHandler = (userData) => {
     if (studentNeptun.trim() == "") {
       alert("Input cannot be empty!!");
     } else {
@@ -35,7 +48,7 @@ const AddRemoveStudent = (props: any) => {
       fetchCall({
         url: "groups/unassign",
         method: RequestType.DELETE,
-        body: { userID: studentNeptun, groupID: 1 },
+        body: { userID: userData["uid"], groupID: 1 },
       })
         .then((response) => {
           const res = response.json();
@@ -47,16 +60,56 @@ const AddRemoveStudent = (props: any) => {
     }
   };
 
+
+
+  const getUsers = () => {
+    fetchCall({
+      url: "users",
+      method: RequestType.GET,
+    })
+      .then((response) => {
+        const res = response.json();
+        return res;
+      })
+      .then((data) => {
+        setUsers(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+
+  let searchUser = () =>{
+    // console.log(users);
+    let userData = null;
+    users.forEach(element => {
+      if (element["neptun"] == studentNeptun ){
+        // console.log(element);
+        userData = element;
+      } 
+    });
+    return userData;
+  };
+
   let submitHandler = () => {
+    let userData = searchUser();
+    console.log(userData);
+    if ( userData != null){
     console.log(adminChoice);
     if (adminChoice == "Add") {
-      addStudentHandler();
+      addStudentHandler(userData);
     } else if (adminChoice == "Remove") {
-      removeStudentHandler();
+      removeStudentHandler(userData);
     } else {
       console.log("Please choose to add or remove");
     }
+  }else{
+    console.log("Neptun ID was not found!");
+  }
   };
+
   return (
     <div className="AddTemoveStudent-container">
       <div className={"admin-forms-holder"}>

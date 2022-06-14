@@ -30,4 +30,4 @@ Maintainers also have the ability to view the database and its components throug
 
 ## User Manual
 
-Users (e.g *Students*, *Instructors*) might be able to see the loaded frontend pages and use them to orchestrate the course. 
+Users (e.g *Students*, *Instructors*) are able to see the loaded frontend pages and use them to orchestrate the course. 

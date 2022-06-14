@@ -13,22 +13,6 @@ const AddRemoveStudent = (props: any) => {
 
 
 
-  const getUsers = () => {
-    fetchCall({
-      url: "users/self",
-      method: RequestType.GET,
-    })
-      .then((response) => {
-        const res = response.json();
-        return res;
-      })
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
 
 
 
@@ -36,14 +20,15 @@ const AddRemoveStudent = (props: any) => {
 
 
 
-  let addStudentHandler = () => {
+
+  let addStudentHandler = (userData) => {
     if (studentNeptun.trim() == "") {
       alert("Input cannot be empty!!");
     } else {
       fetchCall({
         url: "groups/assign",
         method: RequestType.PUT,
-        body: { userID: studentNeptun, groupID: 1 },
+        body: { userID: userData["uid"], groupID: 1 },
       })
         .then((response) => {
           const res = response.json();
@@ -55,7 +40,7 @@ const AddRemoveStudent = (props: any) => {
     }
   };
 
-  let removeStudentHandler = () => {
+  let removeStudentHandler = (userData) => {
     if (studentNeptun.trim() == "") {
       alert("Input cannot be empty!!");
     } else {
@@ -63,7 +48,7 @@ const AddRemoveStudent = (props: any) => {
       fetchCall({
         url: "groups/unassign",
         method: RequestType.DELETE,
-        body: { userID: studentNeptun, groupID: 1 },
+        body: { userID: userData["uid"], groupID: 1 },
       })
         .then((response) => {
           const res = response.json();
@@ -98,21 +83,33 @@ const AddRemoveStudent = (props: any) => {
 
   let searchUser = () =>{
     // console.log(users);
+    let userData = null;
     users.forEach(element => {
-      console.log(element);
+      if (element["neptun"] == studentNeptun ){
+        // console.log(element);
+        userData = element;
+      } 
     });
-  }
+    return userData;
+  };
+
   let submitHandler = () => {
-    searchUser();
+    let userData = searchUser();
+    console.log(userData);
+    if ( userData != null){
     console.log(adminChoice);
     if (adminChoice == "Add") {
-      addStudentHandler();
+      addStudentHandler(userData);
     } else if (adminChoice == "Remove") {
-      removeStudentHandler();
+      removeStudentHandler(userData);
     } else {
       console.log("Please choose to add or remove");
     }
+  }else{
+    console.log("Neptun ID was not found!");
+  }
   };
+
   return (
     <div className="AddTemoveStudent-container">
       <div className={"admin-forms-holder"}>

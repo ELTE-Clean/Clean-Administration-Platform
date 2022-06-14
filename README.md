@@ -26,6 +26,8 @@ The authentication process happens within the *Keycloak* server. It may only be 
 
 Maintainers also have the ability to view the database and its components through the *PGadmin* platform. It is similar in a sense to *PhpMyAdmin* platform. This platform is provided since mainteners might be required to edit the database entries manually in extra-ordinary cases.
 
+---
+
 ## User Manual
 
 Users (e.g *Students*, *Instructors*) might be able to see the loaded frontend pages and use them to orchestrate the course. 

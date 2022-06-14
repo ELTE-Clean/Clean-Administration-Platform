@@ -17,7 +17,8 @@ If all the aforementioned pre-requisites are installed correctly, the project wi
 ## Components Relationship
 As said, a single image may describe a thousand words. The following figure shows the connection between all the components provided within a successfull deployment:
 
-#![http://image]
+![Components Relationship](https://user-images.githubusercontent.com/48254077/173631223-57d96103-598c-4e5d-98c0-925c85a0c753.png)
+
 
 As depicted, a user may use the exposed backen api and frontend services through any client device. The frontend server renders the required pages to the client. Then, the client rendered pages may use the exposed backend api. Any request undergoes a load balancing stage (by *nginx*) before entering the premise. Finally, the backend api authenticate and authorize the user based on its connection cookie, thus, any third party application can harness the backend api if, and only if, it can manage its cookies (Browser such as Chrome) and is permitted to access the backend api.
 

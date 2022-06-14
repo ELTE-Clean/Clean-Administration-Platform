@@ -75,7 +75,8 @@ router.get('/', isAuth, protector(["admin", "demonstrator"]), async(req, res) =>
     let ret = [];
     for (const userDB of userReqDB.result.rows) {
       const username = userDB.username.replace(/\s/g, ""); // Since our usernames in the database have white spaces in the end, we remove them :)
-      if (!usersKC_map.has(username)) continue;
+      if (!usersKC_map.has(username)) 
+        continue;
       const kcuser = usersKC_map.get(username);
       ret = [ ...ret,{
           uid: userDB.userid,
@@ -92,7 +93,10 @@ router.get('/', isAuth, protector(["admin", "demonstrator"]), async(req, res) =>
     res.status(200).send(ret);
 });
 
+
+
 /**
+ * 
  * Takes a list of users and creates them in both the keycloak and database with random passwords.
  * Pre-conditions:
  *  Request Body Contains: body{ 
@@ -133,9 +137,8 @@ router.post('/create', isAuth, protector(["admin"]), async (req, res, next) =>{
 
     /* Create users in the database. */
     for (const user of req.body.users) {
-        console.log(user);
         const student = {
-            neptun: user.neptun || "",
+            neptun: user.neptun || user.username,
             username: user.username, 
             firstname : user.firstname || "", 
             lastname : user.lastname || ""
@@ -149,6 +152,8 @@ router.post('/create', isAuth, protector(["admin"]), async (req, res, next) =>{
 
     return res.status(200).send(insertedUsersKC);
 });
+
+
 
 /**
  * Update user's role. Only admins have the ability to change users roles.

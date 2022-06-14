@@ -18,7 +18,7 @@ router.get('/self', isAuth, async (req, res, next) => {
         return next(userReqKC.error);
     }
 
-    const userReqDB = await selectFromTable('users', {username : userReqKC.user.username})
+    let userReqDB = await selectFromTable('users', {username : userReqKC.user.username})
     if(userReqDB.error){
         log("ERROR", `Error in requesting the user from the database`);
         return next(userReqDB.error);
@@ -27,8 +27,17 @@ router.get('/self', isAuth, async (req, res, next) => {
         return next("No such user exists in the Database. It exists only in our keycloak server.");
     }
 
+    const grpReqDB = await selectFromTable('user_to_group', {userID : userReqDB.result.rows[0].userid})
+    if(grpReqDB.error){
+        log("ERROR", `Error in requesting the user's groups from the database`);
+        return next(grpReqDB.error);
+    }
+
+    const mapIDs = grpReqDB.result?.rows.map(grp => grp.groupid);
     const retUser = {
-        uid : userReqDB.result.rows[0].id,
+        uid : userReqDB.result.rows[0].userid,
+        neptun : userReqDB.result.rows[0].neptun,
+        groupIDs : mapIDs,
         kcid : userReqKC.user.keycloak_id, 
         username: userReqKC.user.username, 
         firstname: userReqDB.result.rows[0].firstname.replace(/[ \t]+$/g, ''),
@@ -74,19 +83,29 @@ router.get('/', isAuth, protector(["admin", "demonstrator"]), async(req, res) =>
     /* Return the users that correspond to a keycloak username only */
     let ret = [];
     for (const userDB of userReqDB.result.rows) {
-      const username = userDB.username.replace(/\s/g, ""); // Since our usernames in the database have white spaces in the end, we remove them :)
-      if (!usersKC_map.has(username)) 
-        continue;
-      const kcuser = usersKC_map.get(username);
-      ret = [ ...ret,{
-          uid: userDB.userid,
-          neptun: userDB.neptun,
-          kcid: kcuser.keycloak_id,
-          username: kcuser.username,
-          firstname: userDB.firstname.replace(/[ \t]+$/g, ""), // Until we remove whitespaces from database
-          lastname: userDB.lastname.replace(/[ \t]+$/g, ""), // Until we remove whitespaces from database
-          roles: kcuser.roles,
-        }];
+        const username = userDB.username.replace(/\s/g, ""); // Since our usernames in the database have white spaces in the end, we remove them :)
+        if (!usersKC_map.has(username)) 
+            continue;
+
+        const grpReqDB = await selectFromTable('user_to_group', {userID : userDB.userid})
+        if(grpReqDB.error){
+            log("ERROR", `Error in requesting the user's groups from the database`);
+            return next(grpReqDB.error);
+        }
+        
+
+        const mapIDs = grpReqDB.result?.rows.map(grp => grp.groupid);
+        const kcuser = usersKC_map.get(username);
+        ret = [ ...ret,{
+            uid: userDB.userid,
+            groupIDs : mapIDs,
+            neptun: userDB.neptun,
+            kcid: kcuser.keycloak_id,
+            username: kcuser.username,
+            firstname: userDB.firstname.replace(/[ \t]+$/g, ""), // Until we remove whitespaces from database
+            lastname: userDB.lastname.replace(/[ \t]+$/g, ""), // Until we remove whitespaces from database
+            roles: kcuser.roles,
+            }];
     }
 
     log("INFO", "All users data have been returned successfully");

@@ -1,10 +1,13 @@
 # Backend Component
 
-The backend runs an [express.js](https://expressjs.com/) server, which is a fast, unopinionated, minimalist web framework for [node](https://nodejs.org/en/).
+The backend is a REST API component that runs an [express.js](https://expressjs.com/) server, which is a fast, unopinionated, minimalist web framework for [node](https://nodejs.org/en/). The API can be accessed via any frontend interface, yet the frontend has to be hosted on a browser like software since it stores cookies and handles setting up the cookies automatically. 
+
+## Requirements
+The backend component relies heavily on the keycloak and postgresql databases. Keycloak is used as an authentication server, while postgresql database holds the data of the application.
 
 ## Getting Started
 
-First, build the backend server:
+First, make sure that nodejs and docker are installed then build the backend server:
 
 ```bash
 ./build.sh

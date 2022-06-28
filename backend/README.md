@@ -38,7 +38,11 @@ You should be able to access all GET endpoints from the browser such as:
 
 ## Files Distribution
 
-The structure of the backend is distributed into multiple modules, each handling a specific mission. The server initialization starts from the `./server.js`. The server encapsulates multiple routes in which the endpoints are defined in. The routes directory `./routes` contain all the endpoint definitions, each defined its mission by the file name.
+The structure of the backend is distributed into multiple modules, each handling a specific mission. 
+* The server initialization starts from the `./server.js`. 
+* The server encapsulates multiple routes in which the endpoints are defined in. The routes directory `./routes` contain all the endpoint definitions. 
+* `./middlewares` folder encapsulates all custom made middlewares (Cors handling and such). Express endpoints uses these middlewares in all the routes.
+* `./utils` holds all the functions that allow the component to communicate with the keycloak and database servers. Moreover, it holds extra utilities which handles logging for instance.
 
 ## Learn More
 

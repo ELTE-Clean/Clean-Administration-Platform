@@ -134,7 +134,7 @@ router.post("/create", fileUpload({ createParentPath: true }), isAuth, protector
   params.taskname = req.files?.name || req.body?.name;
   params.expiryDate = req.files?.dueDate || req.body?.dueDate || `${ts.getFullYear()}-${ts.getMonth()}-${ts.getDay()}`;
   params.expiryTime = req.files?.dueTime || req.body?.dueTime || `${ts.getHours()}:${ts.getMinutes()}:${ts.getSeconds()}`;
-  params.testquestions = req.files?.testcases || req.body.testcases;
+  params.testquestions = req.files?.testcases || req.body.testcases || "";
   params.solution = solution.replace(/^.*module.*$/g, "").replace(/\'/g, "''");
   params.description = description.replace(/\'/g, "''");
 

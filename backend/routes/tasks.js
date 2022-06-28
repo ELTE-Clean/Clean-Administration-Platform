@@ -117,26 +117,26 @@ router.get("/:taskID/submissions", isAuth, async (req, res, next) => {
  */
 router.post("/create", fileUpload({ createParentPath: true }), isAuth, protector(["admin", "demonstrator"]), async (req, res, next) => {
   /* Check if the the incoming data are complete */
-  const dataNotInForm = !req.files || !req.files.solution || !req.files.description || !req.files.name || !req.files.sectionid;
-  const dataNotInBody = !req.body || !req.body.solution || !req.body.description || !req.body.name || !req.body.sectionid;
-  if (dataNotInForm && dataNotInBody)
-    return res.status(400).send({ message: "Missing input parameters!" });
-
   const ts = new Date();
 
   const solution = req.files?.solution.data.toString("utf8") || req.body.solution;
   const description = req.files?.description.data.toString("utf8") || req.body.description;
   
   /* Inserting the data into the table */
-  const params;
+  const params = {};
   params.sectionid = req.files?.sectionid || req.body?.sectionid;
-  params.max = req.files?.maxGrade ||  req.body?.maxGrade;
+  params.max = req.files?.maxGrade ||  req.body?.maxGrade || 0;
   params.taskname = req.files?.name || req.body?.name;
   params.expiryDate = req.files?.dueDate || req.body?.dueDate || `${ts.getFullYear()}-${ts.getMonth()}-${ts.getDay()}`;
   params.expiryTime = req.files?.dueTime || req.body?.dueTime || `${ts.getHours()}:${ts.getMinutes()}:${ts.getSeconds()}`;
   params.testquestions = req.files?.testcases || req.body.testcases || "";
   params.solution = solution.replace(/^.*module.*$/g, "").replace(/\'/g, "''");
   params.description = description.replace(/\'/g, "''");
+
+  const missingData = !params.solution || !params.description || !params.sectionid || !params.taskname;
+  if (missingData)
+    return res.status(400).send({ message: "Missing input parameters!" });
+
 
   const result = await insertIntoTable("tasks", params);
   if (result.error)

@@ -32,14 +32,18 @@ router.get("/", isAuth, async (req, res, next) => {
 
 /**
  * Creates a new section to a group.
- * req.body: {sectionid, groupid}
+ * req.body: {sectionName, groupid}
  */
 router.post(
   "/create",
   isAuth,
   protector(["admin", "demonstrator"]),
   async (req, res, next) => {
-    const result = await insertIntoTable("sections", req.body);
+    const params = {};
+    params.sectionName = req.body.sectionName || req.body.sectionname;
+    params.groupID = req.body.groupid || req.body.groupID;
+
+    const result = await insertIntoTable("sections", params);
     if (result.error)
       return res
         .status(500)

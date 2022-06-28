@@ -1,16 +1,11 @@
 # Keycloak Component
+*Keycloak* is a free authentication server. It stores the users, their credentials, and their roles. It may only be accessed by maintainers, and intranet (inner network) components through either the keycloak api or the UI. Maintainers may change the credentials and manage the roles of the users if manual assessement is needed. Keycloak is a complicated component by its own and has lots of configurations that can be tweaked. However, the project only uses the very basic features to authenticate through it. 
 
-The authentication process happens within the *Keycloak* server. It may only be accessed by maintainers, and intranet (inner network) users. Maintainers may change the credentials and manage the roles of the users if manual assessement is needed.
 
----
+Whenever a login request is sent to keycloak, two tokens are returned defining the user. Once these tokens are received, it means that the user logged in successfully to the interface.
 
-To test if the Keycloak Authentication works:
-* `docker exec -it clean_administration_platform_backend_1 sh`
-* `wget -O - --header 'Content-Type: application/x-www-form-urlencoded' --post-data "username=teacher-1&password=123&client_id=cap-app&client_secret=aQX4Vdbe7PhQTPCwRdeOwIdQzbpGkOdw&grant_type=password" "http://nginx/auth/realms/CAP/protocol/openid-connect/token"`
 
-Means:
-* You will get an access_token + refresh_token. The previous means that the authentication was valid as a teacher. You can access the application freely.
-
-To view the full debug logs add the following lines to the keycloak.env file.
+## Notes: 
+To view the full debug logs add the following lines to the `keycloak.env` file.
 * KEYCLOAK_LOGLEVEL=DEBUG
 * ROOT_LOGLEVEL=DEBUG

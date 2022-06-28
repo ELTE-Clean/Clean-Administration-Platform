@@ -2,7 +2,7 @@
 
 The database is powered by PostgreSQL and contains 2 databases: auth_db and clean_db.
 
-The auth_db database is used by keycloak to store all of its necessary information and should not be touched directly. Instead, the Keycloak UI should be used.
+The auth_db database is used by keycloak to store all of its necessary information and should not be touched directly. Instead, the Keycloak UI and API should be used.
 
 The clean_db database is used and designed by us to store website and user data. You can view the tables either through the pgadmin web UI or by accessing the cleanDB container directly. 
 

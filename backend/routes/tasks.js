@@ -115,47 +115,33 @@ router.get("/:taskID/submissions", isAuth, async (req, res, next) => {
  * The solution and description can be given through the req.body, or passed by a multipart/form_data protocol.
  *
  */
-router.post(
-  "/create",
-  fileUpload({ createParentPath: true }),
-  isAuth,
-  protector(["admin", "demonstrator"]),
-  async (req, res, next) => {
-    /* Check if the the incoming data are complete */
-    const fileNotInForm =
-      !req.files || !req.files.solution || !req.files.description;
-    const fileNotInBody =
-      !req.body || !req.body.solution || !req.body.description;
-    const incompleteFile = fileNotInForm && fileNotInBody;
-    const incompleteBody = !req.body || !req.body.name || !req.body.sectionid;
-    if (incompleteFile || incompleteBody)
-      return res.status(400).send({ message: "Missing input parameters!" });
+router.post("/create", fileUpload({ createParentPath: true }), isAuth, protector(["admin", "demonstrator"]), async (req, res, next) => {
+  /* Check if the the incoming data are complete */
+  const ts = new Date();
 
-    const solution =
-      req.files?.solution.data.toString("utf8") || req.body.solution;
-    const description =
-      req.files?.description.data.toString("utf8") || req.body.description;
+  const solution = req.files?.solution.data.toString("utf8") || req.body.solution;
+  const description = req.files?.description.data.toString("utf8") || req.body.description;
+  
+  /* Inserting the data into the table */
+  const params = {};
+  params.sectionid = req.files?.sectionid || req.body?.sectionid;
+  params.max = req.files?.maxGrade ||  req.body?.maxGrade || 0;
+  params.taskname = req.files?.name || req.body?.name;
+  params.expiryDate = req.files?.dueDate || req.body?.dueDate || `${ts.getFullYear()}-${ts.getMonth()}-${ts.getDay()}`;
+  params.expiryTime = req.files?.dueTime || req.body?.dueTime || `${ts.getHours()}:${ts.getMinutes()}:${ts.getSeconds()}`;
+  params.testquestions = req.files?.testcases || req.body.testcases || "";
+  params.solution = solution.replace(/^.*module.*$/g, "").replace(/\'/g, "''");
+  params.description = description.replace(/\'/g, "''");
 
-    const ts = new Date();
-    /* Inserting the task into the table */
-    const params = {
-      sectionid: req.body.sectionid,
-      max: req.body.maxGrade,
-      taskname: req.body.name,
-      expiryDate:
-        req.body.dueDate ||
-        `${ts.getFullYear()}-${ts.getMonth()}-${ts.getDay()}`,
-      expiryTime:
-        req.body.dueTime ||
-        `${ts.getHours()}:${ts.getMinutes()}:${ts.getSeconds()}`,
-      solution: solution.replace(/^.*module.*$/g, "").replace(/\'/g, "''"),
-      description: description.replace(/\'/g, "''"),
-      testquestions: req.body.testcases,
-    };
-    const result = await insertIntoTable("tasks", params);
-    if (result.error)
-      return res.status(500).send({ message: "Failed to insert task" });
-    return res.status(200).send({ message: "Task created successfully!" });
+  const missingData = !params.solution || !params.description || !params.sectionid || !params.taskname;
+  if (missingData)
+    return res.status(400).send({ message: "Missing input parameters!" });
+
+
+  const result = await insertIntoTable("tasks", params);
+  if (result.error)
+    return res.status(500).send({ message: "Failed to insert task" });
+  return res.status(200).send({ message: "Task created successfully!" });
   }
 );
 

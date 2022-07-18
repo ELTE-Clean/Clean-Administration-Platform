@@ -63,4 +63,13 @@ Maintainers also have the ability to view the database and its components throug
 
 ## User Manual
 
-Users (e.g *Students*, *Instructors*) are able to see the loaded frontend pages and use them to orchestrate the course. 
+Users (e.g *Students*, *Instructors*) are able to see the loaded frontend pages and use them to orchestrate the course. The frontend (the website which the user interacts with) is independent from the backend server. Therefore, it allows implementations of lots of UI interfaces that can do the same stuff. The user manual is divided into 4 categories: "Students", "Demonstrators", "Admin", "Maintainers". Note, the first three categories are represented as roles in the application, while the last one (Maintainers) are internal developers and maintainers, who has the credentials and the ability to edit the databases manually. In other words, students, demonstrators, and admins can interact with the provided frontend directly since it is exposed. Maintainers, on the other hand, can access other platforms, such as Keycloak UI (Alter the security related stuff) and PGAdmin (Alter the application database). If the user is a developer/maintainer, then it is recommended to check the keycloak and pgadmin folders for more details. However, if the user is an app user (e.g: student, demonstrator, or admin), then it is recommended to read the `./frontend/README.md` file. The `./frontend/README.md` contains all the necessary information for the current frontend implementation.
+
+
+---
+
+## Main Founders and Developers Wall of Fame
+Asseel Al-Mahdawi : 
+Abdullah Abdulrab : 
+Mohammed Al-Mahdawi :
+Timur Ismailov : 

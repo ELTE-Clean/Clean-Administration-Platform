@@ -14,7 +14,7 @@ fi;
 
 # Building the images
 if [ $1 -ne 2 ]
-then 
+then
     # Building the backend
     echo "Building the express backend...";
     cd backend;

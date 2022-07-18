@@ -1,117 +1,70 @@
-# Clean-Administration-Platform
+# Clean Administration Platform
 
-## Technologies
+A platform created to enhance the users, both students and demonstrators, experience in orchastrating the *Functional Programming Course* being taught at the University of *Eötvös Loránd*, in which *Clean Programming Language* is used.
 
-## Front-End:
- - Next.JS 
- - React.JS
- - Typescript
+This repository holds all the components required to deploy the project. They are explained individually in their corresponding *README* files. Yet, a breif overview is given below.
 
 
-## Back-End:
- - Express.js
- - Postgresql
- - Auth: keycloak
- - To test if the Keycloak Authentication works: 
-    * `docker exec -it clean_administration_platform_backend_1 sh`
-    * `wget -O - --header 'Content-Type: application/x-www-form-urlencoded' --post-data "username=teacher-1&password=123&client_id=cap-app&client_secret=aQX4Vdbe7PhQTPCwRdeOwIdQzbpGkOdw&grant_type=password" "http://nginx/auth/realms/CAP/protocol/openid-connect/token"`
-    * Means: 
-    * You will get an access_token + refresh_token. The previous means that the authentication was valid as a teacher. You can access the application freely.
+---
+
+## Used Technology
+
+> ### Client Side:
+> Node : Next : React : Express : Sass
+
+> ### Server Side:
+> Node : Express : PostgreSQL : PGAdmin : Keycloak
+
+> ### Virtualization:
+> Docker : Docker-Compose
+
+> ### Automation:
+> Python 
+
+---
+
+## Setup Application
+
+>### Windows Prerequisite
+
+In the end, a Linux environment is needed. If you are already using Linux, you can skip this subsection. Windows 10 version 1903 or higher or Windows 11 is needed to continue.
+
+To run the app in a Windows machine, firstly 2 things are needed: Windows Subsystem for Linux (WSL) and Docker Desktop installed with WSL 2 backend. The easy way to install a WSL is to go to Microsoft Store and download Ubuntu 20.04 LTS (or higher). If you are more tech savvy, follow the [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-manual#step-3---enable-virtual-machine-feature). To install Docker Desktop with WSL 2 backend, a complete guide can be found [here](https://docs.docker.com/desktop/windows/wsl/).
+
+Once these are installed, you can continue with the Build and Deploy section, the only difference being that *docker* and *docker-compose* will already be installed on your machine.
+
+>### Build and Deploy
+
+First of all, make sure to have both *docker* and *docker-compose* installed on your machine. *Docker* is used to build simple virtualized microservices and encapsulates them in a so-called *images* (Which are deployed as *containers*), while *docker-compose* eases the process of creating a single network comprising the project microservices, thus, acting as a premise. Furthermore, *node* and *npm* are needed to download the required modules and build the project. 
+
+The project can be deployed on a *Windows Operating System*, however, the deployer would have to go through the process of porting. However, for *Linux* machines and subsystems, the project can be built and/or deployed easily through running the given shell script at the root of the repository (`./platform_build_deploy.sh`). The script takes extra arguments to define its behavior. Executing `./platform_build_deploy.sh` alone shows the arguments and their behaviours (*Build Only*, *Deploy Only*, *Build and Deploy*).
+
+If all of the aforementioned pre-requisites are installed correctly, the project will be built and/or deployed. If an error occurs, mostly there are some missing utilities (e.g *docker*). To check if the project is running correctly, type `docker-compose -f docker-compose-local.yml ps`. The previous command shows all the container and their status.
+
+---
+
+## Components Relationship
+As said, a single image may describe a thousand words. The following figure shows the connection between all the components provided within a successfull deployment:
+
+![Components Relationship](https://user-images.githubusercontent.com/48254077/173631223-57d96103-598c-4e5d-98c0-925c85a0c753.png)
+
+As depicted, a user may use the exposed backen API and frontend services through any client device. The frontend server renders the required pages to the client. Then, the client rendered pages may use the exposed backend API. Any request undergoes a load balancing stage (by *nginx*) before entering the premise. Finally, the backend API authenticate and authorize the user based on its connection cookie, thus, any third party application can harness the backend API if, and only if, it can manage its cookies (Browser such as Chrome) and is permitted to access the backend API.
+
+The authentication process happens within the *Keycloak* server. It may only be accessed by maintainers, and intranet (inner network) users. Maintainers may change the credentials and manage the roles of the users if manual assessement is needed.
+
+Maintainers also have the ability to view the database and its components through the *pgAdmin* platform. It is similar to the *PhpMyAdmin* platform. This platform is provided for mainteners might be required to edit the database entries manually in extra-ordinary cases.
+
+---
+
+## User Manual
+
+Users (e.g *Students*, *Instructors*) are able to see the loaded frontend pages and use them to orchestrate the course. The frontend (the website which the user interacts with) is independent from the backend server. Therefore, it allows implementations of lots of UI interfaces that can do the same stuff. The user manual is divided into 4 categories: "Students", "Demonstrators", "Admin", "Maintainers". Note, the first three categories are represented as roles in the application, while the last one (Maintainers) are internal developers and maintainers, who has the credentials and the ability to edit the databases manually. In other words, students, demonstrators, and admins can interact with the provided frontend directly since it is exposed. Maintainers, on the other hand, can access other platforms, such as Keycloak UI (Alter the security related stuff) and PGAdmin (Alter the application database). If the user is a developer/maintainer, then it is recommended to check the keycloak and pgadmin folders for more details. However, if the user is an app user (e.g: student, demonstrator, or admin), then it is recommended to read the `./frontend/README.md` file. The `./frontend/README.md` contains all the necessary information for the current frontend implementation.
 
 
-Env: Docker K8S
-Automation: Python
+---
 
-## Application architecture
-![Untitled Diagram drawio](https://user-images.githubusercontent.com/48254077/153008152-10429da8-3431-4b5e-a9b9-46ac501ccd35.png)
-
-## Example student report for now
-
-<details>
-<summary>MI3JG2</summary>
-<br>
-<ul>
-<li>
-      <details>
-      <summary>addInt</summary>
-      <br>
-      Test case: 1 2<br>
-      Teacher result: 3<br>
-      Student result: 3<br>
-      --------------------------------------------------<br>
-      Test case: 1 3<br>
-      Teacher result: 4<br>
-      Student result: 4<br>
-      </details>
-</li>
-<li>
-      <details>
-      <summary>subInt</summary>
-      <br>
-      Test case: 1 2<br>
-      Teacher result: 3<br>
-      Student result: 3<br>
-      --------------------------------------------------<br>
-      Test case: 1 3<br>
-      Teacher result: 4<br>
-      Student result: 4<br>
-      </details>
-</li>
-<ul>
-</details>
-
-<details>
-<summary>HJ3FT6</summary>
-<br>
-<ul>
-<li>
-      <details>
-      <summary>addInt</summary>
-      <br>
-      Test case: 1 2<br>
-      Teacher result: 3<br>
-      Student result: 3<br>
-      --------------------------------------------------<br>
-      Test case: 1 3<br>
-      Teacher result: 4<br>
-      Student result: 4<br>
-      </details>
-</li>
-<ul>
-</details>
-<details>
-<summary>HU5TY7</summary>
-<br>
-<ul>
-<li>
-      <details>
-      <summary>addInt</summary>
-      <br>
-      Test case: 1 2<br>
-      Teacher result: 3<br>
-      Student result: 3<br>
-      --------------------------------------------------<br>
-      Test case: 1 3<br>
-      Teacher result: 4<br>
-      Student result: 4<br>
-      </details>
-</li>
-<li>
-      <details>
-      <summary>subInt</summary>
-      <br>
-      Test case: 1 2<br>
-      Teacher result: 3<br>
-      Student result: 3<br>
-      --------------------------------------------------<br>
-      Test case: 1 3<br>
-      Teacher result: 4<br>
-      Student result: 4<br>
-      </details>
-</li>
-<ul>
-</details>
-
-To view the full debug logs add the following lines to the keycloak .env file.
-* KEYCLOAK_LOGLEVEL=DEBUG
-* ROOT_LOGLEVEL=DEBUG
+## Main Founders and Developers Wall of Fame
+Asseel Al-Mahdawi : 
+Abdullah Abdulrab : 
+Mohammed Al-Mahdawi :
+Timur Ismailov : 

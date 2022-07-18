@@ -269,67 +269,11 @@ export async function getAllUsersData(roles? : string[]) : Promise<KCUserData[]>
 
 
 
-
-/**
- * Create multiple users in keycloak given an array of KCUserData. 
- * Note:
- *  Passwords are generated randomly. 
- * 
- * Returns:
- *  A map containing the usernames and their relative passwords
- * 
- */
-export async function createUsers(users: KCUserData[]) : Promise<Map<string, string>> {
-    /* Creating client access token */
-    var at : string = "";
-    try{
-        at = await createClientAccessToken();
-    }catch(error){
-        log("ERROR", error as string);
-        return new Map();
-    }
-
-    /* Creating user */
-    var insertedUsers : Map<string, string> = new Map<string, string>();
-    for(const user of users){
-        if(insertedUsers.has(user.username)){
-            log("DEBUG", "multiple users are given that are redundant");
-            continue;
-        }
-        let password = (Math.random() + 1).toString(36).substring(7);
-        let userRepr = {
-            id : user.keycloak_id,
-            email : user.email,
-            emailVerified : user.email_verified,
-            enabled : true,
-            realmRoles : user.roles,
-            username : user.username,
-            credentials : [{type:"password", value: password, temporary: false}]
-        };
-        let reqRes = await execReq(
-            "post", 
-            `${KEYCLOAK_HOST}admin/realms/${REALM_NAME}/users`,
-            userRepr,
-            {'Content-Type': 'application/json', Authorization: 'Bearer ' + at }
-        );
-        if(reqRes.error){
-            log("ERROR", reqRes.error);
-            continue;
-        }
-
-        insertedUsers.set(user.username, password)
-        log("DEBUG", `Created user: ${user.username} with password: ${password}`);
-    }
-
-    return insertedUsers;
-}
-
-
 /**
  * You can call this function to get more details regarding the application roles defined in this module as "appRoles"
  * @returns - All roles details (id, name...etc) of the appRoles
  */
-export async function getAllRolesData() : Promise<{id:string, name:string}[]> {
+ export async function getAllRolesData() : Promise<{id:string, name:string}[]> {
     var at : string = "";
     try{
         at = await createClientAccessToken();
@@ -419,6 +363,104 @@ export async function updateUserRole(username: string, roles: string[]) : Promis
     return true;
 }
 
+
+
+
+/**
+ * Create multiple users in keycloak given an array of KCUserData. 
+ * Note:
+ *  Passwords are generated randomly. 
+ * 
+ * Returns:
+ *  A map containing the usernames and their relative passwords
+ * 
+ */
+export async function createUsers(users: KCUserData[]) : Promise<Map<string, string>> {
+    /* Creating client access token */
+    var at : string = "";
+    try{
+        at = await createClientAccessToken();
+    }catch(error){
+        log("ERROR", error as string);
+        return new Map();
+    }
+
+    /* Creating user */
+    var insertedUsers : Map<string, string> = new Map<string, string>();
+    for(const user of users){
+        if(insertedUsers.has(user.username)){
+            log("DEBUG", "multiple users are given that are redundant");
+            continue;
+        }
+        let password = (Math.random() + 1).toString(36).substring(7);
+        let userRepr = {
+            // id : user.keycloak_id,
+            email : user.email,
+            emailVerified : user.email_verified,
+            enabled : true,
+            realmRoles : user.roles,
+            username : user.username,
+            credentials : [{type:"password", value: password, temporary: false}]
+        };
+        
+        let reqRes = await execReq(
+            "post", 
+            `${KEYCLOAK_HOST}admin/realms/${REALM_NAME}/users`,
+            userRepr,
+            {'Content-Type': 'application/json', Authorization: 'Bearer ' + at }
+        );
+        if(reqRes.error){
+            log("ERROR", reqRes.error);
+            continue;
+        }
+
+        if(!(await updateUserRole(user.username, user.roles))){
+            log("ERROR", "Could not update user role for: " + user.username);
+        }
+
+        insertedUsers.set(user.username, password);
+        log("DEBUG", `Created user: ${user.username} with password: ${password}`);
+    }
+
+    return insertedUsers;
+}
+
+/**
+ * Deletes a user from keycloak
+ * @param username - the username of the user. 
+ * @returns - True if user successfully deleted, otherwise, false.
+ */
+export async function deleteUser(username: string): Promise<Boolean> {
+    /* Creating client access token */
+    var at : string = "";
+    try{
+        at = await createClientAccessToken();
+    }catch(error){
+        log("ERROR", error as string);
+        return false;
+    }
+
+    /* Getting user keycloak id*/
+    const userReq : KCUserInfoRequest = await getUserData (username);
+    if(userReq.error){
+        log("ERROR", "Failed to get user data");
+        return false;
+    }
+
+    /* Deleting user from Keycloak */
+    const reqRes = await execReq(
+        "delete", 
+        `${KEYCLOAK_HOST}admin/realms/${REALM_NAME}/users/${userReq.user?.keycloak_id}`,
+        {},
+        {'Content-Type': 'application/json', Authorization: 'Bearer ' + at }
+    );
+    if(reqRes.error){
+        log("ERROR", reqRes.error);
+        return false;
+    }
+
+    return true;
+}
 
 
 

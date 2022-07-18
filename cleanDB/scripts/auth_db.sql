@@ -5,7 +5,7 @@
 -- Dumped from database version 11.14
 -- Dumped by pg_dump version 11.14
 
--- Started on 2022-04-09 22:29:55 UTC
+-- Started on 2022-06-07 15:22:10 UTC
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -2301,8 +2301,7 @@ INSERT INTO public.composite_role (composite, child_role) VALUES ('3d493227-1aa1
 --
 
 INSERT INTO public.credential (id, salt, type, user_id, created_date, user_label, secret_data, credential_data, priority) VALUES ('8a729c25-dc00-46a2-8625-0c2b9cea1947', NULL, 'password', 'b3e2d387-81e8-4fb9-a74e-a941a8c4804f', 1644333809510, NULL, '{"value":"XvE1QUrcBDa0uo5ZayBP77LaG1MVs0ntvo4d1X0bsk0szuVtS5eEYZbN7IBfH9h5MjOEcXa2mXZxdNT4u9Em2A==","salt":"w0Oywgnll9Z/KXnV3ag3fw==","additionalParameters":{}}', '{"hashIterations":27500,"algorithm":"pbkdf2-sha256","additionalParameters":{}}', 10);
-INSERT INTO public.credential (id, salt, type, user_id, created_date, user_label, secret_data, credential_data, priority) VALUES ('5e04ede4-9b89-4d3d-848d-69eacc6ba40b', NULL, 'password', '474a96af-2dea-4fb0-9ba9-c183b7776c13', 1645738735990, NULL, '{"value":"c7bDYdWJb+jCjNt9xLzePUIEzSDY8512SZXQRtFGIDara3Lrc3g1aFuA9JQLu0/oc/0Ws6B46ZuYbBpu5xcYXQ==","salt":"0tcjq9RliYvKovoinODb8w==","additionalParameters":{}}', '{"hashIterations":27500,"algorithm":"pbkdf2-sha256","additionalParameters":{}}', 10);
-INSERT INTO public.credential (id, salt, type, user_id, created_date, user_label, secret_data, credential_data, priority) VALUES ('ed5808f3-4949-4761-9fc4-270d369a383f', NULL, 'password', 'fa9667dd-2549-4464-8bef-8cb57adc8796', 1645738878449, NULL, '{"value":"3OWpqhZb+HklhN8UPmyqzhGpFu0AkZzJYYHndIzB0J2UbKuVPtLa6bxjHI2i/ZG9M9LxVyGE6drd4+m58qgiuA==","salt":"GydK3NHhY0tUU2KvjcHWGA==","additionalParameters":{}}', '{"hashIterations":27500,"algorithm":"pbkdf2-sha256","additionalParameters":{}}', 10);
+INSERT INTO public.credential (id, salt, type, user_id, created_date, user_label, secret_data, credential_data, priority) VALUES ('36ee2c8e-0a65-49b3-99ed-be6f558404d8', NULL, 'password', '40b002af-cfda-4a37-b362-8624cc582e3a', 1654614895596, NULL, '{"value":"Sne7TRgo5FzhTChpfX8pUzzYbDOwKP5xU7KRnaPEzKvzp2mLVcR2o4XLaLK9bKbwllwPS+vtcSNMlIj2IoNK/g==","salt":"0C0cF1C8IngrkjWC5CM1pQ==","additionalParameters":{}}', '{"hashIterations":27500,"algorithm":"pbkdf2-sha256","additionalParameters":{}}', 10);
 
 
 --
@@ -3434,8 +3433,7 @@ INSERT INTO public.scope_mapping (client_id, role_id) VALUES ('92c59aec-0896-484
 
 INSERT INTO public.user_entity (id, email, email_constraint, email_verified, enabled, federation_link, first_name, last_name, realm_id, username, created_timestamp, service_account_client_link, not_before) VALUES ('b3e2d387-81e8-4fb9-a74e-a941a8c4804f', NULL, '80adcd6b-afe6-4e08-9e69-09ba23edcc01', false, true, NULL, NULL, NULL, 'master', 'admin', 1644333809399, NULL, 0);
 INSERT INTO public.user_entity (id, email, email_constraint, email_verified, enabled, federation_link, first_name, last_name, realm_id, username, created_timestamp, service_account_client_link, not_before) VALUES ('3e4386c0-6580-4b79-b2ab-5021406d3cd6', NULL, '2c34abc3-a7f9-4322-95cc-d47331044929', false, true, NULL, NULL, NULL, 'CAP', 'service-account-cap-app', 1645738672200, '92c59aec-0896-4840-adae-3f291ad1c9ad', 0);
-INSERT INTO public.user_entity (id, email, email_constraint, email_verified, enabled, federation_link, first_name, last_name, realm_id, username, created_timestamp, service_account_client_link, not_before) VALUES ('474a96af-2dea-4fb0-9ba9-c183b7776c13', NULL, '773a4d00-3625-4978-aae4-50484d024352', false, true, NULL, NULL, NULL, 'CAP', 'teacher-1', 1645738723637, NULL, 0);
-INSERT INTO public.user_entity (id, email, email_constraint, email_verified, enabled, federation_link, first_name, last_name, realm_id, username, created_timestamp, service_account_client_link, not_before) VALUES ('fa9667dd-2549-4464-8bef-8cb57adc8796', NULL, 'd0befb4e-c8a8-4850-8370-0ddd54ea1d55', false, true, NULL, NULL, NULL, 'CAP', 'student-1', 1645738867953, NULL, 0);
+INSERT INTO public.user_entity (id, email, email_constraint, email_verified, enabled, federation_link, first_name, last_name, realm_id, username, created_timestamp, service_account_client_link, not_before) VALUES ('40b002af-cfda-4a37-b362-8624cc582e3a', NULL, '8e85310f-d1f5-49ed-8d70-7a2dbf422047', false, true, NULL, 'Viktoria', 'Zsok', 'CAP', 'oktato', 1654614873751, NULL, 0);
 
 
 --
@@ -3512,10 +3510,6 @@ INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('9c51296a-bd3e-4
 INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('e4a5be7b-214c-4c29-87fb-a061cb068be1', 'b3e2d387-81e8-4fb9-a74e-a941a8c4804f');
 INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('9bf618ce-e060-40d7-abd8-7dd6407a1e28', 'b3e2d387-81e8-4fb9-a74e-a941a8c4804f');
 INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('3d493227-1aa1-481d-8f5c-d5ccc788460a', '3e4386c0-6580-4b79-b2ab-5021406d3cd6');
-INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('3d493227-1aa1-481d-8f5c-d5ccc788460a', '474a96af-2dea-4fb0-9ba9-c183b7776c13');
-INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('4666aae2-4feb-4111-91ac-ff88bd5bb5d4', '474a96af-2dea-4fb0-9ba9-c183b7776c13');
-INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('3d493227-1aa1-481d-8f5c-d5ccc788460a', 'fa9667dd-2549-4464-8bef-8cb57adc8796');
-INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('4ccc6c3e-0dcc-4a5b-8ae7-79619cf40b15', 'fa9667dd-2549-4464-8bef-8cb57adc8796');
 INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('25aff87c-fa6f-411d-9a05-6584a8c12656', '3e4386c0-6580-4b79-b2ab-5021406d3cd6');
 INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('15de1118-7e55-4d2b-968a-22349e1b5b72', '3e4386c0-6580-4b79-b2ab-5021406d3cd6');
 INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('ee7fdcef-8980-44c0-ac47-e0cf0bf175dc', '3e4386c0-6580-4b79-b2ab-5021406d3cd6');
@@ -3535,6 +3529,8 @@ INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('0064cc3a-bf73-4
 INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('24264fa6-c177-414b-a7c8-758dedf1826f', '3e4386c0-6580-4b79-b2ab-5021406d3cd6');
 INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('1905f91c-f426-46ca-ba80-8e5d2d33790f', '3e4386c0-6580-4b79-b2ab-5021406d3cd6');
 INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('7de77c1d-6c2d-4c69-9bfc-2ab1f0d9da05', '3e4386c0-6580-4b79-b2ab-5021406d3cd6');
+INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('3d493227-1aa1-481d-8f5c-d5ccc788460a', '40b002af-cfda-4a37-b362-8624cc582e3a');
+INSERT INTO public.user_role_mapping (role_id, user_id) VALUES ('785040b2-3102-49a3-adc8-0c545beea043', '40b002af-cfda-4a37-b362-8624cc582e3a');
 
 
 --

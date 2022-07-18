@@ -5,21 +5,19 @@ import EditSectionForm from "../components/EditSectionForm";
 import { useRouter } from "next/router";
 // import AssignTeacher from "../components/AssignTeacher";
 import Create_Student from "../components/CreateStudentForm";
-import AddGroup from "../components/AddGroup";
 
-const dashboard: NextPage = () => {
+const createStudent: NextPage = () => {
   const router = useRouter();
   let name = router.query.sectionName;
   return (
     <div className="section-container">
       <div className="section-name">
-        <h1>Dashboard</h1>
+        <h1>Create Student</h1>
       </div>
-      <AddGroup addGroupCallBack={undefined} />
       <Create_Student  />
     </div>
 
   );
 };
 
-export default dashboard
+export default createStudent;

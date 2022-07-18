@@ -14,7 +14,6 @@ const Login: NextPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
-  console.log("Login");
 
   let loginHandler = (e: any) => {
     e.preventDefault();
@@ -42,7 +41,7 @@ const Login: NextPage = () => {
       })
       .finally(() => {
         fetchCall({
-          url: "users/get/self",
+          url: "users/self",
           method: RequestType.GET,
         })
           .then((response) => {
@@ -51,7 +50,6 @@ const Login: NextPage = () => {
           })
           .then((data) => {
             setUser(data);
-            console.log(user);
           })
           .catch((error) => {
             console.error(error);

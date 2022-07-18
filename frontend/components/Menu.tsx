@@ -8,23 +8,49 @@ import { fetchCall } from "../hooks/useFetch";
 
 const Menu = () => {
   const { sections, setSections } = useContext(UserContext);
+  const [groups, setGroups] = useState([]);
   const [buttonAddSectionPopup, setButtonAddSectionPopup] = useState(false);
   let userNeptun = "MI3JG2";
   // let sections = ["Homeworks", "Progress Tasks", "Mid Term", "End Term"];
 
   let adminUser = "Admin";
-  let groups = ["Group 1", "Group 2", "Group 3", "Group 4"];
-  let isAdmin = false;
+  // let groups = ["Group 1", "Group 2", "Group 3", "Group 4"];
+  let isAdmin = true;
   let addSectionCallBack = (sectionToAdd: string) => {
-    return sections.message.includes(sectionToAdd);
+    return sections
+      .map((section) => section["sectionname"])
+      .includes(sectionToAdd);
   };
   const isUserLoggedIn = () => {
     return localStorage.getItem("isLoggedIn") == "true";
   };
 
+  let addGroupCallBack = () => {
+    return groups.map((group) => group["groupname"]);
+  };
+
+  const renderGroups = () => {
+    fetchCall({
+      url: "groups",
+      method: RequestType.GET,
+    })
+      .then((response) => {
+        const res = response.json();
+        return res;
+      })
+      .then((data) => {
+        let infor = data.results.map((res) => res["groupname"]);
+        setGroups(infor);
+        console.log(infor);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   const renderSections = () => {
     fetchCall({
-      url: "db/section/all",
+      url: "sections",
       method: RequestType.GET,
     })
       .then((response) => {
@@ -33,6 +59,7 @@ const Menu = () => {
       })
       .then((data) => {
         setSections(data);
+        // console.log(data);
       })
       .catch((error) => {
         console.error(error);
@@ -42,19 +69,17 @@ const Menu = () => {
   useEffect(() => {
     if (isUserLoggedIn()) {
       renderSections();
+      renderGroups();
     }
   }, []);
 
-  if (typeof sections.message === "string" || sections.message === undefined) {
+  if (sections.message !== undefined) {
     return (
       <div>
         <p></p>
       </div>
     );
   }
-  // let addGroupCallBack = (groupToAdd: string) => {
-  //   return groups.includes(groupToAdd);
-  // };
 
   return isAdmin ? (
     <div className="menu-container">
@@ -71,6 +96,14 @@ const Menu = () => {
             </div>
           </div>
         </Link>
+
+        {/* <Link href="/create_student" passHref>
+          <div className="section">
+            <div className="section-name">
+              <h2>Create Student</h2>
+            </div>
+          </div>
+        </Link> */}
 
         {groups.map((group, idx) => (
           <Link key={idx} href={`/${group}`} passHref>
@@ -92,11 +125,11 @@ const Menu = () => {
         </div>
       </Link>
       <div className="sections">
-        {sections.message.map((sectionName, idx) => (
-          <Link key={idx} href={`/${sectionName.sectionid}`} passHref>
+        {sections.map((section, idx) => (
+          <Link key={idx} href={`/${section.sectionname}`} passHref>
             <div className="section">
               <div className="section-name">
-                <h2>{sectionName.sectionid}</h2>
+                <h2>{section.sectionname}</h2>
               </div>
             </div>
           </Link>

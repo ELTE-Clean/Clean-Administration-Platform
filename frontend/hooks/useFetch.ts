@@ -79,11 +79,13 @@ export const fetchCall = async ({
   url,
   method,
   params = [],
+  data,
   body,
 }: {
   method: string;
   url: string;
   params?: string[];
+  data?: Record<string, any>;
   body?: Record<string, any>;
 }) => {
 
@@ -93,6 +95,7 @@ export const fetchCall = async ({
   const apiPath =`${ROOT_PATH}/${url}`
   const headers: any = {
     "Content-Type" : "application/json",
+    "Access-Control-Allow-Methods": "DELETE"
   };
     
   return await fetch(apiPath, {
@@ -100,6 +103,7 @@ export const fetchCall = async ({
     "mode" : "cors",
     "credentials" : "include",
     "headers": headers,
+    "data" : data,
     "body": JSON.stringify(body),
   })
       

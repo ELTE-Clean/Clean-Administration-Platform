@@ -56,7 +56,7 @@ ALTER SEQUENCE public.userSeq OWNER TO postgres;
 
 CREATE TABLE public.users (
     userID      INT             DEFAULT nextval('userSeq'),
-    neptun      CHAR(6)         NOT NULL,
+    neptun      CHAR(6)         NOT NULL UNIQUE,
     firstname   VARCHAR(20)     NOT NULL,
     lastname    VARCHAR(20)     NOT NULL,
     username    VARCHAR(20)     NOT NULL UNIQUE,
@@ -80,7 +80,7 @@ ALTER SEQUENCE public.groupSeq OWNER TO postgres;
 
 CREATE TABLE public.groups (
     groupID     INt            DEFAULT nextval('groupSeq'),
-    groupName   VARCHAR(10)    NOT NULL,
+    groupName   VARCHAR(10)    UNIQUE NOT NULL,
     timetable   VARCHAR(20)    UNIQUE,
     PRIMARY KEY (groupID)
 );
@@ -123,13 +123,16 @@ ALTER SEQUENCE public.taskSeq OWNER TO postgres;
 --
 
 CREATE TABLE public.tasks (
-    taskID      INT            DEFAULT nextval('taskSeq'),
-    taskName    VARCHAR(50)    NOT NULL,
-    sectionID   INT            REFERENCES  sections(sectionID)  NOT NULL,
-    groupID     INT            REFERENCES  groups(groupID)      NOT NULL,
-    description VARCHAR(5000)  NOT NULL, -- Task description (File/Text)
-    solution    VARCHAR(5000)  NOT NULL, -- Task solution to run the script on!
-    max         INT            NOT NULL,
+    taskID          INT            DEFAULT nextval('taskSeq'),
+    taskName        VARCHAR(50)    NOT NULL,
+    sectionID       INT            REFERENCES  sections(sectionID)  NOT NULL,
+    -- groupID         INT            REFERENCES  groups(groupID)      NOT NULL,
+    description     VARCHAR(5000)  NOT NULL, -- Task description (File/Text)
+    solution        VARCHAR(5000)  NOT NULL, -- Task solution to run the script on!
+    testQuestions   VARCHAR(1000), -- Test cases for the configuration
+    max             INT            NOT NULL,
+    expiryDate      DATE,
+    expiryTime      TIME,
     PRIMARY KEY (taskID)
 );
 
@@ -150,9 +153,9 @@ ALTER SEQUENCE public.gradeSeq OWNER TO postgres;
 
 CREATE TABLE public.grades (
     gradeID     INT             DEFAULT nextval('gradeSeq'),
-    studentID   INT             REFERENCES  users(userID)           NOT NULL,
+    userID      INT             REFERENCES  users(userID)           NOT NULL,
     taskID      INT             REFERENCES  tasks(taskID)           NOT NULL,
-    sectionID   INT             REFERENCES  sections(sectionID)     NOT NULL,
+    filename    VARCHAR(50),
     submission  VARCHAR(5000)   DEFAULT NULL, -- 5KB Storage of text. 
     grade       INT             DEFAULT NULL,
     PRIMARY KEY (gradeID)
@@ -166,8 +169,8 @@ ALTER TABLE public.grades OWNER TO postgres;
 --
 
 CREATE TABLE public.user_to_group (
-    userID      INT     REFERENCES users(userID)    NOT NULL,
-    groupID     INT     REFERENCES groups(groupID)  NOT NULL,
+    userID      INT             REFERENCES users(userID)    NOT NULL,
+    groupID     INT             REFERENCES groups(groupID)  NOT NULL,
     PRIMARY KEY (userID, groupID)
 );
 
@@ -175,43 +178,5 @@ CREATE TABLE public.user_to_group (
 ALTER TABLE public.user_to_group OWNER TO postgres;
 
 
--- Filling the tables with dummy values
-
-INSERT INTO users (neptun, firstname, lastname, username) VALUES ('81AMIA', 'Judita', 'Fenne', 'student-1');
-INSERT INTO users (neptun, firstname, lastname, username) VALUES ('9YV5TX', 'Hannah', 'Lochana', 'HannaLocha');
-INSERT INTO users (neptun, firstname, lastname, username) VALUES ('ZEADKD', 'Edan', 'Bahadur', 'demonstrator-1');
-INSERT INTO users (neptun, firstname, lastname, username) VALUES ('Q50YI1', 'Dita', 'Bertók', 'Queen');
-INSERT INTO users (neptun, firstname, lastname, username) VALUES ('B8WNS6', 'Georg','Vijay', 'Muscleman');
-INSERT INTO users (neptun, firstname, lastname, username) VALUES ('NM82SK', 'Chaz', 'Saundra', 'Picasso');
-
-INSERT INTO groups (groupName, timetable) VALUES ('Group_1', 'Mon, 12-14');
-INSERT INTO groups (groupName, timetable) VALUES ('Group_2', 'Mon 14-16');
-INSERT INTO groups (groupName, timetable) VALUES ('Group_3', 'Thu 8-10');
-INSERT INTO groups (groupName, timetable) VALUES ('Group_4', 'Fri 12-14');
-
-INSERT INTO sections (sectionName, groupID) VALUES ('Homework', 1);
-INSERT INTO sections (sectionName, groupID) VALUES ('Progress Task', 1);
-INSERT INTO sections (sectionName, groupID) VALUES ('Homework', 2);
-INSERT INTO sections (sectionName, groupID) VALUES ('Midterm', 1);
-INSERT INTO sections (sectionName, groupID) VALUES ('Endterm', 2);
-
-INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VALUES ('Homework 1', 1, 1, 'desc', 'sol', 1);
-INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VALUES ('Progress Task 1', 2, 1, 'desc', 'sol', 1);
-INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VALUES ('Homework 2', 3, 2, 'desc', 'sol', 2);
-INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VALUES ('Midterm', 4, 1, 'desc', 'sol', 3);
-INSERT INTO tasks (taskName, sectionID, groupID, description, solution, max) VALUES ('Endterm', 5, 2, 'desc', 'sol', 4);
-
-INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (1, 1, 1, NULL, 5);
-INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (2, 1, 3, NULL, 2);
-INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (2, 4, 5, NULL, 3);
-INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (3, 4, 5, NULL, 3);
-INSERT INTO grades (studentID, taskID, sectionID, submission, grade) VALUES (3, 5, 5, NULL, 4);
-
-INSERT INTO user_to_group (userID, groupID) VALUES (1, 1);
-INSERT INTO user_to_group (userID, groupID) VALUES (2, 2);
-INSERT INTO user_to_group (userID, groupID) VALUES (3, 3);
-INSERT INTO user_to_group (userID, groupID) VALUES (4, 4);
-INSERT INTO user_to_group (userID, groupID) VALUES (5, 1);
-INSERT INTO user_to_group (userID, groupID) VALUES (5, 2);
-INSERT INTO user_to_group (userID, groupID) VALUES (6, 3);
-INSERT INTO user_to_group (userID, groupID) VALUES (6, 4);
+-- Creating Admin User
+INSERT INTO users (neptun, firstname, lastname, username) VALUES ('oktato', 'Viktoria', 'Zsok', 'oktato');

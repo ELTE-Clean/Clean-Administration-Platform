@@ -1,67 +1,114 @@
-import {
-  BaseSyntheticEvent,
-  ReactChild,
-  ReactFragment,
-  ReactPortal,
-  useState,
-} from "react";
-import internal from "stream";
+import { BaseSyntheticEvent, useState } from "react";
 import EditTestCasesForm from "./EditTestCasesForm";
 import RichTextEditor from "./RichTextEditor";
 import PopUp from "./Popup";
+import router from "next/router";
+import { RequestType } from "../enums/requestTypes";
+import { fetchCall } from "../hooks/useFetch";
+import FileUpload from "./FileUpload";
 
 const EditTaskForm = (props: any) => {
-  const [taskName, setTaskName] = useState(props.task.title);
-  const [taskDescription, setTaskDescription] = useState(
-    props.task.description
-  );
+  const [task, setTask] = useState({
+    taskid: props.task["taskid"],
+    sectionid: props.task["sectionid"],
+    taskname: props.task["taskname"],
+    description: props.task["description"],
+    testcases:
+      props.task["testcases"] === undefined ? [] : props.task["testcases"],
+    solution: props.task["solution"],
+    dueDate: props.task["dutDate"],
+    dueTime: props.task["dutTime"],
+  });
+
+  const [testCase, setTestCase] = useState({});
   const [functionName, setFunctionName] = useState("");
-  const [uploadedFileName, setUploadedFileName] = useState("");
   const [buttonEditPopup, setButtonEditPopup] = useState(false);
 
-  let handelFileUpload = (e: BaseSyntheticEvent) => {
-    let latestFile = e.target.files[0].name;
-    setUploadedFileName(latestFile);
-
-    // later send file to the server
-  };
-
-  let uploadedSubmitBtnStyle = {
-    backgroundColor: "#acf19b",
-  };
-
-  let uploadedBtnStyle = {
-    border: "3px solid #acf19b",
-    color: "#acf19b",
+  let handelFileUpload = (file: File) => {
+    // let latestFile = file.name;
+    setTask({ ...task, solution: file });
   };
 
   let funcViewHandler = (taskIndex: number) => {
     console.log("Handling viewing");
   };
 
+  let popTestCase = (testCaseId: number) => {
+    const testCase = task["testcases"][testCaseId];
+    setTestCase(testCase);
+    setButtonEditPopup(true);
+  };
+
   let removeFuncHandler = (taskIndex: number) => {
-    console.log(`removing This function data`);
+    let testcases = task["testcases"];
+    testcases.splice(taskIndex, 1);
+    setTask({ ...task, testcases: testcases });
   };
 
   let addFuncHandler = () => {
-    if (functionName.trim() === "") {
+    const funcName = functionName.trim();
+    if (funcName === "") {
       alert("Function name should not be empty!!");
     } else {
       console.log("Adding function");
+      let newTestCasesSet;
+      if (task["testcases"] === undefined) {
+        newTestCasesSet = [{ name: funcName, parameter: [] }];
+      } else {
+        newTestCasesSet = [
+          ...task["testcases"],
+          { name: funcName, parameter: [] },
+        ];
+      }
+      setTask({ ...task, testcases: newTestCasesSet });
     }
   };
-
+  let deleteTaskHandler = () => {
+    fetchCall({
+      url: "tasks",
+      method: RequestType.DELETE,
+      body: { taskID: task["taskid"] },
+    })
+      .then((response) => {
+        const res = response.json();
+        return res;
+      })
+      .then((data) => {
+        console.log("Removed task", props.task["taskid"]);
+        router.push("/");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
   let saveHandler = () => {
-    if (taskName === "") {
+    if (task["taskname"].trim() === "") {
       alert("Task name cannot be empty!!!");
     } else {
-      console.log("Handling task name change");
+      console.log(task);
+
+      fetchCall({
+        url: `tasks/${task["taskid"]}/update`,
+        method: RequestType.PUT,
+        body: task,
+      })
+        .then((response) => {
+          const res = response.json();
+          return res;
+        })
+        .then((data) => {
+          console.log("Saved Task", task["taskname"]);
+          router.push("/");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     }
   };
 
   return (
     <div className="container">
-      <h1>Edit {taskName}</h1>
+      <h1>Edit - {task["taskname"]}</h1>
       <br />
       <div className="two-section-container">
         <div className="left-section">
@@ -69,90 +116,83 @@ const EditTaskForm = (props: any) => {
           <h3>Name:</h3>
           <input
             type="text"
-            value={taskName}
-            onChange={(e) => setTaskName(e.target.value.trim())}
+            value={task["taskname"]}
+            onChange={(e) => setTask({ ...task, taskname: e.target.value })}
           />
           <br />
           <br />
           <h3>Description:</h3>
-          {/* <textarea
-            className="description-area"
-            name="description"
-            value={taskDescription}
-            onChange={(e) => setTaskDescription(e.target.value.trim())}
+          {/* <RichTextEditor
+            classTemp={"description-area"}
+            valueTemp={taskDescription}
+            onChange={(value) => setTaskDescription(value)}
           /> */}
-          <RichTextEditor classTemp={"description-area"} valueTemp={taskDescription}/>
+          <textarea
+            onChange={(e) => setTask({ ...task, description: e.target.value })}
+          />
 
           <br />
-          <br />
+          <div className="dates-solution">
+            <div>
+              <h3>Due date</h3>
+              <input
+                type="date"
+                onChange={(e) => setTask({ ...task, dueDate: e.target.value })}
+              />
+            </div>
+            <div>
+              <h3>Due time</h3>
+              <input
+                type="time"
+                onChange={(e) => setTask({ ...task, dueTime: e.target.value })}
+              />
+            </div>
+            <div>
+              <h3>Solution file:</h3>
+              <div className="edit-homework-upload-area">
+                <FileUpload getCB={handelFileUpload} />
+              </div>
+            </div>
+          </div>
+        </div>
 
-          <h3>Attach files:</h3>
-          {props.task.attachedFiles === null ? (
-            ""
-          ) : (
-            <div className="edit-this-hw-task-attachments">
-              {props.task.attachedFiles.map(
-                (attachedFile: string, idx: number) => (
-                  <div key={idx} className="attachment">
-                    <p>{attachedFile}</p>
+        <br />
+
+        <div className="right-section">
+          <h3>Test Case</h3>
+          <br />
+          {task["testcases"] === undefined && (
+            <p>No test cases yet for this task</p>
+          )}
+          {task["testcases"] !== undefined && (
+            <div className="edit-homework-container">
+              {task["testcases"].map((testCase: any, idx: number) => (
+                <div key={idx} className="homework-task-container">
+                  <div
+                    className="edit-homework-btn"
+                    onClick={() => popTestCase(idx)}
+                  >
+                    {testCase.name}
                   </div>
-                )
-              )}
+                  <div
+                    className="remove-task-btn"
+                    onClick={() => removeFuncHandler(idx)}
+                  >
+                    &times;
+                  </div>
+                </div>
+              ))}
+              <PopUp
+                trigger={buttonEditPopup}
+                setTrigger={setButtonEditPopup}
+                popupType="edit-this-homework"
+                component={<EditTestCasesForm testCaseData={testCase} />}
+              />
+              ;
             </div>
           )}
 
-          <div className="edit-homework-upload-area">
-            <label
-              htmlFor="file-upload"
-              className="custom-file-upload"
-              style={uploadedFileName === "" ? {} : { ...uploadedBtnStyle }}
-            >
-              Add file
-            </label>
-            <input id="file-upload" onChange={handelFileUpload} type="file" />
-            <input
-              type="text"
-              name=""
-              id="uploaded-file"
-              placeholder="No file chosen"
-              readOnly
-              value={uploadedFileName}
-            />
-          </div>
-        </div>
-        {/* <div className="vertical"></div> */}
-        <div className="right-section">
           <br />
-          <h3>Test Case</h3>
-          <br />
-          <div className="edit-homework-container">
-            {props.task.testCases.map((testCase: any, idx: number) => (
-              <div key={idx} className="homework-task-container">
-                <div
-                  className="edit-homework-btn"
-                  onClick={() => setButtonEditPopup(true)}
-                >
-                  {testCase.name}
-                </div>
-                <div
-                  className="remove-task-btn"
-                  onClick={() => removeFuncHandler(2)}
-                >
-                  &times;
-                </div>
-
-                <PopUp
-                  trigger={buttonEditPopup}
-                  setTrigger={setButtonEditPopup}
-                  popupType="edit-this-homework"
-                  component={<EditTestCasesForm testCaseData={testCase} />}
-                />
-              </div>
-            ))}
-          </div>
-
-          <br />
-
           <h3>Add Function</h3>
           <input
             type="text"
@@ -167,7 +207,6 @@ const EditTaskForm = (props: any) => {
           >
             Add
           </button>
-          <br />
         </div>
       </div>
 
@@ -178,6 +217,13 @@ const EditTaskForm = (props: any) => {
           onClick={() => saveHandler()}
         >
           Save
+        </button>
+        <button
+          type="button"
+          className="delete-task-btn"
+          onClick={deleteTaskHandler}
+        >
+          Delete task
         </button>
       </div>
     </div>

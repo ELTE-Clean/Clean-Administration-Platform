@@ -1,5 +1,5 @@
 export type Task = {
-    title: String,
+    taskname: String,
     dutTme: String,
     dutDate: String,
     grade: number,

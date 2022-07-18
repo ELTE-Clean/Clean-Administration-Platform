@@ -2,12 +2,11 @@ import { ChangeEvent, useState } from "react";
 
 const EditHomeworkForm = (props) => {
   const [taskData, setTaskData] = useState(props.taskData);
-  console.log(props.taskData.title);
 
   return (
     <div className="EditHomeworkFormContainer">
       <div className="test-name">
-        <h1>{taskData.title}</h1>
+        <h1>{taskData.taskname}</h1>
       </div>
       <div className="edit-homework-data">
         <label>Name:</label>
@@ -15,9 +14,9 @@ const EditHomeworkForm = (props) => {
         <input
           type="text"
           name="name-of-hw"
-          value={taskData.title}
+          value={taskData.taskname}
           onChange={(e) => {
-            setTaskData({ ...taskData, title: e.target.value });
+            setTaskData({ ...taskData, taskname: e.target.value });
           }}
         />
         <br />
@@ -53,10 +52,10 @@ const EditHomeworkForm = (props) => {
 
             <input
               type="number"
-              value={taskData.gradeOutOf}
+              value={taskData.max}
               name="name-of-hw"
               onChange={(e) => {
-                setTaskData({ ...taskData, gradeOutOf: e.target.value });
+                setTaskData({ ...taskData, max: e.target.value });
               }}
             />
           </div>

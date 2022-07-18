@@ -4,27 +4,22 @@ A platform created to enhance the users, both students and demonstrators, experi
 
 This repository holds all the components required to deploy the project. They are explained individually in their corresponding *README* files. Yet, a breif overview is given below.
 
+
 ---
 
-## Technology
+## Used Technology
 
-### Front-End:
- - Next.js
- - React.js
- - Typescript
+> ### Client Side:
+> Node : Next : React : Express : Sass
 
-### Back-End:
- - Express.js
- - PostgreSQL
- - Keycloak
+> ### Server Side:
+> Node : Express : PostgreSQL : PGAdmin : Keycloak
 
-### Environment:
- - Linux Machine
- - Nginx Server
- - Docker
+> ### Virtualization:
+> Docker : Docker-Compose
 
-### Automation:
- - Python
+> ### Automation:
+> Python 
 
 ---
 

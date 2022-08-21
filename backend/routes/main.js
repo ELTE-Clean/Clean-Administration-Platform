@@ -39,7 +39,7 @@ router.post("/login", isUnauth, (req, res, next) => {
  * So other arbitrary data can still be saved in the session.
  * 
  */
-router.get("/logout", isAuth, (req, res, next) => {
+router.post("/logout", isAuth, (req, res, next) => {
     let sid = req.session.id;
     keycloak.unstoreGrant(sid);     // destroys the keycloak data corresponding to this session.
     res.status(200).send(JSON.stringify({message: "User is Logged out and session has been destroyed"}));

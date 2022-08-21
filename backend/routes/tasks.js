@@ -123,11 +123,14 @@ router.post("/create", fileUpload({ createParentPath: true }), isAuth, protector
   const description = req.files?.description.data.toString("utf8") || req.body.description;
   
   /* Inserting the data into the table */
+  const day = (ts.getDay() == 0)? 1: ts.getDay();
+
   const params = {};
   params.sectionid = req.files?.sectionid || req.body?.sectionid;
   params.max = req.files?.maxGrade ||  req.body?.maxGrade || 0;
   params.taskname = req.files?.name || req.body?.name;
-  params.expiryDate = req.files?.dueDate || req.body?.dueDate || `${ts.getFullYear()}-${ts.getMonth()}-${ts.getDay()}`;
+  params.expiryDate = req.files?.dueDate || req.body?.dueDate || `${ts.getFullYear()}-${ts.getMonth()}-${day}`;
+
   params.expiryTime = req.files?.dueTime || req.body?.dueTime || `${ts.getHours()}:${ts.getMinutes()}:${ts.getSeconds()}`;
   params.testquestions = req.files?.testcases || req.body.testcases || "";
   params.solution = solution.replace(/^.*module.*$/g, "").replace(/\'/g, "''");
@@ -209,7 +212,8 @@ router.put(
     const oldTask = result.result.rows[0];
 
     let ts = new Date();
-
+    /* Inserting the data into the table */
+    const day = (ts.getDay() == 0)? 1: ts.getDay();
     const params = {
       solution:
         req.files?.solution.data.toString("utf8") ||
@@ -224,7 +228,7 @@ router.put(
       expiryDate:
         req.body.dueDate ||
         oldTask.expiryDate ||
-        `${ts.getFullYear()}-${ts.getMonth()}-${ts.getDay()}`,
+        `${ts.getFullYear()}-${ts.getMonth()}-${day}`,
       expiryTime:
         req.body.dueTime ||
         oldTask.expiryTime ||
@@ -240,6 +244,7 @@ router.put(
       .send(JSON.stringify({ message: "Tasks successfully updated" }));
   }
 );
+
 
 router.post(
   "/:taskID/submit",

@@ -14,10 +14,10 @@ const REALM_NAME    : string = process.env.REALM_NAME    || 'CAP';
 
 /* Global Keycloak Configuration */
 export const kc_config = {
-    // clientId: CLIENT_ID,
-    // credentials: {
-    //     secret: CLIENT_SECRET
-    // },
+    clientId: CLIENT_ID,
+    credentials: {
+        secret: CLIENT_SECRET
+    },
     'confidential-port': 80,
     'auth-server-url': KEYCLOAK_HOST,
     'resource': "", 

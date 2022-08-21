@@ -12,13 +12,15 @@ const log = require('../utils/logger_utils').log;
 /* Getters */
 router.get('/self', isAuth, async (req, res, next) => {
     log("INFO", `Getting user profile.`);
-    const userReqKC = await getSelfData(req, res);
-    if(userReqKC.error){
+    var userReqKC = null; 
+    try{
+        userReqKC = await getSelfData(req, res);
+    }catch(error){
         log("ERROR", `Error in getting the user data from the access token`);
-        return next(userReqKC.error);
+        return next(error);
     }
 
-    let userReqDB = await selectFromTable('users', {username : userReqKC.user.username})
+    let userReqDB = await selectFromTable('users', {username : userReqKC.username})
     if(userReqDB.error){
         log("ERROR", `Error in requesting the user from the database`);
         return next(userReqDB.error);
@@ -38,11 +40,11 @@ router.get('/self', isAuth, async (req, res, next) => {
         uid : userReqDB.result.rows[0].userid,
         neptun : userReqDB.result.rows[0].neptun,
         groupIDs : mapIDs,
-        kcid : userReqKC.user.keycloak_id, 
-        username: userReqKC.user.username, 
+        kcid : userReqKC.keycloak_id, 
+        username: userReqKC.username, 
         firstname: userReqDB.result.rows[0].firstname.replace(/[ \t]+$/g, ''),
         lastname: userReqDB.result.rows[0].lastname.replace(/[ \t]+$/g, ''),
-        roles : userReqKC.user.roles,
+        roles : userReqKC.roles,
     };
 
     log("INFO", `[users/get/profile]: "${retUser.username}" Profile Requested`);
@@ -77,7 +79,7 @@ router.get('/', isAuth, protector(["admin", "demonstrator"]), async(req, res) =>
     const userReqDB = await execQuery({ text: `SELECT * FROM users` });
     if (userReqDB.error) {
         log("ERROR", `Error in requesting the user from the databae`);
-        return next(userReqKC.error);
+        return next(userReqDB.error);
     }
 
     /* Return the users that correspond to a keycloak username only */

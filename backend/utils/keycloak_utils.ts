@@ -89,21 +89,6 @@ export const isAuth: express.RequestHandler = (req: express.Request, res: expres
 }
 
 
-
-/**
- * A helper function for getting an access token of the current client. This is mainly called from this module
- *  only. However, it can be also called for custom purposes (from within the endpoints) to get a client access
- *  token. If it is called from the endpoints, then it is up to the developer to strictly make sure to use this
- *  token as secure as possible. Because the client has full control of keycloak, the developer must be careful,
- *  what to change in the keycloak server. 
- */
-export async function createClientAccessToken(): Promise<string|null>{
-    /* Get access token for the client (cap-app) so we can request data from keycloak using that client */
-    return await keycloakclient.createAccessToken();
-};
-
-
-
 /**
  * Return a specific user data with the specific given username
  * @param username - The username registered for the user in keycloak
